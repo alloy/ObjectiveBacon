@@ -314,6 +314,7 @@ describe "before/after" do
   
   describe "when nested at a sibling level" do
     it "should not run from sibling level" do
+      p @c
       @c.should.be.nil
     end
   end

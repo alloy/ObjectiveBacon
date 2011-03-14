@@ -18,6 +18,12 @@ module Kernel
 end
 
 class BaconContext
+  def describe(*args, &block)
+    context = childContextWithName(args.join(' '))
+    context.instance_eval(&block)
+    context
+  end
+
   def before(&block)
     addBeforeFilter(block)
   end

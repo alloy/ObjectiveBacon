@@ -16,6 +16,11 @@ void Init_objective_bacon() {};
 @property (nonatomic, retain) NSMutableArray *specifications, *beforeFilters, *afterFilters;
 
 - (id)initWithName:(NSString *)contextName;
+- (id)initWithName:(NSString *)contextName
+     beforeFilters:(NSArray *)theBeforeFilters
+      afterFilters:(NSArray *)theAfterFilters;
+- (id)childContextWithName:(NSString *)childName;
+
 - (void)addBeforeFilter:(id)block;
 - (void)addAfterFilter:(id)block;
 - (void)addSpecification:(NSString *)description withBlock:(id)block report:(BOOL)report;

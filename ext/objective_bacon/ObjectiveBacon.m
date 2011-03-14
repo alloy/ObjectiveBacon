@@ -5,18 +5,31 @@
 @synthesize name, specifications, beforeFilters, afterFilters;
 
 - (id)initWithName:(NSString *)contextName {
+  return [self initWithName:contextName beforeFilters:nil afterFilters:nil];
+}
+
+- (id)initWithName:(NSString *)contextName
+     beforeFilters:(NSArray *)theBeforeFilters
+      afterFilters:(NSArray *)theAfterFilters {
   if ((self = [super init])) {
     [[Bacon sharedInstance] addContext:self];
+
+    self.beforeFilters = theBeforeFilters == nil ? [NSMutableArray new] : [theBeforeFilters mutableCopy];
+    self.afterFilters = theAfterFilters == nil ? [NSMutableArray new] : [theAfterFilters mutableCopy];
 
     printedName = NO;
     currentSpecificationIndex = 0;
 
     self.name = contextName;
     self.specifications = [NSMutableArray array];
-    self.beforeFilters = [NSMutableArray array];
-    self.afterFilters = [NSMutableArray array];
   }
   return self;
+}
+
+- (id)childContextWithName:(NSString *)childName {
+  return [[[BaconContext alloc] initWithName:childName
+                               beforeFilters:self.beforeFilters
+                                afterFilters:self.afterFilters] autorelease];
 }
 
 - (void)addBeforeFilter:(id)block {
@@ -179,6 +192,7 @@
       } else {
         // TODO add error to summary
         type = @" [ERROR]";
+        NSLog(@"Exception: %@", e);
       }
       printf("%s\n", [type UTF8String]);
       // TODO add to error log
