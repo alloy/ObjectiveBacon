@@ -7,19 +7,22 @@ void Init_objective_bacon() {};
 
 @interface BaconContext : NSObject {
   NSString *name;
-  NSMutableArray *specifications, *before, *after;
+  NSMutableArray *specifications, *beforeFilters, *afterFilters;
   BOOL printedName;
   NSUInteger currentSpecificationIndex;
 }
 
 @property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSMutableArray *specifications, *before, *after;
+@property (nonatomic, retain) NSMutableArray *specifications, *beforeFilters, *afterFilters;
 
 - (id)initWithName:(NSString *)contextName;
+- (void)addBeforeFilter:(id)block;
+- (void)addAfterFilter:(id)block;
 - (void)addSpecification:(NSString *)description withBlock:(id)block report:(BOOL)report;
 - (void)run;
 - (BaconSpecification *)currentSpecification;
-- (void)finish;
+- (void)specificationDidFinish:(BaconSpecification *)specification;
+- (void)finishContext;
 - (void)evaluateBlock:(id)block;
 
 @end
@@ -28,26 +31,31 @@ void Init_objective_bacon() {};
   BaconContext *context;
   NSString *description;
   id specBlock;
-  NSArray *before, *after;
+  NSArray *beforeFilters, *afterFilters;
   BOOL report;
+  BOOL exceptionOccurred;
 }
 
 @property (nonatomic, assign) BaconContext *context;
 @property (nonatomic, retain) NSString *description;
 @property (nonatomic, retain) id specBlock;
-@property (nonatomic, retain) NSArray *before, *after;
+@property (nonatomic, retain) NSArray *beforeFilters, *afterFilters;
 @property (nonatomic, assign) BOOL report;
 
 - (id)initWithContext:(BaconContext *)theContext
           description:(NSString *)theDescription
                 block:(id)theSpecBlock
-               before:(NSArray *)beforeFilters
-                after:(NSArray *)afterFilters
+               before:(NSArray *)theBeforeFilters
+                after:(NSArray *)theAfterFilters
                report:(BOOL)shouldReport;
 
 - (void)run;
 - (void)runSpecBlock;
 - (void)runBeforeFilters;
+
+- (void)finishSpec;
+- (void)exitSpec;
+
 - (void)executeBlock:(void (^)())block;
 
 @end
@@ -70,8 +78,16 @@ void Init_objective_bacon() {};
 @end
 
 
+@interface BaconError : NSException
+
++ (BaconError *)errorWithDescription:(NSString *)description;
+
+@end
+
+
 @interface BaconShould : NSObject {
   id object;
+  BOOL negated;
   NSMutableString *descriptionBuffer;
 }
 
@@ -79,7 +95,13 @@ void Init_objective_bacon() {};
 
 - (id)initWithObject:(id)theObject;
 - (void)satisfy:(NSString *)description block:(id)block;
+
 - (BOOL)executeBlock:(id)block;
+- (BOOL)executeBlock:(id)block withObject:(id)obj;
+
+- (BaconShould *)not;
+
+- (void)equal:(id)otherValue;
 
 @end
 

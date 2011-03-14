@@ -18,6 +18,14 @@ module Kernel
 end
 
 class BaconContext
+  def before(&block)
+    addBeforeFilter(block)
+  end
+
+  def after(&block)
+    addAfterFilter(block)
+  end
+
   def it(description, &block)
     addSpecification(description, withBlock:block, report:true)
   end
@@ -32,7 +40,17 @@ class BaconContext
 end
 
 class BaconShould
+  def satisfy(&block)
+    satisfy(nil, block:block)
+  end
+
   def executeBlock(block)
-    block.call(object)
+    block.call
+  end
+
+  def executeBlock(block, withObject:object)
+    r = block.call(object)
+    p r
+    r
   end
 end
