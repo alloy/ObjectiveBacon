@@ -6,6 +6,11 @@
 
 - (id)initWithName:(NSString *)contextName {
   if (self = [super init]) {
+    [[Bacon sharedInstance] addContext:self];
+
+    printedName = NO;
+    currentSpecificationIndex = 0;
+
     self.name = contextName;
     self.specifications = [NSMutableArray array];
     self.before = [NSMutableArray array];
@@ -33,22 +38,52 @@
   [super dealloc];
 }
 
+- (void)run {
+  NSLog(@"RUN CONTEXT!");
+  if ([self.specifications count] > 0) {
+    BOOL report = YES; // TODO
+    if (report) {
+      if (!printedName) {
+        printedName = YES;
+        printf("\n%s\n", [self.name UTF8String]);
+      }
+    }
+
+    // TODO maybe we don't need to delay performing the method here?
+    [[self currentSpecification] performSelector:@selector(run) withObject:nil afterDelay:0];
+  } else {
+    [self finish];
+  }
+}
+
+- (BaconSpecification *)currentSpecification {
+  return [self.specifications objectAtIndex:currentSpecificationIndex];
+}
+
+- (void)finish {
+  [[Bacon sharedInstance] contextDidFinish:self];
+}
+
+- (void)evaluateBlock:(id)block {
+  NSLog(@"-[BaconContext evaluateBlock:] should be overriden by the client to evaluate the given block in the context instance.");
+}
+
 @end
 
 @implementation BaconSpecification
 
-@synthesize context, description, block, before, after, report;
+@synthesize context, description, specBlock, before, after, report;
 
 - (id)initWithContext:(BaconContext *)theContext
           description:(NSString *)theDescription
-                block:(id)theBlock
+                block:(id)theSpecBlock
                before:(NSArray *)beforeFilters
                 after:(NSArray *)afterFilters
                report:(BOOL)shouldReport {
   if (self = [super init]) {
     self.context = theContext;
     self.description = theDescription;
-    self.block = theBlock;
+    self.specBlock = theSpecBlock;
     self.report = shouldReport;
 
     self.before = [[beforeFilters copy] autorelease];
@@ -60,10 +95,38 @@
 - (void)dealloc {
   self.context = nil;
   self.description = nil;
-  self.block = nil;
+  self.specBlock = nil;
   self.before = nil;
   self.after = nil;
   [super dealloc];
+}
+
+- (void)run {
+  if (report) {
+    // TODO add to summary
+    printf("- %s\n", [self.description UTF8String]);
+  }
+
+  //[self runBeforeFilters];
+  [self runSpecBlock];
+}
+
+- (void)runSpecBlock {
+  [self executeBlock:^{
+    [self.context evaluateBlock:self.specBlock];
+  }];
+}
+
+- (void)runBeforeFilters {
+  [self executeBlock:^{
+    for (id block in self.before) {
+      [self.context evaluateBlock:block];
+    }
+  }];
+}
+
+- (void)executeBlock:(void (^)())block {
+  block();
 }
 
 @end
@@ -107,6 +170,43 @@ static Bacon *sharedBaconInstance = nil;
 
 // implementation
 
+@synthesize contexts, currentContextIndex;
 
+- (id)init {
+  if (self = [super init]) {
+    self.contexts = [NSMutableArray array];
+    self.currentContextIndex = 0;
+  }
+  return self;
+}
+
+- (void)addContext:(BaconContext *)context {
+  [self.contexts addObject:context];
+}
+
+- (BaconContext *)currentContext {
+  return [self.contexts objectAtIndex:currentContextIndex];
+}
+
+- (void)run {
+  if ([self.contexts count] > 0) {
+    [[self currentContext] performSelector:@selector(run) withObject:nil afterDelay:0];
+    [[NSApplication sharedApplication] run];
+  } else {
+    // DONE
+    [self contextDidFinish:nil];
+  }
+}
+
+- (void)contextDidFinish:(BaconContext *)context {
+  if (currentContextIndex + 1 < [self.contexts count]) {
+    currentContextIndex++;
+    [self run];
+  } else {
+    // DONE
+    // TODO print summary
+    exit(0); // TODO exit with error/failure count
+  }
+}
 
 @end

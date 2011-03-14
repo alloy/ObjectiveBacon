@@ -25,4 +25,8 @@ class BaconContext
   def behaves_like(*names)
     # TODO
   end
+
+  def evaluateBlock(block)
+    instance_eval(&block)
+  end
 end

@@ -390,3 +390,5 @@ describe 'describe arguments' do
 end
 
 puts "DONE LOADING SPEC!"
+p Bacon.sharedInstance.contexts
+Bacon.sharedInstance.run
