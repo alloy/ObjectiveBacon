@@ -67,3 +67,46 @@
 }
 
 @end
+
+@implementation Bacon
+
+// singleton code
+
+static Bacon *sharedBaconInstance = nil;
+
++ (Bacon *)sharedInstance {
+  if (sharedBaconInstance == nil) {
+    sharedBaconInstance = [[super allocWithZone:NULL] init];
+  }
+  return sharedBaconInstance;
+}
+
++ (id)allocWithZone:(NSZone *)zone {
+  return [[self sharedInstance] retain];
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+  return self;
+}
+
+- (id)retain {
+  return self;
+}
+
+- (NSUInteger)retainCount {
+  return NSUIntegerMax;
+}
+
+- (void)release {
+  // noop
+}
+
+- (id)autorelease {
+  return self;
+}
+
+// implementation
+
+
+
+@end

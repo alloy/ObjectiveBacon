@@ -35,3 +35,9 @@ void Init_objective_bacon() {};
                report:(BOOL)shouldReport;
 
 @end
+
+@interface Bacon : NSObject
+
++ (Bacon *)sharedInstance;
+
+@end
