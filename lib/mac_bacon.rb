@@ -30,3 +30,9 @@ class BaconContext
     instance_eval(&block)
   end
 end
+
+class BaconShould
+  def executeBlock(block)
+    block.call(object)
+  end
+end

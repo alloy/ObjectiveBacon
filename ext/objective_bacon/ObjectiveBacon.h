@@ -68,3 +68,25 @@ void Init_objective_bacon() {};
 - (void)run;
 
 @end
+
+
+@interface BaconShould : NSObject {
+  id object;
+  NSMutableString *descriptionBuffer;
+}
+
+@property (nonatomic, assign) id object;
+
+- (id)initWithObject:(id)theObject;
+- (void)satisfy:(NSString *)description block:(id)block;
+- (BOOL)executeBlock:(id)block;
+
+@end
+
+
+@interface NSObject (Bacon)
+
+- (BaconShould *)should;
+- (BaconShould *)should:(id)block;
+
+@end

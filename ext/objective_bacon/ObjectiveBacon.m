@@ -210,3 +210,55 @@ static Bacon *sharedBaconInstance = nil;
 }
 
 @end
+
+
+@implementation BaconShould
+
+@synthesize object;
+
+- (id)initWithObject:(id)theObject {
+  if (self = [super init]) {
+    self.object = theObject;
+    descriptionBuffer = [[NSMutableString alloc] init];
+  }
+  return self;
+}
+
+- (void)dealloc {
+  self.object = nil;
+  [descriptionBuffer release];
+  [super dealloc];
+}
+
+- (void)satisfy:(NSString *)description block:(id)block {
+  // TODO add requirement to summary
+  NSString *desc = description == nil ? [NSString stringWithFormat:@"satisfy `%@'", block] : description;
+  desc = [NSString stringWithFormat:@"expected `%@' to%@ %@", self.object, descriptionBuffer, desc];
+  BOOL passed = [self executeBlock:block];
+  if (passed) {
+    NSLog(@"ASSERTION PASSED!");
+  } else {
+    NSLog(@"ASSERTION FAILED!");
+  }
+}
+
+- (BOOL)executeBlock:(id)block {
+  NSLog(@"-[BaconShould executeBlock:] should be overriden by the client to call the given block in its original binding.");
+}
+
+@end
+
+
+@implementation NSObject (Bacon)
+
+- (BaconShould *)should {
+  return [[[BaconShould alloc] initWithObject:self] autorelease];
+}
+
+- (BaconShould *)should:(id)block {
+  BaconShould *should = [[[BaconShould alloc] initWithObject:self] autorelease];
+  [should satisfy:nil block:block];
+  return should;
+}
+
+@end
