@@ -1,0 +1,2 @@
+@interface Bacon : NSObject
+@end
