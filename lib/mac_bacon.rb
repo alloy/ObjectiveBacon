@@ -11,12 +11,15 @@ module Kernel
   end
 
   def shared(name, &block)
-    # TODO
-    #Bacon::Shared[name] = block
+    BaconContext::Shared[name] = block
   end
 end
 
 class BaconContext
+  Shared = Hash.new { |_, name|
+    raise NameError, "no such context: #{name.inspect}"
+  }
+
   def describe(*args, &block)
     context = childContextWithName(args.join(' '))
     parent_context = self
@@ -41,7 +44,7 @@ class BaconContext
   end
 
   def behaves_like(*names)
-    # TODO
+    names.each { |name| instance_eval(&Shared[name]) }
   end
 
   def evaluateBlock(block)
