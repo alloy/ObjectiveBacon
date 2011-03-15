@@ -136,7 +136,6 @@ describe "Bacon" do
     lambda { "string".should =~ /slin./ }.should fail
   end
 
-  if false
   it "should have should.not.raise" do
     lambda { lambda { 1 + 1 }.should.not.raise }.should succeed
     lambda { lambda { 1 + 1 }.should.not.raise(Interrupt) }.should succeed
@@ -152,6 +151,7 @@ describe "Bacon" do
     lambda { lambda { raise "Error" }.should.not.raise }.should fail
   end
 
+  if false
   it "should have should.throw" do
     lambda { lambda { throw :foo }.should.throw(:foo) }.should succeed
     lambda { lambda {       :foo }.should.throw(:foo) }.should fail

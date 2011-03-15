@@ -121,7 +121,11 @@
     @catch(NSException *e) {
       //NSLog(@"Got exception: %@, expected: %@", [e name], exceptionName);
       result = [self convertException:e];
-      return [[e name] isEqualToString:exceptionName];
+      if ([[e name] isEqualToString:exceptionName]) {
+        return YES;
+      } else {
+        @throw e;
+      }
     }
     return NO; // never reached?
   }];
