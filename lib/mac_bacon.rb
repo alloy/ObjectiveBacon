@@ -65,6 +65,7 @@ class BaconShould
     end
   end
 
+  # TODO
   #alias_method :identical_to, :equal?
   #alias_method :same_as, :equal?
 
@@ -140,11 +141,4 @@ class Proc
     }
     return true
   end
-
-  #def change?
-    #pre_result = yield
-    #called = call
-    #post_result = yield
-    #pre_result != post_result
-  #end
 end

@@ -1,4 +1,6 @@
 #import "BaconShould.h"
+#import "ObjectiveBacon.h"
+
 
 @implementation BaconShould
 
@@ -21,7 +23,8 @@
 
 
 - (void)satisfy:(NSString *)description block:(id)block {
-  // TODO add requirement to summary
+  [[[Bacon sharedInstance] summary] addRequirement];
+
   NSString *desc = description == nil ? [NSString stringWithFormat:@"satisfy `%@'", block] : description;
   desc = [NSString stringWithFormat:@"expected `%@' to%@ %@", self.object, descriptionBuffer, desc];
   //NSLog(@"Block class: %@", [block class]);

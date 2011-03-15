@@ -247,3 +247,5 @@ describe "Nib helper" do
     verify_outlets_of_owner(owner)
   end
 end
+
+Bacon.sharedInstance.run

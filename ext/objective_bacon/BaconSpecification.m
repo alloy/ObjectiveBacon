@@ -1,6 +1,8 @@
 #import "BaconSpecification.h"
+#import "ObjectiveBacon.h"
 #import "BaconContext.h"
 #import "BaconShould.h"
+
 
 @implementation BaconSpecification
 
@@ -37,7 +39,7 @@
 
 - (void)run {
   if (report) {
-    // TODO add to summary
+    [[[Bacon sharedInstance] summary] addSpecification];
     printf("- %s\n", [self.description UTF8String]);
   }
 
@@ -90,15 +92,18 @@
     exceptionOccurred = YES;
     if (report) {
       if ([e isKindOfClass:[BaconError class]]) {
-        // TODO add failure to summary
+        [[[Bacon sharedInstance] summary] addFailure];
         type = @" [FAILURE]";
       } else {
-        // TODO add error to summary
+        [[[Bacon sharedInstance] summary] addError];
         type = @" [ERROR]";
         NSLog(@"Exception: %@, %@", [e name], [e reason]);
       }
       printf("%s\n", [type UTF8String]);
-      // TODO add to error log
+      [[[Bacon sharedInstance] summary] addToErrorLog:e
+                                              context:self.context.name
+                                        specification:self.description
+                                                 type:type];
     }
   }
   @finally {

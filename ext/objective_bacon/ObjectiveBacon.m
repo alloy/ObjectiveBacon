@@ -46,10 +46,11 @@ static Bacon *sharedBaconInstance = nil;
 
 // implementation
 
-@synthesize contexts, currentContextIndex;
+@synthesize summary, contexts, currentContextIndex;
 
 - (id)init {
   if ((self = [super init])) {
+    self.summary = [BaconSummary new];
     self.contexts = [NSMutableArray array];
     self.currentContextIndex = 0;
   }
@@ -80,9 +81,82 @@ static Bacon *sharedBaconInstance = nil;
     [self run];
   } else {
     // DONE
-    // TODO print summary
+    [[self summary] print];
     exit(0); // TODO exit with error/failure count
   }
+}
+
+@end
+
+
+@implementation BaconSummary
+
+- (id)init {
+  if ((self = [super init])) {
+    errorLog = [NSMutableString new];
+    counters = malloc(sizeof(NSUInteger) * 4);
+    int i;
+    for (i = 0; i < 4; i++) {
+      counters[i] = 0;
+    }
+  }
+  return self;
+}
+
+// Probably never reached
+- (void)dealloc {
+  [errorLog release];
+  free(counters);
+  [super dealloc];
+}
+
+- (NSUInteger)specifications {
+  return counters[0];
+}
+
+- (void)addSpecification {
+  counters[0]++;
+}
+
+- (NSUInteger)requirements {
+  return counters[1];
+}
+
+- (void)addRequirement {
+  counters[1]++;
+}
+
+- (NSUInteger)failures {
+  return counters[2];
+}
+
+- (void)addFailure {
+  counters[2]++;
+}
+
+- (NSUInteger)errors {
+  return counters[3];
+}
+
+- (void)addError {
+  counters[3]++;
+}
+
+- (void)addToErrorLog:(id)exception context:(NSString *)name specification:(NSString *)description type:(NSString *)type {
+  [errorLog appendString:[NSString stringWithFormat:@"%@ - %@: ", name, description]];
+  if ([exception respondsToSelector:@selector(reason)]) {
+    [errorLog appendString:[exception reason]];
+  } else {
+    [errorLog appendString:[exception description]];
+  }
+  [errorLog appendString:type];
+  [errorLog appendString:@"\n"];
+  // TODO callStackSymbols for NuBacon/objc?
+}
+
+- (void)print {
+  printf("\n%s", [errorLog UTF8String]);
+  printf("%d specifications (%d requirements), %d failures, %d errors\n", (int)counters[0], (int)counters[1], (int)counters[2], (int)counters[3]);
 }
 
 @end
