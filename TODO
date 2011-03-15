@@ -1,0 +1,2 @@
+* add specs from NuBacon which test that BaconShould#raise returns the raised exception
+* check/port the rest of the NuBacon specs

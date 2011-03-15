@@ -8,6 +8,15 @@ task :compile do
   end
 end
 
+desc 'Clean extension'
+task :clean do
+  Dir.chdir(EXT_SRC_ROOT) do
+    sh 'rm -f Makefile'
+    sh 'rm -f *.o'
+    sh 'rm -f objective_bacon.bundle'
+  end
+end
+
 desc 'Run specs'
 task :spec => :compile do
   sh 'macruby spec/bacon_spec.rb'
