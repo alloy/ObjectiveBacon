@@ -411,5 +411,3 @@ describe 'describe arguments' do
   end
 
 end
-
-Bacon.sharedInstance.run

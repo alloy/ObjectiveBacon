@@ -109,7 +109,6 @@ describe "NSRunloop aware Bacon" do
     end
   end
 
-      if false
   describe "postponing blocks should work from before/after filters as well" do
     shared "waiting in before/after filters" do
       it "starts later because of postponed blocks in the before filter" do
@@ -202,8 +201,6 @@ describe "NSRunloop aware Bacon" do
       behaves_like "waiting in before/after filters"
     end
   end
-
-  end
 end
 
 if false
@@ -253,5 +250,3 @@ describe "Nib helper" do
 end
 
 end
-
-Bacon.sharedInstance.run

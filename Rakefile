@@ -19,8 +19,7 @@ end
 
 desc 'Run specs'
 task :spec => :compile do
-  #sh 'macruby spec/bacon_spec.rb'
-  sh 'macruby spec/mac_bacon_spec.rb'
+  sh 'macruby -r spec/bacon_spec.rb -r spec/mac_bacon_spec.rb -e "Bacon.sharedInstance.run"'
 end
 
 task :default => :spec

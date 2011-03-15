@@ -91,7 +91,6 @@
 - (void)scheduleBlock:(id)block withDelay:(NSTimeInterval)seconds {
   // If an exception occurred, we definitely don't need to schedule any more blocks
   if (!exceptionOccurred) {
-    NSLog(@"Scheduling block!");
     scheduledBlocksCount++;
     [self performSelector:@selector(runPostponedBlock:) withObject:block afterDelay:seconds];
   }
@@ -184,7 +183,9 @@
 - (void)finishSpec {
   // TODO add requirements missing failure to the summary
   [self runAfterFilters];
-  [self exitSpec]; // TODO unless postponed
+  if (![self isPostponed]) {
+    [self exitSpec];
+  }
 }
 
 - (void)exitSpec {
