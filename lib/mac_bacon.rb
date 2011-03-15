@@ -1,3 +1,4 @@
+framework 'Cocoa'
 require "objective_bacon"
 
 puts "HIER!"
@@ -52,28 +53,33 @@ class BaconShould
     satisfy(nil, block:block)
   end
 
+  def match(value)
+    satisfy("match #{value.inspect}", block:proc { |o| o =~ value })
+  end
+  alias_method :=~, :match
+
   def method_missing(method, *args, &block)
     method_name = method.to_s
     description = descriptionForMissingMethod(method_name, arguments:args)
 
     if object.respond_to?(method)
       # forward the message as-is
-      satisfy(description, block:proc { object.send(method, *args, &block) })
+      satisfy(description, block:proc { |o| o.send(method, *args, &block) })
     else
       predicate = "#{method_name}?"
       if object.respond_to?(predicate)
         # forward the Ruby predicate version of the method
-        satisfy(description, block:proc { object.send(predicate, *args, &block) })
+        satisfy(description, block:proc { |o| o.send(predicate, *args, &block) })
       else
         predicate = predicateVersionOfMissingMethod(method_name, arguments:args)
         if object.respond_to?(predicate)
           # forward the Objective-C predicate version of the method
-          satisfy(description, block:proc { object.send(predicate, *args) })
+          satisfy(description, block:proc { |o| o.send(predicate, *args) })
         else
           third_person_form = thirdPersonVersionOfMissingMethod(method_name, arguments:args)
           if object.respond_to?(third_person_form)
             # forward the Objective-C third person form of the method
-            satisfy(description, block:proc { object.send(third_person_form, *args) })
+            satisfy(description, block:proc { |o| o.send(third_person_form, *args) })
           else
             super
           end
@@ -99,7 +105,8 @@ class BaconShould
     block.call
   end
 
-  def executeBlock(block, withObject:object)
-    block.call(object)
+  # We should not return 0/1/nil etc, but always strict boolean values.
+  def executeAssertionBlock(block)
+    !!block.call(object)
   end
 end

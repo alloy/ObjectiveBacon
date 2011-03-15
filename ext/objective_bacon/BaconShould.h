@@ -17,6 +17,7 @@
 - (BaconShould *)an;
 
 - (void)equal:(id)otherValue;
+- (void)match:(id)value;
 
 - (id)raise;
 - (id)raise:(id)exception;
@@ -29,7 +30,7 @@
 // - (NSString *)getExceptionName:(id)exception;
 - (id)convertException:(id)exception;
 - (void)executeBlock:(id)block;
-- (BOOL)executeBlock:(id)block withObject:(id)obj;
+- (BOOL)executeAssertionBlock:(id)block;
 
 @end
 

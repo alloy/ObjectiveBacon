@@ -51,7 +51,7 @@
     passed = ((BOOL (^)(id x))block)(object);
   } else {
     //NSLog(@"not objc block!");
-    passed = [self executeBlock:block withObject:object];
+    passed = [self executeAssertionBlock:block];
   }
   if (passed) {
     // NSLog(@"ASSERTION PASSED!");
@@ -71,6 +71,12 @@
   [self satisfy:[NSString stringWithFormat:@"equal `%@'", otherValue] block:^(id value) {
     return [object isEqualTo:otherValue];
   }];
+}
+
+- (void)match:(id)value {
+  @throw [NSException exceptionWithName:@"ArgumentError"
+                                 reason:@"ObjectiveBacon does not provide its own regexp engine. The -[BaconShould match:] method should be overriden by the client."
+                             userInfo:nil];
 }
 
 - (id)raise {
@@ -192,8 +198,10 @@
   NSLog(@"-[BaconShould executeBlock:] should be overriden by the client to call the given block in its original binding.");
 }
 
-- (BOOL)executeBlock:(id)block withObject:(id)obj {
-  NSLog(@"-[BaconShould executeBlock:withObject:] should be overriden by the client to call the given block in its original binding.");
+- (BOOL)executeAssertionBlock:(id)block {
+  @throw [NSException exceptionWithName:@"UnimplementedError"
+                               reason:@"The -[BaconShould executeAssertionBlock:] should be implemented by the client. It should yield the `object' and return a boolean."
+                             userInfo:nil];
   return NO;
 }
 

@@ -127,7 +127,7 @@ describe "Bacon" do
     lambda { "".should.respondToSelector 'objectAtIndex:' }.should fail
   end
 
-  if false
+  # TODO this is implemented by the client
   it "should have should.match" do
     lambda { "string".should.match(/strin./) }.should succeed
     lambda { "string".should =~ /strin./ }.should succeed
@@ -136,6 +136,7 @@ describe "Bacon" do
     lambda { "string".should =~ /slin./ }.should fail
   end
 
+  if false
   it "should have should.not.raise" do
     lambda { lambda { 1 + 1 }.should.not.raise }.should succeed
     lambda { lambda { 1 + 1 }.should.not.raise(Interrupt) }.should succeed
