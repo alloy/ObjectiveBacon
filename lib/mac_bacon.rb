@@ -1,8 +1,6 @@
 framework 'Cocoa'
 require "objective_bacon"
 
-puts "HIER!"
-
 module Kernel
   private
 
@@ -21,6 +19,11 @@ end
 class BaconContext
   def describe(*args, &block)
     context = childContextWithName(args.join(' '))
+    parent_context = self
+    context_metaclass = (class << context; self; end)
+    parent_context.methods(false).each do |name|
+      context_metaclass.send(:define_method, name) { |*args| parent_context.send(name, *args) }
+    end
     context.instance_eval(&block)
     context
   end

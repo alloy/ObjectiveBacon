@@ -273,19 +273,15 @@ describe "Bacon" do
     lambda { (1+2).should.not.be equal_string("2") }.should succeed
   end
 
-          if false
-
-  it "should have should.flunk" do
-    lambda { should.flunk }.should fail
-    lambda { should.flunk "yikes" }.should fail
-  end
-  end
+  # TODO
+  #it "should have should.flunk" do
+    #lambda { should.flunk }.should fail
+    #lambda { should.flunk "yikes" }.should fail
+  #end
 end
 
-if false
 describe "before/after" do
   before do
-    puts "BEFORE!"
     @a = 1
     @b = 2
   end
@@ -295,7 +291,6 @@ describe "before/after" do
   end
 
   after do
-    puts "AFTER!"
     @a.should.equal 2
     @a = 3
   end
@@ -305,9 +300,6 @@ describe "before/after" do
   end
   
   it "should run in the right order" do
-    p @a, @b
-    #@a = 2
-    #@b = 2
     @a.should.equal 2
     @b.should.equal 2
   end
@@ -347,35 +339,35 @@ describe "before/after" do
   end
 end
 
-shared "a shared context" do
-  it "gets called where it is included" do
-    true.should.be.true
-  end
-end
+#shared "a shared context" do
+  #it "gets called where it is included" do
+    #true.should.be.true
+  #end
+#end
 
-shared "another shared context" do
-  it "can access data" do
-    @magic.should.be.equal 42
-  end
-end
+#shared "another shared context" do
+  #it "can access data" do
+    #@magic.should.be.equal 42
+  #end
+#end
 
-describe "shared/behaves_like" do
-  behaves_like "a shared context"
+#describe "shared/behaves_like" do
+  #behaves_like "a shared context"
 
-  ctx = self
-  it "raises NameError when the context is not found" do
-    lambda {
-      ctx.behaves_like "whoops"
-    }.should.raise NameError
-  end
+  #ctx = self
+  #it "raises NameError when the context is not found" do
+    #lambda {
+      #ctx.behaves_like "whoops"
+    #}.should.raise NameError
+  #end
 
-  behaves_like "a shared context"
+  #behaves_like "a shared context"
 
-  before {
-    @magic = 42
-  }
-  behaves_like "another shared context"
-end
+  #before {
+    #@magic = 42
+  #}
+  #behaves_like "another shared context"
+#end
 
 describe "Methods" do
   def the_meaning_of_life
@@ -413,16 +405,13 @@ describe 'describe arguments' do
   end
 
   it 'should work with namespaced modules' do
-    check(describe(Bacon::Context) {},'Bacon::Context')
+    check(describe(BaconContext) {},'BaconContext')
   end
 
   it 'should work with multiple arguments' do
-    check(describe(Bacon::Context, :empty) {},'Bacon::Context empty')
+    check(describe(BaconContext, :empty) {},'BaconContext empty')
   end
 
 end
-end
 
-puts "DONE LOADING SPEC!"
-p Bacon.sharedInstance.contexts
 Bacon.sharedInstance.run
