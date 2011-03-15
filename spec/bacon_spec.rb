@@ -13,11 +13,7 @@ module MetaTests
 
   def fail
     lambda { |block|
-      begin
-        block.should.raise BaconError
-      rescue Object => e
-        p e
-      end
+      block.should.raise BaconError
       true
     }
   end
@@ -37,37 +33,36 @@ describe "Bacon" do
     lambda { should.satisfy { 1 } }.should succeed
 
     lambda { should.satisfy { 1 != 1 } }.should fail
-    #should.satisfy { false }
     lambda { should.satisfy { false } }.should fail
 
-    #lambda { 1.should.satisfy { |n| n % 2 == 0 } }.should fail
+    lambda { 1.should.satisfy { |n| n % 2 == 0 } }.should fail
     lambda { 2.should.satisfy { |n| n % 2 == 0 } }.should succeed
   end
 
   it "should have should.equal" do
     lambda { "string1".should == "string1" }.should succeed
-    #lambda { "string1".should == "string2" }.should fail
-    #"1".should == 1
+    lambda { "string1".should == "string2" }.should fail
     lambda { "1".should == 1 }.should fail
 
     lambda { "string1".should.equal "string1" }.should succeed
-    #lambda { "string1".should.equal "string2" }.should fail
-    #lambda { "1".should.equal 1 }.should fail
+    lambda { "string1".should.equal "string2" }.should fail
+    lambda { "1".should.equal 1 }.should fail
+  end
+
+  it "should have should.raise" do
+    lambda { raise "Error" }.should.raise
+    #lambda { lambda { raise "Error" }.should.raise }.should succeed
+    #lambda { lambda { raise "Error" }.should.raise RuntimeError }.should succeed
+    #lambda { lambda { raise "Error" }.should.not.raise }.should fail
+    #lambda { lambda { raise "Error" }.should.not.raise(RuntimeError) }.should fail
+
+    #lambda { lambda { 1 + 1 }.should.raise }.should fail
+    #lambda {
+      #lambda { raise "Error" }.should.raise(Interrupt)
+    #}.should.raise
   end
 
   if false
-  it "should have should.raise" do
-    lambda { lambda { raise "Error" }.should.raise }.should succeed
-    lambda { lambda { raise "Error" }.should.raise RuntimeError }.should succeed
-    lambda { lambda { raise "Error" }.should.not.raise }.should fail
-    lambda { lambda { raise "Error" }.should.not.raise(RuntimeError) }.should fail
-
-    lambda { lambda { 1 + 1 }.should.raise }.should fail
-    lambda {
-      lambda { raise "Error" }.should.raise(Interrupt)
-    }.should.raise
-  end
-
   it "should have should.raise with a block" do
     lambda { should.raise { raise "Error" } }.should succeed
     lambda { should.raise(RuntimeError) { raise "Error" } }.should succeed

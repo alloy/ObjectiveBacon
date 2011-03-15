@@ -111,6 +111,9 @@ void Init_objective_bacon() {};
 
 - (void)equal:(id)otherValue;
 
+- (id)raise;
+- (id)raise:(id)exception;
+
 @end
 
 

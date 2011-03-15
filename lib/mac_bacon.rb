@@ -57,8 +57,6 @@ class BaconShould
   end
 
   def executeBlock(block, withObject:object)
-    r = block.call(object)
-    p r
-    r
+    block.call(object)
   end
 end
