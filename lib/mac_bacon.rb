@@ -47,7 +47,20 @@ class BaconContext
 end
 
 class BaconShould
-  alias_method :==, :equal
+  # Kills ==, ===, =~, eql?, equal?, frozen?, instance_of?, is_a?,
+  # kind_of?, nil?, respond_to?, tainted?
+  Object.instance_methods.each do |name|
+    if name =~ /\?|^\W+$/
+      class_eval %{
+        def #{name}(*a, &b)
+          method_missing(#{name.inspect}, *a, &b)
+        end
+      }
+    end
+  end
+
+  #alias_method :identical_to, :equal?
+  #alias_method :same_as, :equal?
 
   def satisfy(&block)
     satisfy(nil, block:block)
@@ -88,9 +101,11 @@ class BaconShould
     end
   end
 
-  #def getExceptionName(exception_class)
-    #exception_class.name
-  #end
+  # Client overrides
+
+  def isBlock(object)
+    object.is_a?(Proc)
+  end
 
   def convertException(exception)
     if info = exception.userInfo

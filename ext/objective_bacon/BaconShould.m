@@ -19,26 +19,6 @@
   [super dealloc];
 }
 
-- (BaconShould *)not {
-  negated = YES;
-  [descriptionBuffer appendString:@" not"];
-  return self;
-}
-
-- (BaconShould *)be {
-  [descriptionBuffer appendString:@" be"];
-  return self;
-}
-
-- (BaconShould *)a {
-  [descriptionBuffer appendString:@" a"];
-  return self;
-}
-
-- (BaconShould *)an {
-  [descriptionBuffer appendString:@" an"];
-  return self;
-}
 
 - (void)satisfy:(NSString *)description block:(id)block {
   // TODO add requirement to summary
@@ -67,9 +47,67 @@
   }
 }
 
+
+- (BaconShould *)not {
+  negated = YES;
+  [descriptionBuffer appendString:@" not"];
+  return self;
+}
+
+- (void)not:(id)block {
+  negated = YES;
+  [descriptionBuffer appendString:@" not"];
+  [self satisfy:nil block:block];
+}
+
+- (BaconShould *)be {
+  [descriptionBuffer appendString:@" be"];
+  return self;
+}
+
+- (void)be:(id)otherValue {
+  if ([self isBlock:otherValue]) {
+    [self satisfy:[NSString stringWithFormat:@"be `%@'", otherValue] block:otherValue];
+  } else {
+    [self satisfy:[NSString stringWithFormat:@"be `%@'", otherValue] block:^(id value) {
+      return [value isEqualTo:otherValue];
+    }];
+  }
+}
+
+- (BaconShould *)a {
+  [descriptionBuffer appendString:@" a"];
+  return self;
+}
+
+- (void)a:(id)otherValue {
+  if ([self isBlock:otherValue]) {
+    [self satisfy:[NSString stringWithFormat:@"a `%@'", otherValue] block:otherValue];
+  } else {
+    [self satisfy:[NSString stringWithFormat:@"a `%@'", otherValue] block:^(id value) {
+      return [value isEqualTo:otherValue];
+    }];
+  }
+}
+
+- (BaconShould *)an {
+  [descriptionBuffer appendString:@" an"];
+  return self;
+}
+
+- (void)an:(id)otherValue {
+  if ([self isBlock:otherValue]) {
+    [self satisfy:[NSString stringWithFormat:@"an `%@'", otherValue] block:otherValue];
+  } else {
+    [self satisfy:[NSString stringWithFormat:@"an `%@'", otherValue] block:^(id value) {
+      return [value isEqualTo:otherValue];
+    }];
+  }
+}
+
 - (void)equal:(id)otherValue {
   [self satisfy:[NSString stringWithFormat:@"equal `%@'", otherValue] block:^(id value) {
-    return [object isEqualTo:otherValue];
+    return [value isEqualTo:otherValue];
   }];
 }
 
@@ -187,11 +225,12 @@
 // Methods that should be overriden by clients
 
 
-// TODO check if we do need this after all, for now we just check if the `exception' given to raise: responds to `name'.
-//- (NSString *)getExceptionName:(id)exception {
-  //NSLog(@"-[BaconShould getExceptionName:] should be overriden by the client to retreive the name of the exception.");
-  //return @"";
-//}
+- (BOOL)isBlock:(id)object {
+  @throw [NSException exceptionWithName:@"UnimplementedError"
+                               reason:@"-[BaconShould isBlock:] should be implemented by the client. It should return a boolean indicating whether or not the argument is a language block."
+                             userInfo:nil];
+  return NO;
+}
 
 // Should be overriden by the client to convert the exception to the exception expected for that client's language.
 - (id)convertException:(id)exception {
@@ -204,7 +243,7 @@
 
 - (BOOL)executeAssertionBlock:(id)block {
   @throw [NSException exceptionWithName:@"UnimplementedError"
-                               reason:@"The -[BaconShould executeAssertionBlock:] should be implemented by the client. It should yield the `object' and return a boolean."
+                               reason:@"-[BaconShould executeAssertionBlock:] should be implemented by the client. It should yield the `object' and return a boolean."
                              userInfo:nil];
   return NO;
 }

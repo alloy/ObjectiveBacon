@@ -159,7 +159,6 @@ describe "Bacon" do
     #should.throw(:foo) { throw :foo }
   end
 
-    if false
   it "should have should.not.satisfy" do
     lambda { should.not.satisfy { 1 == 2 } }.should succeed
     lambda { should.not.satisfy { 1 == 1 } }.should fail
@@ -173,47 +172,48 @@ describe "Bacon" do
   it "should have should.not.match" do
     lambda { "string".should.not.match(/sling/) }.should succeed
     lambda { "string".should.not.match(/string/) }.should fail
-#    lambda { "string".should.not.match("strin") }.should fail
 
     lambda { "string".should.not =~ /sling/ }.should succeed
     lambda { "string".should.not =~ /string/ }.should fail
-#    lambda { "string".should.not =~ "strin" }.should fail
   end
 
-  it "should have should.be.identical_to/same_as" do
-    lambda { s = "string"; s.should.be.identical_to s }.should succeed
-    lambda { "string".should.be.identical_to "string" }.should fail
+  # TODO
+  #it "should have should.be.identical_to/same_as" do
+    #lambda { s = "string"; s.should.be.identical_to s }.should succeed
+    #lambda { "string".should.be.identical_to "string" }.should fail
 
-    lambda { s = "string"; s.should.be.same_as s }.should succeed
-    lambda { "string".should.be.same_as "string" }.should fail
-  end
+    #lambda { s = "string"; s.should.be.same_as s }.should succeed
+    #lambda { "string".should.be.same_as "string" }.should fail
+  #end
 
   it "should have should.respond_to" do
     lambda { "foo".should.respond_to :to_s }.should succeed
     lambda { 5.should.respond_to :to_str }.should fail
     lambda { :foo.should.respond_to :nx }.should fail
   end
-  
-  it "should have should.be.close" do
-    lambda { 1.4.should.be.close 1.4, 0 }.should succeed
-    lambda { 0.4.should.be.close 0.5, 0.1 }.should succeed
 
-    lambda { 0.4.should.be.close 0.5, 0.05 }.should fail
-    lambda { 0.4.should.be.close Object.new, 0.1 }.should fail
-    lambda { 0.4.should.be.close 0.5, -0.1 }.should fail
-  end
+  # TODO
+  #it "should have should.be.close" do
+    #lambda { 1.4.should.be.close 1.4, 0 }.should succeed
+    #lambda { 0.4.should.be.close 0.5, 0.1 }.should succeed
 
-  it "should support multiple negation" do
-    lambda { 1.should.equal 1 }.should succeed
-    lambda { 1.should.not.equal 1 }.should fail
-    lambda { 1.should.not.not.equal 1 }.should succeed
-    lambda { 1.should.not.not.not.equal 1 }.should fail
+    #lambda { 0.4.should.be.close 0.5, 0.05 }.should fail
+    #lambda { 0.4.should.be.close Object.new, 0.1 }.should fail
+    #lambda { 0.4.should.be.close 0.5, -0.1 }.should fail
+  #end
 
-    lambda { 1.should.equal 2 }.should fail
-    lambda { 1.should.not.equal 2 }.should succeed
-    lambda { 1.should.not.not.equal 2 }.should fail
-    lambda { 1.should.not.not.not.equal 2 }.should succeed
-  end
+  # TODO ? I don't see the benefit
+  #it "should support multiple negation" do
+    #lambda { 1.should.equal 1 }.should succeed
+    #lambda { 1.should.not.equal 1 }.should fail
+    #lambda { 1.should.not.not.equal 1 }.should succeed
+    #lambda { 1.should.not.not.not.equal 1 }.should fail
+
+    #lambda { 1.should.equal 2 }.should fail
+    #lambda { 1.should.not.equal 2 }.should succeed
+    #lambda { 1.should.not.not.equal 2 }.should fail
+    #lambda { 1.should.not.not.not.equal 2 }.should succeed
+  #end
 
   it "should have should.<predicate>" do
     lambda { [].should.be.empty }.should succeed
@@ -225,8 +225,9 @@ describe "Bacon" do
     lambda { {1=>2, 3=>4}.should.has_key 1 }.should succeed
     lambda { {1=>2, 3=>4}.should.not.has_key 2 }.should succeed
 
-    lambda { nil.should.bla }.should.raise(NoMethodError)
-    lambda { nil.should.not.bla }.should.raise(NoMethodError)
+    # TODO
+    #lambda { nil.should.bla }.should.raise(NoMethodError)
+    #lambda { nil.should.not.bla }.should.raise(NoMethodError)
   end
 
   it "should have should <operator> (>, >=, <, <=, ===)" do
@@ -258,13 +259,21 @@ describe "Bacon" do
     lambda { (1+1).should.be equal_string("2") }.should succeed
     lambda { (1+2).should.be equal_string("2") }.should fail
 
+    lambda { (1+1).should.be.a equal_string("2") }.should succeed
+    lambda { (1+2).should.be.a equal_string("2") }.should fail
+
+    lambda { (1+1).should.be.an equal_string("2") }.should succeed
+    lambda { (1+2).should.be.an equal_string("2") }.should fail
+
     lambda { (1+1).should.not equal_string("2") }.should fail
     lambda { (1+2).should.not equal_string("2") }.should succeed
-    lambda { (1+2).should.not.not equal_string("2") }.should fail
+    #lambda { (1+2).should.not.not equal_string("2") }.should fail
 
     lambda { (1+1).should.not.be equal_string("2") }.should fail
     lambda { (1+2).should.not.be equal_string("2") }.should succeed
   end
+
+          if false
 
   it "should have should.flunk" do
     lambda { should.flunk }.should fail

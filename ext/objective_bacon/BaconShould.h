@@ -12,9 +12,13 @@
 - (void)satisfy:(NSString *)description block:(id)block;
 
 - (BaconShould *)not;
+- (void)not:(id)block;
 - (BaconShould *)be;
+- (void)be:(id)otherValue;
 - (BaconShould *)a;
+- (void)a:(id)otherValue;
 - (BaconShould *)an;
+- (void)an:(id)otherValue;
 
 - (void)equal:(id)otherValue;
 - (void)match:(id)value;
@@ -27,7 +31,7 @@
 - (NSString *)predicateVersionOfMissingMethod:(NSString *)methodName arguments:(NSArray *)arguments;
 - (NSString *)thirdPersonVersionOfMissingMethod:(NSString *)methodName arguments:(NSArray *)arguments;
 
-// - (NSString *)getExceptionName:(id)exception;
+- (BOOL)isBlock:(id)object;
 - (id)convertException:(id)exception;
 - (void)executeBlock:(id)block;
 - (BOOL)executeAssertionBlock:(id)block;
