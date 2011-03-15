@@ -56,6 +56,15 @@ class BaconShould
     #exception_class.name
   #end
 
+  def convertException(exception)
+    if info = exception.userInfo
+      if rubyException = info.valueForKey('RubyException')
+        return rubyException
+      end
+    end
+    exception
+  end
+
   def executeBlock(block)
     block.call
   end

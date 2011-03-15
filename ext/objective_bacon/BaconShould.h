@@ -22,6 +22,7 @@
 - (id)raise:(id)exception;
 
 // - (NSString *)getExceptionName:(id)exception;
+- (id)convertException:(id)exception;
 - (void)executeBlock:(id)block;
 - (BOOL)executeBlock:(id)block withObject:(id)obj;
 

@@ -82,7 +82,7 @@
     }
     @catch(id e) {
       // NSLog(@"Got exception: %@", [e name]);
-      result = e;
+      result = [self convertException:e];
       return YES;
     }
     return NO; // never reached?
@@ -114,7 +114,7 @@
     }
     @catch(NSException *e) {
       //NSLog(@"Got exception: %@, expected: %@", [e name], exceptionName);
-      result = e;
+      result = [self convertException:e];
       return [[e name] isEqualToString:exceptionName];
     }
     return NO; // never reached?
@@ -127,6 +127,11 @@
   //NSLog(@"-[BaconShould getExceptionName:] should be overriden by the client to retreive the name of the exception.");
   //return @"";
 //}
+
+// Should be overriden by the client to convert the exception to the exception expected for that client's language.
+- (id)convertException:(id)exception {
+  return exception;
+}
 
 - (void)executeBlock:(id)block {
   NSLog(@"-[BaconShould executeBlock:] should be overriden by the client to call the given block in its original binding.");

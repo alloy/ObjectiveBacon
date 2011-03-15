@@ -61,25 +61,28 @@ describe "Bacon" do
     }.should.raise
   end
 
-  if false
-  it "should have should.raise with a block" do
-    lambda { should.raise { raise "Error" } }.should succeed
-    lambda { should.raise(RuntimeError) { raise "Error" } }.should succeed
-    lambda { should.not.raise { raise "Error" } }.should fail
-    lambda { should.not.raise(RuntimeError) { raise "Error" } }.should fail
+  # TODO decide if we really need this
+  #it "should have should.raise with a block" do
+    #lambda { should.raise { raise "Error" } }.should succeed
+    #lambda { should.raise(RuntimeError) { raise "Error" } }.should succeed
+    #lambda { should.not.raise { raise "Error" } }.should fail
+    #lambda { should.not.raise(RuntimeError) { raise "Error" } }.should fail
 
-    lambda { should.raise { 1 + 1 } }.should fail
-    lambda {
-      should.raise(Interrupt) { raise "Error" }
-    }.should.raise
-  end
+    #lambda { should.raise { 1 + 1 } }.should fail
+    #lambda {
+      #should.raise(Interrupt) { raise "Error" }
+    #}.should.raise
+  #end
 
   it "should have a should.raise should return the exception" do
     ex = lambda { raise "foo!" }.should.raise
-    ex.should.be.kind_of RuntimeError
+    # TODO
+    #ex.should.be.kind_of RuntimeError
+    ex.class.should == RuntimeError
     ex.message.should =~ /foo/
   end
-  
+
+  if false
   it "should have should.be.an.instance_of" do
     lambda { "string".should.be.instance_of String }.should succeed
     lambda { "string".should.be.instance_of Hash }.should fail
