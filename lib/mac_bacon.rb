@@ -59,6 +59,14 @@ class BaconContext
     currentSpecification.postponeBlock(block, withTimeout:timeout)
   end
 
+  def wait_for_change(observable, key_path, timeout = nil, &block)
+    if timeout
+      currentSpecification.postponeBlockUntilChange(block, ofObject:observable, withKeyPath:key_path, timeout:timeout)
+    else
+      currentSpecification.postponeBlockUntilChange(block, ofObject:observable, withKeyPath:key_path)
+    end
+  end
+
   def resume
     currentSpecification.resume
   end

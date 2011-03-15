@@ -154,7 +154,7 @@ static Bacon *sharedBaconInstance = nil;
     [errorLog appendString:[exception description]];
   }
   [errorLog appendString:type];
-  [errorLog appendString:@"\n"];
+  [errorLog appendString:@"\n\n"];
   // TODO callStackSymbols for NuBacon/objc?
 }
 

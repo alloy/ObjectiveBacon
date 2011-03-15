@@ -30,6 +30,7 @@
     ranAfterFilters = NO;
 
     postponedBlock = nil;
+    observedObjectAndKeyPath = nil;
   }
   return self;
 }
@@ -41,6 +42,7 @@
   self.beforeFilters = nil;
   self.afterFilters = nil;
   [postponedBlock release];
+  [observedObjectAndKeyPath release];
   [super dealloc];
 }
 
@@ -112,6 +114,25 @@
   }
 }
 
+- (void)postponeBlockUntilChange:(id)block ofObject:(id)observable withKeyPath:(NSString *)keyPath {
+  [self postponeBlockUntilChange:block ofObject:observable withKeyPath:keyPath timeout:1.0];
+}
+
+- (void)postponeBlockUntilChange:(id)block ofObject:(id)observable withKeyPath:(NSString *)keyPath timeout:(NSTimeInterval)timeout {
+  // If an exception occurred, we definitely don't need to schedule any more blocks
+  if (!exceptionOccurred) {
+    if (postponedBlock != nil) {
+      // TODO raise exception!
+    } else {
+      scheduledBlocksCount++;
+      postponedBlock = [block retain];
+      observedObjectAndKeyPath = [[NSArray arrayWithObjects:observable, keyPath, nil] retain];
+      [observable addObserver:self forKeyPath:keyPath options:0 context:nil];
+      [self performSelector:@selector(postponedChangeBlockTimeoutExceeded) withObject:nil afterDelay:timeout];
+    }
+  }
+}
+
 - (void)postponedBlockTimeoutExceeded {
   [self cancelScheduledRequests];
   // TODO don't use an exception here!
@@ -122,8 +143,19 @@
   [self finishSpec];
 }
 
+- (void)postponedChangeBlockTimeoutExceeded {
+  [self removeObserver];
+  [self postponedBlockTimeoutExceeded];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+  [self resume];
+}
+
 - (void)resume {
   [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(postponedBlockTimeoutExceeded) object:nil];
+  [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(postponedChangeBlockTimeoutExceeded) object:nil];
+  [self removeObserver];
   id block = postponedBlock;
   postponedBlock = nil;
   [self runPostponedBlock:block];
@@ -166,6 +198,16 @@
 - (void)cancelScheduledRequests {
   [NSObject cancelPreviousPerformRequestsWithTarget:self.context];
   [NSObject cancelPreviousPerformRequestsWithTarget:self];
+}
+
+- (void)removeObserver {
+  if (observedObjectAndKeyPath != nil) {
+    id object = [observedObjectAndKeyPath objectAtIndex:0];
+    NSString *keyPath = [observedObjectAndKeyPath objectAtIndex:1];
+    [object removeObserver:self forKeyPath:keyPath];
+    [observedObjectAndKeyPath release];
+    observedObjectAndKeyPath = nil;
+  }
 }
 
 - (void)executeBlock:(void (^)())block {

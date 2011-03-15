@@ -13,6 +13,7 @@
   BOOL ranSpecBlock;
   BOOL ranAfterFilters;
   id postponedBlock;
+  NSArray *observedObjectAndKeyPath;
 }
 
 @property (nonatomic, assign) BaconContext *context;
@@ -40,9 +41,12 @@
 - (void)scheduleBlock:(id)block withDelay:(NSTimeInterval)seconds;
 - (void)postponeBlock:(id)block;
 - (void)postponeBlock:(id)block withTimeout:(NSTimeInterval)timeout;
+- (void)postponeBlockUntilChange:(id)block ofObject:(id)observable withKeyPath:(NSString *)keyPath;
+- (void)postponeBlockUntilChange:(id)block ofObject:(id)observable withKeyPath:(NSString *)keyPath timeout:(NSTimeInterval)timeout;
 - (void)resume;
 - (void)runPostponedBlock:(id)block;
 
+- (void)removeObserver;
 - (void)cancelScheduledRequests;
 - (void)executeBlock:(void (^)())block;
 

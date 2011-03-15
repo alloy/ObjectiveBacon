@@ -62,8 +62,6 @@ describe "NSRunloop aware Bacon" do
     end
   end
 
-    if false
-
   describe "concerning `wait_for_change'" do
     before do
       @observable = MockObservable.new
@@ -111,6 +109,7 @@ describe "NSRunloop aware Bacon" do
     end
   end
 
+      if false
   describe "postponing blocks should work from before/after filters as well" do
     shared "waiting in before/after filters" do
       it "starts later because of postponed blocks in the before filter" do
