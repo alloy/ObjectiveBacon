@@ -76,9 +76,7 @@ describe "Bacon" do
 
   it "should have a should.raise should return the exception" do
     ex = lambda { raise "foo!" }.should.raise
-    # TODO
-    #ex.should.be.kind_of RuntimeError
-    ex.class.should == RuntimeError
+    ex.should.be.kind_of RuntimeError
     ex.message.should =~ /foo/
   end
 

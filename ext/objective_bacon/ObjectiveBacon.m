@@ -82,7 +82,7 @@ static Bacon *sharedBaconInstance = nil;
   } else {
     // DONE
     [[self summary] print];
-    exit(0); // TODO exit with error/failure count
+    exit([[self summary] failures] + [[self summary] errors]);
   }
 }
 
@@ -155,7 +155,7 @@ static Bacon *sharedBaconInstance = nil;
 }
 
 - (void)print {
-  printf("\n%s", [errorLog UTF8String]);
+  printf("\n%s\n", [errorLog UTF8String]);
   printf("%d specifications (%d requirements), %d failures, %d errors\n", (int)counters[0], (int)counters[1], (int)counters[2], (int)counters[3]);
 }
 

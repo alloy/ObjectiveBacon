@@ -40,7 +40,7 @@
 - (void)run {
   if (report) {
     [[[Bacon sharedInstance] summary] addSpecification];
-    printf("- %s\n", [self.description UTF8String]);
+    printf("- %s", [self.description UTF8String]);
   }
 
   [self runBeforeFilters];
@@ -79,6 +79,9 @@
 }
 
 - (void)exitSpec {
+  if (report) {
+    printf("\n");
+  }
   [self.context specificationDidFinish:self];
 }
 
@@ -97,16 +100,14 @@
       } else {
         [[[Bacon sharedInstance] summary] addError];
         type = @" [ERROR]";
-        NSLog(@"Exception: %@, %@", [e name], [e reason]);
+        //NSLog(@"Exception: %@, %@", [e name], [e reason]);
       }
-      printf("%s\n", [type UTF8String]);
+      printf("%s", [type UTF8String]);
       [[[Bacon sharedInstance] summary] addToErrorLog:e
                                               context:self.context.name
                                         specification:self.description
                                                  type:type];
     }
-  }
-  @finally {
   }
 }
 
