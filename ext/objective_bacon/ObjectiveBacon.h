@@ -101,10 +101,13 @@ void Init_objective_bacon() {};
 - (id)initWithObject:(id)theObject;
 - (void)satisfy:(NSString *)description block:(id)block;
 
-- (BOOL)executeBlock:(id)block;
+- (void)executeBlock:(id)block;
 - (BOOL)executeBlock:(id)block withObject:(id)obj;
 
 - (BaconShould *)not;
+- (BaconShould *)be;
+- (BaconShould *)a;
+- (BaconShould *)an;
 
 - (void)equal:(id)otherValue;
 

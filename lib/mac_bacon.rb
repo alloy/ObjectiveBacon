@@ -46,6 +46,8 @@ class BaconContext
 end
 
 class BaconShould
+  alias_method :==, :equal
+
   def satisfy(&block)
     satisfy(nil, block:block)
   end

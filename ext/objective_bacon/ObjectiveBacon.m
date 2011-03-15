@@ -183,7 +183,7 @@
     block();
   }
   @catch(id e) {
-    //NSLog(@"Exception was raised: %@", e);
+    NSLog(@"Exception was raised: %@", [e name]);
     exceptionOccurred = YES;
     if (report) {
       if ([e isKindOfClass:[BaconError class]]) {
@@ -319,6 +319,21 @@ static Bacon *sharedBaconInstance = nil;
   return self;
 }
 
+- (BaconShould *)be {
+  [descriptionBuffer appendString:@" be"];
+  return self;
+}
+
+- (BaconShould *)a {
+  [descriptionBuffer appendString:@" a"];
+  return self;
+}
+
+- (BaconShould *)an {
+  [descriptionBuffer appendString:@" an"];
+  return self;
+}
+
 - (void)satisfy:(NSString *)description block:(id)block {
   // TODO add requirement to summary
   NSString *desc = description == nil ? [NSString stringWithFormat:@"satisfy `%@'", block] : description;
@@ -333,14 +348,14 @@ static Bacon *sharedBaconInstance = nil;
     passed = [self executeBlock:block withObject:object];
   }
   if (passed) {
-    //NSLog(@"ASSERTION PASSED!");
+    NSLog(@"ASSERTION PASSED!");
     if (negated) {
       @throw [BaconError errorWithDescription:desc];
     }
   } else {
-    //NSLog(@"ASSERTION FAILED!");
+    NSLog(@"ASSERTION FAILED!");
     if (!negated) {
-      //NSLog(@"THROW!");
+      NSLog(@"THROW!");
       @throw [BaconError errorWithDescription:desc];
     }
   }
@@ -359,7 +374,8 @@ static Bacon *sharedBaconInstance = nil;
       [self executeBlock:block];
       return NO;
     }
-    @catch(BaconError *e) {
+    @catch(NSException *e) {
+      NSLog(@"Got exception: %@", [e name]);
       result = e;
       return [e isKindOfClass:exception];
     }
@@ -368,9 +384,8 @@ static Bacon *sharedBaconInstance = nil;
   return result;
 }
 
-- (BOOL)executeBlock:(id)block {
+- (void)executeBlock:(id)block {
   NSLog(@"-[BaconShould executeBlock:] should be overriden by the client to call the given block in its original binding.");
-  return NO;
 }
 
 - (BOOL)executeBlock:(id)block withObject:(id)obj {
@@ -384,6 +399,7 @@ static Bacon *sharedBaconInstance = nil;
 @implementation NSObject (Bacon)
 
 - (BaconShould *)should {
+  NSLog(@"Should without block");
   return [[[BaconShould alloc] initWithObject:self] autorelease];
 }
 
