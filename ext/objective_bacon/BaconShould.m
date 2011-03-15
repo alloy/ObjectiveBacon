@@ -92,7 +92,7 @@
 
 - (id)raise:(id)exception {
   __block id result = nil;
-  NSString *exceptionName;
+  NSString *exceptionName = nil;
   if ([exception isKindOfClass:[NSException class]]) {
     //NSLog(@"Raised exception is a NSException.");
     exceptionName = [exception name];
@@ -120,6 +120,50 @@
     return NO; // never reached?
   }];
   return result;
+}
+
+
+// Helper methods that should be used by the client when dynamically handling missing methods
+
+
+- (NSString *)descriptionForMissingMethod:(NSString *)methodName arguments:(NSArray *)arguments {
+  if ([arguments count] == 0) {
+    return methodName;
+  } else {
+    return [NSString stringWithFormat:@"%@ with %@", methodName, [arguments componentsJoinedByString:@", "]];
+  }
+}
+
+- (NSString *)predicateVersionOfMissingMethod:(NSString *)methodName arguments:(NSArray *)arguments {
+  NSString *result = [NSString stringWithFormat:@"is%@%@",
+    [[methodName substringToIndex:1] uppercaseString],
+    [methodName substringFromIndex:1]
+  ];
+  if ([arguments count] == 0) {
+    return result;
+  } else if ([arguments count] == 1) {
+    return [result stringByAppendingString:@":"];
+  } else {
+    @throw [NSException exceptionWithName:@"ArgumentError"
+                                   reason:@"ObjectiveBacon does not transform selectors with multiple arguments, yet."
+                                 userInfo:nil];
+  }
+}
+
+- (NSString *)thirdPersonVersionOfMissingMethod:(NSString *)methodName arguments:(NSArray *)arguments {
+  NSArray *parts = [methodName componentsSeparatedByCharactersInSet:[NSCharacterSet uppercaseLetterCharacterSet]];
+  NSString *firstPart = [parts objectAtIndex:0];
+  NSString *rest = [methodName substringFromIndex:[firstPart length]];
+  NSString *result = [NSString stringWithFormat:@"%@s%@", firstPart, rest];
+  if ([arguments count] == 0) {
+    return result;
+  } else if ([arguments count] == 1) {
+    return [result stringByAppendingString:@":"];
+  } else {
+    @throw [NSException exceptionWithName:@"ArgumentError"
+                                   reason:@"ObjectiveBacon does not transform selectors with multiple arguments, yet."
+                                 userInfo:nil];
+  }
 }
 
 // TODO this should be implemented when dealing with objc, but maybe it will work for Nu as well.

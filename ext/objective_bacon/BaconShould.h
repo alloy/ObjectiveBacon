@@ -21,6 +21,11 @@
 - (id)raise;
 - (id)raise:(id)exception;
 
+
+- (NSString *)descriptionForMissingMethod:(NSString *)methodName arguments:(NSArray *)arguments;
+- (NSString *)predicateVersionOfMissingMethod:(NSString *)methodName arguments:(NSArray *)arguments;
+- (NSString *)thirdPersonVersionOfMissingMethod:(NSString *)methodName arguments:(NSArray *)arguments;
+
 // - (NSString *)getExceptionName:(id)exception;
 - (id)convertException:(id)exception;
 - (void)executeBlock:(id)block;

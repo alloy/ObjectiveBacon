@@ -2,3 +2,4 @@
 * check/port the rest of the NuBacon specs
 * Do we really need to support BaconShould#raise with a block? Disabled for now.
 * Do we need -[BaconShould forwardInvocation:] for Nu/objc?
+* We can't really implement handling missing objc methods from objc, because the language that the call originates from, eg MacRuby, might have boxed an immediate type such as an int as a NSNumber. So the client has to deal with this. Is this correct?
