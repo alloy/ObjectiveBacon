@@ -50,16 +50,15 @@ describe "Bacon" do
   end
 
   it "should have should.raise" do
-    lambda { raise "Error" }.should.raise
-    #lambda { lambda { raise "Error" }.should.raise }.should succeed
-    #lambda { lambda { raise "Error" }.should.raise RuntimeError }.should succeed
-    #lambda { lambda { raise "Error" }.should.not.raise }.should fail
-    #lambda { lambda { raise "Error" }.should.not.raise(RuntimeError) }.should fail
+    lambda { lambda { raise "Error" }.should.raise }.should succeed
+    lambda { lambda { raise "Error" }.should.raise RuntimeError }.should succeed
+    lambda { lambda { raise "Error" }.should.not.raise }.should fail
+    lambda { lambda { raise "Error" }.should.not.raise(RuntimeError) }.should fail
 
-    #lambda { lambda { 1 + 1 }.should.raise }.should fail
-    #lambda {
-      #lambda { raise "Error" }.should.raise(Interrupt)
-    #}.should.raise
+    lambda { lambda { 1 + 1 }.should.raise }.should fail
+    lambda {
+      lambda { raise "Error" }.should.raise(Interrupt)
+    }.should.raise
   end
 
   if false

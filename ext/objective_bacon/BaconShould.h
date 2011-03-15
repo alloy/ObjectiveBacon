@@ -11,9 +11,6 @@
 - (id)initWithObject:(id)theObject;
 - (void)satisfy:(NSString *)description block:(id)block;
 
-- (void)executeBlock:(id)block;
-- (BOOL)executeBlock:(id)block withObject:(id)obj;
-
 - (BaconShould *)not;
 - (BaconShould *)be;
 - (BaconShould *)a;
@@ -23,6 +20,10 @@
 
 - (id)raise;
 - (id)raise:(id)exception;
+
+// - (NSString *)getExceptionName:(id)exception;
+- (void)executeBlock:(id)block;
+- (BOOL)executeBlock:(id)block withObject:(id)obj;
 
 @end
 

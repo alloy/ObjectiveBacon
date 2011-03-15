@@ -92,20 +92,41 @@
 
 - (id)raise:(id)exception {
   __block id result = nil;
-  [self satisfy:[NSString stringWithFormat:@"raise an exception of type `%@'", exception] block:^(id block) {
+  NSString *exceptionName;
+  if ([exception isKindOfClass:[NSException class]]) {
+    //NSLog(@"Raised exception is a NSException.");
+    exceptionName = [exception name];
+  } else {
+    //NSLog(@"Raised exception is not a NSException, retreiving name.");
+    if ([exception respondsToSelector:@selector(name)]) {
+      //NSLog(@"The exception object responds to `name', so try to retreive it that way.");
+      exceptionName = [exception performSelector:@selector(name)];
+    }
+    //else {
+      //exceptionName = [self getExceptionName:exception];
+    //}
+  }
+
+  [self satisfy:[NSString stringWithFormat:@"raise an exception with name `%@'", exceptionName] block:^(id block) {
     @try {
       [self executeBlock:block];
       return NO;
     }
-    @catch(id e) {
-      // NSLog(@"Got exception: %@", [e name]);
+    @catch(NSException *e) {
+      //NSLog(@"Got exception: %@, expected: %@", [e name], exceptionName);
       result = e;
-      return [e isKindOfClass:exception];
+      return [[e name] isEqualToString:exceptionName];
     }
     return NO; // never reached?
   }];
   return result;
 }
+
+// TODO check if we do need this after all, for now we just check if the `exception' given to raise: responds to `name'.
+//- (NSString *)getExceptionName:(id)exception {
+  //NSLog(@"-[BaconShould getExceptionName:] should be overriden by the client to retreive the name of the exception.");
+  //return @"";
+//}
 
 - (void)executeBlock:(id)block {
   NSLog(@"-[BaconShould executeBlock:] should be overriden by the client to call the given block in its original binding.");

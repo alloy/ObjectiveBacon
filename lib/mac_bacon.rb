@@ -52,6 +52,10 @@ class BaconShould
     satisfy(nil, block:block)
   end
 
+  #def getExceptionName(exception_class)
+    #exception_class.name
+  #end
+
   def executeBlock(block)
     block.call
   end
