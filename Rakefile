@@ -19,8 +19,8 @@ end
 
 desc 'Run specs'
 task :spec => :compile do
-  sh 'macruby spec/bacon_spec.rb'
-  #sh 'macruby spec/mac_bacon_spec.rb'
+  #sh 'macruby spec/bacon_spec.rb'
+  sh 'macruby spec/mac_bacon_spec.rb'
 end
 
 task :default => :spec

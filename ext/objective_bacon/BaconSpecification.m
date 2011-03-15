@@ -24,6 +24,10 @@
     self.afterFilters = [[theAfterFilters copy] autorelease];
 
     exceptionOccurred = NO;
+    scheduledBlocksCount = 0;
+
+    ranSpecBlock = NO;
+    ranAfterFilters = NO;
   }
   return self;
 }
@@ -37,23 +41,29 @@
   [super dealloc];
 }
 
+- (BOOL)isPostponed {
+  return scheduledBlocksCount != 0;
+}
+
 - (void)run {
   if (report) {
     [[[Bacon sharedInstance] summary] addSpecification];
     printf("- %s", [self.description UTF8String]);
   }
-
   [self runBeforeFilters];
-  [self runSpecBlock];
-
-  // TODO check if postponed
-  [self finishSpec];
+  if (![self isPostponed]) {
+    [self runSpecBlock];
+  }
 }
 
 - (void)runSpecBlock {
+  ranSpecBlock = YES;
   [self executeBlock:^{
     [self.context evaluateBlock:self.specBlock];
   }];
+  if (![self isPostponed]) {
+    [self finishSpec];
+  }
 }
 
 - (void)runBeforeFilters {
@@ -65,11 +75,40 @@
 }
 
 - (void)runAfterFilters {
+  ranAfterFilters = YES;
   [self executeBlock:^{
     for (id block in self.afterFilters) {
       [self.context evaluateBlock:block];
     }
   }];
+}
+
+- (void)scheduleBlock:(id)block withDelay:(NSTimeInterval)seconds {
+  // If an exception occurred, we definitely don't need to schedule any more blocks
+  if (!exceptionOccurred) {
+    NSLog(@"Scheduling block!");
+    scheduledBlocksCount++;
+    [self performSelector:@selector(runPostponedBlock:) withObject:block afterDelay:seconds];
+  }
+}
+
+- (void)runPostponedBlock:(id)block {
+  // If an exception occurred, we definitely don't need to execute any more blocks
+  if (!exceptionOccurred) {
+    [self executeBlock:^{
+      [self.context evaluateBlock:block];
+    }];
+  }
+  scheduledBlocksCount--;
+  if (![self isPostponed]) {
+    if (ranAfterFilters) {
+      [self exitSpec];
+    } else if (ranSpecBlock) {
+      [self finishSpec];
+    } else {
+      [self runSpecBlock];
+    }
+  }
 }
 
 - (void)finishSpec {

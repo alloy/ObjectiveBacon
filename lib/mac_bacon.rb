@@ -47,6 +47,14 @@ class BaconContext
     names.each { |name| instance_eval(&Shared[name]) }
   end
 
+  def wait(seconds = nil, &block)
+    if seconds
+      currentSpecification.scheduleBlock(block, withDelay:seconds)
+    #else
+      #currentSpecification.postpone_block(&block)
+    end
+  end
+
   def evaluateBlock(block)
     instance_eval(&block)
   end
@@ -71,6 +79,16 @@ class BaconShould
 
   def satisfy(&block)
     satisfy(nil, block:block)
+  end
+
+  def close(to, delta)
+    satisfy("close to `#{to}'", block:proc { |value|
+      if to.respond_to?(:to_f) && delta.respond_to?(:to_f)
+        (to.to_f - value).abs <= delta.to_f
+      else
+        false
+      end
+    })
   end
 
   def match(value)

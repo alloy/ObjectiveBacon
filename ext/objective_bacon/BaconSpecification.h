@@ -9,6 +9,9 @@
   NSArray *beforeFilters, *afterFilters;
   BOOL report;
   BOOL exceptionOccurred;
+  NSUInteger scheduledBlocksCount;
+  BOOL ranSpecBlock;
+  BOOL ranAfterFilters;
 }
 
 @property (nonatomic, assign) BaconContext *context;
@@ -23,6 +26,8 @@
                before:(NSArray *)theBeforeFilters
                 after:(NSArray *)theAfterFilters
                report:(BOOL)shouldReport;
+
+- (BOOL)isPostponed;
 
 - (void)run;
 - (void)runSpecBlock;

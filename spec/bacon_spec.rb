@@ -190,15 +190,15 @@ describe "Bacon" do
     lambda { :foo.should.respond_to :nx }.should fail
   end
 
-  # TODO
-  #it "should have should.be.close" do
-    #lambda { 1.4.should.be.close 1.4, 0 }.should succeed
+  # TODO should this be implemented in the client? currently is.
+  it "should have should.be.close" do
+    lambda { 1.4.should.be.close 1.4, 0 }.should succeed
     #lambda { 0.4.should.be.close 0.5, 0.1 }.should succeed
 
-    #lambda { 0.4.should.be.close 0.5, 0.05 }.should fail
-    #lambda { 0.4.should.be.close Object.new, 0.1 }.should fail
-    #lambda { 0.4.should.be.close 0.5, -0.1 }.should fail
-  #end
+    lambda { 0.4.should.be.close 0.5, 0.05 }.should fail
+    lambda { 0.4.should.be.close Object.new, 0.1 }.should fail
+    lambda { 0.4.should.be.close 0.5, -0.1 }.should fail
+  end
 
   # TODO ? I don't see the benefit
   #it "should support multiple negation" do
