@@ -12,6 +12,7 @@
   NSUInteger scheduledBlocksCount;
   BOOL ranSpecBlock;
   BOOL ranAfterFilters;
+  id postponedBlock;
 }
 
 @property (nonatomic, assign) BaconContext *context;
@@ -36,6 +37,13 @@
 - (void)finishSpec;
 - (void)exitSpec;
 
+- (void)scheduleBlock:(id)block withDelay:(NSTimeInterval)seconds;
+- (void)postponeBlock:(id)block;
+- (void)postponeBlock:(id)block withTimeout:(NSTimeInterval)timeout;
+- (void)resume;
+- (void)runPostponedBlock:(id)block;
+
+- (void)cancelScheduledRequests;
 - (void)executeBlock:(void (^)())block;
 
 @end

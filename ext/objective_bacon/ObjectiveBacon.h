@@ -36,6 +36,7 @@
 - (NSUInteger)requirements;
 - (void)addRequirement;
 - (NSUInteger)failures;
+- (void)setFailures:(NSUInteger)failures;
 - (void)addFailure;
 - (NSUInteger)errors;
 - (void)addError;

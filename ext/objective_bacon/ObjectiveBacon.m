@@ -130,6 +130,10 @@ static Bacon *sharedBaconInstance = nil;
   return counters[2];
 }
 
+- (void)setFailures:(NSUInteger)failures {
+  counters[2] = failures;
+}
+
 - (void)addFailure {
   counters[2]++;
 }

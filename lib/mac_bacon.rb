@@ -50,9 +50,17 @@ class BaconContext
   def wait(seconds = nil, &block)
     if seconds
       currentSpecification.scheduleBlock(block, withDelay:seconds)
-    #else
-      #currentSpecification.postpone_block(&block)
+    else
+      currentSpecification.postponeBlock(block)
     end
+  end
+
+  def wait_max(timeout, &block)
+    currentSpecification.postponeBlock(block, withTimeout:timeout)
+  end
+
+  def resume
+    currentSpecification.resume
   end
 
   def evaluateBlock(block)

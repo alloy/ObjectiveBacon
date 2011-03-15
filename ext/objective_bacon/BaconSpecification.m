@@ -28,6 +28,8 @@
 
     ranSpecBlock = NO;
     ranAfterFilters = NO;
+
+    postponedBlock = nil;
   }
   return self;
 }
@@ -38,6 +40,7 @@
   self.specBlock = nil;
   self.beforeFilters = nil;
   self.afterFilters = nil;
+  [postponedBlock release];
   [super dealloc];
 }
 
@@ -92,6 +95,41 @@
   }
 }
 
+- (void)postponeBlock:(id)block {
+  [self postponeBlock:block withTimeout:1.0];
+}
+
+- (void)postponeBlock:(id)block withTimeout:(NSTimeInterval)timeout {
+  // If an exception occurred, we definitely don't need to schedule any more blocks
+  if (!exceptionOccurred) {
+    if (postponedBlock != nil) {
+      // TODO raise exception!
+    } else {
+      scheduledBlocksCount++;
+      postponedBlock = [block retain];
+      [self performSelector:@selector(postponedBlockTimeoutExceeded) withObject:nil afterDelay:timeout];
+    }
+  }
+}
+
+- (void)postponedBlockTimeoutExceeded {
+  [self cancelScheduledRequests];
+  // TODO don't use an exception here!
+  [self executeBlock:^{
+    @throw [BaconError errorWithDescription:[NSString stringWithFormat:@"timeout exceeded: %@ %@", self.context.name, self.description]];
+  }];
+  scheduledBlocksCount = 0;
+  [self finishSpec];
+}
+
+- (void)resume {
+  [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(postponedBlockTimeoutExceeded) object:nil];
+  id block = postponedBlock;
+  postponedBlock = nil;
+  [self runPostponedBlock:block];
+  [block release];
+}
+
 - (void)runPostponedBlock:(id)block {
   // If an exception occurred, we definitely don't need to execute any more blocks
   if (!exceptionOccurred) {
@@ -118,10 +156,16 @@
 }
 
 - (void)exitSpec {
+  [self cancelScheduledRequests];
   if (report) {
     printf("\n");
   }
   [self.context specificationDidFinish:self];
+}
+
+- (void)cancelScheduledRequests {
+  [NSObject cancelPreviousPerformRequestsWithTarget:self.context];
+  [NSObject cancelPreviousPerformRequestsWithTarget:self];
 }
 
 - (void)executeBlock:(void (^)())block {

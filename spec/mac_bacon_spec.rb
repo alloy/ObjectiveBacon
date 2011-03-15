@@ -23,7 +23,6 @@ describe "NSRunloop aware Bacon" do
     end
   end
 
-  if false
   describe "concerning `wait' without a fixed time" do
     def delegateCallbackMethod
       @delegateCallbackCalled = true
@@ -62,6 +61,8 @@ describe "NSRunloop aware Bacon" do
       end
     end
   end
+
+    if false
 
   describe "concerning `wait_for_change'" do
     before do
