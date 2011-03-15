@@ -52,6 +52,37 @@ class BaconShould
     satisfy(nil, block:block)
   end
 
+  def method_missing(method, *args, &block)
+    description = method_name = method.to_s
+    description = "#{description} with #{args.join(', ')}" unless args.empty?
+
+    if object.respond_to?(method)
+      # forward the message as-is
+      satisfy(description, block:proc { object.send(method, *args, &block) })
+    else
+      predicate = "#{method_name}?"
+      if object.respond_to?(predicate)
+        # forward the Ruby predicate version of the method
+        satisfy(description, block:proc { object.send(predicate, *args, &block) })
+      else
+        predicate = "is#{method_name[0,1].upcase}#{method_name[1..-1]}"
+        if object.respond_to?(predicate)
+          # forward the Objective-C predicate version of the method
+          satisfy(description, block:proc { object.send(predicate, *args) })
+        else
+          parts = method_name.split(/([A-Z][a-z]*)/)
+          third_person_form = "#{parts[0]}s#{parts[1..-1].join}"
+          if object.respond_to?(third_person_form)
+            # forward the Objective-C third person form of the method
+            satisfy(description, block:proc { object.send(third_person_form, *args) })
+          else
+            super
+          end
+        end
+      end
+    end
+  end
+
   #def getExceptionName(exception_class)
     #exception_class.name
   #end

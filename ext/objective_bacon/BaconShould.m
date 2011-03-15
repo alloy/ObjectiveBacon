@@ -122,6 +122,17 @@
   return result;
 }
 
+// TODO this should be implemented when dealing with objc, but maybe it will work for Nu as well.
+// For MacRuby, however, it will not, so I'm implementing this in the client.
+//- (void)forwardInvocation:(NSInvocation *)invocation {
+  //NSLog(@"Method missing %@", NSStringFromSelector([invocation selector]));
+  //[super forwardInvocation:invocation];
+//}
+
+
+// Methods that should be overriden by clients
+
+
 // TODO check if we do need this after all, for now we just check if the `exception' given to raise: responds to `name'.
 //- (NSString *)getExceptionName:(id)exception {
   //NSLog(@"-[BaconShould getExceptionName:] should be overriden by the client to retreive the name of the exception.");

@@ -1,3 +1,4 @@
 * add specs from NuBacon which test that BaconShould#raise returns the raised exception
 * check/port the rest of the NuBacon specs
 * Do we really need to support BaconShould#raise with a block? Disabled for now.
+* Do we need -[BaconShould forwardInvocation:] for Nu/objc?

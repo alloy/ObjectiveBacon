@@ -82,8 +82,8 @@ describe "Bacon" do
     ex.message.should =~ /foo/
   end
 
-  if false
   it "should have should.be.an.instance_of" do
+    #"string".should.be.instance_of String
     lambda { "string".should.be.instance_of String }.should succeed
     lambda { "string".should.be.instance_of Hash }.should fail
 
@@ -116,6 +116,18 @@ describe "Bacon" do
     lambda { "string".should.be.a.kind_of Class }.should fail
   end
 
+  # TODO check NuBacon spec for completeness
+  it "forwards Objective-C methods" do
+    # kindOfClass is transformed to isKindOfClass
+    lambda { [].should.be.kindOfClass Array }.should succeed
+    lambda { "".should.be.kindOfClass Array }.should fail
+
+    # respondToSelector is transformed to respondsToSelector
+    lambda { [].should.respondToSelector 'objectAtIndex:' }.should succeed
+    lambda { "".should.respondToSelector 'objectAtIndex:' }.should fail
+  end
+
+  if false
   it "should have should.match" do
     lambda { "string".should.match(/strin./) }.should succeed
     lambda { "string".should =~ /strin./ }.should succeed
