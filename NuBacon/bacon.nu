@@ -104,6 +104,8 @@
   )
 )
 
+; main context macros
+
 (macro describe (name specifications)
   `(try
     (set parent bacon-context)
@@ -137,6 +139,24 @@
   `(bacon-context addAfterFilter:,block)
 )
 
+; shared contexts
+
+(set $BaconShared (NSMutableDictionary dictionary))
+
+(macro shared (name specifications)
+  `($BaconShared setValue:,specifications forKey:,name)
+)
+
+(macro behaves_like (name)
+  (set shared-context ($BaconShared valueForKey:name))
+  (if (shared-context)
+    ; each specification is a complete `it' block
+    (then (shared-context each:(do (specification) (eval specification))))
+    (else (throw "No such context `#{name}'"))
+  )
+)
+
+; helper macros
 
 (macro sendMessageWithList (object *body)
   (set __body (eval *body))

@@ -370,7 +370,6 @@
   ))
 ))
 
-(if nil
 (shared "a shared context" `(
   (it "gets called where it is included" (do ()
     (~ t should be:t)
@@ -399,7 +398,7 @@
   
   (behaves_like "another shared context")
 ))
-)
+
 
 (describe "Regression specs" `(
   (describe "An empty context does not break, issue #5" `(
