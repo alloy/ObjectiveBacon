@@ -117,6 +117,45 @@
   }];
 }
 
+- (void)closeTo:(id)otherValue {
+  [self closeTo:otherValue delta:0.00001];
+}
+
+// TODO this should be split into a method that does the actual checks and let this one iterate if its an array
+- (void)closeTo:(id)otherValue delta:(double)delta {
+  if ([otherValue isKindOfClass:[NSArray class]]) {
+    [self satisfy:[NSString stringWithFormat:@"close to `%@'", [self prettyPrint:otherValue]] block:^(id values) {
+      if ([values isKindOfClass:[NSArray class]]) { // check that the `object' is also an array
+        int length = [values count];
+        if ([otherValue count] == length) { // check that both arrays have the same number of elements
+          BOOL result = YES;
+          double v, ov;
+          for (int i = 0; i < length; i++) {
+            if (![[values objectAtIndex:i] isKindOfClass:[NSNumber class]] || ![[otherValue objectAtIndex:i] isKindOfClass:[NSNumber class]]) {
+              return NO; // short circuit if any of the objects isn't a NSNumber
+            }
+            v  = [(NSNumber *)[values objectAtIndex:i] doubleValue];
+            ov = [(NSNumber *)[otherValue objectAtIndex:i] doubleValue];
+            result = (BOOL)(result && ov >= (v - delta) && ov <= (v + delta));
+          }
+          return result;
+        }
+      }
+      // or should we raise an ArgumentError?
+      return NO;
+    }];
+  } else {
+    [self satisfy:[NSString stringWithFormat:@"close to `%@'", [self prettyPrint:otherValue]] block:^(id value) {
+      if (![value isKindOfClass:[NSNumber class]] || ![otherValue isKindOfClass:[NSNumber class]]) {
+        return NO; // short circuit if any of the objects isn't a NSNumber
+      }
+      double v  = [value doubleValue];
+      double ov = [otherValue doubleValue];
+      return (BOOL)(ov >= (v - delta) && ov <= (v + delta));
+    }];
+  }
+}
+
 - (void)match:(id)value {
   @throw [NSException exceptionWithName:@"ArgumentError"
                                  reason:@"ObjectiveBacon does not provide its own regexp engine. The -[BaconShould match:] method should be overriden by the client."

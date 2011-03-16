@@ -24,7 +24,8 @@
 
 - (void)equal:(id)otherValue;
 - (void)match:(id)value;
-
+- (void)closeTo:(id)otherValue;
+- (void)closeTo:(id)otherValue delta:(double)delta;
 - (id)raise;
 - (id)raise:(id)exception;
 

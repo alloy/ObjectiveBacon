@@ -103,14 +103,12 @@ class BaconShould
     satisfy(nil, block:block)
   end
 
-  def close(to, delta)
-    satisfy("close to `#{to}'", block:proc { |value|
-      if to.respond_to?(:to_f) && delta.respond_to?(:to_f)
-        (to.to_f - value).abs <= delta.to_f
-      else
-        false
-      end
-    })
+  def close(to, delta = nil)
+    if delta
+      closeTo(to, delta:delta)
+    else
+      closeTo(to)
+    end
   end
 
   def match(value)

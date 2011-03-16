@@ -67,7 +67,6 @@
     (set numberOfFailuresBefore (((Bacon sharedInstance) summary) failures))
     ((createSpecification "flunks" (do ()) t) run)
     (~ (((Bacon sharedInstance) summary) failures) should equal:(+ numberOfFailuresBefore 1))
-    ;(($BaconSummary valueForIvar:"counters") setValue:numberOfFailuresBefore forKey:"failures")
     (((Bacon sharedInstance) summary) setFailures:numberOfFailuresBefore)
   ))
   
@@ -118,18 +117,18 @@
     (-> (~ "foo" should not equal:"foo") should:fail)
   ))
   
-  ;(it "checks if the number is close to a given number" (do ()
-    ;(-> (~ 1.4 should be closeTo:1.4) should:succeed)
-    ;(-> (~ 0.4 should be closeTo:0.5 delta:0.1) should:succeed)
-    ;(-> (~ 0.4 should be closeTo:0.5) should:fail)
-    ;(-> (~ 0.4 should be closeTo:0.5 delta:0.05) should:fail)
-  ;))
+  (it "checks if the number is close to a given number" (do ()
+    (-> (~ 1.4 should be closeTo:1.4) should:succeed)
+    (-> (~ 0.4 should be closeTo:0.5 delta:0.1) should:succeed)
+    (-> (~ 0.4 should be closeTo:0.5) should:fail)
+    (-> (~ 0.4 should be closeTo:0.5 delta:0.05) should:fail)
+  ))
   
-  ;(it "checks if the numbers in the list are close to the list of given numbers" (do ()
-    ;(-> (~ `(1.4 2.5 3.6 4.7) should be closeTo:`(1.4 2.5 3.6 4.7)) should:succeed)
-    ;(-> (~ `(1.4 2.5 3.6 4.7) should be closeTo:`(1.4 2.6 3.6 4.7)) should:fail)
-    ;(-> (~ `(1.4 2.5 3.6 4.7) should be closeTo:`(1.4 2.6 3.6 4.7) delta:0.1) should:succeed)
-  ;))
+  (it "checks if the numbers in the list are close to the list of given numbers" (do ()
+    (-> (~ (`(1.4 2.5 3.6 4.7) array) should be closeTo:(`(1.4 2.5 3.6 4.7) array)) should:succeed)
+    (-> (~ (`(1.4 2.5 3.6 4.7) array) should be closeTo:(`(1.4 2.6 3.6 4.7) array)) should:fail)
+    (-> (~ (`(1.4 2.5 3.6 4.7) array) should be closeTo:(`(1.4 2.6 3.6 4.7) array) delta:0.1) should:succeed)
+  ))
   
   ;(it "checks if the string matches the given regexp" (do ()
     ;(-> (~ "string" should match:/strin./) should:succeed)
@@ -195,8 +194,8 @@
     (catch-failure (~ "foo" should be:42))
     (~ (failure reason) should equal:"expected `foo' to be `42'")
     
-    ;(catch-failure (~ 0.4 should be closeTo:42))
-    ;(~ (failure reason) should equal:"expected `0.4' to be close to `42'")
+    (catch-failure (~ 0.4 should be closeTo:42))
+    (~ (failure reason) should equal:"expected `0.4' to be close to `42'")
     
     (catch-failure (~ "foo" should not equal:"foo"))
     (~ (failure reason) should equal:"expected `foo' to not equal `foo'")
