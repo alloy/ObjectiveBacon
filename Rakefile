@@ -48,4 +48,12 @@ namespace :framework do
   task :spec => :compile do
     sh "env USE_OBJECTIVE_BACON_FRAMEWORK=true DYLD_FRAMEWORK_PATH=#{FRAMEWORK_ROOT}/build/Release #{RUN_MACRUBY_SPECS_CMD}"
   end
+
+  desc 'Install framework'
+  task :install => :compile do
+    cp_r File.join(FRAMEWORK_ROOT, 'build/Release/ObjectiveBacon.framework'), '/Library/Frameworks'
+  end
 end
+
+desc 'Clean all'
+task :clean => ['macruby_ext:clean', 'framework:clean']
