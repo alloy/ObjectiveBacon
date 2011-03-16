@@ -50,6 +50,9 @@
   }
 }
 
+- (BaconShould *)should {
+  return self;
+}
 
 - (BaconShould *)not {
   negated = YES;
@@ -227,6 +230,9 @@
 
 // Methods that should be overriden by clients
 
+- (BOOL)checkIfEqual:(id)object toObject:(id)otherObject {
+  return [object isEqualTo:otherObject];
+}
 
 - (BOOL)isBlock:(id)object {
   @throw [NSException exceptionWithName:@"UnimplementedError"

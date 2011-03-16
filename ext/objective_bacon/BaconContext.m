@@ -24,6 +24,8 @@
 
     self.name = contextName;
     self.specifications = [NSMutableArray array];
+
+    __nuivars = nil;
   }
   return self;
 }
@@ -58,6 +60,7 @@
   self.specifications = nil;
   self.beforeFilters = nil;
   self.afterFilters = nil;
+  [__nuivars release];
   [super dealloc];
 }
 

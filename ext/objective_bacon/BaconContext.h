@@ -7,6 +7,11 @@
   NSMutableArray *specifications, *beforeFilters, *afterFilters;
   BOOL printedName;
   NSUInteger currentSpecificationIndex;
+
+  // TODO is this the only way we can support dynamic ivars in NuBacon?
+  // MacRuby is able to define ivars dynamically in any class, check if
+  // it uses the objc runtime to do so.
+  NSMutableDictionary *__nuivars;
 }
 
 @property (nonatomic, retain) NSString *name;

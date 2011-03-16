@@ -11,6 +11,8 @@
 - (id)initWithObject:(id)theObject;
 - (void)satisfy:(NSString *)description block:(id)block;
 
+- (BaconShould *)should;
+
 - (BaconShould *)not;
 - (void)not:(id)block;
 - (BaconShould *)be;
@@ -31,6 +33,7 @@
 - (NSString *)predicateVersionOfMissingMethod:(NSString *)methodName arguments:(NSArray *)arguments;
 - (NSString *)thirdPersonVersionOfMissingMethod:(NSString *)methodName arguments:(NSArray *)arguments;
 
+- (BOOL)checkIfEqual:(id)object toObject:(id)otherObject;
 - (BOOL)isBlock:(id)object;
 - (id)convertException:(id)exception;
 - (void)executeBlock:(id)block;
