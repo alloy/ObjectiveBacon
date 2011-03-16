@@ -230,7 +230,7 @@
     for (id obj in arguments) {
       [formattedArgs addObject:[self prettyPrint:obj]];
     }
-    return [NSString stringWithFormat:@"%@ with %@", methodName, [formattedArgs componentsJoinedByString:@", "]];
+    return [NSString stringWithFormat:@"%@ with `%@'", methodName, [formattedArgs componentsJoinedByString:@"', `"]];
   }
 }
 
@@ -242,7 +242,11 @@
   if ([arguments count] == 0) {
     return result;
   } else if ([arguments count] == 1) {
-    return [result stringByAppendingString:@":"];
+    if ([result hasSuffix:@":"]) {
+      return result;
+    } else {
+      return [result stringByAppendingString:@":"];
+    }
   } else {
     @throw [NSException exceptionWithName:@"ArgumentError"
                                    reason:@"ObjectiveBacon does not transform selectors with multiple arguments, yet."
@@ -258,7 +262,11 @@
   if ([arguments count] == 0) {
     return result;
   } else if ([arguments count] == 1) {
-    return [result stringByAppendingString:@":"];
+    if ([result hasSuffix:@":"]) {
+      return result;
+    } else {
+      return [result stringByAppendingString:@":"];
+    }
   } else {
     @throw [NSException exceptionWithName:@"ArgumentError"
                                    reason:@"ObjectiveBacon does not transform selectors with multiple arguments, yet."

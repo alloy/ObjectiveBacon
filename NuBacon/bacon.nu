@@ -33,8 +33,13 @@
     (send block isKindOfClass:NuBlock)
   )
 
-  (- (id)executeAssertionBlock:(id)block is
-    (block (self object))
+  (- (BOOL)executeAssertionBlock:(id)block is
+    ; have to do it this way, otherwise it complains (in certain cases) with:
+    ; -[NuSymbol unsignedIntValue]: unrecognized selector sent to instance
+    (if (block (self object))
+      (then 1)
+      (else 0)
+    )
   )
 
   (- (id)executeBlock:(id)block is
@@ -44,6 +49,52 @@
       (set block (shouldInstance object))
     )
     (call block)
+  )
+
+  (- (id) handleUnknownMessage:(id)message withContext:(id)context is
+    (set methodName ((car message) stringValue))
+    (set args ((cdr message) array))
+    (set description (self descriptionForMissingMethod:methodName arguments:args))
+    (set target (self object))
+
+    (if (target respondsToSelector:methodName)
+      (then
+        ; forward the message as-is
+        (self satisfy:description block:(do (object)
+          (object sendMessage:message withContext:context)
+        ))
+      )
+      (else
+        (set predicate (self predicateVersionOfMissingMethod:methodName arguments:args))
+        (if (target respondsToSelector:predicate)
+          (then
+            ; forward the predicate version of the message with the args
+            (self satisfy:description block:(do (object)
+              (set symbol ((NuSymbolTable sharedSymbolTable) symbolWithString:predicate))
+              (set msg (cons symbol (cdr message)))
+              (object sendMessage:msg withContext:context)
+            ))
+          )
+          (else
+            (set thirdPersonForm (self thirdPersonVersionOfMissingMethod:methodName arguments:args))
+            (if (target respondsToSelector:thirdPersonForm)
+              (then
+                ; example: respondsToSelector: is matched as respondToSelector:
+                (self satisfy:description block:(do (object)
+                  (set symbol ((NuSymbolTable sharedSymbolTable) symbolWithString:thirdPersonForm))
+                  (set msg (cons symbol (cdr message)))
+                  (object sendMessage:msg withContext:context)
+                ))
+              )
+              (else
+                ; the object does not respond to any of the messages
+                (super handleUnknownMessage:message withContext:context)
+              )
+            )
+          )
+        )
+      )
+    )
   )
 )
 
