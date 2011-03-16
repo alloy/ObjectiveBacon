@@ -130,12 +130,12 @@
     (-> (~ (`(1.4 2.5 3.6 4.7) array) should be closeTo:(`(1.4 2.6 3.6 4.7) array) delta:0.1) should:succeed)
   ))
   
-  ;(it "checks if the string matches the given regexp" (do ()
-    ;(-> (~ "string" should match:/strin./) should:succeed)
-    ;(-> (~ "string" should match:/slin./) should:fail)
-    ;(-> (~ "string" should not match:/slin./) should:succeed)
-    ;(-> (~ "string" should not match:/strin./) should:fail)
-  ;))
+  (it "checks if the string matches the given regexp" (do ()
+    (-> (~ "string" should match:/strin./) should:succeed)
+    (-> (~ "string" should match:/slin./) should:fail)
+    (-> (~ "string" should not match:/slin./) should:succeed)
+    (-> (~ "string" should not match:/strin./) should:fail)
+  ))
   
   ;(it "checks if after executing a block a numeric value has changed at all" (do ()
     ;(set x 0)
@@ -200,8 +200,8 @@
     (catch-failure (~ "foo" should not equal:"foo"))
     (~ (failure reason) should equal:"expected `foo' to not equal `foo'")
     
-    ;(catch-failure (~ "foo" should match:/slin./))
-    ;(~ (failure reason) should equal:"expected `foo' to match /slin./")
+    (catch-failure (~ "foo" should match:/slin./))
+    (~ (failure reason) should equal:"expected `foo' to match /slin./")
     
     ;(set x 0)
     ;(set valueBlock (do () x)) ; simply returns the value of x

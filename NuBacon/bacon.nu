@@ -24,6 +24,12 @@
 )
 
 (class BaconShould
+  (- (id) match:(id)regexp is
+    (self satisfy:"match /#{(regexp pattern)}/" block:(do (string)
+      (regexp findInString:string)
+    ))
+  )
+
   (- (id)prettyPrint:(id)theObject is
     (send theObject stringValue)
   )
