@@ -7,17 +7,14 @@
     (send block evalWithArguments:nil context:c self:self)
   )
 
-  ;(- (id) stringValue is
-    ;(set description (self description))
-    ;(set className ((self class) name))
-    ;(if (description hasPrefix:"<#{className}")
-      ;(then description)
-      ;(else "#{className}: #{description}")
-    ;)
-  ;)
-
-  ;(- (id) should is ((BaconShould alloc) initWithObject:self))
-  ;(- (id) should:(id)block is (((BaconShould alloc) initWithObject:self) satisfy:nil block:block))
+  (- (id) stringValue is
+    (set description (self description))
+    (set className ((self class) name))
+    (if (description hasPrefix:"<#{className}")
+      (then description)
+      (else "#{className}: #{description}")
+    )
+  )
 )
 
 (class BaconContext
@@ -27,10 +24,11 @@
 )
 
 (class BaconShould
-  (- (BOOL)checkIfEqual:(id)object toObject:(id)otherObject is
-    (eq object otherObject)
+  (- (id)prettyPrint:(id)object is
+    (send object stringValue)
   )
 
+  ; We should not return 0/1/nil etc, but always strict boolean values.
   (- (BOOL)isBlock:(id)block is
     (send block isKindOfClass:NuBlock)
   )

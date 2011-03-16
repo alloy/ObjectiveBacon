@@ -28,14 +28,17 @@
 
 (set fail
   (do (block)
-    (puts block)
     ((send block should) raise:BaconError)
     t
   )
 )
 
 (class DummyContext is NSObject
-  (- (id) name is "Dummy context")
+  (- (id)name is "Dummy context")
+  (- (id)evaluateBlock:(id)block is (self instanceEval:block))
+  (- (id)specificationDidFinish:(id)spec is
+    ; noop
+  )
 )
 
 ; Just some test constants
@@ -51,68 +54,69 @@
     (-> (~ "foo" should equal:"bar") should:fail)
   ))
   
-  ;(it "does not raise an exception if the assertion passes" (do ()
-    ;(-> (~ "foo" should equal:"foo") should:succeed)
-  ;))
+  (it "does not raise an exception if the assertion passes" (do ()
+    (-> (~ "foo" should equal:"foo") should:succeed)
+  ))
   
-  ;(it "catches any type of exception so the spec suite can continue" (do ()
-    ;(-> ((createSpecification "throws" (do () throw "ohnoes") nil) run) should not raise)
-  ;))
+  (it "catches any type of exception so the spec suite can continue" (do ()
+    (-> ((createSpecification "throws" (do () throw "ohnoes") nil) run) should not raise)
+  ))
   
-  ;; NOTE: this requirement will print that the requirement failed/flunked, but in fact it does not!
+  ; NOTE: this requirement will print that the requirement failed/flunked, but in fact it does not!
   ;(it "flunks a requirement if it contains no assertions" (do ()
-    ;(set numberOfFailuresBefore ($BaconSummary failures))
+    ;(set numberOfFailuresBefore (((Bacon sharedInstance) summary) failures))
     ;((createSpecification "flunks" (do ()) t) run)
-    ;(~ ($BaconSummary failures) should equal:(+ numberOfFailuresBefore 1))
-    ;(($BaconSummary valueForIvar:"counters") setValue:numberOfFailuresBefore forKey:"failures")
+    ;(~ (((Bacon sharedInstance) summary) failures) should equal:(+ numberOfFailuresBefore 1))
+    ;;(($BaconSummary valueForIvar:"counters") setValue:numberOfFailuresBefore forKey:"failures")
+    ;(((Bacon sharedInstance) summary) setFailures:numberOfFailuresBefore)
   ;))
   
-  ;(it "checks if the given block satisfies" (do ()
-    ;(-> (~ "foo" should satisfy:"pass" block:equalFoo) should:succeed)
-    ;(-> (~ "foo" should satisfy:"fail" block:equalBar) should:fail)
-    ;(-> (~ "foo" should not satisfy:"pass" block:equalBar) should:succeed)
-    ;(-> (~ "foo" should not satisfy:"fail" block:equalFoo) should:fail)
-  ;))
+  (it "checks if the given block satisfies" (do ()
+    (-> (~ "foo" should satisfy:"pass" block:equalFoo) should:succeed)
+    (-> (~ "foo" should satisfy:"fail" block:equalBar) should:fail)
+    (-> (~ "foo" should not satisfy:"pass" block:equalBar) should:succeed)
+    (-> (~ "foo" should not satisfy:"fail" block:equalFoo) should:fail)
+  ))
   
-  ;(it "negates an assertion" (do ()
-    ;(-> (~ "foo" should not equal:"bar") should:succeed)
-    ;(-> (~ "foo" should not equal:"foo") should:fail)
-  ;))
+  (it "negates an assertion" (do ()
+    (-> (~ "foo" should not equal:"bar") should:succeed)
+    (-> (~ "foo" should not equal:"foo") should:fail)
+  ))
   
-  ;(it "has `be', `a', and `an' syntactic sugar methods which add to the requirement description and return the BaconShould instance" (do ()
-    ;(aRequirement setValue:"" forIvar:"descriptionBuffer")
-    ;(~ (eq (aRequirement be) aRequirement) should be:t)
-    ;(~ (aRequirement valueForIvar:"descriptionBuffer") should equal:" be")
-    ;(~ (eq (aRequirement a) aRequirement) should be:t)
-    ;(~ (aRequirement valueForIvar:"descriptionBuffer") should equal:" be a")
-    ;(~ (eq (aRequirement an) aRequirement) should be:t)
-    ;(~ (aRequirement valueForIvar:"descriptionBuffer") should equal:" be a an")
-  ;))
+  (it "has `be', `a', and `an' syntactic sugar methods which add to the requirement description and return the BaconShould instance" (do ()
+    (aRequirement setValue:"" forIvar:"descriptionBuffer")
+    (~ (eq (aRequirement be) aRequirement) should be:t)
+    (~ (aRequirement valueForIvar:"descriptionBuffer") should equal:" be")
+    (~ (eq (aRequirement a) aRequirement) should be:t)
+    (~ (aRequirement valueForIvar:"descriptionBuffer") should equal:" be a")
+    (~ (eq (aRequirement an) aRequirement) should be:t)
+    (~ (aRequirement valueForIvar:"descriptionBuffer") should equal:" be a an")
+  ))
   
-  ;(it "has a `be:' syntactic sugar method which checks for equality" (do ()
-    ;((-> (aRequirement be:"foo")) should:succeed)
-    ;((-> (aRequirement be:"bar")) should:fail)
-  ;))
+  (it "has a `be:' syntactic sugar method which checks for equality" (do ()
+    ((-> (aRequirement be:"foo")) should:succeed)
+    ((-> (aRequirement be:"bar")) should:fail)
+  ))
   
-  ;(it "has a `be:' syntactic sugar method which takes a block which in turn is passed to satisfy:block:" (do ()
-    ;(-> (aRequirement be:(do (_) t)) should:succeed)
-    ;(-> (aRequirement be:(do (_) nil)) should:fail)
-  ;))
+  (it "has a `be:' syntactic sugar method which takes a block which in turn is passed to satisfy:block:" (do ()
+    (-> (aRequirement be:(do (_) t)) should:succeed)
+    (-> (aRequirement be:(do (_) nil)) should:fail)
+  ))
   
-  ;(it "has a `a:' syntactic sugar method which checks for equality" (do ()
-    ;(-> (aRequirement a:"foo") should:succeed)
-    ;(-> (aRequirement a:"bar") should:fail)
-  ;))
+  (it "has a `a:' syntactic sugar method which checks for equality" (do ()
+    (-> (aRequirement a:"foo") should:succeed)
+    (-> (aRequirement a:"bar") should:fail)
+  ))
   
-  ;(it "has a `a:' syntactic sugar method which takes a block which in turn is passed to satisfy:block:" (do ()
-    ;(-> (aRequirement a:(do (_) t)) should:succeed)
-    ;(-> (aRequirement a:(do (_) nil)) should:fail)
-  ;))
+  (it "has a `a:' syntactic sugar method which takes a block which in turn is passed to satisfy:block:" (do ()
+    (-> (aRequirement a:(do (_) t)) should:succeed)
+    (-> (aRequirement a:(do (_) nil)) should:fail)
+  ))
   
-  ;(it "checks for equality" (do ()
-    ;(-> (~ "foo" should equal:"foo") should:succeed)
-    ;(-> (~ "foo" should not equal:"foo") should:fail)
-  ;))
+  (it "checks for equality" (do ()
+    (-> (~ "foo" should equal:"foo") should:succeed)
+    (-> (~ "foo" should not equal:"foo") should:fail)
+  ))
   
   ;(it "checks if the number is close to a given number" (do ()
     ;(-> (~ 1.4 should be closeTo:1.4) should:succeed)
@@ -154,21 +158,21 @@
     ;(-> (-> (set x (+ x 1)) should not change:valueBlock by:+1) should:fail)
   ;))
   
-  ;(it "checks if any exception is raised" (do ()
-    ;(-> (emptyArray objectAtIndex:0) should raise)
-    ;(-> (notEmptyArray objectAtIndex:0) should not raise)
-  ;))
+  (it "checks if any exception is raised" (do ()
+    (-> (emptyArray objectAtIndex:0) should raise)
+    (-> (notEmptyArray objectAtIndex:0) should not raise)
+  ))
   
-  ;(it "checks if a specified exception is raised" (do ()
-    ;(-> (emptyArray objectAtIndex:0) should raise:"NSRangeException")
-    ;(-> (emptyArray objectAtIndex:0) should not raise:"SomeRandomException")
-  ;))
+  (it "checks if a specified exception is raised" (do ()
+    (-> (emptyArray objectAtIndex:0) should raise:"NSRangeException")
+    (-> (-> (emptyArray objectAtIndex:0) should not raise:"SomeRandomException") should raise:"NSRangeException")
+  ))
   
-  ;(it "returns the raised exception" (do ()
-    ;(set e (-> (emptyArray objectAtIndex:0) should raise:"NSRangeException"))
-    ;(~ ((e class) name) should equal:"NuException")
-    ;(~ (e name) should equal:"NSRangeException")
-  ;))
+  (it "returns the raised exception" (do ()
+    (set e (-> (emptyArray objectAtIndex:0) should raise:"NSRangeException"))
+    (~ ((e class) name) should equal:"NuException")
+    (~ (e name) should equal:"NSRangeException")
+  ))
   
   ;(it "checks if the object has the method and, if so, forward the message" (do ()
     ;(-> (~ "/an/absolute/path" should be isAbsolutePath) should:succeed)
@@ -180,22 +184,22 @@
     ;(-> (~ "a/relative/path" should be an absolutePath) should:fail)
   ;))
   
-  ;(it "checks if the object has the first person version of the method and if so forward the message" (do ()
+  ;(it "checks if the object has the third person version of the method and if so forward the message" (do ()
     ;(-> (~ "foo" should respondToSelector:"isAbsolutePath") should:succeed)
     ;(-> (~ "foo" should not respondToSelector:"noWay") should:succeed)
     ;(-> (~ "foo" should respondToSelector:"noWay") should:fail)
     ;(-> (~ "foo" should not respondToSelector:"isAbsolutePath") should:fail)
   ;))
   
-  ;(it "creates nice descriptions" (do ()
-    ;(catch-failure (~ "foo" should be:42))
-    ;(~ (failure reason) should equal:"expected `foo' to be `42'")
+  (it "creates nice descriptions" (do ()
+    (catch-failure (~ "foo" should be:42))
+    (~ (failure reason) should equal:"expected `foo' to be `42'")
     
     ;(catch-failure (~ 0.4 should be closeTo:42))
     ;(~ (failure reason) should equal:"expected `0.4' to be close to `42'")
     
-    ;(catch-failure (~ "foo" should not equal:"foo"))
-    ;(~ (failure reason) should equal:"expected `foo' to not equal `foo'")
+    (catch-failure (~ "foo" should not equal:"foo"))
+    (~ (failure reason) should equal:"expected `foo' to not equal `foo'")
     
     ;(catch-failure (~ "foo" should match:/slin./))
     ;(~ (failure reason) should equal:"expected `foo' to match /slin./")
@@ -207,14 +211,14 @@
     ;(catch-failure (-> (set x x) should change:valueBlock by:-1))
     ;(~ (failure reason) should equal:"expected `(do () ((set x x)))' to change `(x)' by `-1'")
     
-    ;(set o1 (NSObject new))
-    ;(set o2 (NSObject new))
-    ;(catch-failure (~ o1 should equal:o2))
-    ;(~ (failure reason) should equal:"expected `#{(o1 description)}' to equal `#{(o2 description)}'")
+    (set o1 (NSObject new))
+    (set o2 (NSObject new))
+    (catch-failure (~ o1 should equal:o2))
+    (~ (failure reason) should equal:"expected `#{(o1 description)}' to equal `#{(o2 description)}'")
     
-    ;(set otherArray (`("bar") array))
-    ;(catch-failure (~ notEmptyArray should equal:otherArray))
-    ;(~ (failure reason) should equal:"expected `NSCFArray: #{(notEmptyArray description)}' to equal `NSCFArray: #{(otherArray description)}'")
+    (set otherArray (`("bar") array))
+    (catch-failure (~ notEmptyArray should equal:otherArray))
+    (~ (failure reason) should equal:"expected `NSCFArray: #{(notEmptyArray description)}' to equal `NSCFArray: #{(otherArray description)}'")
     
     ;(catch-failure (~ "foo" should be isEqualToString:"bar"))
     ;(~ (failure reason) should equal:"expected `foo' to be isEqualToString:(\"bar\")")
@@ -225,15 +229,15 @@
     ;(catch-failure (~ "foo" should be an absolutePath))
     ;(~ (failure reason) should equal:"expected `foo' to be an absolutePath")
     
-    ;(catch-failure (~ "foo" should satisfy:nil block:(do (x) (eq x "bar"))))
-    ;(~ (failure reason) should equal:"expected `foo' to satisfy `(do (x) ((eq x \"bar\")))'")
+    (catch-failure (~ "foo" should satisfy:nil block:(do (x) (eq x "bar"))))
+    (~ (failure reason) should equal:"expected `foo' to satisfy `(do (x) ((eq x \"bar\")))'")
     
-    ;(catch-failure (~ "foo" should:(do (x) (eq x "bar"))))
-    ;(~ (failure reason) should equal:"expected `foo' to satisfy `(do (x) ((eq x \"bar\")))'")
+    (catch-failure (~ "foo" should:(do (x) (eq x "bar"))))
+    (~ (failure reason) should equal:"expected `foo' to satisfy `(do (x) ((eq x \"bar\")))'")
     
-    ;(catch-failure (~ "foo" should not:(do (x) (eq x "foo"))))
-    ;(~ (failure reason) should equal:"expected `foo' to not satisfy `(do (x) ((eq x \"foo\")))'")
-  ;))
+    (catch-failure (~ "foo" should not:(do (x) (eq x "foo"))))
+    (~ (failure reason) should equal:"expected `foo' to not satisfy `(do (x) ((eq x \"foo\")))'")
+  ))
 ))
 
 ;(describe "The NuBacon helper macros" `(
@@ -295,18 +299,18 @@
   ;))
 ;))
 
-;(describe "NSObject, concerning Bacon extensions" `(
-  ;(it "returns a BaconShould instance, wrapping that object" (do ()
-    ;(~ "foo" should equal:"foo")
-  ;))
+(describe "NSObject, concerning Bacon extensions" `(
+  (it "returns a BaconShould instance, wrapping that object" (do ()
+    (~ "foo" should equal:"foo")
+  ))
   
-  ;(it "takes a block that's to be called with the `object', the return value indicates success or failure" (do ()
-    ;(-> (~ "foo" should:equalFoo) should:succeed)
-    ;(-> (~ "foo" should:equalBar) should:fail)
-    ;(-> (~ "foo" should not:equalBar) should:succeed)
-    ;(-> (~ "foo" should not:equalFoo) should:fail)
-  ;))
-;))
+  (it "takes a block that's to be called with the `object', the return value indicates success or failure" (do ()
+    (-> (~ "foo" should:equalFoo) should:succeed)
+    (-> (~ "foo" should:equalBar) should:fail)
+    (-> (~ "foo" should not:equalBar) should:succeed)
+    (-> (~ "foo" should not:equalFoo) should:fail)
+  ))
+))
 
 (describe "before/after" `(
   (before (do ()
@@ -396,6 +400,7 @@
   
   (behaves_like "another shared context")
 ))
+)
 
 (describe "Regression specs" `(
   (describe "An empty context does not break, issue #5" `(
@@ -405,11 +410,11 @@
   (describe "An completely empty spec (no contexts/specifications)" `(
     (it "does not break" (do ()
       (puts "\n[!] The following summary is from a regression spec and can be ignored:")
-      (~ (system "nush -e '(load \"bacon\") ((Bacon sharedInstance) run)'") should be: 0)
+      (~ (system "nush -f ObjectiveBacon -e '(load \"bacon\") ((Bacon sharedInstance) run)'") should be: 0)
     ))
   ))
 ))
-)
+
 
 ;(describe "Regression specs" `(
   ;(before (do ()

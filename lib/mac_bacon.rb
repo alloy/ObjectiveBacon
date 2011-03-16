@@ -150,6 +150,8 @@ class BaconShould
 
   # Client overrides
 
+  # TODO override prettyPrint to return #inspect value
+
   def isBlock(object)
     object.is_a?(Proc)
   end

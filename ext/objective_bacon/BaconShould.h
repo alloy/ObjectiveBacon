@@ -33,7 +33,7 @@
 - (NSString *)predicateVersionOfMissingMethod:(NSString *)methodName arguments:(NSArray *)arguments;
 - (NSString *)thirdPersonVersionOfMissingMethod:(NSString *)methodName arguments:(NSArray *)arguments;
 
-- (BOOL)checkIfEqual:(id)object toObject:(id)otherObject;
+- (NSString *)prettyPrint:(id)object;
 - (BOOL)isBlock:(id)object;
 - (id)convertException:(id)exception;
 - (void)executeBlock:(id)block;

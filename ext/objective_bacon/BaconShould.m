@@ -25,8 +25,8 @@
 - (void)satisfy:(NSString *)description block:(id)block {
   [[[Bacon sharedInstance] summary] addRequirement];
 
-  NSString *desc = description == nil ? [NSString stringWithFormat:@"satisfy `%@'", block] : description;
-  desc = [NSString stringWithFormat:@"expected `%@' to%@ %@", self.object, descriptionBuffer, desc];
+  NSString *desc = description == nil ? [NSString stringWithFormat:@"satisfy `%@'", [self prettyPrint:block]] : description;
+  desc = [NSString stringWithFormat:@"expected `%@' to%@ %@", [self prettyPrint:self.object], descriptionBuffer, desc];
   //NSLog(@"Block class: %@", [block class]);
   BOOL passed;
   if ([block isKindOfClass:NSClassFromString(@"__NSStackBlock__")]) {
@@ -73,9 +73,9 @@
 
 - (void)be:(id)otherValue {
   if ([self isBlock:otherValue]) {
-    [self satisfy:[NSString stringWithFormat:@"be `%@'", otherValue] block:otherValue];
+    [self satisfy:[NSString stringWithFormat:@"be `%@'", [self prettyPrint:otherValue]] block:otherValue];
   } else {
-    [self satisfy:[NSString stringWithFormat:@"be `%@'", otherValue] block:^(id value) {
+    [self satisfy:[NSString stringWithFormat:@"be `%@'", [self prettyPrint:otherValue]] block:^(id value) {
       return [value isEqualTo:otherValue];
     }];
   }
@@ -88,9 +88,9 @@
 
 - (void)a:(id)otherValue {
   if ([self isBlock:otherValue]) {
-    [self satisfy:[NSString stringWithFormat:@"a `%@'", otherValue] block:otherValue];
+    [self satisfy:[NSString stringWithFormat:@"a `%@'", [self prettyPrint:otherValue]] block:otherValue];
   } else {
-    [self satisfy:[NSString stringWithFormat:@"a `%@'", otherValue] block:^(id value) {
+    [self satisfy:[NSString stringWithFormat:@"a `%@'", [self prettyPrint:otherValue]] block:^(id value) {
       return [value isEqualTo:otherValue];
     }];
   }
@@ -103,16 +103,16 @@
 
 - (void)an:(id)otherValue {
   if ([self isBlock:otherValue]) {
-    [self satisfy:[NSString stringWithFormat:@"an `%@'", otherValue] block:otherValue];
+    [self satisfy:[NSString stringWithFormat:@"an `%@'", [self prettyPrint:otherValue]] block:otherValue];
   } else {
-    [self satisfy:[NSString stringWithFormat:@"an `%@'", otherValue] block:^(id value) {
+    [self satisfy:[NSString stringWithFormat:@"an `%@'", [self prettyPrint:otherValue]] block:^(id value) {
       return [value isEqualTo:otherValue];
     }];
   }
 }
 
 - (void)equal:(id)otherValue {
-  [self satisfy:[NSString stringWithFormat:@"equal `%@'", otherValue] block:^(id value) {
+  [self satisfy:[NSString stringWithFormat:@"equal `%@'", [self prettyPrint:otherValue]] block:^(id value) {
     return [value isEqualTo:otherValue];
   }];
 }
@@ -143,19 +143,22 @@
 - (id)raise:(id)exception {
   __block id result = nil;
   NSString *exceptionName = nil;
-  if ([exception isKindOfClass:[NSException class]]) {
-    //NSLog(@"Raised exception is a NSException.");
+  if ([exception isKindOfClass:[NSString class]]) {
+    //NSLog(@"Expected exception object is a string");
+    exceptionName = exception;
+  } else if ([exception isKindOfClass:[NSException class]]) {
+    //NSLog(@"Expected exception object is a NSException");
     exceptionName = [exception name];
+  } else if ([exception respondsToSelector:@selector(name)]) {
+    //NSLog(@"The Expected exception object responds to `name', so try to retreive it that way.");
+    exceptionName = [exception performSelector:@selector(name)];
   } else {
-    //NSLog(@"Raised exception is not a NSException, retreiving name.");
-    if ([exception respondsToSelector:@selector(name)]) {
-      //NSLog(@"The exception object responds to `name', so try to retreive it that way.");
-      exceptionName = [exception performSelector:@selector(name)];
-    }
-    //else {
-      //exceptionName = [self getExceptionName:exception];
-    //}
+    @throw [NSException exceptionWithName:@"ArgumentError"
+                                   reason:[NSString stringWithFormat:@"Unable to figure out the name of the expected exception from object `%@'", exception]
+                                 userInfo:nil];
+
   }
+  //NSLog(@"Expected exception name: %@", exceptionName);
 
   [self satisfy:[NSString stringWithFormat:@"raise an exception with name `%@'", exceptionName] block:^(id block) {
     @try {
@@ -184,7 +187,11 @@
   if ([arguments count] == 0) {
     return methodName;
   } else {
-    return [NSString stringWithFormat:@"%@ with %@", methodName, [arguments componentsJoinedByString:@", "]];
+    NSMutableArray *formattedArgs = [NSMutableArray array];
+    for (id object in arguments) {
+      [formattedArgs addObject:[self prettyPrint:object]];
+    }
+    return [NSString stringWithFormat:@"%@ with %@", methodName, [formattedArgs componentsJoinedByString:@", "]];
   }
 }
 
@@ -230,8 +237,8 @@
 
 // Methods that should be overriden by clients
 
-- (BOOL)checkIfEqual:(id)object toObject:(id)otherObject {
-  return [object isEqualTo:otherObject];
+- (NSString *)prettyPrint:(id)object {
+  return [object description];
 }
 
 - (BOOL)isBlock:(id)object {
