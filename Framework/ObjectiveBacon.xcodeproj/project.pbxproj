@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5122E6FF1330BFA9009F201C /* BaconContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 5122E6F71330BFA9009F201C /* BaconContext.h */; };
+		5122E6FF1330BFA9009F201C /* BaconContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 5122E6F71330BFA9009F201C /* BaconContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5122E7001330BFA9009F201C /* BaconContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 5122E6F81330BFA9009F201C /* BaconContext.m */; };
-		5122E7011330BFA9009F201C /* BaconShould.h in Headers */ = {isa = PBXBuildFile; fileRef = 5122E6F91330BFA9009F201C /* BaconShould.h */; };
+		5122E7011330BFA9009F201C /* BaconShould.h in Headers */ = {isa = PBXBuildFile; fileRef = 5122E6F91330BFA9009F201C /* BaconShould.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5122E7021330BFA9009F201C /* BaconShould.m in Sources */ = {isa = PBXBuildFile; fileRef = 5122E6FA1330BFA9009F201C /* BaconShould.m */; };
-		5122E7031330BFA9009F201C /* BaconSpecification.h in Headers */ = {isa = PBXBuildFile; fileRef = 5122E6FB1330BFA9009F201C /* BaconSpecification.h */; };
+		5122E7031330BFA9009F201C /* BaconSpecification.h in Headers */ = {isa = PBXBuildFile; fileRef = 5122E6FB1330BFA9009F201C /* BaconSpecification.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5122E7041330BFA9009F201C /* BaconSpecification.m in Sources */ = {isa = PBXBuildFile; fileRef = 5122E6FC1330BFA9009F201C /* BaconSpecification.m */; };
-		5122E7051330BFA9009F201C /* ObjectiveBacon.h in Headers */ = {isa = PBXBuildFile; fileRef = 5122E6FD1330BFA9009F201C /* ObjectiveBacon.h */; };
+		5122E7051330BFA9009F201C /* ObjectiveBacon.h in Headers */ = {isa = PBXBuildFile; fileRef = 5122E6FD1330BFA9009F201C /* ObjectiveBacon.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5122E7061330BFA9009F201C /* ObjectiveBacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 5122E6FE1330BFA9009F201C /* ObjectiveBacon.m */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
@@ -271,6 +271,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -285,6 +286,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;

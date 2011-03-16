@@ -5,5 +5,6 @@ tmp
 ext/objective_bacon/Makefile
 ext/objective_bacon/*.o
 ext/objective_bacon/*.bundle
+Framework/build
 Framework/ObjectiveBacon.xcodeproj/*.mode1v3
 Framework/ObjectiveBacon.xcodeproj/*.pbxuser

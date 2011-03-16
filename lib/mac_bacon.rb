@@ -1,5 +1,11 @@
 framework 'Cocoa'
-require "objective_bacon"
+
+if ENV['USE_OBJECTIVE_BACON_FRAMEWORK']
+  # mainly for testing the framework with MacRuby
+  framework 'ObjectiveBacon'
+else
+  require "objective_bacon"
+end
 
 module Kernel
   private
