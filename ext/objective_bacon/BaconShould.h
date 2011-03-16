@@ -33,7 +33,7 @@
 - (NSString *)predicateVersionOfMissingMethod:(NSString *)methodName arguments:(NSArray *)arguments;
 - (NSString *)thirdPersonVersionOfMissingMethod:(NSString *)methodName arguments:(NSArray *)arguments;
 
-- (NSString *)prettyPrint:(id)object;
+- (NSString *)prettyPrint:(id)theObject;
 - (BOOL)isBlock:(id)object;
 - (id)convertException:(id)exception;
 - (void)executeBlock:(id)block;

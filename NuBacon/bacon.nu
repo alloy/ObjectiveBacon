@@ -24,8 +24,8 @@
 )
 
 (class BaconShould
-  (- (id)prettyPrint:(id)object is
-    (send object stringValue)
+  (- (id)prettyPrint:(id)theObject is
+    (send theObject stringValue)
   )
 
   ; We should not return 0/1/nil etc, but always strict boolean values.

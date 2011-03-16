@@ -188,8 +188,8 @@
     return methodName;
   } else {
     NSMutableArray *formattedArgs = [NSMutableArray array];
-    for (id object in arguments) {
-      [formattedArgs addObject:[self prettyPrint:object]];
+    for (id obj in arguments) {
+      [formattedArgs addObject:[self prettyPrint:obj]];
     }
     return [NSString stringWithFormat:@"%@ with %@", methodName, [formattedArgs componentsJoinedByString:@", "]];
   }
@@ -237,8 +237,8 @@
 
 // Methods that should be overriden by clients
 
-- (NSString *)prettyPrint:(id)object {
-  return [object description];
+- (NSString *)prettyPrint:(id)theObject {
+  return [theObject description];
 }
 
 - (BOOL)isBlock:(id)object {
