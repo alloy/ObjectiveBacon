@@ -10,6 +10,7 @@
   BOOL report;
   BOOL exceptionOccurred;
   NSUInteger scheduledBlocksCount;
+  NSUInteger numberOfRequirementsBefore;
   BOOL ranSpecBlock;
   BOOL ranAfterFilters;
   id postponedBlock;

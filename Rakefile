@@ -67,3 +67,8 @@ end
 
 desc 'Clean all'
 task :clean => ['macruby_ext:clean', 'framework:clean']
+
+desc 'Run MacRuby ext, MacRuby framework, and Nu framework specs'
+task :spec => ['macruby_ext:spec', 'framework:macruby_spec', 'framework:nu_spec']
+
+task :default => :spec

@@ -63,13 +63,13 @@
   ))
   
   ; NOTE: this requirement will print that the requirement failed/flunked, but in fact it does not!
-  ;(it "flunks a requirement if it contains no assertions" (do ()
-    ;(set numberOfFailuresBefore (((Bacon sharedInstance) summary) failures))
-    ;((createSpecification "flunks" (do ()) t) run)
-    ;(~ (((Bacon sharedInstance) summary) failures) should equal:(+ numberOfFailuresBefore 1))
-    ;;(($BaconSummary valueForIvar:"counters") setValue:numberOfFailuresBefore forKey:"failures")
-    ;(((Bacon sharedInstance) summary) setFailures:numberOfFailuresBefore)
-  ;))
+  (it "flunks a requirement if it contains no assertions" (do ()
+    (set numberOfFailuresBefore (((Bacon sharedInstance) summary) failures))
+    ((createSpecification "flunks" (do ()) t) run)
+    (~ (((Bacon sharedInstance) summary) failures) should equal:(+ numberOfFailuresBefore 1))
+    ;(($BaconSummary valueForIvar:"counters") setValue:numberOfFailuresBefore forKey:"failures")
+    (((Bacon sharedInstance) summary) setFailures:numberOfFailuresBefore)
+  ))
   
   (it "checks if the given block satisfies" (do ()
     (-> (~ "foo" should satisfy:"pass" block:equalFoo) should:succeed)

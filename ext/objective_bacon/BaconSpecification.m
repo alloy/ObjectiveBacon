@@ -24,13 +24,12 @@
     self.afterFilters = [[theAfterFilters copy] autorelease];
 
     exceptionOccurred = NO;
+    numberOfRequirementsBefore = 0;
     scheduledBlocksCount = 0;
-
-    ranSpecBlock = NO;
-    ranAfterFilters = NO;
-
     postponedBlock = nil;
     observedObjectAndKeyPath = nil;
+    ranSpecBlock = NO;
+    ranAfterFilters = NO;
   }
   return self;
 }
@@ -56,6 +55,7 @@
     printf("- %s", [self.description UTF8String]);
   }
   [self runBeforeFilters];
+  numberOfRequirementsBefore = [[[Bacon sharedInstance] summary] requirements];
   if (![self isPostponed]) {
     [self runSpecBlock];
   }
@@ -181,7 +181,13 @@
 }
 
 - (void)finishSpec {
-  // TODO add requirements missing failure to the summary
+  if (!exceptionOccurred && [[[Bacon sharedInstance] summary] requirements] == numberOfRequirementsBefore) {
+    // the specification did not contain any requirements, so it flunked
+    // TODO don't use an exception here!
+    [self executeBlock:^{
+      @throw [BaconError errorWithDescription:[NSString stringWithFormat:@"empty specification: %@ %@", self.context.name, self.description]];
+    }];
+  }
   [self runAfterFilters];
   if (![self isPostponed]) {
     [self exitSpec];
