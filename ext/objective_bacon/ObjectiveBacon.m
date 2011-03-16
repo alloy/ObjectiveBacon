@@ -68,7 +68,7 @@ static Bacon *sharedBaconInstance = nil;
 - (void)run {
   if ([self.contexts count] > 0) {
     [[self currentContext] performSelector:@selector(run) withObject:nil afterDelay:0];
-    [[NSApplication sharedApplication] run];
+    //[[NSApplication sharedApplication] run];
   } else {
     // DONE
     [self contextDidFinish:nil];

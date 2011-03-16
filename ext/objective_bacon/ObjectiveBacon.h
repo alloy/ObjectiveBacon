@@ -1,4 +1,5 @@
-#import <Cocoa/Cocoa.h>
+//#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
 
 @class BaconContext;
 @class BaconSpecification;

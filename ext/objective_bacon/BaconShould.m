@@ -76,7 +76,7 @@
     [self satisfy:[NSString stringWithFormat:@"be `%@'", [self prettyPrint:otherValue]] block:otherValue];
   } else {
     [self satisfy:[NSString stringWithFormat:@"be `%@'", [self prettyPrint:otherValue]] block:^(id value) {
-      return [value isEqualTo:otherValue];
+      return [value isEqual:otherValue];
     }];
   }
 }
@@ -91,7 +91,7 @@
     [self satisfy:[NSString stringWithFormat:@"a `%@'", [self prettyPrint:otherValue]] block:otherValue];
   } else {
     [self satisfy:[NSString stringWithFormat:@"a `%@'", [self prettyPrint:otherValue]] block:^(id value) {
-      return [value isEqualTo:otherValue];
+      return [value isEqual:otherValue];
     }];
   }
 }
@@ -106,14 +106,14 @@
     [self satisfy:[NSString stringWithFormat:@"an `%@'", [self prettyPrint:otherValue]] block:otherValue];
   } else {
     [self satisfy:[NSString stringWithFormat:@"an `%@'", [self prettyPrint:otherValue]] block:^(id value) {
-      return [value isEqualTo:otherValue];
+      return [value isEqual:otherValue];
     }];
   }
 }
 
 - (void)equal:(id)otherValue {
   [self satisfy:[NSString stringWithFormat:@"equal `%@'", [self prettyPrint:otherValue]] block:^(id value) {
-    return [value isEqualTo:otherValue];
+    return [value isEqual:otherValue];
   }];
 }
 

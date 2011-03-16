@@ -1,4 +1,4 @@
-(load "bacon.nu")
+(try (load "bacon.nu"))
 
 (macro catch-failure (block)
   `(try
