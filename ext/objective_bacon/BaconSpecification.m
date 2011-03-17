@@ -243,4 +243,15 @@
   }
 }
 
+- (void)assertionFailed:(NSString *)failureDescription {
+  exceptionOccurred = YES; // TODO continue running or not? this will only prevent any more wait blocks being scheduled
+  [[[Bacon sharedInstance] summary] addFailure];
+  NSString *type = @" [FAILURE]";
+  printf("%s", [type UTF8String]);
+  [[[Bacon sharedInstance] summary] addToErrorLog:failureDescription
+                                          context:self.context.name
+                                    specification:self.description
+                                             type:type];
+}
+
 @end

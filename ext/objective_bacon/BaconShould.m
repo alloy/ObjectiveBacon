@@ -39,13 +39,15 @@
   if (passed) {
     // NSLog(@"ASSERTION PASSED!");
     if (negated) {
-      @throw [BaconError errorWithDescription:desc];
+      [[[[Bacon sharedInstance] currentContext] currentSpecification] assertionFailed:desc];
+      //@throw [BaconError errorWithDescription:desc];
     }
   } else {
     // NSLog(@"ASSERTION FAILED!");
     if (!negated) {
       // NSLog(@"THROW!");
-      @throw [BaconError errorWithDescription:desc];
+      [[[[Bacon sharedInstance] currentContext] currentSpecification] assertionFailed:desc];
+      //@throw [BaconError errorWithDescription:desc];
     }
   }
 }

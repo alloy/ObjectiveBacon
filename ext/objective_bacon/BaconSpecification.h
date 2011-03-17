@@ -51,4 +51,6 @@
 - (void)cancelScheduledRequests;
 - (void)executeBlock:(void (^)())block;
 
+- (void)assertionFailed:(NSString *)failureDescription;
+
 @end
