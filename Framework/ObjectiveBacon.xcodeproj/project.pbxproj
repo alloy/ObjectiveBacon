@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5122E6FF1330BFA9009F201C /* BaconContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 5122E6F71330BFA9009F201C /* BaconContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5122E7001330BFA9009F201C /* BaconContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 5122E6F81330BFA9009F201C /* BaconContext.m */; };
-		5122E7011330BFA9009F201C /* BaconShould.h in Headers */ = {isa = PBXBuildFile; fileRef = 5122E6F91330BFA9009F201C /* BaconShould.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5122E7021330BFA9009F201C /* BaconShould.m in Sources */ = {isa = PBXBuildFile; fileRef = 5122E6FA1330BFA9009F201C /* BaconShould.m */; };
-		5122E7031330BFA9009F201C /* BaconSpecification.h in Headers */ = {isa = PBXBuildFile; fileRef = 5122E6FB1330BFA9009F201C /* BaconSpecification.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5122E7041330BFA9009F201C /* BaconSpecification.m in Sources */ = {isa = PBXBuildFile; fileRef = 5122E6FC1330BFA9009F201C /* BaconSpecification.m */; };
-		5122E7051330BFA9009F201C /* ObjectiveBacon.h in Headers */ = {isa = PBXBuildFile; fileRef = 5122E6FD1330BFA9009F201C /* ObjectiveBacon.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5122E7061330BFA9009F201C /* ObjectiveBacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 5122E6FE1330BFA9009F201C /* ObjectiveBacon.m */; };
+		515C420C13326AD1004545DA /* BaconContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 515C420413326AD1004545DA /* BaconContext.h */; };
+		515C420D13326AD1004545DA /* BaconContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 515C420513326AD1004545DA /* BaconContext.m */; };
+		515C420E13326AD1004545DA /* BaconShould.h in Headers */ = {isa = PBXBuildFile; fileRef = 515C420613326AD1004545DA /* BaconShould.h */; };
+		515C420F13326AD1004545DA /* BaconShould.m in Sources */ = {isa = PBXBuildFile; fileRef = 515C420713326AD1004545DA /* BaconShould.m */; };
+		515C421013326AD1004545DA /* BaconSpecification.h in Headers */ = {isa = PBXBuildFile; fileRef = 515C420813326AD1004545DA /* BaconSpecification.h */; };
+		515C421113326AD1004545DA /* BaconSpecification.m in Sources */ = {isa = PBXBuildFile; fileRef = 515C420913326AD1004545DA /* BaconSpecification.m */; };
+		515C421213326AD1004545DA /* ObjectiveBacon.h in Headers */ = {isa = PBXBuildFile; fileRef = 515C420A13326AD1004545DA /* ObjectiveBacon.h */; };
+		515C421313326AD1004545DA /* ObjectiveBacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 515C420B13326AD1004545DA /* ObjectiveBacon.m */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -25,14 +25,14 @@
 		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCF5E0370ADEE00C91783 /* ObjectiveBacon_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveBacon_Prefix.pch; sourceTree = "<group>"; };
-		5122E6F71330BFA9009F201C /* BaconContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaconContext.h; path = ../ext/objective_bacon/BaconContext.h; sourceTree = SOURCE_ROOT; };
-		5122E6F81330BFA9009F201C /* BaconContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaconContext.m; path = ../ext/objective_bacon/BaconContext.m; sourceTree = SOURCE_ROOT; };
-		5122E6F91330BFA9009F201C /* BaconShould.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaconShould.h; path = ../ext/objective_bacon/BaconShould.h; sourceTree = SOURCE_ROOT; };
-		5122E6FA1330BFA9009F201C /* BaconShould.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaconShould.m; path = ../ext/objective_bacon/BaconShould.m; sourceTree = SOURCE_ROOT; };
-		5122E6FB1330BFA9009F201C /* BaconSpecification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaconSpecification.h; path = ../ext/objective_bacon/BaconSpecification.h; sourceTree = SOURCE_ROOT; };
-		5122E6FC1330BFA9009F201C /* BaconSpecification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaconSpecification.m; path = ../ext/objective_bacon/BaconSpecification.m; sourceTree = SOURCE_ROOT; };
-		5122E6FD1330BFA9009F201C /* ObjectiveBacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjectiveBacon.h; path = ../ext/objective_bacon/ObjectiveBacon.h; sourceTree = SOURCE_ROOT; };
-		5122E6FE1330BFA9009F201C /* ObjectiveBacon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ObjectiveBacon.m; path = ../ext/objective_bacon/ObjectiveBacon.m; sourceTree = SOURCE_ROOT; };
+		515C420413326AD1004545DA /* BaconContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaconContext.h; path = ../Source/BaconContext.h; sourceTree = SOURCE_ROOT; };
+		515C420513326AD1004545DA /* BaconContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaconContext.m; path = ../Source/BaconContext.m; sourceTree = SOURCE_ROOT; };
+		515C420613326AD1004545DA /* BaconShould.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaconShould.h; path = ../Source/BaconShould.h; sourceTree = SOURCE_ROOT; };
+		515C420713326AD1004545DA /* BaconShould.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaconShould.m; path = ../Source/BaconShould.m; sourceTree = SOURCE_ROOT; };
+		515C420813326AD1004545DA /* BaconSpecification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaconSpecification.h; path = ../Source/BaconSpecification.h; sourceTree = SOURCE_ROOT; };
+		515C420913326AD1004545DA /* BaconSpecification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaconSpecification.m; path = ../Source/BaconSpecification.m; sourceTree = SOURCE_ROOT; };
+		515C420A13326AD1004545DA /* ObjectiveBacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjectiveBacon.h; path = ../Source/ObjectiveBacon.h; sourceTree = SOURCE_ROOT; };
+		515C420B13326AD1004545DA /* ObjectiveBacon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ObjectiveBacon.m; path = ../Source/ObjectiveBacon.m; sourceTree = SOURCE_ROOT; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* ObjectiveBacon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectiveBacon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
@@ -91,14 +91,14 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				5122E6F71330BFA9009F201C /* BaconContext.h */,
-				5122E6F81330BFA9009F201C /* BaconContext.m */,
-				5122E6F91330BFA9009F201C /* BaconShould.h */,
-				5122E6FA1330BFA9009F201C /* BaconShould.m */,
-				5122E6FB1330BFA9009F201C /* BaconSpecification.h */,
-				5122E6FC1330BFA9009F201C /* BaconSpecification.m */,
-				5122E6FD1330BFA9009F201C /* ObjectiveBacon.h */,
-				5122E6FE1330BFA9009F201C /* ObjectiveBacon.m */,
+				515C420413326AD1004545DA /* BaconContext.h */,
+				515C420513326AD1004545DA /* BaconContext.m */,
+				515C420613326AD1004545DA /* BaconShould.h */,
+				515C420713326AD1004545DA /* BaconShould.m */,
+				515C420813326AD1004545DA /* BaconSpecification.h */,
+				515C420913326AD1004545DA /* BaconSpecification.m */,
+				515C420A13326AD1004545DA /* ObjectiveBacon.h */,
+				515C420B13326AD1004545DA /* ObjectiveBacon.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -136,10 +136,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5122E6FF1330BFA9009F201C /* BaconContext.h in Headers */,
-				5122E7011330BFA9009F201C /* BaconShould.h in Headers */,
-				5122E7031330BFA9009F201C /* BaconSpecification.h in Headers */,
-				5122E7051330BFA9009F201C /* ObjectiveBacon.h in Headers */,
+				515C420C13326AD1004545DA /* BaconContext.h in Headers */,
+				515C420E13326AD1004545DA /* BaconShould.h in Headers */,
+				515C421013326AD1004545DA /* BaconSpecification.h in Headers */,
+				515C421213326AD1004545DA /* ObjectiveBacon.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,10 +206,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5122E7001330BFA9009F201C /* BaconContext.m in Sources */,
-				5122E7021330BFA9009F201C /* BaconShould.m in Sources */,
-				5122E7041330BFA9009F201C /* BaconSpecification.m in Sources */,
-				5122E7061330BFA9009F201C /* ObjectiveBacon.m in Sources */,
+				515C420D13326AD1004545DA /* BaconContext.m in Sources */,
+				515C420F13326AD1004545DA /* BaconShould.m in Sources */,
+				515C421113326AD1004545DA /* BaconSpecification.m in Sources */,
+				515C421313326AD1004545DA /* ObjectiveBacon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,14 +12,14 @@
 		515C419C133256CD004545DA /* bacon_spec.nu in Resources */ = {isa = PBXBuildFile; fileRef = 518A910413290CBC000DA4DE /* bacon_spec.nu */; };
 		515C419D133256CD004545DA /* SpecHelper.nu in Resources */ = {isa = PBXBuildFile; fileRef = 518A911413290CF9000DA4DE /* SpecHelper.nu */; };
 		515C419E133256D3004545DA /* SpecHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 518A90FD13290C0E000DA4DE /* SpecHelper.m */; };
-		518D6C7D133184380086143B /* BaconContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 518D6C75133184380086143B /* BaconContext.h */; };
-		518D6C7E133184380086143B /* BaconContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 518D6C76133184380086143B /* BaconContext.m */; };
-		518D6C7F133184380086143B /* BaconShould.h in Headers */ = {isa = PBXBuildFile; fileRef = 518D6C77133184380086143B /* BaconShould.h */; };
-		518D6C80133184380086143B /* BaconShould.m in Sources */ = {isa = PBXBuildFile; fileRef = 518D6C78133184380086143B /* BaconShould.m */; };
-		518D6C81133184380086143B /* BaconSpecification.h in Headers */ = {isa = PBXBuildFile; fileRef = 518D6C79133184380086143B /* BaconSpecification.h */; };
-		518D6C82133184380086143B /* BaconSpecification.m in Sources */ = {isa = PBXBuildFile; fileRef = 518D6C7A133184380086143B /* BaconSpecification.m */; };
-		518D6C83133184380086143B /* ObjectiveBacon.h in Headers */ = {isa = PBXBuildFile; fileRef = 518D6C7B133184380086143B /* ObjectiveBacon.h */; };
-		518D6C84133184380086143B /* ObjectiveBacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 518D6C7C133184380086143B /* ObjectiveBacon.m */; };
+		515C422913326B81004545DA /* BaconContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 515C422113326B81004545DA /* BaconContext.h */; };
+		515C422A13326B81004545DA /* BaconContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 515C422213326B81004545DA /* BaconContext.m */; };
+		515C422B13326B81004545DA /* BaconShould.h in Headers */ = {isa = PBXBuildFile; fileRef = 515C422313326B81004545DA /* BaconShould.h */; };
+		515C422C13326B81004545DA /* BaconShould.m in Sources */ = {isa = PBXBuildFile; fileRef = 515C422413326B81004545DA /* BaconShould.m */; };
+		515C422D13326B81004545DA /* BaconSpecification.h in Headers */ = {isa = PBXBuildFile; fileRef = 515C422513326B81004545DA /* BaconSpecification.h */; };
+		515C422E13326B81004545DA /* BaconSpecification.m in Sources */ = {isa = PBXBuildFile; fileRef = 515C422613326B81004545DA /* BaconSpecification.m */; };
+		515C422F13326B81004545DA /* ObjectiveBacon.h in Headers */ = {isa = PBXBuildFile; fileRef = 515C422713326B81004545DA /* ObjectiveBacon.h */; };
+		515C423013326B81004545DA /* ObjectiveBacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 515C422813326B81004545DA /* ObjectiveBacon.m */; };
 		51ED141912AE422D003E9DC2 /* block.m in Sources */ = {isa = PBXBuildFile; fileRef = 2283087411DE5F0100A5C690 /* block.m */; };
 		51ED141A12AE422D003E9DC2 /* bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 2283087611DE5F0100A5C690 /* bridge.m */; };
 		51ED141B12AE422D003E9DC2 /* bridgesupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2283087811DE5F0100A5C690 /* bridgesupport.m */; };
@@ -93,7 +93,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 51ED140A12AE416B003E9DC2 /* NuBaconLib */;
+			remoteGlobalIDString = 51ED140A12AE416B003E9DC2;
 			remoteInfo = NuBaconLib;
 		};
 /* End PBXContainerItemProxy section */
@@ -213,6 +213,14 @@
 		22E7304811AB5E210014052A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		515C4192133256B9004545DA /* NuBaconSpecs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NuBaconSpecs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		515C4194133256B9004545DA /* NuBaconSpecs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NuBaconSpecs-Info.plist"; sourceTree = "<group>"; };
+		515C422113326B81004545DA /* BaconContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaconContext.h; path = ../../../Source/BaconContext.h; sourceTree = SOURCE_ROOT; };
+		515C422213326B81004545DA /* BaconContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaconContext.m; path = ../../../Source/BaconContext.m; sourceTree = SOURCE_ROOT; };
+		515C422313326B81004545DA /* BaconShould.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaconShould.h; path = ../../../Source/BaconShould.h; sourceTree = SOURCE_ROOT; };
+		515C422413326B81004545DA /* BaconShould.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaconShould.m; path = ../../../Source/BaconShould.m; sourceTree = SOURCE_ROOT; };
+		515C422513326B81004545DA /* BaconSpecification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaconSpecification.h; path = ../../../Source/BaconSpecification.h; sourceTree = SOURCE_ROOT; };
+		515C422613326B81004545DA /* BaconSpecification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaconSpecification.m; path = ../../../Source/BaconSpecification.m; sourceTree = SOURCE_ROOT; };
+		515C422713326B81004545DA /* ObjectiveBacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjectiveBacon.h; path = ../../../Source/ObjectiveBacon.h; sourceTree = SOURCE_ROOT; };
+		515C422813326B81004545DA /* ObjectiveBacon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ObjectiveBacon.m; path = ../../../Source/ObjectiveBacon.m; sourceTree = SOURCE_ROOT; };
 		5167862C1291436B001CA283 /* exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = exception.h; sourceTree = "<group>"; };
 		5167862D1291436B001CA283 /* exception.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = exception.m; sourceTree = "<group>"; };
 		5169DB8612917CA8002517BD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -221,14 +229,6 @@
 		518A90FD13290C0E000DA4DE /* SpecHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpecHelper.m; path = Source/SpecHelpers/SpecHelper.m; sourceTree = "<group>"; };
 		518A910413290CBC000DA4DE /* bacon_spec.nu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = bacon_spec.nu; path = ../bacon_spec.nu; sourceTree = SOURCE_ROOT; };
 		518A911413290CF9000DA4DE /* SpecHelper.nu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SpecHelper.nu; path = Source/SpecHelpers/SpecHelper.nu; sourceTree = "<group>"; };
-		518D6C75133184380086143B /* BaconContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaconContext.h; path = ../../ext/objective_bacon/BaconContext.h; sourceTree = SOURCE_ROOT; };
-		518D6C76133184380086143B /* BaconContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaconContext.m; path = ../../ext/objective_bacon/BaconContext.m; sourceTree = SOURCE_ROOT; };
-		518D6C77133184380086143B /* BaconShould.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaconShould.h; path = ../../ext/objective_bacon/BaconShould.h; sourceTree = SOURCE_ROOT; };
-		518D6C78133184380086143B /* BaconShould.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaconShould.m; path = ../../ext/objective_bacon/BaconShould.m; sourceTree = SOURCE_ROOT; };
-		518D6C79133184380086143B /* BaconSpecification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaconSpecification.h; path = ../../ext/objective_bacon/BaconSpecification.h; sourceTree = SOURCE_ROOT; };
-		518D6C7A133184380086143B /* BaconSpecification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaconSpecification.m; path = ../../ext/objective_bacon/BaconSpecification.m; sourceTree = SOURCE_ROOT; };
-		518D6C7B133184380086143B /* ObjectiveBacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjectiveBacon.h; path = ../../ext/objective_bacon/ObjectiveBacon.h; sourceTree = SOURCE_ROOT; };
-		518D6C7C133184380086143B /* ObjectiveBacon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ObjectiveBacon.m; path = ../../ext/objective_bacon/ObjectiveBacon.m; sourceTree = SOURCE_ROOT; };
 		51ED140B12AE416B003E9DC2 /* libNuBaconLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNuBaconLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		51ED157012AE4735003E9DC2 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		51ED157112AE4735003E9DC2 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -462,14 +462,14 @@
 		5169DBCF12917D58002517BD /* NuBacon */ = {
 			isa = PBXGroup;
 			children = (
-				518D6C75133184380086143B /* BaconContext.h */,
-				518D6C76133184380086143B /* BaconContext.m */,
-				518D6C77133184380086143B /* BaconShould.h */,
-				518D6C78133184380086143B /* BaconShould.m */,
-				518D6C79133184380086143B /* BaconSpecification.h */,
-				518D6C7A133184380086143B /* BaconSpecification.m */,
-				518D6C7B133184380086143B /* ObjectiveBacon.h */,
-				518D6C7C133184380086143B /* ObjectiveBacon.m */,
+				515C422113326B81004545DA /* BaconContext.h */,
+				515C422213326B81004545DA /* BaconContext.m */,
+				515C422313326B81004545DA /* BaconShould.h */,
+				515C422413326B81004545DA /* BaconShould.m */,
+				515C422513326B81004545DA /* BaconSpecification.h */,
+				515C422613326B81004545DA /* BaconSpecification.m */,
+				515C422713326B81004545DA /* ObjectiveBacon.h */,
+				515C422813326B81004545DA /* ObjectiveBacon.m */,
 				5169DBD812917DD2002517BD /* bacon.nu */,
 			);
 			name = NuBacon;
@@ -500,10 +500,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				518D6C7D133184380086143B /* BaconContext.h in Headers */,
-				518D6C7F133184380086143B /* BaconShould.h in Headers */,
-				518D6C81133184380086143B /* BaconSpecification.h in Headers */,
-				518D6C83133184380086143B /* ObjectiveBacon.h in Headers */,
+				515C422913326B81004545DA /* BaconContext.h in Headers */,
+				515C422B13326B81004545DA /* BaconShould.h in Headers */,
+				515C422D13326B81004545DA /* BaconSpecification.h in Headers */,
+				515C422F13326B81004545DA /* ObjectiveBacon.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -659,10 +659,10 @@
 				51ED145412AE422D003E9DC2 /* symbol.m in Sources */,
 				51ED145512AE422D003E9DC2 /* testhelper.m in Sources */,
 				51ED145612AE422D003E9DC2 /* types.c in Sources */,
-				518D6C7E133184380086143B /* BaconContext.m in Sources */,
-				518D6C80133184380086143B /* BaconShould.m in Sources */,
-				518D6C82133184380086143B /* BaconSpecification.m in Sources */,
-				518D6C84133184380086143B /* ObjectiveBacon.m in Sources */,
+				515C422A13326B81004545DA /* BaconContext.m in Sources */,
+				515C422C13326B81004545DA /* BaconShould.m in Sources */,
+				515C422E13326B81004545DA /* BaconSpecification.m in Sources */,
+				515C423013326B81004545DA /* ObjectiveBacon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
