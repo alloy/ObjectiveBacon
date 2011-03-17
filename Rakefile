@@ -40,7 +40,7 @@ namespace :framework do
   desc 'Clean extension'
   task :clean do
     Dir.chdir(EXT_SRC_ROOT) do
-      sh 'rm -f build'
+      rm_rf 'build'
     end
   end
 
@@ -65,10 +65,52 @@ namespace :framework do
   end
 end
 
+IOS_RUNNER_ROOT = 'NuBacon/iOSRunner'
+
+namespace :ios do
+  desc 'Create the spec runner'
+  task :compile do
+    Dir.chdir(IOS_RUNNER_ROOT) do
+      sh 'xcodebuild -project NuBacon-iOSRunner.xcodeproj -target NuBacon-iOSRunner -configuration Debug -sdk /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk'
+    end
+  end
+
+  desc 'Clean iOS build'
+  task :clean do
+    Dir.chdir(IOS_RUNNER_ROOT) do
+      rm_rf 'build'
+    end
+  end
+
+  namespace :spec do
+    def run_on_ios_sim(family)
+      path = `which ios-sim`.strip
+      if path.empty?
+        puts "[!] Unable to run the iOS simulator specs with ios-sim installed. Try `brew install ios-sim'."
+      else
+        sh "#{path} launch #{File.join(IOS_RUNNER_ROOT, 'build/Debug-iphonesimulator/NuBacon-iOSRunner.app')} --family #{family}"
+      end
+    end
+
+    desc 'Run iOS specs on iPhone simulator'
+    task :iphone => 'ios:compile' do
+      run_on_ios_sim :iphone
+    end
+
+    desc 'Run iOS specs on iPad simulator'
+    task :ipad => 'ios:compile' do
+      run_on_ios_sim :ipad
+    end
+  end
+
+  desc 'Run iOS specs'
+  task :spec => ['ios:spec:iphone', 'ios:spec:ipad']
+end
+
 desc 'Clean all'
-task :clean => ['macruby_ext:clean', 'framework:clean']
+task :clean => ['macruby_ext:clean', 'framework:clean', 'ios:clean']
 
 desc 'Run MacRuby ext, MacRuby framework, and Nu framework specs'
-task :spec => ['macruby_ext:spec', 'framework:macruby_spec', 'framework:nu_spec']
+task :spec => ['macruby_ext:spec', 'framework:macruby_spec', 'framework:nu_spec', 'ios:spec']
 
 task :default => :spec
