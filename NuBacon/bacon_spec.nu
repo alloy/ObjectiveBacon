@@ -241,6 +241,33 @@
   )
 ))
 
+(class BaconContext
+  (- (id)delegateCallbackMethod is
+    (set @delegateCallbackCalled t)
+    (self resume)
+  )
+
+  (- (id)delegateCallbackTookTooLongMethod is
+    (throw "Oh noes, I must never be called!")
+  )
+
+  (- (id)triggerChange is
+    (@observable setAnAttribute:"changed")
+  )
+)
+
+(class MockObservable is NSObject
+  (ivar (id) anAttribute)
+
+  (- (id)anAttribute is
+    @anAttribute
+  )
+
+  (- (void)setAnAttribute:(id)value is
+    (set @anAttribute value)
+  )
+)
+
 (describe "The NuBacon helper macros" `(
   (it "includes the `~' macro, which dynamically dispatches the messages, in an unordered list, to the first object in the list" (do ()
     (-> (~ "foo" should be a kindOfClass:NSCFString) should:succeed)
@@ -285,6 +312,104 @@
             (~ (((Bacon sharedInstance) summary) specifications) should be:numberOfSpecsBefore)
           ))
         ))
+      ))
+    ))
+
+    (describe "concerning `wait' without a fixed time" `(
+      (it "allows the user to postpone execution of a block until Context#resume is called, from for instance a delegate callback" (do ()
+        (self performSelector:"delegateCallbackMethod" withObject:nil afterDelay:0.1)
+        (wait (do ()
+          (~ @delegateCallbackCalled should be:t)
+        ))
+      ))
+
+      (before (do ()
+        (set failures (((Bacon sharedInstance) summary) failures))
+        (unless (eq @failuresBefore nil)
+          (then
+            (((Bacon sharedInstance) summary) setFailures:@failuresBefore)
+            (~ failures should be:(+ @failuresBefore 1))
+          )
+          (else (set @failuresBefore failures))
+        )
+      ))
+
+      ; This spec adds a failure to the ErrorLog!
+      (it "has a default timeout of 1 second after which the spec will fail and further scheduled calls to the Context are cancelled" (do ()
+        (self performSelector:"delegateCallbackTookTooLongMethod" withObject:nil afterDelay:1.2)
+        (wait (do ()
+          ; we must never arrive here, because the default timeout of 1 second will have passed
+          (throw "Oh noes, we shouldn't have arrived in this postponed block!")
+        ))
+      ))
+
+      ; This spec adds a failure to the ErrorLog!
+      (it "takes an explicit timeout" (do ()
+        (self performSelector:"delegateCallbackTookTooLongMethod" withObject:nil afterDelay:0.8)
+        (wait-max 0.3 (do ()
+          ; we must never arrive here, because the default timeout of 1 second will have passed
+          (throw "Oh noes, we shouldn't have arrived in this postponed block!")
+        ))
+      ))
+
+      (it "runs an extra spec so that the before filter runs one more time" (do ()
+        (~ t should be:t)
+      ))
+    ))
+
+    (describe "concerning `wait_for_change'" `(
+      (before (do ()
+        (set @observable (MockObservable new))
+      ))
+
+      (it "resumes the postponed block once an observed value changes" (do ()
+        (wait-for-change @observable "anAttribute" (do ()
+          (set @value (@observable anAttribute))
+        ))
+        (~ @value should be:nil)
+        (self performSelector:"triggerChange" withObject:nil afterDelay:0.1)
+        (wait 0.2 (do ()
+          (~ @value should be:"changed")
+        ))
+      ))
+
+      (before (do ()
+        (set failures (((Bacon sharedInstance) summary) failures))
+        (unless (eq @failuresBefore nil)
+          (then
+            (((Bacon sharedInstance) summary) setFailures:@failuresBefore)
+            (~ failures should be:(+ @failuresBefore 1))
+          )
+          (else (set @failuresBefore failures))
+        )
+      ))
+
+      ; This spec adds a failure to the ErrorLog!
+      (it "has a default timeout of 1 second" (do ()
+        (wait-for-change @observable "anAttribute" (do ()
+          (throw "Oh noes, I must never be called!")
+        ))
+        (self performSelector:"triggerChange" withObject:nil afterDelay:1.1)
+        (wait 1.2 (do ()
+          ; we must never arrive here, because the default timeout of 1 second will have passed
+          (throw "Oh noes, we shouldn't have arrived in this postponed block!")
+        ))
+      ))
+
+      ; This spec adds a failure to the ErrorLog!
+      (it "takes an explicit timeout" (do ()
+        (wait-for-change @observable "anAttribute" 0.3 (do ()
+          (throw "Oh noes, I must never be called!")
+        ))
+        (self performSelector:"triggerChange" withObject:nil afterDelay:0.8)
+        (wait 0.9 (do ()
+          ; we must never arrive here, because the default timeout of 1 second will have passed
+          (throw "Oh noes, we shouldn't have arrived in this postponed block!")
+        ))
+      ))
+
+      (it "runs an extra spec so that the before filter runs one more time" (do ()
+        (~ t should be:t)
       ))
     ))
   ))

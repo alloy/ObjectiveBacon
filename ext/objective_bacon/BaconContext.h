@@ -28,6 +28,7 @@
 - (void)addSpecification:(NSString *)description withBlock:(id)block report:(BOOL)report;
 - (void)run;
 - (BaconSpecification *)currentSpecification;
+- (void)resume;
 - (void)specificationDidFinish:(BaconSpecification *)specification;
 - (void)finishContext;
 - (void)evaluateBlock:(id)block;

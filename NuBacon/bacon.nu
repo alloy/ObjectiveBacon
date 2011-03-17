@@ -157,8 +157,40 @@
 
 ; `wait' helper macros
 
-(macro wait (seconds block)
-  `((self currentSpecification) scheduleBlock:,block withDelay:,seconds)
+(macro wait (*wait-args)
+  (if (eq (*wait-args count) 1)
+    (then
+      `(((self currentSpecification) postponeBlock:,@*wait-args))
+    )
+    (else
+      (set __seconds (car *wait-args))
+      (set __block (cdr *wait-args))
+      `(((self currentSpecification) scheduleBlock:,@__block withDelay:,__seconds))
+    )
+  )
+)
+
+(macro wait-max (timeout block)
+  `(((self currentSpecification) postponeBlock:,block withTimeout:,timeout))
+)
+
+(macro wait-for-change (*wait-args)
+  (set __args (*wait-args array))
+  (if (eq (*wait-args count) 3)
+    (then
+      (set __observable (__args objectAtIndex:0))
+      (set __key-path (__args objectAtIndex:1))
+      (set __block (__args objectAtIndex:2))
+      `(((self currentSpecification) postponeBlockUntilChange:,__block ofObject:,__observable withKeyPath:,__key-path))
+    )
+    (else
+      (set __observable (__args objectAtIndex:0))
+      (set __key-path (__args objectAtIndex:1))
+      (set __timeout (__args objectAtIndex:2))
+      (set __block (__args objectAtIndex:3))
+      `(((self currentSpecification) postponeBlockUntilChange:,__block ofObject:,__observable withKeyPath:,__key-path timeout:__timeout))
+    )
+  )
 )
 
 ; helper macros

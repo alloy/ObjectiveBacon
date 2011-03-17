@@ -73,10 +73,6 @@ class BaconContext
     end
   end
 
-  def resume
-    currentSpecification.resume
-  end
-
   def evaluateBlock(block)
     instance_eval(&block)
   end

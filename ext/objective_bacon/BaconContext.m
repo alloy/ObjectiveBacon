@@ -84,6 +84,11 @@
   return [self.specifications objectAtIndex:currentSpecificationIndex];
 }
 
+// This will resume the current specification if there is a postponed block.
+- (void)resume {
+  [[self currentSpecification] resume];
+}
+
 - (void)specificationDidFinish:(BaconSpecification *)specification {
   if (currentSpecificationIndex + 1 < [self.specifications count]) {
     currentSpecificationIndex++;
