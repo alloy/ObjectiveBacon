@@ -1,6 +1,12 @@
 ; (load "ObjectiveBacon")
 ; TODO Something like this? (load "ObjectiveBacon:bacon.nu")
 
+; The iOS runner AppDelegate sets this to true.
+(global TARGET_OS_IPHONE nil)
+(global TARGET_IPHONE_SIMULATOR nil)
+(global UIUserInterfaceIdiomPad nil)
+(global UIUserInterfaceIdiomPhone nil)
+
 (class NSObject
   (- (id) instanceEval:(id)block is
     (set c (send block context))

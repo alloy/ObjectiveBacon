@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		518A90D0132908B6000DA4DE /* libNuBaconLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51ED140B12AE416B003E9DC2 /* libNuBaconLib.a */; };
-		518A90FE13290C0E000DA4DE /* SpecHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 518A90FD13290C0E000DA4DE /* SpecHelper.m */; };
-		518A910A13290CBC000DA4DE /* bacon_spec.nu in Resources */ = {isa = PBXBuildFile; fileRef = 518A910413290CBC000DA4DE /* bacon_spec.nu */; };
-		518A910D13290CC6000DA4DE /* bacon.nu in Resources */ = {isa = PBXBuildFile; fileRef = 5169DBD812917DD2002517BD /* bacon.nu */; };
-		518A911713290D76000DA4DE /* SpecHelper.nu in Resources */ = {isa = PBXBuildFile; fileRef = 518A911413290CF9000DA4DE /* SpecHelper.nu */; };
+		515C419A133256C2004545DA /* libNuBaconLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51ED140B12AE416B003E9DC2 /* libNuBaconLib.a */; };
+		515C419B133256CD004545DA /* bacon.nu in Resources */ = {isa = PBXBuildFile; fileRef = 5169DBD812917DD2002517BD /* bacon.nu */; };
+		515C419C133256CD004545DA /* bacon_spec.nu in Resources */ = {isa = PBXBuildFile; fileRef = 518A910413290CBC000DA4DE /* bacon_spec.nu */; };
+		515C419D133256CD004545DA /* SpecHelper.nu in Resources */ = {isa = PBXBuildFile; fileRef = 518A911413290CF9000DA4DE /* SpecHelper.nu */; };
+		515C419E133256D3004545DA /* SpecHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 518A90FD13290C0E000DA4DE /* SpecHelper.m */; };
 		518D6C7D133184380086143B /* BaconContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 518D6C75133184380086143B /* BaconContext.h */; };
 		518D6C7E133184380086143B /* BaconContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 518D6C76133184380086143B /* BaconContext.m */; };
 		518D6C7F133184380086143B /* BaconShould.h in Headers */ = {isa = PBXBuildFile; fileRef = 518D6C77133184380086143B /* BaconShould.h */; };
@@ -89,11 +89,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		518A90CE132908AA000DA4DE /* PBXContainerItemProxy */ = {
+		515C4198133256BE004545DA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 51ED140A12AE416B003E9DC2;
+			remoteGlobalIDString = 51ED140A12AE416B003E9DC2 /* NuBaconLib */;
 			remoteInfo = NuBaconLib;
 		};
 /* End PBXContainerItemProxy section */
@@ -211,11 +211,12 @@
 		22A2932D11DE8450008B1084 /* handlers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = handlers.m; path = util/handlers.m; sourceTree = "<group>"; };
 		22B4F2E311DEBD53009C693F /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 		22E7304811AB5E210014052A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		515C4192133256B9004545DA /* NuBaconSpecs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NuBaconSpecs.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		515C4194133256B9004545DA /* NuBaconSpecs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NuBaconSpecs-Info.plist"; sourceTree = "<group>"; };
 		5167862C1291436B001CA283 /* exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = exception.h; sourceTree = "<group>"; };
 		5167862D1291436B001CA283 /* exception.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = exception.m; sourceTree = "<group>"; };
 		5169DB8612917CA8002517BD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		5169DBD812917DD2002517BD /* bacon.nu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = bacon.nu; path = ../bacon.nu; sourceTree = "<group>"; };
-		518A90C8132908A1000DA4DE /* NuBacon-iOSRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NuBacon-iOSRunner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		518A90CA132908A1000DA4DE /* NuBacon-iOSRunner-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NuBacon-iOSRunner-Info.plist"; sourceTree = "<group>"; };
 		518A90FD13290C0E000DA4DE /* SpecHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpecHelper.m; path = Source/SpecHelpers/SpecHelper.m; sourceTree = "<group>"; };
 		518A910413290CBC000DA4DE /* bacon_spec.nu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = bacon_spec.nu; path = ../bacon_spec.nu; sourceTree = SOURCE_ROOT; };
@@ -234,11 +235,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		518A90C6132908A1000DA4DE /* Frameworks */ = {
+		515C4190133256B9004545DA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				518A90D0132908B6000DA4DE /* libNuBaconLib.a in Frameworks */,
+				515C419A133256C2004545DA /* libNuBaconLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,7 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				51ED140B12AE416B003E9DC2 /* libNuBaconLib.a */,
-				518A90C8132908A1000DA4DE /* NuBacon-iOSRunner.app */,
+				515C4192133256B9004545DA /* NuBaconSpecs.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -435,6 +436,7 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				518A90CA132908A1000DA4DE /* NuBacon-iOSRunner-Info.plist */,
+				515C4194133256B9004545DA /* NuBaconSpecs-Info.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -508,22 +510,22 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		518A90C7132908A1000DA4DE /* NuBacon-iOSRunner */ = {
+		515C4191133256B9004545DA /* NuBaconSpecs */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 518A90CD132908A2000DA4DE /* Build configuration list for PBXNativeTarget "NuBacon-iOSRunner" */;
+			buildConfigurationList = 515C4197133256BA004545DA /* Build configuration list for PBXNativeTarget "NuBaconSpecs" */;
 			buildPhases = (
-				518A90C4132908A1000DA4DE /* Resources */,
-				518A90C5132908A1000DA4DE /* Sources */,
-				518A90C6132908A1000DA4DE /* Frameworks */,
+				515C418E133256B9004545DA /* Resources */,
+				515C418F133256B9004545DA /* Sources */,
+				515C4190133256B9004545DA /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				518A90CF132908AA000DA4DE /* PBXTargetDependency */,
+				515C4199133256BE004545DA /* PBXTargetDependency */,
 			);
-			name = "NuBacon-iOSRunner";
-			productName = "NuBacon-iOSRunner";
-			productReference = 518A90C8132908A1000DA4DE /* NuBacon-iOSRunner.app */;
+			name = NuBaconSpecs;
+			productName = NuBaconSpecs;
+			productReference = 515C4192133256B9004545DA /* NuBaconSpecs.app */;
 			productType = "com.apple.product-type.application";
 		};
 		51ED140A12AE416B003E9DC2 /* NuBaconLib */ = {
@@ -563,30 +565,30 @@
 			projectRoot = "";
 			targets = (
 				51ED140A12AE416B003E9DC2 /* NuBaconLib */,
-				518A90C7132908A1000DA4DE /* NuBacon-iOSRunner */,
+				515C4191133256B9004545DA /* NuBaconSpecs */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		518A90C4132908A1000DA4DE /* Resources */ = {
+		515C418E133256B9004545DA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				518A910D13290CC6000DA4DE /* bacon.nu in Resources */,
-				518A910A13290CBC000DA4DE /* bacon_spec.nu in Resources */,
-				518A911713290D76000DA4DE /* SpecHelper.nu in Resources */,
+				515C419B133256CD004545DA /* bacon.nu in Resources */,
+				515C419C133256CD004545DA /* bacon_spec.nu in Resources */,
+				515C419D133256CD004545DA /* SpecHelper.nu in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		518A90C5132908A1000DA4DE /* Sources */ = {
+		515C418F133256B9004545DA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				518A90FE13290C0E000DA4DE /* SpecHelper.m in Sources */,
+				515C419E133256D3004545DA /* SpecHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,25 +669,25 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		518A90CF132908AA000DA4DE /* PBXTargetDependency */ = {
+		515C4199133256BE004545DA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 51ED140A12AE416B003E9DC2 /* NuBaconLib */;
-			targetProxy = 518A90CE132908AA000DA4DE /* PBXContainerItemProxy */;
+			targetProxy = 515C4198133256BE004545DA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		518A90CB132908A2000DA4DE /* Debug */ = {
+		515C4195133256B9004545DA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "Don't Code Sign";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
-				INFOPLIST_FILE = "NuBacon-iOSRunner-Info.plist";
+				INFOPLIST_FILE = "NuBaconSpecs-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -696,13 +698,12 @@
 					"-all_load",
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = "NuBacon-iOSRunner";
-				PROVISIONING_PROFILE = "";
+				PRODUCT_NAME = NuBaconSpecs;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
-		518A90CC132908A2000DA4DE /* Release */ = {
+		515C4196133256B9004545DA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -712,7 +713,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
-				INFOPLIST_FILE = "NuBacon-iOSRunner-Info.plist";
+				INFOPLIST_FILE = "NuBaconSpecs-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -723,7 +724,7 @@
 					"-all_load",
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = "NuBacon-iOSRunner";
+				PRODUCT_NAME = NuBaconSpecs;
 				SDKROOT = iphoneos;
 				ZERO_LINK = NO;
 			};
@@ -766,7 +767,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Don't Code Sign";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					IPHONE,
@@ -811,11 +812,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		518A90CD132908A2000DA4DE /* Build configuration list for PBXNativeTarget "NuBacon-iOSRunner" */ = {
+		515C4197133256BA004545DA /* Build configuration list for PBXNativeTarget "NuBaconSpecs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				518A90CB132908A2000DA4DE /* Debug */,
-				518A90CC132908A2000DA4DE /* Release */,
+				515C4195133256B9004545DA /* Debug */,
+				515C4196133256B9004545DA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

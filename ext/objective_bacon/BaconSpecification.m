@@ -222,10 +222,13 @@
     block();
   }
   @catch(id e) {
-    // NSLog(@"Exception was raised: %@", [e name]);
+    //NSLog(@"Exception was raised: %@ %@", [e class], [e name]);
     exceptionOccurred = YES;
     if (report) {
-      if ([e isKindOfClass:[BaconError class]]) {
+      // On iOS this raises a NuException with name BaconError, hence this change.
+      // Not sure what to do in the end yet...
+      //if ([e isKindOfClass:[BaconError class]]) {
+      if ([e respondsToSelector:@selector(name)] && [[e name] isEqualToString:@"BaconError"]) {
         [[[Bacon sharedInstance] summary] addFailure];
         type = @" [FAILURE]";
       } else {

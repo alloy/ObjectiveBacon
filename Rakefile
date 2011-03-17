@@ -71,7 +71,7 @@ namespace :ios do
   desc 'Create the spec runner'
   task :compile do
     Dir.chdir(IOS_RUNNER_ROOT) do
-      sh 'xcodebuild -project NuBacon-iOSRunner.xcodeproj -target NuBacon-iOSRunner -configuration Debug -sdk /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk'
+      sh 'xcodebuild -project NuBacon-iOSRunner.xcodeproj -target NuBaconSpecs -configuration Debug -sdk /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk'
     end
   end
 
@@ -88,7 +88,7 @@ namespace :ios do
       if path.empty?
         puts "[!] Unable to run the iOS simulator specs with ios-sim installed. Try `brew install ios-sim'."
       else
-        sh "#{path} launch #{File.join(IOS_RUNNER_ROOT, 'build/Debug-iphonesimulator/NuBacon-iOSRunner.app')} --family #{family}"
+        sh "#{path} launch #{File.join(IOS_RUNNER_ROOT, 'build/Debug-iphonesimulator/NuBaconSpecs.app')} --family #{family}"
       end
     end
 

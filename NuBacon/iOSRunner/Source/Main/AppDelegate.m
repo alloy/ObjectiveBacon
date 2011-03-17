@@ -1,5 +1,6 @@
 #import "AppDelegate.h"
 #import "main.h" // not renaming this header, so we can easily update it from upstream
+#import "ObjectiveBacon.h"
 
 @implementation AppDelegate
 
@@ -19,6 +20,21 @@
   assert(baconPath != NULL && "The bacon.nu file could not be found in the app's Resources.");
   NSString *baconSource = [NSString stringWithContentsOfFile:baconPath encoding:NSUTF8StringEncoding error:nil];
   [parser parseEval:baconSource];
+
+  // Set up iOS related globals
+  [parser parseEval:@"(global TARGET_OS_IPHONE t)"];
+#if TARGET_IPHONE_SIMULATOR
+  [parser parseEval:@"(global TARGET_IPHONE_SIMULATOR t)"];
+#else
+  [parser parseEval:@"(global TARGET_IPHONE_SIMULATOR nil)"];
+#endif
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+    [parser parseEval:@"(global UIUserInterfaceIdiomPad t)"];
+    [parser parseEval:@"(global UIUserInterfaceIdiomPhone nil)"];
+  } else {
+    [parser parseEval:@"(global UIUserInterfaceIdiomPad nil)"];
+    [parser parseEval:@"(global UIUserInterfaceIdiomPhone t)"];
+  }
 
   // Now load the specs, which are files like: FooSpec.nu or foo_spec.nu
   NSArray *files = [[NSBundle mainBundle] pathsForResourcesOfType:@"nu" inDirectory:nil];
@@ -42,7 +58,8 @@
     }
   }];
 
-  [parser parseEval:@"((Bacon sharedInstance) run)"];
+  //[parser parseEval:@"((Bacon sharedInstance) run)"];
+  [[Bacon sharedInstance] run];
 }
 
 @end

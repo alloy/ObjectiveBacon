@@ -76,7 +76,7 @@
     [self satisfy:[NSString stringWithFormat:@"be `%@'", [self prettyPrint:otherValue]] block:otherValue];
   } else {
     [self satisfy:[NSString stringWithFormat:@"be `%@'", [self prettyPrint:otherValue]] block:^(id value) {
-      return [value isEqual:otherValue];
+      return [self isObject:value equalTo:otherValue];
     }];
   }
 }
@@ -91,7 +91,7 @@
     [self satisfy:[NSString stringWithFormat:@"a `%@'", [self prettyPrint:otherValue]] block:otherValue];
   } else {
     [self satisfy:[NSString stringWithFormat:@"a `%@'", [self prettyPrint:otherValue]] block:^(id value) {
-      return [value isEqual:otherValue];
+      return [self isObject:value equalTo:otherValue];
     }];
   }
 }
@@ -106,14 +106,14 @@
     [self satisfy:[NSString stringWithFormat:@"an `%@'", [self prettyPrint:otherValue]] block:otherValue];
   } else {
     [self satisfy:[NSString stringWithFormat:@"an `%@'", [self prettyPrint:otherValue]] block:^(id value) {
-      return [value isEqual:otherValue];
+      return [self isObject:value equalTo:otherValue];
     }];
   }
 }
 
 - (void)equal:(id)otherValue {
   [self satisfy:[NSString stringWithFormat:@"equal `%@'", [self prettyPrint:otherValue]] block:^(id value) {
-    return [value isEqual:otherValue];
+    return [self isObject:value equalTo:otherValue];
   }];
 }
 
@@ -292,7 +292,11 @@
 //}
 
 
-// Methods that should be overriden by clients
+// Methods that could/should be overriden by clients
+
+- (BOOL)isObject:(id)theObject equalTo:(id)otherObject {
+  return [theObject isEqual:otherObject];
+}
 
 - (NSString *)prettyPrint:(id)theObject {
   return [theObject description];
