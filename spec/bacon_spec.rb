@@ -387,7 +387,7 @@ describe 'describe arguments' do
 
   def check(ctx,name)
     ctx.should.be.an.instance_of BaconContext
-    ctx.name.should == name
+    ctx.name.should == "#{self.name} #{name}"
   end
 
   it 'should work with string' do

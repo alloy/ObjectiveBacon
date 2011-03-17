@@ -124,7 +124,6 @@
 // TODO this should be split into a method that does the actual checks and let this one iterate if its an array
 - (void)closeTo:(id)otherValue delta:(double)delta {
   if ([otherValue isKindOfClass:[NSArray class]]) {
-    NSLog(@"Compare arrays!");
     [self satisfy:[NSString stringWithFormat:@"close to `%@'", [self prettyPrint:otherValue]] block:^(id values) {
       if ([values isKindOfClass:[NSArray class]]) { // check that the `object' is also an array
         int length = [values count];
@@ -146,7 +145,6 @@
       return NO;
     }];
   } else {
-    NSLog(@"Compare values!");
     [self satisfy:[NSString stringWithFormat:@"close to `%@'", [self prettyPrint:otherValue]] block:^(id value) {
       if (![value isKindOfClass:[NSNumber class]] || ![otherValue isKindOfClass:[NSNumber class]]) {
         return NO; // short circuit if any of the objects isn't a NSNumber

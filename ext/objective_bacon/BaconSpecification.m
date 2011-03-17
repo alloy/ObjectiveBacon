@@ -88,7 +88,6 @@
 }
 
 - (void)scheduleBlock:(id)block withDelay:(NSTimeInterval)seconds {
-  NSLog(@"SCHEDULE BLOCK!");
   // If an exception occurred, we definitely don't need to schedule any more blocks
   if (!exceptionOccurred) {
     scheduledBlocksCount++;

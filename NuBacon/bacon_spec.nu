@@ -414,17 +414,7 @@
     ))
   ))
 
-  ;(describe "concerning the `wait' macro" `(
-    ;(after (do ()
-      ;; make sure the after block is in fact ran after the postponed block
-      ;(~ @x should be:42)
-    ;))
-
-    ;(it "runs the postponed block in the same way as normal requirements" (do ()
-      ;(~ t should be:t)
-      ;(wait 0.5 (do () (set @x 42)))
-    ;))
-  ;))
+  ; TODO add the before/after wait specs that are present in the MacRuby specs.
 ))
 
 (describe "NSObject, concerning Bacon extensions" `(

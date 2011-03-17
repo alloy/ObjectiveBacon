@@ -52,5 +52,6 @@
 - (void)executeBlock:(void (^)())block;
 
 - (void)assertionFailed:(NSString *)failureDescription;
+- (void)skipRestOfAssertions;
 
 @end
