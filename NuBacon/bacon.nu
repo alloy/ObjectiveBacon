@@ -106,24 +106,23 @@
 
 ; main context macros
 
+(set bacon-context nil)
+
 (macro describe (name specifications)
-  `(try
-    (set parent bacon-context)
-    ; create child context and make it the current bacon-context
-    (set bacon-context (parent childContextWithName:,name))
-    (,specifications each:(do (x) (eval x)))
-    ; after evalling the block reset the bacon-context to the previous one
-    (set bacon-context parent)
-    (catch (e)
-      (if (eq (e reason) "undefined symbol bacon-context while evaluating expression (set parent bacon-context)")
-        (then
-          ; not running inside a context
-          (set bacon-context ((BaconContext alloc) initWithName:,name))
-          (,specifications each:(do (x) (eval x)))
-        )
-        ; another type of exception occured
-        (else (throw e))
-      )
+  `(if bacon-context
+    (then
+      (set parent bacon-context)
+      ; create child context and make it the current bacon-context
+      (set bacon-context (parent childContextWithName:,name))
+      (,specifications each:(do (x) (eval x)))
+      ; after evalling the block reset the bacon-context to the previous one
+      (set bacon-context parent)
+    )
+    (else
+      ; not running inside a context
+      (set bacon-context ((BaconContext alloc) initWithName:,name))
+      (,specifications each:(do (x) (eval x)))
+      (set bacon-context nil)
     )
   )
 )
@@ -154,6 +153,12 @@
     (then (shared-context each:(do (specification) (eval specification))))
     (else (throw "No such context `#{name}'"))
   )
+)
+
+; `wait' helper macros
+
+(macro wait (seconds block)
+  `((self currentSpecification) scheduleBlock:,block withDelay:,seconds)
 )
 
 ; helper macros

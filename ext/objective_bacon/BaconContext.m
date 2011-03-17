@@ -31,7 +31,7 @@
 }
 
 - (id)childContextWithName:(NSString *)childName {
-  return [[[BaconContext alloc] initWithName:childName
+  return [[[BaconContext alloc] initWithName:[NSString stringWithFormat:@"%@ %@", self.name, childName]
                                beforeFilters:self.beforeFilters
                                 afterFilters:self.afterFilters] autorelease];
 }

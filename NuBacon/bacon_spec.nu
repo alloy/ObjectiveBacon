@@ -241,49 +241,53 @@
   )
 ))
 
-;(describe "The NuBacon helper macros" `(
-  ;(it "includes the `~' macro, which dynamically dispatches the messages, in an unordered list, to the first object in the list" (do ()
-    ;(-> (~ "foo" should be a kindOfClass:NSCFString) should:succeed)
-    ;(-> (~ "foo" should not equal:"foo") should:fail)
-  ;))
+(describe "The NuBacon helper macros" `(
+  (it "includes the `~' macro, which dynamically dispatches the messages, in an unordered list, to the first object in the list" (do ()
+    (-> (~ "foo" should be a kindOfClass:NSCFString) should:succeed)
+    (-> (~ "foo" should not equal:"foo") should:fail)
+  ))
 
-  ;(describe "concerning the `->' macro" `(
-    ;(it "is a shortcut for creating a block and returning a BaconShould instance for said block" (do ()
-      ;(set @ivar "foo")
-      ;(set lvar  "foo")
-      ;(set ran  nil)
+  (describe "concerning the `->' macro" `(
+    (it "is a shortcut for creating a block and returning a BaconShould instance for said block" (do ()
+      (set @ivar "foo")
+      (set lvar  "foo")
+      (set ran  nil)
 
-      ;(set result (-> (set ran (eq @ivar lvar))))
+      (set result (-> (set ran (eq @ivar lvar))))
 
-      ;(~ ((result class) name) should be:"BaconShould")
-      ;(~ (send (result object) body) should equal:`((set ran (eq @ivar lvar))))
-      ;(~ result should not raise) ; executes the block
-      ;(~ ran should be:t)
-    ;))
+      (~ ((result class) name) should be:"BaconShould")
+      (~ (send (result object) body) should equal:`((set ran (eq @ivar lvar))))
+      (~ result should not raise) ; executes the block
+      (~ ran should be:t)
+    ))
 
-    ;(it "forwards any extra messages to the `~' macro" (do ()
-      ;(-> (-> (throw "oh noes") should not raise) should:fail)
-    ;))
-  ;))
+    (it "forwards any extra messages to the `~' macro" (do ()
+      (-> (-> (throw "oh noes") should not raise) should:fail)
+    ))
+  ))
 
-  ;(it "includes the `wait' macro, which schedules the given block to run after n seconds, this will halt any further requirement execution as well" (do ()
-    ;(set startedAt1 (NSDate date))
-    ;(set startedAt2 (NSDate date))
-    ;(set startedAt3 (NSDate date))
-    ;(set numberOfSpecsBefore ($BaconSummary specifications))
+  (describe "concerning NSRunloop aware macros" `(
+    (describe "concerning `wait' with a fixed time" `(
+      (it "allows the user to postpone execution of a block for n seconds, which will halt any further execution of specs" (do ()
+        (set startedAt1 (NSDate date))
+        (set startedAt2 (NSDate date))
+        (set startedAt3 (NSDate date))
+        (set numberOfSpecsBefore (((Bacon sharedInstance) summary) specifications))
 
-    ;(wait 0.5 (do ()
-      ;(~ ((NSDate date) timeIntervalSinceDate:startedAt1) should be closeTo:0.5 delta:0.01)
-    ;))
-    ;(wait 1 (do ()
-      ;(~ ((NSDate date) timeIntervalSinceDate:startedAt2) should be closeTo:1 delta:0.01)
-      ;(wait 1.5 (do ()
-        ;(~ ((NSDate date) timeIntervalSinceDate:startedAt3) should be closeTo:2.5 delta:0.01)
-        ;; no other specs should have ran in the meantime!
-        ;(~ ($BaconSummary specifications) should be:numberOfSpecsBefore)
-      ;))
-    ;))
-  ;))
+        (wait 0.5 (do ()
+          (~ ((NSDate date) timeIntervalSinceDate:startedAt1) should be closeTo:0.5 delta:0.01)
+        ))
+        (wait 1 (do ()
+          (~ ((NSDate date) timeIntervalSinceDate:startedAt2) should be closeTo:1 delta:0.01)
+          (wait 1.5 (do ()
+            (~ ((NSDate date) timeIntervalSinceDate:startedAt3) should be closeTo:2.5 delta:0.01)
+            ; no other specs should have ran in the meantime!
+            (~ (((Bacon sharedInstance) summary) specifications) should be:numberOfSpecsBefore)
+          ))
+        ))
+      ))
+    ))
+  ))
 
   ;(describe "concerning the `wait' macro" `(
     ;(after (do ()
@@ -291,14 +295,12 @@
       ;(~ @x should be:42)
     ;))
 
-    ;; TODO when refactoring the specs, this should become specs that assert that:
-    ;; * no exceptions bubble up
-    ;; * failures/errors/flunk are reported the same way as in normal requirements
     ;(it "runs the postponed block in the same way as normal requirements" (do ()
+      ;(~ t should be:t)
       ;(wait 0.5 (do () (set @x 42)))
     ;))
   ;))
-;))
+))
 
 (describe "NSObject, concerning Bacon extensions" `(
   (it "returns a BaconShould instance, wrapping that object" (do ()
