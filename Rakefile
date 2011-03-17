@@ -1,11 +1,18 @@
-RUN_MACRUBY_SPECS_CMD = 'macruby -r spec/bacon_spec.rb -r spec/mac_bacon_spec.rb -e "Bacon.sharedInstance.run"'
+OBJECTIVE_BACON_SOURCE = 'Source'
 
-EXT_SRC_ROOT = 'ext/objective_bacon'
+MACRUBY_ROOT      = 'LanguageBindings/MacRuby'
+MACRUBY_RUN_SPECS = "macruby -r #{MACRUBY_ROOT}/spec/bacon_spec.rb -r #{MACRUBY_ROOT}/spec/mac_bacon_spec.rb -e 'Bacon.sharedInstance.run'"
+MACRUBY_EXT       = "#{MACRUBY_ROOT}/ext/objective_bacon"
 
-namespace :macruby_ext do
+namespace :macruby do
+  desc 'Copy source files into MacRuby ext dir'
+  task :copy_source do
+    sh "cp #{OBJECTIVE_BACON_SOURCE}/*.* #{MACRUBY_EXT}/"
+  end
+
   desc 'Compile extension'
-  task :compile do
-    Dir.chdir(EXT_SRC_ROOT) do
+  task :compile => :copy_source do
+    Dir.chdir(MACRUBY_EXT) do
       sh 'macruby extconf.rb'
       sh 'make'
     end
@@ -13,8 +20,10 @@ namespace :macruby_ext do
 
   desc 'Clean extension'
   task :clean do
-    Dir.chdir(EXT_SRC_ROOT) do
+    Dir.chdir(MACRUBY_EXT) do
       sh 'rm -f Makefile'
+      sh 'rm -f *.h'
+      sh 'rm -f *.m'
       sh 'rm -f *.o'
       sh 'rm -f objective_bacon.bundle'
     end
@@ -22,12 +31,14 @@ namespace :macruby_ext do
 
   desc 'Run specs'
   task :spec => :compile do
-    sh RUN_MACRUBY_SPECS_CMD
+    sh MACRUBY_RUN_SPECS
   end
 end
 
 
 FRAMEWORK_ROOT = File.expand_path('../Framework', __FILE__)
+
+NU_ROOT = 'LanguageBindings/Nu'
 
 namespace :framework do
   desc 'Create the framework'
@@ -37,21 +48,21 @@ namespace :framework do
     end
   end
 
-  desc 'Clean extension'
+  desc 'Clean framework'
   task :clean do
-    Dir.chdir(EXT_SRC_ROOT) do
+    Dir.chdir(FRAMEWORK_ROOT) do
       rm_rf 'build'
     end
   end
 
   desc 'Run Macruby specs'
   task :macruby_spec => :compile do
-    sh "env USE_OBJECTIVE_BACON_FRAMEWORK=true DYLD_FRAMEWORK_PATH=#{FRAMEWORK_ROOT}/build/Release #{RUN_MACRUBY_SPECS_CMD}"
+    sh "env USE_OBJECTIVE_BACON_FRAMEWORK=true DYLD_FRAMEWORK_PATH=#{FRAMEWORK_ROOT}/build/Release #{MACRUBY_RUN_SPECS}"
   end
 
   desc 'Run Nu specs'
   task :nu_spec => :install do
-    Dir.chdir('NuBacon') do
+    Dir.chdir(NU_ROOT) do
       # TODO nush doesn't use the frameworks in DYLD_FRAMEWORK_PATH, so installing the framework for now
       #sh "env DYLD_FRAMEWORK_PATH=#{FRAMEWORK_ROOT}/build/Release nush -f ObjectiveBacon bacon_spec.nu"
       sh "nush -f ObjectiveBacon bacon_spec.nu"
@@ -65,7 +76,7 @@ namespace :framework do
   end
 end
 
-IOS_RUNNER_ROOT = 'NuBacon/iOSRunner'
+IOS_RUNNER_ROOT = File.join(NU_ROOT, 'iOSRunner')
 
 namespace :ios do
   desc 'Create the spec runner'
@@ -108,9 +119,9 @@ namespace :ios do
 end
 
 desc 'Clean all'
-task :clean => ['macruby_ext:clean', 'framework:clean', 'ios:clean']
+task :clean => ['macruby:clean', 'framework:clean', 'ios:clean']
 
 desc 'Run MacRuby ext, MacRuby framework, and Nu framework specs'
-task :spec => ['macruby_ext:spec', 'framework:macruby_spec', 'framework:nu_spec', 'ios:spec']
+task :spec => ['macruby:spec', 'framework:macruby_spec', 'framework:nu_spec', 'ios:spec']
 
 task :default => :spec
