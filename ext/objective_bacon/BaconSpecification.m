@@ -1,7 +1,6 @@
 #import "BaconSpecification.h"
 #import "ObjectiveBacon.h"
 #import "BaconContext.h"
-#import "BaconShould.h"
 
 
 @implementation BaconSpecification
@@ -136,7 +135,7 @@
   [self cancelScheduledRequests];
   // TODO don't use an exception here!
   [self executeBlock:^{
-    @throw [BaconError errorWithDescription:[NSString stringWithFormat:@"timeout exceeded: %@ %@", self.context.name, self.description]];
+    [self assertionFailed:[NSString stringWithFormat:@"timeout exceeded: %@ %@", self.context.name, self.description]];
   }];
   scheduledBlocksCount = 0;
   [self finishSpec];
@@ -185,7 +184,7 @@
     // the specification did not contain any requirements, so it flunked
     // TODO don't use an exception here!
     [self executeBlock:^{
-      @throw [BaconError errorWithDescription:[NSString stringWithFormat:@"empty specification: %@ %@", self.context.name, self.description]];
+      [self assertionFailed:[NSString stringWithFormat:@"empty specification: %@ %@", self.context.name, self.description]];
     }];
   }
   [self runAfterFilters];
@@ -243,15 +242,36 @@
   }
 }
 
+// TODO refactor with executeBlock:
 - (void)assertionFailed:(NSString *)failureDescription {
-  exceptionOccurred = YES; // TODO continue running or not? this will only prevent any more wait blocks being scheduled
-  [[[Bacon sharedInstance] summary] addFailure];
-  NSString *type = @" [FAILURE]";
-  printf("%s", [type UTF8String]);
-  [[[Bacon sharedInstance] summary] addToErrorLog:failureDescription
-                                          context:self.context.name
-                                    specification:self.description
-                                             type:type];
+  if ([Bacon sharedInstance].raiseExceptionOnFailure) {
+    @throw [BaconError errorWithDescription:failureDescription];
+  } else {
+    // only report one failure!
+    if (!exceptionOccurred) {
+      // TODO continue running or not? this will only prevent any more wait blocks being scheduled
+      exceptionOccurred = YES;
+      [[[Bacon sharedInstance] summary] addFailure];
+      NSString *type = @" [FAILURE]";
+      printf("%s", [type UTF8String]);
+      [[[Bacon sharedInstance] summary] addToErrorLog:failureDescription
+                                              context:self.context.name
+                                        specification:self.description
+                                                 type:type];
+    }
+  }
+}
+
+// TODO this could also throw a BaconError if someone has a reason to skip assertions when exceptions are supported...
+- (void)skipRestOfAssertions {
+  // only report one failure!
+  if (!exceptionOccurred) {
+    // this will only prevent any more wait blocks being scheduled
+    exceptionOccurred = YES;
+    [[[Bacon sharedInstance] summary] addSkipped];
+    NSString *type = @" [SKIPPING]";
+    printf("%s", [type UTF8String]);
+  }
 }
 
 @end

@@ -1,6 +1,7 @@
-#import "BaconShould.h"
 #import "ObjectiveBacon.h"
-
+#import "BaconShould.h"
+#import "BaconContext.h"
+#import "BaconSpecification.h"
 
 @implementation BaconShould
 
@@ -40,14 +41,11 @@
     // NSLog(@"ASSERTION PASSED!");
     if (negated) {
       [[[[Bacon sharedInstance] currentContext] currentSpecification] assertionFailed:desc];
-      //@throw [BaconError errorWithDescription:desc];
     }
   } else {
     // NSLog(@"ASSERTION FAILED!");
     if (!negated) {
-      // NSLog(@"THROW!");
       [[[[Bacon sharedInstance] currentContext] currentSpecification] assertionFailed:desc];
-      //@throw [BaconError errorWithDescription:desc];
     }
   }
 }
@@ -165,59 +163,69 @@
 }
 
 - (id)raise {
-  __block id result = nil;
-  [self satisfy:@"raise any exception" block:^(id block) {
-    @try {
-      [self executeBlock:block];
-      return NO;
-    }
-    @catch(id e) {
-      // NSLog(@"Got exception: %@", [e name]);
-      result = [self convertException:e];
-      return YES;
-    }
-    return NO; // never reached?
-  }];
-  return result;
+  if ([Bacon sharedInstance].skipRequirementsThatRaiseExceptions) {
+    [[[[Bacon sharedInstance] currentContext] currentSpecification] skipRestOfAssertions];
+    return nil;
+  } else {
+    __block id result = nil;
+    [self satisfy:@"raise any exception" block:^(id block) {
+      @try {
+        [self executeBlock:block];
+        return NO;
+      }
+      @catch(id e) {
+        // NSLog(@"Got exception: %@", [e name]);
+        result = [self convertException:e];
+        return YES;
+      }
+      return NO; // never reached?
+    }];
+    return result;
+  }
 }
 
 - (id)raise:(id)exception {
-  __block id result = nil;
-  NSString *exceptionName = nil;
-  if ([exception isKindOfClass:[NSString class]]) {
-    //NSLog(@"Expected exception object is a string");
-    exceptionName = exception;
-  } else if ([exception isKindOfClass:[NSException class]]) {
-    //NSLog(@"Expected exception object is a NSException");
-    exceptionName = [exception name];
-  } else if ([exception respondsToSelector:@selector(name)]) {
-    //NSLog(@"The Expected exception object responds to `name', so try to retreive it that way.");
-    exceptionName = [exception performSelector:@selector(name)];
+  if ([Bacon sharedInstance].skipRequirementsThatRaiseExceptions) {
+    [[[[Bacon sharedInstance] currentContext] currentSpecification] skipRestOfAssertions];
+    return nil;
   } else {
-    @throw [NSException exceptionWithName:@"ArgumentError"
-                                   reason:[NSString stringWithFormat:@"Unable to figure out the name of the expected exception from object `%@'", exception]
-                                 userInfo:nil];
+    __block id result = nil;
+    NSString *exceptionName = nil;
+    if ([exception isKindOfClass:[NSString class]]) {
+      //NSLog(@"Expected exception object is a string");
+      exceptionName = exception;
+    } else if ([exception isKindOfClass:[NSException class]]) {
+      //NSLog(@"Expected exception object is a NSException");
+      exceptionName = [exception name];
+    } else if ([exception respondsToSelector:@selector(name)]) {
+      //NSLog(@"The Expected exception object responds to `name', so try to retreive it that way.");
+      exceptionName = [exception performSelector:@selector(name)];
+    } else {
+      @throw [NSException exceptionWithName:@"ArgumentError"
+                                     reason:[NSString stringWithFormat:@"Unable to figure out the name of the expected exception from object `%@'", exception]
+                                   userInfo:nil];
 
-  }
-  //NSLog(@"Expected exception name: %@", exceptionName);
-
-  [self satisfy:[NSString stringWithFormat:@"raise an exception with name `%@'", exceptionName] block:^(id block) {
-    @try {
-      [self executeBlock:block];
-      return NO;
     }
-    @catch(NSException *e) {
-      //NSLog(@"Got exception: %@, expected: %@", [e name], exceptionName);
-      result = [self convertException:e];
-      if ([[e name] isEqualToString:exceptionName]) {
-        return YES;
-      } else {
-        @throw e;
+    //NSLog(@"Expected exception name: %@", exceptionName);
+
+    [self satisfy:[NSString stringWithFormat:@"raise an exception with name `%@'", exceptionName] block:^(id block) {
+      @try {
+        [self executeBlock:block];
+        return NO;
       }
-    }
-    return NO; // never reached?
-  }];
-  return result;
+      @catch(NSException *e) {
+        //NSLog(@"Got exception: %@, expected: %@", [e name], exceptionName);
+        result = [self convertException:e];
+        if ([[e name] isEqualToString:exceptionName]) {
+          return YES;
+        } else {
+          @throw e;
+        }
+      }
+      return NO; // never reached?
+    }];
+    return result;
+  }
 }
 
 
@@ -311,15 +319,6 @@
                                reason:@"-[BaconShould executeAssertionBlock:] should be implemented by the client. It should yield the `object' and return a boolean."
                              userInfo:nil];
   return NO;
-}
-
-@end
-
-
-@implementation BaconError
-
-+ (BaconError *)errorWithDescription:(NSString *)description {
-  return [[[self alloc] initWithName:@"BaconError" reason:description userInfo:nil] autorelease];
 }
 
 @end

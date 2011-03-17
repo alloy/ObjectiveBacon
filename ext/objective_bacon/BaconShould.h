@@ -9,6 +9,7 @@
 @property (nonatomic, assign) id object;
 
 - (id)initWithObject:(id)theObject;
+
 - (void)satisfy:(NSString *)description block:(id)block;
 
 - (BaconShould *)should;
@@ -39,13 +40,6 @@
 - (id)convertException:(id)exception;
 - (void)executeBlock:(id)block;
 - (BOOL)executeAssertionBlock:(id)block;
-
-@end
-
-
-@interface BaconError : NSException
-
-+ (BaconError *)errorWithDescription:(NSString *)description;
 
 @end
 

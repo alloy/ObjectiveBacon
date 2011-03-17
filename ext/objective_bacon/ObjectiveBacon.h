@@ -1,5 +1,10 @@
-//#import <Cocoa/Cocoa.h>
-#import <UIKit/UIKit.h>
+#import "TargetConditionals.h"
+
+#if TARGET_OS_IPHONE
+  #import <UIKit/UIKit.h>
+#else
+  #import <Cocoa/Cocoa.h>
+#endif
 
 @class BaconContext;
 @class BaconSpecification;
@@ -9,11 +14,16 @@
   BaconSummary *summary;
   NSMutableArray *contexts;
   NSUInteger currentContextIndex;
+  BOOL raiseExceptionOnFailure;
+  BOOL skipRequirementsThatRaiseExceptions;
+  BOOL started;
 }
 
 @property (nonatomic, retain) BaconSummary *summary;
 @property (nonatomic, retain) NSMutableArray *contexts;
 @property (nonatomic, assign) NSUInteger currentContextIndex;
+@property (nonatomic, assign) BOOL raiseExceptionOnFailure;
+@property (nonatomic, assign) BOOL skipRequirementsThatRaiseExceptions;
 
 + (Bacon *)sharedInstance;
 
@@ -29,21 +39,26 @@
 
 @interface BaconSummary : NSObject {
   NSMutableString *errorLog;
-  NSUInteger *counters;
+  NSUInteger specifications, requirements, failures, errors, skipped;
 }
 
-- (NSUInteger)specifications;
+@property (nonatomic, assign) NSUInteger specifications, requirements, failures, errors, skipped;
+
 - (void)addSpecification;
-- (NSUInteger)requirements;
 - (void)addRequirement;
-- (NSUInteger)failures;
-- (void)setFailures:(NSUInteger)failures;
 - (void)addFailure;
-- (NSUInteger)errors;
 - (void)addError;
+- (void)addSkipped;
 
 - (void)addToErrorLog:(id)exception context:(NSString *)name specification:(NSString *)description type:(NSString *)type;
 
 - (void)print;
+
+@end
+
+
+@interface BaconError : NSException
+
++ (BaconError *)errorWithDescription:(NSString *)description;
 
 @end

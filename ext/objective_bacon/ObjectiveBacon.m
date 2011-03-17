@@ -1,6 +1,5 @@
 #import "ObjectiveBacon.h"
 #import "BaconContext.h"
-#import "BaconSpecification.h"
 
 
 // This is just so MacRuby will load the bundle.
@@ -46,13 +45,24 @@ static Bacon *sharedBaconInstance = nil;
 
 // implementation
 
-@synthesize summary, contexts, currentContextIndex;
+@synthesize summary, contexts, currentContextIndex, raiseExceptionOnFailure, skipRequirementsThatRaiseExceptions;
 
 - (id)init {
   if ((self = [super init])) {
     self.summary = [BaconSummary new];
     self.contexts = [NSMutableArray array];
     self.currentContextIndex = 0;
+    started = NO;
+
+    // Currently on the iOS simulator there's a bug that will not allow exceptions to be caught.
+    // Hence on the simulator we default to *not* using exceptions.
+#if TARGET_IPHONE_SIMULATOR
+    raiseExceptionOnFailure = NO;
+    skipRequirementsThatRaiseExceptions = YES;
+#else
+    raiseExceptionOnFailure = YES;
+    skipRequirementsThatRaiseExceptions = NO;
+#endif
   }
   return self;
 }
@@ -68,7 +78,19 @@ static Bacon *sharedBaconInstance = nil;
 - (void)run {
   if ([self.contexts count] > 0) {
     [[self currentContext] performSelector:@selector(run) withObject:nil afterDelay:0];
-    //[[NSApplication sharedApplication] run];
+    if (!started) {
+      started = YES;
+      if (!raiseExceptionOnFailure) {
+        printf("[!] Raising exceptions on assertion failures has been disabled.\n");
+      }
+      if (skipRequirementsThatRaiseExceptions) {
+        printf("[!] Assertions that expect exceptions to occur, or not occur, will be skipped.\n");
+      }
+#ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
+      // On iOS the runner app has already started the app.
+      [[NSApplication sharedApplication] run];
+#endif
+    }
   } else {
     // DONE
     [self contextDidFinish:nil];
@@ -91,14 +113,16 @@ static Bacon *sharedBaconInstance = nil;
 
 @implementation BaconSummary
 
+@synthesize specifications, requirements, failures, errors, skipped;
+
 - (id)init {
   if ((self = [super init])) {
     errorLog = [NSMutableString new];
-    counters = malloc(sizeof(NSUInteger) * 4);
-    int i;
-    for (i = 0; i < 4; i++) {
-      counters[i] = 0;
-    }
+    specifications = 0;
+    requirements = 0;
+    failures = 0;
+    errors = 0;
+    skipped = 0;
   }
   return self;
 }
@@ -106,44 +130,27 @@ static Bacon *sharedBaconInstance = nil;
 // Probably never reached
 - (void)dealloc {
   [errorLog release];
-  free(counters);
   [super dealloc];
 }
 
-- (NSUInteger)specifications {
-  return counters[0];
-}
-
 - (void)addSpecification {
-  counters[0]++;
-}
-
-- (NSUInteger)requirements {
-  return counters[1];
+  specifications++;
 }
 
 - (void)addRequirement {
-  counters[1]++;
-}
-
-- (NSUInteger)failures {
-  return counters[2];
-}
-
-- (void)setFailures:(NSUInteger)failures {
-  counters[2] = failures;
+  requirements++;
 }
 
 - (void)addFailure {
-  counters[2]++;
-}
-
-- (NSUInteger)errors {
-  return counters[3];
+  failures++;
 }
 
 - (void)addError {
-  counters[3]++;
+  errors++;
+}
+
+- (void)addSkipped {
+  skipped++;
 }
 
 - (void)addToErrorLog:(id)exception context:(NSString *)name specification:(NSString *)description type:(NSString *)type {
@@ -160,7 +167,23 @@ static Bacon *sharedBaconInstance = nil;
 
 - (void)print {
   printf("\n%s\n", [errorLog UTF8String]);
-  printf("%d specifications (%d requirements), %d failures, %d errors\n", (int)counters[0], (int)counters[1], (int)counters[2], (int)counters[3]);
+  if (skipped == 0) {
+    printf("%d specifications (%d requirements), %d failures, %d errors\n",
+      (int)specifications, (int)requirements, (int)failures, (int)errors);
+  } else {
+    printf("%d specifications (%d requirements) of which %d were (partially) skipped, %d failures, %d errors\n",
+      (int)specifications, (int)requirements, (int)skipped, (int)failures, (int)errors);
+  }
+}
+
+@end
+
+
+
+@implementation BaconError
+
++ (BaconError *)errorWithDescription:(NSString *)description {
+  return [[[self alloc] initWithName:@"BaconError" reason:description userInfo:nil] autorelease];
 }
 
 @end

@@ -41,7 +41,6 @@
   )
 )
 
-(if nil
 ; Just some test constants
 (set equalFoo (do (x) (eq x "foo")))
 (set equalBar (do (x) (eq x "bar")))
@@ -191,53 +190,55 @@
     (-> (~ "foo" should not respondToSelector:"isAbsolutePath") should:fail)
   ))
   
-  (it "creates nice descriptions" (do ()
-    (catch-failure (~ "foo" should be:42))
-    (~ (failure reason) should equal:"expected `foo' to be `42'")
-    
-    (catch-failure (~ 0.4 should be closeTo:42))
-    (~ (failure reason) should equal:"expected `0.4' to be close to `42'")
-    
-    (catch-failure (~ "foo" should not equal:"foo"))
-    (~ (failure reason) should equal:"expected `foo' to not equal `foo'")
-    
-    (catch-failure (~ "foo" should match:/slin./))
-    (~ (failure reason) should equal:"expected `foo' to match /slin./")
-    
-    ;(set x 0)
-    ;(set valueBlock (do () x)) ; simply returns the value of x
-    ;(catch-failure (-> (set x x) should change:valueBlock))
-    ;(~ (failure reason) should equal:"expected `(do () ((set x x)))' to change `(x)'")
-    ;(catch-failure (-> (set x x) should change:valueBlock by:-1))
-    ;(~ (failure reason) should equal:"expected `(do () ((set x x)))' to change `(x)' by `-1'")
-    
-    (set o1 (NSObject new))
-    (set o2 (NSObject new))
-    (catch-failure (~ o1 should equal:o2))
-    (~ (failure reason) should equal:"expected `#{(o1 description)}' to equal `#{(o2 description)}'")
-    
-    (set otherArray (`("bar") array))
-    (catch-failure (~ notEmptyArray should equal:otherArray))
-    (~ (failure reason) should equal:"expected `NSCFArray: #{(notEmptyArray description)}' to equal `NSCFArray: #{(otherArray description)}'")
-    
-    (catch-failure (~ "foo" should be isEqualToString:"bar"))
-    (~ (failure reason) should equal:"expected `foo' to be isEqualToString: with `bar'")
-    
-    (catch-failure (~ "foo" should equalToString:"bar"))
-    (~ (failure reason) should equal:"expected `foo' to equalToString: with `bar'")
-    
-    (catch-failure (~ "foo" should be an absolutePath))
-    (~ (failure reason) should equal:"expected `foo' to be an absolutePath")
-    
-    (catch-failure (~ "foo" should satisfy:nil block:(do (x) (eq x "bar"))))
-    (~ (failure reason) should equal:"expected `foo' to satisfy `(do (x) ((eq x \"bar\")))'")
-    
-    (catch-failure (~ "foo" should:(do (x) (eq x "bar"))))
-    (~ (failure reason) should equal:"expected `foo' to satisfy `(do (x) ((eq x \"bar\")))'")
-    
-    (catch-failure (~ "foo" should not:(do (x) (eq x "foo"))))
-    (~ (failure reason) should equal:"expected `foo' to not satisfy `(do (x) ((eq x \"foo\")))'")
-  ))
+  (unless ((Bacon sharedInstance) skipRequirementsThatRaiseExceptions)
+    (it "creates nice descriptions" (do ()
+      (catch-failure (~ "foo" should be:42))
+      (~ (failure reason) should equal:"expected `foo' to be `42'")
+      
+      (catch-failure (~ 0.4 should be closeTo:42))
+      (~ (failure reason) should equal:"expected `0.4' to be close to `42'")
+      
+      (catch-failure (~ "foo" should not equal:"foo"))
+      (~ (failure reason) should equal:"expected `foo' to not equal `foo'")
+      
+      (catch-failure (~ "foo" should match:/slin./))
+      (~ (failure reason) should equal:"expected `foo' to match /slin./")
+      
+      ;(set x 0)
+      ;(set valueBlock (do () x)) ; simply returns the value of x
+      ;(catch-failure (-> (set x x) should change:valueBlock))
+      ;(~ (failure reason) should equal:"expected `(do () ((set x x)))' to change `(x)'")
+      ;(catch-failure (-> (set x x) should change:valueBlock by:-1))
+      ;(~ (failure reason) should equal:"expected `(do () ((set x x)))' to change `(x)' by `-1'")
+      
+      (set o1 (NSObject new))
+      (set o2 (NSObject new))
+      (catch-failure (~ o1 should equal:o2))
+      (~ (failure reason) should equal:"expected `#{(o1 description)}' to equal `#{(o2 description)}'")
+      
+      (set otherArray (`("bar") array))
+      (catch-failure (~ notEmptyArray should equal:otherArray))
+      (~ (failure reason) should equal:"expected `NSCFArray: #{(notEmptyArray description)}' to equal `NSCFArray: #{(otherArray description)}'")
+      
+      (catch-failure (~ "foo" should be isEqualToString:"bar"))
+      (~ (failure reason) should equal:"expected `foo' to be isEqualToString: with `bar'")
+      
+      (catch-failure (~ "foo" should equalToString:"bar"))
+      (~ (failure reason) should equal:"expected `foo' to equalToString: with `bar'")
+      
+      (catch-failure (~ "foo" should be an absolutePath))
+      (~ (failure reason) should equal:"expected `foo' to be an absolutePath")
+      
+      (catch-failure (~ "foo" should satisfy:nil block:(do (x) (eq x "bar"))))
+      (~ (failure reason) should equal:"expected `foo' to satisfy `(do (x) ((eq x \"bar\")))'")
+      
+      (catch-failure (~ "foo" should:(do (x) (eq x "bar"))))
+      (~ (failure reason) should equal:"expected `foo' to satisfy `(do (x) ((eq x \"bar\")))'")
+      
+      (catch-failure (~ "foo" should not:(do (x) (eq x "foo"))))
+      (~ (failure reason) should equal:"expected `foo' to not satisfy `(do (x) ((eq x \"foo\")))'")
+    ))
+  )
 ))
 
 ;(describe "The NuBacon helper macros" `(
@@ -311,7 +312,6 @@
     (-> (~ "foo" should not:equalFoo) should:fail)
   ))
 ))
-)
 
 (describe "before/after" `(
   (before (do ()
@@ -334,7 +334,7 @@
   
   (it "runs in the right order" (do ()
     (~ @a should equal:2)
-    (~ @b should equal:3)
+    (~ @b should equal:2)
   ))
   
   (describe "when nested" `(
@@ -387,10 +387,10 @@
 (describe "shared/behaves_like" `(
   (behaves_like "a shared context")
   
-  ;(it "raises when the context is not found" (do ()
-    ;(set e (-> (behaves_like "whoops") should raise))
-    ;(~ e should equal:"No such context `whoops'")
-  ;))
+  (it "raises when the context is not found" (do ()
+    (set e (-> (behaves_like "whoops") should raise))
+    (~ e should equal:"No such context `whoops'")
+  ))
   
   (behaves_like "a shared context")
   
@@ -402,18 +402,18 @@
 ))
 
 
-;(describe "Regression specs" `(
-  ;(describe "An empty context does not break, issue #5" `(
-    ;; EMPTY
-  ;))
+(describe "Regression specs" `(
+  (describe "An empty context does not break, issue #5" `(
+    ; EMPTY
+  ))
 
-  ;(describe "An completely empty spec (no contexts/specifications)" `(
-    ;(it "does not break" (do ()
-      ;(puts "\n[!] The following summary is from a regression spec and can be ignored:")
-      ;(~ (system "nush -f ObjectiveBacon -e '(load \"bacon\") ((Bacon sharedInstance) run)'") should be: 0)
-    ;))
-  ;))
-;))
+  (describe "An completely empty spec (no contexts/specifications)" `(
+    (it "does not break" (do ()
+      (puts "\n[!] The following summary is from a regression spec and can be ignored:")
+      (~ (system "nush -f ObjectiveBacon -e '(load \"bacon\") ((Bacon sharedInstance) run)'") should be: 0)
+    ))
+  ))
+))
 
 
 ;(describe "Regression specs" `(
