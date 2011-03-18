@@ -429,7 +429,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				51C12F03133371C400B731E4 /* UIQuery */,
 				5169DBDC12917DE4002517BD /* Spec */,
 				5169DBCF12917D58002517BD /* NuBacon */,
 				22E7304411AB5E210014052A /* Source */,
@@ -482,13 +481,6 @@
 				518A910413290CBC000DA4DE /* bacon_spec.nu */,
 			);
 			name = Spec;
-			sourceTree = "<group>";
-		};
-		51C12F03133371C400B731E4 /* UIQuery */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = UIQuery;
 			sourceTree = "<group>";
 		};
 		51DB3B7112967E3400027005 /* SpecHelpers */ = {
