@@ -1,4 +1,4 @@
-(try (load "bacon.nu"))
+(try (load "ObjectiveBacon:bacon"))
 
 (macro catch-failure (block)
   `(try
@@ -531,7 +531,7 @@
     (describe "An completely empty spec (no contexts/specifications)" `(
       (it "does not break" (do ()
         (puts "\n[!] The following summary is from a regression spec and can be ignored:")
-        (~ (system "nush -f ObjectiveBacon -e '(load \"bacon\") ((Bacon sharedInstance) run)'") should be: 0)
+        (~ (system "nush -e '(load \"ObjectiveBacon:bacon\") ((Bacon sharedInstance) run)'") should be: 0)
       ))
     ))
   )

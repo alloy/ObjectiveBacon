@@ -51,11 +51,9 @@ namespace :framework do
 
   desc 'Run Nu specs'
   task :nu_spec => :install do
-    Dir.chdir('NuBacon') do
-      # TODO nush doesn't use the frameworks in DYLD_FRAMEWORK_PATH, so installing the framework for now
-      #sh "env DYLD_FRAMEWORK_PATH=#{FRAMEWORK_ROOT}/build/Release nush -f ObjectiveBacon bacon_spec.nu"
-      sh "nush -f ObjectiveBacon bacon_spec.nu"
-    end
+    # TODO nush doesn't use the frameworks in DYLD_FRAMEWORK_PATH, so installing the framework for now
+    #sh "env DYLD_FRAMEWORK_PATH=#{FRAMEWORK_ROOT}/build/Release nush -f ObjectiveBacon bacon_spec.nu"
+    sh "nush NuBacon/spec/bacon_spec.nu"
   end
 
   desc 'Install framework'
