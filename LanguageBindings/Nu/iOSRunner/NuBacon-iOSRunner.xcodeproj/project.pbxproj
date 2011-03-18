@@ -20,6 +20,47 @@
 		515C422E13326B81004545DA /* BaconSpecification.m in Sources */ = {isa = PBXBuildFile; fileRef = 515C422613326B81004545DA /* BaconSpecification.m */; };
 		515C422F13326B81004545DA /* ObjectiveBacon.h in Headers */ = {isa = PBXBuildFile; fileRef = 515C422713326B81004545DA /* ObjectiveBacon.h */; };
 		515C423013326B81004545DA /* ObjectiveBacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 515C422813326B81004545DA /* ObjectiveBacon.m */; };
+		51C12F21133371DC00B731E4 /* Recordable.h in Headers */ = {isa = PBXBuildFile; fileRef = 51C12F06133371DC00B731E4 /* Recordable.h */; };
+		51C12F22133371DC00B731E4 /* Recordable.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C12F07133371DC00B731E4 /* Recordable.m */; };
+		51C12F23133371DC00B731E4 /* UIChildren.h in Headers */ = {isa = PBXBuildFile; fileRef = 51C12F08133371DC00B731E4 /* UIChildren.h */; };
+		51C12F24133371DC00B731E4 /* UIChildren.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C12F09133371DC00B731E4 /* UIChildren.m */; };
+		51C12F27133371DC00B731E4 /* UIDescendants.h in Headers */ = {isa = PBXBuildFile; fileRef = 51C12F0C133371DC00B731E4 /* UIDescendants.h */; };
+		51C12F28133371DC00B731E4 /* UIDescendants.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C12F0D133371DC00B731E4 /* UIDescendants.m */; };
+		51C12F2B133371DC00B731E4 /* UIFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 51C12F10133371DC00B731E4 /* UIFilter.h */; };
+		51C12F2C133371DC00B731E4 /* UIFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C12F11133371DC00B731E4 /* UIFilter.m */; };
+		51C12F2D133371DC00B731E4 /* UILog.h in Headers */ = {isa = PBXBuildFile; fileRef = 51C12F12133371DC00B731E4 /* UILog.h */; };
+		51C12F30133371DC00B731E4 /* UIParents.h in Headers */ = {isa = PBXBuildFile; fileRef = 51C12F15133371DC00B731E4 /* UIParents.h */; };
+		51C12F31133371DC00B731E4 /* UIParents.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C12F16133371DC00B731E4 /* UIParents.m */; };
+		51C12F32133371DC00B731E4 /* UIQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = 51C12F17133371DC00B731E4 /* UIQuery.h */; };
+		51C12F33133371DC00B731E4 /* UIQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C12F18133371DC00B731E4 /* UIQuery.m */; };
+		51C12F34133371DC00B731E4 /* UIQueryAll.h in Headers */ = {isa = PBXBuildFile; fileRef = 51C12F19133371DC00B731E4 /* UIQueryAll.h */; };
+		51C12F35133371DC00B731E4 /* UIQueryAll.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C12F1A133371DC00B731E4 /* UIQueryAll.m */; };
+		51C12F38133371DC00B731E4 /* UIRedoer.h in Headers */ = {isa = PBXBuildFile; fileRef = 51C12F1D133371DC00B731E4 /* UIRedoer.h */; };
+		51C12F39133371DC00B731E4 /* UIRedoer.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C12F1E133371DC00B731E4 /* UIRedoer.m */; };
+		51C12F3A133371DC00B731E4 /* ViewFilterSwizzler.h in Headers */ = {isa = PBXBuildFile; fileRef = 51C12F1F133371DC00B731E4 /* ViewFilterSwizzler.h */; };
+		51C12F3B133371DC00B731E4 /* ViewFilterSwizzler.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C12F20133371DC00B731E4 /* ViewFilterSwizzler.m */; };
+		51C12F60133373FE00B731E4 /* WaitUntilIdle.h in Headers */ = {isa = PBXBuildFile; fileRef = 51C12F5C133373FE00B731E4 /* WaitUntilIdle.h */; };
+		51C12F61133373FE00B731E4 /* WaitUntilIdle.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C12F5D133373FE00B731E4 /* WaitUntilIdle.m */; };
+		51C12F721333746400B731E4 /* UIQuerySearchBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 51C12F661333746400B731E4 /* UIQuerySearchBar.h */; };
+		51C12F731333746400B731E4 /* UIQuerySearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C12F671333746400B731E4 /* UIQuerySearchBar.m */; };
+		51C12F741333746400B731E4 /* UIQuerySegmentedControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 51C12F681333746400B731E4 /* UIQuerySegmentedControl.h */; };
+		51C12F751333746400B731E4 /* UIQuerySegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C12F691333746400B731E4 /* UIQuerySegmentedControl.m */; };
+		51C12F761333746400B731E4 /* UIQueryTabBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 51C12F6A1333746400B731E4 /* UIQueryTabBar.h */; };
+		51C12F771333746400B731E4 /* UIQueryTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C12F6B1333746400B731E4 /* UIQueryTabBar.m */; };
+		51C12F781333746400B731E4 /* UIQueryTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 51C12F6C1333746400B731E4 /* UIQueryTableView.h */; };
+		51C12F791333746400B731E4 /* UIQueryTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C12F6D1333746400B731E4 /* UIQueryTableView.m */; };
+		51C12F7A1333746400B731E4 /* UIQueryTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 51C12F6E1333746400B731E4 /* UIQueryTableViewCell.h */; };
+		51C12F7B1333746400B731E4 /* UIQueryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C12F6F1333746400B731E4 /* UIQueryTableViewCell.m */; };
+		51C12F7C1333746400B731E4 /* UIQueryWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 51C12F701333746400B731E4 /* UIQueryWebView.h */; };
+		51C12F7D1333746400B731E4 /* UIQueryWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C12F711333746400B731E4 /* UIQueryWebView.m */; };
+		51C12FAC133375E900B731E4 /* UIProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 51C12FAA133375E900B731E4 /* UIProxy.h */; };
+		51C12FAD133375E900B731E4 /* UIProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C12FAB133375E900B731E4 /* UIProxy.m */; };
+		51C12FB6133376A200B731E4 /* UIBug.h in Headers */ = {isa = PBXBuildFile; fileRef = 51C12FB2133376A200B731E4 /* UIBug.h */; };
+		51C12FB7133376A200B731E4 /* UIBug.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C12FB3133376A200B731E4 /* UIBug.m */; };
+		51C12FB8133376A200B731E4 /* UIConsole.h in Headers */ = {isa = PBXBuildFile; fileRef = 51C12FB4133376A200B731E4 /* UIConsole.h */; };
+		51C12FB9133376A200B731E4 /* UIConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C12FB5133376A200B731E4 /* UIConsole.m */; };
+		51C12FC0133376BA00B731E4 /* UIInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = 51C12FBE133376BA00B731E4 /* UIInspector.h */; };
+		51C12FC1133376BA00B731E4 /* UIInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C12FBF133376BA00B731E4 /* UIInspector.m */; };
 		51ED141912AE422D003E9DC2 /* block.m in Sources */ = {isa = PBXBuildFile; fileRef = 2283087411DE5F0100A5C690 /* block.m */; };
 		51ED141A12AE422D003E9DC2 /* bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 2283087611DE5F0100A5C690 /* bridge.m */; };
 		51ED141B12AE422D003E9DC2 /* bridgesupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2283087811DE5F0100A5C690 /* bridgesupport.m */; };
@@ -229,6 +270,47 @@
 		518A90FD13290C0E000DA4DE /* SpecHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpecHelper.m; path = Source/SpecHelpers/SpecHelper.m; sourceTree = "<group>"; };
 		518A910413290CBC000DA4DE /* bacon_spec.nu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = bacon_spec.nu; path = ../bacon_spec.nu; sourceTree = SOURCE_ROOT; };
 		518A911413290CF9000DA4DE /* SpecHelper.nu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SpecHelper.nu; path = Source/SpecHelpers/SpecHelper.nu; sourceTree = "<group>"; };
+		51C12F06133371DC00B731E4 /* Recordable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Recordable.h; path = vendor/UIQuery/Recordable.h; sourceTree = "<group>"; };
+		51C12F07133371DC00B731E4 /* Recordable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Recordable.m; path = vendor/UIQuery/Recordable.m; sourceTree = "<group>"; };
+		51C12F08133371DC00B731E4 /* UIChildren.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIChildren.h; path = vendor/UIQuery/UIChildren.h; sourceTree = "<group>"; };
+		51C12F09133371DC00B731E4 /* UIChildren.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIChildren.m; path = vendor/UIQuery/UIChildren.m; sourceTree = "<group>"; };
+		51C12F0C133371DC00B731E4 /* UIDescendants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIDescendants.h; path = vendor/UIQuery/UIDescendants.h; sourceTree = "<group>"; };
+		51C12F0D133371DC00B731E4 /* UIDescendants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIDescendants.m; path = vendor/UIQuery/UIDescendants.m; sourceTree = "<group>"; };
+		51C12F10133371DC00B731E4 /* UIFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIFilter.h; path = vendor/UIQuery/UIFilter.h; sourceTree = "<group>"; };
+		51C12F11133371DC00B731E4 /* UIFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIFilter.m; path = vendor/UIQuery/UIFilter.m; sourceTree = "<group>"; };
+		51C12F12133371DC00B731E4 /* UILog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UILog.h; path = vendor/UIQuery/UILog.h; sourceTree = "<group>"; };
+		51C12F15133371DC00B731E4 /* UIParents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIParents.h; path = vendor/UIQuery/UIParents.h; sourceTree = "<group>"; };
+		51C12F16133371DC00B731E4 /* UIParents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIParents.m; path = vendor/UIQuery/UIParents.m; sourceTree = "<group>"; };
+		51C12F17133371DC00B731E4 /* UIQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIQuery.h; path = vendor/UIQuery/UIQuery.h; sourceTree = "<group>"; };
+		51C12F18133371DC00B731E4 /* UIQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIQuery.m; path = vendor/UIQuery/UIQuery.m; sourceTree = "<group>"; };
+		51C12F19133371DC00B731E4 /* UIQueryAll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIQueryAll.h; path = vendor/UIQuery/UIQueryAll.h; sourceTree = "<group>"; };
+		51C12F1A133371DC00B731E4 /* UIQueryAll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIQueryAll.m; path = vendor/UIQuery/UIQueryAll.m; sourceTree = "<group>"; };
+		51C12F1D133371DC00B731E4 /* UIRedoer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIRedoer.h; path = vendor/UIQuery/UIRedoer.h; sourceTree = "<group>"; };
+		51C12F1E133371DC00B731E4 /* UIRedoer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIRedoer.m; path = vendor/UIQuery/UIRedoer.m; sourceTree = "<group>"; };
+		51C12F1F133371DC00B731E4 /* ViewFilterSwizzler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewFilterSwizzler.h; path = vendor/UIQuery/ViewFilterSwizzler.h; sourceTree = "<group>"; };
+		51C12F20133371DC00B731E4 /* ViewFilterSwizzler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewFilterSwizzler.m; path = vendor/UIQuery/ViewFilterSwizzler.m; sourceTree = "<group>"; };
+		51C12F5C133373FE00B731E4 /* WaitUntilIdle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaitUntilIdle.h; path = vendor/UIQueryUtils/WaitUntilIdle.h; sourceTree = "<group>"; };
+		51C12F5D133373FE00B731E4 /* WaitUntilIdle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WaitUntilIdle.m; path = vendor/UIQueryUtils/WaitUntilIdle.m; sourceTree = "<group>"; };
+		51C12F661333746400B731E4 /* UIQuerySearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIQuerySearchBar.h; path = vendor/UIQueryComponents/UIQuerySearchBar.h; sourceTree = "<group>"; };
+		51C12F671333746400B731E4 /* UIQuerySearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIQuerySearchBar.m; path = vendor/UIQueryComponents/UIQuerySearchBar.m; sourceTree = "<group>"; };
+		51C12F681333746400B731E4 /* UIQuerySegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIQuerySegmentedControl.h; path = vendor/UIQueryComponents/UIQuerySegmentedControl.h; sourceTree = "<group>"; };
+		51C12F691333746400B731E4 /* UIQuerySegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIQuerySegmentedControl.m; path = vendor/UIQueryComponents/UIQuerySegmentedControl.m; sourceTree = "<group>"; };
+		51C12F6A1333746400B731E4 /* UIQueryTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIQueryTabBar.h; path = vendor/UIQueryComponents/UIQueryTabBar.h; sourceTree = "<group>"; };
+		51C12F6B1333746400B731E4 /* UIQueryTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIQueryTabBar.m; path = vendor/UIQueryComponents/UIQueryTabBar.m; sourceTree = "<group>"; };
+		51C12F6C1333746400B731E4 /* UIQueryTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIQueryTableView.h; path = vendor/UIQueryComponents/UIQueryTableView.h; sourceTree = "<group>"; };
+		51C12F6D1333746400B731E4 /* UIQueryTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIQueryTableView.m; path = vendor/UIQueryComponents/UIQueryTableView.m; sourceTree = "<group>"; };
+		51C12F6E1333746400B731E4 /* UIQueryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIQueryTableViewCell.h; path = vendor/UIQueryComponents/UIQueryTableViewCell.h; sourceTree = "<group>"; };
+		51C12F6F1333746400B731E4 /* UIQueryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIQueryTableViewCell.m; path = vendor/UIQueryComponents/UIQueryTableViewCell.m; sourceTree = "<group>"; };
+		51C12F701333746400B731E4 /* UIQueryWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIQueryWebView.h; path = vendor/UIQueryComponents/UIQueryWebView.h; sourceTree = "<group>"; };
+		51C12F711333746400B731E4 /* UIQueryWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIQueryWebView.m; path = vendor/UIQueryComponents/UIQueryWebView.m; sourceTree = "<group>"; };
+		51C12FAA133375E900B731E4 /* UIProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIProxy.h; path = vendor/UIQueryUtils/UIProxy.h; sourceTree = "<group>"; };
+		51C12FAB133375E900B731E4 /* UIProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIProxy.m; path = vendor/UIQueryUtils/UIProxy.m; sourceTree = "<group>"; };
+		51C12FB2133376A200B731E4 /* UIBug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIBug.h; path = vendor/UIQueryUtils/UIBug.h; sourceTree = "<group>"; };
+		51C12FB3133376A200B731E4 /* UIBug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIBug.m; path = vendor/UIQueryUtils/UIBug.m; sourceTree = "<group>"; };
+		51C12FB4133376A200B731E4 /* UIConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIConsole.h; path = vendor/UIQueryUtils/UIConsole.h; sourceTree = "<group>"; };
+		51C12FB5133376A200B731E4 /* UIConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIConsole.m; path = vendor/UIQueryUtils/UIConsole.m; sourceTree = "<group>"; };
+		51C12FBE133376BA00B731E4 /* UIInspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIInspector.h; path = vendor/UIQueryUtils/UIInspector.h; sourceTree = "<group>"; };
+		51C12FBF133376BA00B731E4 /* UIInspector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIInspector.m; path = vendor/UIQueryUtils/UIInspector.m; sourceTree = "<group>"; };
 		51ED140B12AE416B003E9DC2 /* libNuBaconLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNuBaconLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		51ED157012AE4735003E9DC2 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		51ED157112AE4735003E9DC2 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -429,6 +511,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				51C12F03133371C400B731E4 /* UIQuery */,
 				5169DBDC12917DE4002517BD /* Spec */,
 				5169DBCF12917D58002517BD /* NuBacon */,
 				22E7304411AB5E210014052A /* Source */,
@@ -483,6 +566,54 @@
 			name = Spec;
 			sourceTree = "<group>";
 		};
+		51C12F03133371C400B731E4 /* UIQuery */ = {
+			isa = PBXGroup;
+			children = (
+				51C12FAA133375E900B731E4 /* UIProxy.h */,
+				51C12FAB133375E900B731E4 /* UIProxy.m */,
+				51C12F661333746400B731E4 /* UIQuerySearchBar.h */,
+				51C12F671333746400B731E4 /* UIQuerySearchBar.m */,
+				51C12F681333746400B731E4 /* UIQuerySegmentedControl.h */,
+				51C12F691333746400B731E4 /* UIQuerySegmentedControl.m */,
+				51C12F6A1333746400B731E4 /* UIQueryTabBar.h */,
+				51C12F6B1333746400B731E4 /* UIQueryTabBar.m */,
+				51C12F6C1333746400B731E4 /* UIQueryTableView.h */,
+				51C12F6D1333746400B731E4 /* UIQueryTableView.m */,
+				51C12F6E1333746400B731E4 /* UIQueryTableViewCell.h */,
+				51C12F6F1333746400B731E4 /* UIQueryTableViewCell.m */,
+				51C12F701333746400B731E4 /* UIQueryWebView.h */,
+				51C12F711333746400B731E4 /* UIQueryWebView.m */,
+				51C12F5C133373FE00B731E4 /* WaitUntilIdle.h */,
+				51C12F5D133373FE00B731E4 /* WaitUntilIdle.m */,
+				51C12F06133371DC00B731E4 /* Recordable.h */,
+				51C12F07133371DC00B731E4 /* Recordable.m */,
+				51C12F08133371DC00B731E4 /* UIChildren.h */,
+				51C12FB2133376A200B731E4 /* UIBug.h */,
+				51C12FB3133376A200B731E4 /* UIBug.m */,
+				51C12FBE133376BA00B731E4 /* UIInspector.h */,
+				51C12FBF133376BA00B731E4 /* UIInspector.m */,
+				51C12FB4133376A200B731E4 /* UIConsole.h */,
+				51C12FB5133376A200B731E4 /* UIConsole.m */,
+				51C12F09133371DC00B731E4 /* UIChildren.m */,
+				51C12F0C133371DC00B731E4 /* UIDescendants.h */,
+				51C12F0D133371DC00B731E4 /* UIDescendants.m */,
+				51C12F10133371DC00B731E4 /* UIFilter.h */,
+				51C12F11133371DC00B731E4 /* UIFilter.m */,
+				51C12F12133371DC00B731E4 /* UILog.h */,
+				51C12F15133371DC00B731E4 /* UIParents.h */,
+				51C12F16133371DC00B731E4 /* UIParents.m */,
+				51C12F17133371DC00B731E4 /* UIQuery.h */,
+				51C12F18133371DC00B731E4 /* UIQuery.m */,
+				51C12F19133371DC00B731E4 /* UIQueryAll.h */,
+				51C12F1A133371DC00B731E4 /* UIQueryAll.m */,
+				51C12F1D133371DC00B731E4 /* UIRedoer.h */,
+				51C12F1E133371DC00B731E4 /* UIRedoer.m */,
+				51C12F1F133371DC00B731E4 /* ViewFilterSwizzler.h */,
+				51C12F20133371DC00B731E4 /* ViewFilterSwizzler.m */,
+			);
+			name = UIQuery;
+			sourceTree = "<group>";
+		};
 		51DB3B7112967E3400027005 /* SpecHelpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -504,6 +635,27 @@
 				515C422B13326B81004545DA /* BaconShould.h in Headers */,
 				515C422D13326B81004545DA /* BaconSpecification.h in Headers */,
 				515C422F13326B81004545DA /* ObjectiveBacon.h in Headers */,
+				51C12F21133371DC00B731E4 /* Recordable.h in Headers */,
+				51C12F23133371DC00B731E4 /* UIChildren.h in Headers */,
+				51C12F27133371DC00B731E4 /* UIDescendants.h in Headers */,
+				51C12F2B133371DC00B731E4 /* UIFilter.h in Headers */,
+				51C12F2D133371DC00B731E4 /* UILog.h in Headers */,
+				51C12F30133371DC00B731E4 /* UIParents.h in Headers */,
+				51C12F32133371DC00B731E4 /* UIQuery.h in Headers */,
+				51C12F34133371DC00B731E4 /* UIQueryAll.h in Headers */,
+				51C12F38133371DC00B731E4 /* UIRedoer.h in Headers */,
+				51C12F3A133371DC00B731E4 /* ViewFilterSwizzler.h in Headers */,
+				51C12F60133373FE00B731E4 /* WaitUntilIdle.h in Headers */,
+				51C12F721333746400B731E4 /* UIQuerySearchBar.h in Headers */,
+				51C12F741333746400B731E4 /* UIQuerySegmentedControl.h in Headers */,
+				51C12F761333746400B731E4 /* UIQueryTabBar.h in Headers */,
+				51C12F781333746400B731E4 /* UIQueryTableView.h in Headers */,
+				51C12F7A1333746400B731E4 /* UIQueryTableViewCell.h in Headers */,
+				51C12F7C1333746400B731E4 /* UIQueryWebView.h in Headers */,
+				51C12FAC133375E900B731E4 /* UIProxy.h in Headers */,
+				51C12FB6133376A200B731E4 /* UIBug.h in Headers */,
+				51C12FB8133376A200B731E4 /* UIConsole.h in Headers */,
+				51C12FC0133376BA00B731E4 /* UIInspector.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -663,6 +815,26 @@
 				515C422C13326B81004545DA /* BaconShould.m in Sources */,
 				515C422E13326B81004545DA /* BaconSpecification.m in Sources */,
 				515C423013326B81004545DA /* ObjectiveBacon.m in Sources */,
+				51C12F22133371DC00B731E4 /* Recordable.m in Sources */,
+				51C12F24133371DC00B731E4 /* UIChildren.m in Sources */,
+				51C12F28133371DC00B731E4 /* UIDescendants.m in Sources */,
+				51C12F2C133371DC00B731E4 /* UIFilter.m in Sources */,
+				51C12F31133371DC00B731E4 /* UIParents.m in Sources */,
+				51C12F33133371DC00B731E4 /* UIQuery.m in Sources */,
+				51C12F35133371DC00B731E4 /* UIQueryAll.m in Sources */,
+				51C12F39133371DC00B731E4 /* UIRedoer.m in Sources */,
+				51C12F3B133371DC00B731E4 /* ViewFilterSwizzler.m in Sources */,
+				51C12F61133373FE00B731E4 /* WaitUntilIdle.m in Sources */,
+				51C12F731333746400B731E4 /* UIQuerySearchBar.m in Sources */,
+				51C12F751333746400B731E4 /* UIQuerySegmentedControl.m in Sources */,
+				51C12F771333746400B731E4 /* UIQueryTabBar.m in Sources */,
+				51C12F791333746400B731E4 /* UIQueryTableView.m in Sources */,
+				51C12F7B1333746400B731E4 /* UIQueryTableViewCell.m in Sources */,
+				51C12F7D1333746400B731E4 /* UIQueryWebView.m in Sources */,
+				51C12FAD133375E900B731E4 /* UIProxy.m in Sources */,
+				51C12FB7133376A200B731E4 /* UIBug.m in Sources */,
+				51C12FB9133376A200B731E4 /* UIConsole.m in Sources */,
+				51C12FC1133376BA00B731E4 /* UIInspector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
