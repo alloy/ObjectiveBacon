@@ -15,6 +15,7 @@
 		515C421113326AD1004545DA /* BaconSpecification.m in Sources */ = {isa = PBXBuildFile; fileRef = 515C420913326AD1004545DA /* BaconSpecification.m */; };
 		515C421213326AD1004545DA /* ObjectiveBacon.h in Headers */ = {isa = PBXBuildFile; fileRef = 515C420A13326AD1004545DA /* ObjectiveBacon.h */; };
 		515C421313326AD1004545DA /* ObjectiveBacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 515C420B13326AD1004545DA /* ObjectiveBacon.m */; };
+		518D6CB31333F7690086143B /* bacon.nu in Resources */ = {isa = PBXBuildFile; fileRef = 518D6CB21333F7690086143B /* bacon.nu */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -33,6 +34,7 @@
 		515C420913326AD1004545DA /* BaconSpecification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaconSpecification.m; path = ../Source/BaconSpecification.m; sourceTree = SOURCE_ROOT; };
 		515C420A13326AD1004545DA /* ObjectiveBacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjectiveBacon.h; path = ../Source/ObjectiveBacon.h; sourceTree = SOURCE_ROOT; };
 		515C420B13326AD1004545DA /* ObjectiveBacon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ObjectiveBacon.m; path = ../Source/ObjectiveBacon.m; sourceTree = SOURCE_ROOT; };
+		518D6CB21333F7690086143B /* bacon.nu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = bacon.nu; path = ../LanguageBindings/Nu/lib/bacon.nu; sourceTree = SOURCE_ROOT; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* ObjectiveBacon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectiveBacon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
@@ -82,6 +84,7 @@
 		089C1665FE841158C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				518D6CB21333F7690086143B /* bacon.nu */,
 				8DC2EF5A0486A6940098B216 /* Info.plist */,
 				089C1666FE841158C02AAC07 /* InfoPlist.strings */,
 			);
@@ -196,6 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */,
+				518D6CB31333F7690086143B /* bacon.nu in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,4 +1,4 @@
-(try (load "bacon.nu"))
+(try (load "ObjectiveBacon:bacon"))
 
 (macro catch-failure (block)
   `(try
