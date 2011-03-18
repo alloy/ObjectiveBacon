@@ -1,3 +1,4 @@
+(if nil
 (try (load "ObjectiveBacon:bacon"))
 
 (macro catch-failure (block)
@@ -571,5 +572,8 @@
   ;))
 ;))
 
-((Bacon sharedInstance) run)
-;($BaconSummary print)
+; TODO need a cmd line runner!
+(unless TARGET_OS_IPHONE
+  ((Bacon sharedInstance) run)
+)
+)
