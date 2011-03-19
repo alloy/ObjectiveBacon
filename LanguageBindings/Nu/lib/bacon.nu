@@ -110,6 +110,18 @@
   )
 )
 
+(try
+  (class UIBaconViewSet
+    (- (id)list is
+      ((self array) list)
+    )
+
+    (- (id)_filteredList:(id)array is
+      (array list)
+    )
+  )
+)
+
 ; main context macros
 
 (set bacon-context nil)
