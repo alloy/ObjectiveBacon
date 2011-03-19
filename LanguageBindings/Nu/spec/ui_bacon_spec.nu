@@ -54,6 +54,10 @@
   )
 )
 
+(function $$ (viewClass)
+  (((UIApplication sharedApplication) keyWindow) viewsByClass:viewClass)
+)
+
 (describe "Bacon UIView additions" `(
   (before (do ()
     (set @controller (ControlsViewController new))
@@ -66,16 +70,24 @@
   ))
 
   (describe "viewsByClass:" `(
+    (before (do ()
+      (set @allButtons ((@controller view) viewsByClass:UIButton))
+    ))
+
     (it "returns subviews from any level down" (do ()
-      (set buttons ((@controller viewWithSubviews) viewsByClass:UIButton))
-      (set titles ((buttons list) map:(do (b) (b currentTitle))))
+      (set buttonsInSubview ((@controller viewWithSubviews) viewsByClass:UIButton))
+      (set titles ((buttonsInSubview list) map:(do (b) (b currentTitle))))
       (~ titles should equal:`("Button 6"))
     ))
 
     (it "returns subviews ordered from top-left to bottom-right" (do ()
-      (set buttons ((@controller view) viewsByClass:UIButton))
-      (set titles ((buttons list) map:(do (b) (b currentTitle))))
+      (set titles ((@allButtons list) map:(do (b) (b currentTitle))))
       (~ titles should equal:`("Button 1" "Button 2" "Button 3" "Button 4" "Button 5" "Button 6"))
+    ))
+
+    (it "has `$$' as a shortcut for getting views from the key window" (do ()
+      (set buttons ($$ UIButton))
+      (~ buttons should equal:@allButtons)
     ))
   ))
 ))
