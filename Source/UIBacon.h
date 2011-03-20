@@ -17,6 +17,9 @@
 @interface UIView (UIBacon)
 
 - (UIBaconViewSet *)viewsByClass:(Class)viewClass;
+- (NSArray *)_viewsByClass:(Class)viewClass recursive:(BOOL)recursive;
+- (UIView *)viewByName:(NSString *)accessibilityLabel;
+- (id)viewsByPath:(NSString *)path;
 
 @end
 

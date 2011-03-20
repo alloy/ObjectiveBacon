@@ -1,13 +1,25 @@
 #import "UIBacon.h"
-
+#import "UIBaconPath.h"
 
 @implementation UIBaconViewSet
 
-// NSArray subclass methods
 
 - (id)initWithArray:(NSArray *)array {
   if (self = [super init]) {
-    viewSet = [array retain];
+    viewSet = [[array sortedArrayUsingComparator:^(id view1, id view2) {
+      CGPoint origin1 = [(UIView *)view1 convertPoint:((UIView *)view1).bounds.origin toView:nil];
+      CGPoint origin2 = [(UIView *)view2 convertPoint:((UIView *)view2).bounds.origin toView:nil];
+      if (floor(origin1.y) > floor(origin2.y)) {
+        return (NSComparisonResult)NSOrderedDescending;
+      } else if (floor(origin1.y) < floor(origin2.y)) {
+        return (NSComparisonResult)NSOrderedAscending;
+      } else if (floor(origin1.x) > floor(origin2.x)) {
+        return (NSComparisonResult)NSOrderedDescending;
+      } else if (floor(origin1.x) < floor(origin2.x)) {
+        return (NSComparisonResult)NSOrderedAscending;
+      }
+      return (NSComparisonResult)NSOrderedSame;
+    }] retain];
   }
   return self;
 }
@@ -22,6 +34,10 @@
 
 - (id)index:(NSUInteger)index {
   return [viewSet objectAtIndex:index];
+}
+
+- (NSString *)description {
+  return [viewSet description];
 }
 
 - (BOOL)isEqual:(id)other {
@@ -65,47 +81,48 @@
 
 @end
 
-@interface UIView (UIBaconPrivate)
-
-- (NSArray *)_viewsByClass:(Class)viewClass;
-
-@end
-
-@implementation UIView (UIBaconPrivate)
-
-// Collects the actual views.
-- (NSArray *)_viewsByClass:(Class)viewClass {
-  NSMutableArray *result = [NSMutableArray array];
-  for (UIView *view in self.subviews) {
-    if ([view isKindOfClass:viewClass]) {
-      [result addObject:view];
-    } else {
-      [result addObjectsFromArray:[view _viewsByClass:viewClass]];
-    }
-  }
-  return result;
-}
-
-@end
 
 @implementation UIView (UIBacon)
 
 // Sorts all views by their origin in the window.
 - (UIBaconViewSet *)viewsByClass:(Class)viewClass {
-  return [[[UIBaconViewSet alloc] initWithArray:[[self _viewsByClass:viewClass] sortedArrayUsingComparator:^(id view1, id view2) {
-    CGPoint origin1 = [(UIView *)view1 convertPoint:((UIView *)view1).bounds.origin toView:nil];
-    CGPoint origin2 = [(UIView *)view2 convertPoint:((UIView *)view2).bounds.origin toView:nil];
-    if (floor(origin1.y) > floor(origin2.y)) {
-      return (NSComparisonResult)NSOrderedDescending;
-    } else if (floor(origin1.y) < floor(origin2.y)) {
-      return (NSComparisonResult)NSOrderedAscending;
-    } else if (floor(origin1.x) > floor(origin2.x)) {
-      return (NSComparisonResult)NSOrderedDescending;
-    } else if (floor(origin1.x) < floor(origin2.x)) {
-      return (NSComparisonResult)NSOrderedAscending;
+  return [[[UIBaconViewSet alloc] initWithArray:[self _viewsByClass:viewClass recursive:YES]] autorelease];
+}
+
+- (NSArray *)_viewsByClass:(Class)viewClass recursive:(BOOL)recursive {
+  NSMutableArray *result = [NSMutableArray array];
+  for (UIView *view in self.subviews) {
+    if ([view isKindOfClass:viewClass]) {
+      [result addObject:view];
+    } else {
+      if (recursive) {
+        [result addObjectsFromArray:[view _viewsByClass:viewClass recursive:YES]];
+      }
     }
-    return (NSComparisonResult)NSOrderedSame;
-  }]] autorelease];
+  }
+  return result;
+}
+
+// To be able to use this the simulator/device needs to have accessibility enabled.
+// Do this in the Settings app.
+- (UIView *)viewByName:(NSString *)accessibilityLabel {
+  //NSLog(@"Search in: %@", self);
+  for (UIView *view in self.subviews) {
+    //NSLog(@"Label: %@", view.accessibilityLabel);
+    if ([view.accessibilityLabel isEqualToString:accessibilityLabel]) {
+      return view;
+    } else {
+      UIView *found = [view viewByName:accessibilityLabel];
+      if (found) {
+        return found;
+      }
+    }
+  }
+  return nil;
+}
+
+- (id)viewsByPath:(NSString *)path {
+  return [UIBaconPath viewsByPath:path ofView:self];
 }
 
 @end
