@@ -81,12 +81,6 @@
     write exec;
   }%%
 
-  // TODO checking if it's an array doesn't work, find out why.
-  //if ([result isKindOfClass:[NSArray array]]) {
-  //if ([result respondsToSelector:@selector(subarrayWithRange:)]) {
-    //result = [[[UIBaconViewSet alloc] initWithArray:result] autorelease];
-  //}
-
   return result;
 }
 
