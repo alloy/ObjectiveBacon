@@ -1,6 +1,5 @@
 #import "UIBaconPath.h"
 #import "UIBacon.h"
-#include <string.h> 
 
 
 #define FILTER(from, length) do { \
@@ -33,13 +32,13 @@
   NSString *current;
 
   %%{
-    path_delimiter = "/";
-    one_down = path_delimiter;
-    any_depth = path_delimiter path_delimiter;
-    quote = "'";
-    name = quote print+ quote;
-    class = alpha+;
-    accessor = "[" digit+ "]";
+    delimiter = "/";
+    one_down  = delimiter;
+    any_depth = delimiter delimiter;
+    quote     = "'";
+    name      = quote print+ quote;
+    class     = alpha+;
+    accessor  = "[" digit+ "]";
 
     main := |*
       name => {

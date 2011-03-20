@@ -116,6 +116,11 @@ namespace :ios do
   task :spec => ['ios:spec:iphone', 'ios:spec:ipad']
 end
 
+desc "Generate Source/UIBaconPath.m"
+task :ragel do
+  sh "ragel Source/UIBaconPath.m.rl -o Source/UIBaconPath.m"
+end
+
 desc 'Clean all'
 task :clean => ['macruby:clean', 'framework:clean', 'ios:clean']
 

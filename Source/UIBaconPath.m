@@ -1,7 +1,6 @@
 #line 1 "Source/UIBaconPath.m.rl"
 #import "UIBaconPath.h"
 #import "UIBacon.h"
-#include <string.h> 
 
 
 #define FILTER(from, length) do { \
@@ -14,9 +13,9 @@
 #define AUTO_FILTER() FILTER(ts, te-ts)
 
 
-#line 17 "Source/UIBaconPath.m.rl"
+#line 16 "Source/UIBaconPath.m.rl"
 
-#line 20 "Source/UIBaconPath.m"
+#line 19 "Source/UIBaconPath.m"
 static const char _query_path_actions[] = {
 	0, 1, 2, 1, 5, 1, 6, 1, 
 	7, 1, 8, 1, 9, 1, 10, 2, 
@@ -85,7 +84,7 @@ static const int query_path_error = 0;
 
 static const int query_path_en_main = 5;
 
-#line 18 "Source/UIBaconPath.m.rl"
+#line 17 "Source/UIBaconPath.m.rl"
 
 
 @implementation UIBaconPath
@@ -104,7 +103,7 @@ static const int query_path_en_main = 5;
   NSString *current;
 
   
-#line 108 "Source/UIBaconPath.m"
+#line 107 "Source/UIBaconPath.m"
 	{
 	cs = query_path_start;
 	ts = 0;
@@ -112,7 +111,7 @@ static const int query_path_en_main = 5;
 	act = 0;
 	}
 
-#line 116 "Source/UIBaconPath.m"
+#line 115 "Source/UIBaconPath.m"
 	{
 	int _klen;
 	unsigned int _trans;
@@ -133,7 +132,7 @@ _resume:
 #line 1 "Source/UIBaconPath.m.rl"
 	{ts = p;}
 	break;
-#line 137 "Source/UIBaconPath.m"
+#line 136 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -203,24 +202,24 @@ _eof_trans:
 	{te = p+1;}
 	break;
 	case 4:
-#line 45 "Source/UIBaconPath.m.rl"
+#line 44 "Source/UIBaconPath.m.rl"
 	{act = 1;}
 	break;
 	case 5:
-#line 66 "Source/UIBaconPath.m.rl"
+#line 65 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         FILTER_TRIMMED();
         result = [result index:[current intValue]];
       }}
 	break;
 	case 6:
-#line 75 "Source/UIBaconPath.m.rl"
+#line 74 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         traverse = YES;
       }}
 	break;
 	case 7:
-#line 45 "Source/UIBaconPath.m.rl"
+#line 44 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         FILTER_TRIMMED();
         current = [current stringByReplacingOccurrencesOfString:@"\\'" withString:@"'"];
@@ -229,7 +228,7 @@ _eof_trans:
       }}
 	break;
 	case 8:
-#line 52 "Source/UIBaconPath.m.rl"
+#line 51 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         AUTO_FILTER();
         if ([result isKindOfClass:[UIView class]]) {
@@ -245,7 +244,7 @@ _eof_trans:
       }}
 	break;
 	case 9:
-#line 71 "Source/UIBaconPath.m.rl"
+#line 70 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         traverse = NO;
       }}
@@ -268,7 +267,7 @@ _eof_trans:
 	}
 	}
 	break;
-#line 272 "Source/UIBaconPath.m"
+#line 271 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -285,7 +284,7 @@ _again:
 #line 1 "Source/UIBaconPath.m.rl"
 	{act = 0;}
 	break;
-#line 289 "Source/UIBaconPath.m"
+#line 288 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -304,14 +303,8 @@ _again:
 
 	_out: {}
 	}
-#line 82 "Source/UIBaconPath.m.rl"
+#line 81 "Source/UIBaconPath.m.rl"
 
-
-  // TODO checking if it's an array doesn't work, find out why.
-  //if ([result isKindOfClass:[NSArray array]]) {
-  //if ([result respondsToSelector:@selector(subarrayWithRange:)]) {
-    //result = [[[UIBaconViewSet alloc] initWithArray:result] autorelease];
-  //}
 
   return result;
 }
