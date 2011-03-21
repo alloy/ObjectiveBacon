@@ -106,21 +106,13 @@
 // To be able to use this the simulator/device needs to have accessibility enabled.
 // Do this in the Settings app.
 - (UIView *)viewByName:(NSString *)accessibilityLabel {
-  UIView *result = [self _viewByName:accessibilityLabel];
-  if (!result) {
-    printf("[!] Unable to find a view by accessibility label `%s'. Did you enable accessibility on the device/simulator?\n", [accessibilityLabel UTF8String]);
-  }
-  return result;
-}
-
-- (UIView *)_viewByName:(NSString *)accessibilityLabel {
   //NSLog(@"Search in: %@", self);
   for (UIView *view in self.subviews) {
     //NSLog(@"Label: %@", view.accessibilityLabel);
     if ([view.accessibilityLabel isEqualToString:accessibilityLabel]) {
       return view;
     } else {
-      UIView *found = [view _viewByName:accessibilityLabel];
+      UIView *found = [view viewByName:accessibilityLabel];
       if (found) {
         return found;
       }
