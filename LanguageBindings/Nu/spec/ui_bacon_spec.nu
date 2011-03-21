@@ -57,14 +57,6 @@
   )
 )
 
-(function $$ (viewClass)
-  (((UIApplication sharedApplication) keyWindow) viewsByClass:viewClass)
-)
-
-(function $ (accessibilityLabel)
-  (((UIApplication sharedApplication) keyWindow) viewByName:accessibilityLabel)
-)
-
 (describe "Bacon UIView additions" `(
   (before (do ()
     (set @controller (ControlsViewController new))
@@ -116,6 +108,7 @@
       ;(puts "VALID:")
       (~ ((@controller view) viewsByPath:"'green view'/UIButton") should be:(NSArray arrayWithObject:($ "Button 6")))
       (~ ((@controller view) viewsByPath:"'green view'/UIButton[0]") should be:($ "Button 6"))
+      (~ ($$ (@controller view) "'green view'/UIButton[0]") should be:($ "Button 6"))
 
       (~ ((@controller view) viewsByPath:"'red\\'s view'/UIButton") should be:(NSArray arrayWithObject:($ "Button 3")))
       (~ ((@controller view) viewsByPath:"'red\\'s view'/UIButton[0]") should be:($ "Button 3"))
@@ -129,7 +122,7 @@
       (~ ((@controller view) viewsByPath:"//UIButton") should be:($$ UIButton))
       (~ ((@controller view) viewsByPath:"//UIButton[1]") should be:($ "Button 2"))
 
-      ;(~ ((@controller view) viewsByPath:"'blue view'/UIButton") should be:(NSArray array))
+      (~ ((@controller view) viewsByPath:"'blue view'/UIButton") should be:(NSArray array))
       ;(~ ((@controller view) viewsByPath:"'blue view'/UIButton[0]") should be:nil)
 
       ;(puts "")

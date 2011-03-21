@@ -122,6 +122,38 @@
   )
 )
 
+(function $$ (*class-or-path)
+  (if (eq (*class-or-path count) 1)
+    (then
+      (set __arg (car *class-or-path))
+      (if (__arg isKindOfClass:NSString)
+        (then
+          (((UIApplication sharedApplication) keyWindow) viewsByPath:__arg)
+        )
+        (else
+          (((UIApplication sharedApplication) keyWindow) viewsByClass:__arg)
+        )
+      )
+    )
+    (else
+      (set __view (car *class-or-path))
+      (set __arg (car (cdr *class-or-path)))
+      (if (__arg isKindOfClass:NSString)
+        (then
+          (__view viewsByPath:__arg)
+        )
+        (else
+          (__view viewsByClass:__arg)
+        )
+      )
+    )
+  )
+)
+
+(function $ (accessibilityLabel)
+  (((UIApplication sharedApplication) keyWindow) viewByName:accessibilityLabel)
+)
+
 ; main context macros
 
 (set bacon-context nil)
