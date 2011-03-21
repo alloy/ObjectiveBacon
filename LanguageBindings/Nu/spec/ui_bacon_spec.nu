@@ -61,7 +61,9 @@
   (before (do ()
     (set @controller (ControlsViewController new))
     ($window setRootViewController:@controller)
-    (wait 1 (do () ))
+    (wait 1 (do ()
+      (set @view (@controller view))
+    ))
   ))
 
   (after (do ()
@@ -97,15 +99,39 @@
   ))
 
   (describe "viewsByPath:" `(
-    (it "returns views by query path" (do ()
-      ;(puts "INVALID:")
+    (it "finds a view by accessibility label if the start of the path is enclosed by single quotes" (do ()
+      (~ (@view viewsByPath:"'green view'") should be:($ "green view"))
+      (~ (@view viewsByPath:"'purple view'") should be:nil)
+      (~ (($ "blue view") viewsByPath:"'green view'") should be:($ "green view"))
+      (~ (($ "green view") viewsByPath:"'blue view'") should be:nil)
+    ))
+
+    (it "allows escaped single quotes in the accessibility label" (do ()
+      (~ (@view viewsByPath:"'red\\'s view'") should be:($ "red's view"))
+    ))
+
+    (it "raises an exception when a label is empty or unclosed" (do ()
       ;(puts ((@controller view) viewsByPath:"''/UIButton"))
       ;(puts ((@controller view) viewsByPath:"'//UIButton"))
-      ;(puts "")
       ;(puts ((@controller view) viewsByPath:"'green view/UIButton"))
-      ;(puts "")
+    ))
 
-      ;(puts "VALID:")
+    (it "finds a view by class" (do ()
+      (~ ((@view viewsByPath:"UIButton") currentTitle) should be:`("Button 1" "Button 2" "Button 4" "Button 5"))
+      (~ (($ "red's view") viewsByPath:"UIButton") should be:(NSArray arrayWithObject:($ "Button 3")))
+    ))
+
+    (it "finds classes only one down or any depth with double slash" (do ()
+      (~ ((@view viewsByPath:"/UIButton") currentTitle) should be:`("Button 1" "Button 2" "Button 4" "Button 5"))
+      (~ (@view viewsByPath:"//UIButton") should be:($$ UIButton))
+    ))
+
+    (it "retrieves one element of a set with a numerical accessor" (do ()
+      (~ ((@view viewsByPath:"/UIButton[2]") currentTitle) should be:"Button 4")
+      (~ ((@view viewsByPath:"//UIButton[2]") currentTitle) should be:"Button 3")
+    ))
+
+    (it "combines the various path components to select views down in the tree" (do ()
       (~ ((@controller view) viewsByPath:"'green view'/UIButton") should be:(NSArray arrayWithObject:($ "Button 6")))
       (~ ((@controller view) viewsByPath:"'green view'/UIButton[0]") should be:($ "Button 6"))
       (~ ($$ (@controller view) "'green view'/UIButton[0]") should be:($ "Button 6"))
@@ -124,11 +150,6 @@
 
       (~ ((@controller view) viewsByPath:"'blue view'/UIButton") should be:(NSArray array))
       ;(~ ((@controller view) viewsByPath:"'blue view'/UIButton[0]") should be:nil)
-
-      ;(puts "")
-      ;(puts ((@controller view) viewsByPath:"//UIButton"))
-      ;(puts "")
-      ;(puts ((@controller view) viewsByPath:"UIView")) ; colored view!
     ))
   ))
 
