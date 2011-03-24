@@ -67,7 +67,11 @@
 
       accessor => {
         FILTER_TRIMMED();
-        result = [result index:[current intValue]];
+        NSInteger index = [current integerValue];
+        if (index > ([result count] - 1)) {
+          return nil;
+        }
+        result = [result index:index];
       };
 
       one_down {

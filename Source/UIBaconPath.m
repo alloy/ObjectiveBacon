@@ -209,11 +209,15 @@ _eof_trans:
 #line 68 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         FILTER_TRIMMED();
-        result = [result index:[current intValue]];
+        NSInteger index = [current integerValue];
+        if (index > ([result count] - 1)) {
+          return nil;
+        }
+        result = [result index:index];
       }}
 	break;
 	case 6:
-#line 77 "Source/UIBaconPath.m.rl"
+#line 81 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         traverse = YES;
       }}
@@ -247,7 +251,7 @@ _eof_trans:
       }}
 	break;
 	case 9:
-#line 73 "Source/UIBaconPath.m.rl"
+#line 77 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         traverse = NO;
       }}
@@ -270,7 +274,7 @@ _eof_trans:
 	}
 	}
 	break;
-#line 274 "Source/UIBaconPath.m"
+#line 278 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -287,7 +291,7 @@ _again:
 #line 1 "Source/UIBaconPath.m.rl"
 	{act = 0;}
 	break;
-#line 291 "Source/UIBaconPath.m"
+#line 295 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -306,7 +310,7 @@ _again:
 
 	_out: {}
 	}
-#line 84 "Source/UIBaconPath.m.rl"
+#line 88 "Source/UIBaconPath.m.rl"
 
 
   return result;

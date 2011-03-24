@@ -150,6 +150,7 @@
 
       (~ ((@controller view) viewsByPath:"'blue view'/UIButton") should be:nil)
       (~ ((@controller view) viewsByPath:"'blue view'/UIButton[0]") should be:nil)
+      (~ ((@controller view) viewsByPath:"//UIButton[42]") should be:nil)
     ))
   ))
 
