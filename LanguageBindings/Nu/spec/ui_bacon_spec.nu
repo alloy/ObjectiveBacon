@@ -148,8 +148,8 @@
       (~ ((@controller view) viewsByPath:"//UIButton") should be:($$ UIButton))
       (~ ((@controller view) viewsByPath:"//UIButton[1]") should be:($ "Button 2"))
 
-      (~ ((@controller view) viewsByPath:"'blue view'/UIButton") should be:(NSArray array))
-      ;(~ ((@controller view) viewsByPath:"'blue view'/UIButton[0]") should be:nil)
+      (~ ((@controller view) viewsByPath:"'blue view'/UIButton") should be:nil)
+      (~ ((@controller view) viewsByPath:"'blue view'/UIButton[0]") should be:nil)
     ))
   ))
 

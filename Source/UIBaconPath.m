@@ -206,14 +206,14 @@ _eof_trans:
 	{act = 1;}
 	break;
 	case 5:
-#line 65 "Source/UIBaconPath.m.rl"
+#line 68 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         FILTER_TRIMMED();
         result = [result index:[current intValue]];
       }}
 	break;
 	case 6:
-#line 74 "Source/UIBaconPath.m.rl"
+#line 77 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         traverse = YES;
       }}
@@ -240,11 +240,14 @@ _eof_trans:
           }
           result = r;
         }
+        if ([result count] == 0) {
+          return nil;
+        }
         result = [[[UIBaconViewSet alloc] initWithArray:result] autorelease];
       }}
 	break;
 	case 9:
-#line 70 "Source/UIBaconPath.m.rl"
+#line 73 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         traverse = NO;
       }}
@@ -267,7 +270,7 @@ _eof_trans:
 	}
 	}
 	break;
-#line 271 "Source/UIBaconPath.m"
+#line 274 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -284,7 +287,7 @@ _again:
 #line 1 "Source/UIBaconPath.m.rl"
 	{act = 0;}
 	break;
-#line 288 "Source/UIBaconPath.m"
+#line 291 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -303,7 +306,7 @@ _again:
 
 	_out: {}
 	}
-#line 81 "Source/UIBaconPath.m.rl"
+#line 84 "Source/UIBaconPath.m.rl"
 
 
   return result;

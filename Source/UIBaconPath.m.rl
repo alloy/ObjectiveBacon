@@ -59,6 +59,9 @@
           }
           result = r;
         }
+        if ([result count] == 0) {
+          return nil;
+        }
         result = [[[UIBaconViewSet alloc] initWithArray:result] autorelease];
       };
 
