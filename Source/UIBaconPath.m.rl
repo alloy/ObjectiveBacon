@@ -53,7 +53,7 @@
         AUTO_FILTER();
         if ([result isKindOfClass:[UIView class]]) {
           result = [result _viewsByClass:NSClassFromString(current) recursive:traverse];
-        } else if ([result isKindOfClass:[UIBaconViewSet class]]) {
+        } else {
           NSMutableArray *r = [NSMutableArray array];
           for (UIView *v in [(UIBaconViewSet *)result array]) {
             [r addObjectsFromArray:[v _viewsByClass:NSClassFromString(current) recursive:traverse]];
@@ -77,18 +77,10 @@
 
       wildcard => {
         NSArray *r;
-        if (traverse) {
-          if ([result isKindOfClass:[UIBaconViewSet class]]) {
-            r = [self _collectSubviews:[(UIBaconViewSet *)result array] recursive:YES];
-          } else {
-            r = [self _collectSubviews:[NSArray arrayWithObject:result] recursive:YES];
-          }
+        if ([result isKindOfClass:[UIView class]]) {
+          r = [self _collectSubviews:[NSArray arrayWithObject:result] recursive:traverse];
         } else {
-          if ([result isKindOfClass:[UIBaconViewSet class]]) {
-            r = [self _collectSubviews:[(UIBaconViewSet *)result array] recursive:NO];
-          } else {
-            r = [(UIView *)result subviews];
-          }
+          r = [self _collectSubviews:[(UIBaconViewSet *)result array] recursive:traverse];
         }
         result = [[[UIBaconViewSet alloc] initWithArray:r] autorelease];
       };

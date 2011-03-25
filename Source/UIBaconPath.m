@@ -220,24 +220,16 @@ _eof_trans:
 #line 78 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         NSArray *r;
-        if (traverse) {
-          if ([result isKindOfClass:[UIBaconViewSet class]]) {
-            r = [self _collectSubviews:[(UIBaconViewSet *)result array] recursive:YES];
-          } else {
-            r = [self _collectSubviews:[NSArray arrayWithObject:result] recursive:YES];
-          }
+        if ([result isKindOfClass:[UIView class]]) {
+          r = [self _collectSubviews:[NSArray arrayWithObject:result] recursive:traverse];
         } else {
-          if ([result isKindOfClass:[UIBaconViewSet class]]) {
-            r = [self _collectSubviews:[(UIBaconViewSet *)result array] recursive:NO];
-          } else {
-            r = [(UIView *)result subviews];
-          }
+          r = [self _collectSubviews:[(UIBaconViewSet *)result array] recursive:traverse];
         }
         result = [[[UIBaconViewSet alloc] initWithArray:r] autorelease];
       }}
 	break;
 	case 7:
-#line 100 "Source/UIBaconPath.m.rl"
+#line 92 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         traverse = YES;
       }}
@@ -257,7 +249,7 @@ _eof_trans:
         AUTO_FILTER();
         if ([result isKindOfClass:[UIView class]]) {
           result = [result _viewsByClass:NSClassFromString(current) recursive:traverse];
-        } else if ([result isKindOfClass:[UIBaconViewSet class]]) {
+        } else {
           NSMutableArray *r = [NSMutableArray array];
           for (UIView *v in [(UIBaconViewSet *)result array]) {
             [r addObjectsFromArray:[v _viewsByClass:NSClassFromString(current) recursive:traverse]];
@@ -271,7 +263,7 @@ _eof_trans:
       }}
 	break;
 	case 10:
-#line 96 "Source/UIBaconPath.m.rl"
+#line 88 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         traverse = NO;
       }}
@@ -294,7 +286,7 @@ _eof_trans:
 	}
 	}
 	break;
-#line 298 "Source/UIBaconPath.m"
+#line 290 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -311,7 +303,7 @@ _again:
 #line 1 "Source/UIBaconPath.m.rl"
 	{act = 0;}
 	break;
-#line 315 "Source/UIBaconPath.m"
+#line 307 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -330,7 +322,7 @@ _again:
 
 	_out: {}
 	}
-#line 107 "Source/UIBaconPath.m.rl"
+#line 99 "Source/UIBaconPath.m.rl"
 
 
   return result;
