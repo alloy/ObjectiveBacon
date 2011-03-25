@@ -78,9 +78,17 @@
       wildcard => {
         NSArray *r;
         if (traverse) {
-          r = [self _collectSubviews:[NSArray arrayWithObject:result]];
+          if ([result isKindOfClass:[UIBaconViewSet class]]) {
+            r = [self _collectSubviews:[(UIBaconViewSet *)result array] recursive:YES];
+          } else {
+            r = [self _collectSubviews:[NSArray arrayWithObject:result] recursive:YES];
+          }
         } else {
-          r = [(UIView *)result subviews];
+          if ([result isKindOfClass:[UIBaconViewSet class]]) {
+            r = [self _collectSubviews:[(UIBaconViewSet *)result array] recursive:NO];
+          } else {
+            r = [(UIView *)result subviews];
+          }
         }
         result = [[[UIBaconViewSet alloc] initWithArray:r] autorelease];
       };
@@ -101,12 +109,14 @@
   return result;
 }
 
-+ (NSArray *)_collectSubviews:(NSArray *)views {
++ (NSArray *)_collectSubviews:(NSArray *)views recursive:(BOOL)recursive {
   NSMutableArray *result = [NSMutableArray array];
   for (UIView *v in views) {
     NSArray *subviews = [v subviews];
     [result addObjectsFromArray:subviews];
-    [result addObjectsFromArray:[self _collectSubviews:subviews]];
+    if (recursive) {
+      [result addObjectsFromArray:[self _collectSubviews:subviews recursive:YES]];
+    }
   }
   return result;
 }

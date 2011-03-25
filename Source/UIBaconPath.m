@@ -221,15 +221,23 @@ _eof_trans:
 	{te = p+1;{
         NSArray *r;
         if (traverse) {
-          r = [self _collectSubviews:[NSArray arrayWithObject:result]];
+          if ([result isKindOfClass:[UIBaconViewSet class]]) {
+            r = [self _collectSubviews:[(UIBaconViewSet *)result array] recursive:YES];
+          } else {
+            r = [self _collectSubviews:[NSArray arrayWithObject:result] recursive:YES];
+          }
         } else {
-          r = [(UIView *)result subviews];
+          if ([result isKindOfClass:[UIBaconViewSet class]]) {
+            r = [self _collectSubviews:[(UIBaconViewSet *)result array] recursive:NO];
+          } else {
+            r = [(UIView *)result subviews];
+          }
         }
         result = [[[UIBaconViewSet alloc] initWithArray:r] autorelease];
       }}
 	break;
 	case 7:
-#line 92 "Source/UIBaconPath.m.rl"
+#line 100 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         traverse = YES;
       }}
@@ -263,7 +271,7 @@ _eof_trans:
       }}
 	break;
 	case 10:
-#line 88 "Source/UIBaconPath.m.rl"
+#line 96 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         traverse = NO;
       }}
@@ -286,7 +294,7 @@ _eof_trans:
 	}
 	}
 	break;
-#line 290 "Source/UIBaconPath.m"
+#line 298 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -303,7 +311,7 @@ _again:
 #line 1 "Source/UIBaconPath.m.rl"
 	{act = 0;}
 	break;
-#line 307 "Source/UIBaconPath.m"
+#line 315 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -322,18 +330,20 @@ _again:
 
 	_out: {}
 	}
-#line 99 "Source/UIBaconPath.m.rl"
+#line 107 "Source/UIBaconPath.m.rl"
 
 
   return result;
 }
 
-+ (NSArray *)_collectSubviews:(NSArray *)views {
++ (NSArray *)_collectSubviews:(NSArray *)views recursive:(BOOL)recursive {
   NSMutableArray *result = [NSMutableArray array];
   for (UIView *v in views) {
     NSArray *subviews = [v subviews];
     [result addObjectsFromArray:subviews];
-    [result addObjectsFromArray:[self _collectSubviews:subviews]];
+    if (recursive) {
+      [result addObjectsFromArray:[self _collectSubviews:subviews recursive:YES]];
+    }
   }
   return result;
 }

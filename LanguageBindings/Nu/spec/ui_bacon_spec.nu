@@ -1,6 +1,8 @@
 (global UIButtonTypeRoundedRect 1)
 (global UIControlStateNormal 0)
 
+(class ColoredView is UIView)
+
 (class ControlsViewController is UIViewController
   (ivar (id) viewWithSubviews)
 
@@ -15,7 +17,7 @@
     (button setFrame:`(0 0 80 30))
     (view addSubview:button)
 
-    (set aSubview ((UIView alloc) initWithFrame:`(90, 15, 100, 100)))
+    (set aSubview ((ColoredView alloc) initWithFrame:`(90, 15, 100, 100)))
     (aSubview setBackgroundColor:(UIColor redColor))
     (aSubview setAccessibilityLabel:"red's view")
     (view addSubview:aSubview)
@@ -35,12 +37,12 @@
     (button setFrame:`(150 200 80 30))
     (view addSubview:button)
 
-    (set @viewWithSubviews ((UIView alloc) initWithFrame:`(10, 300, 150, 150)))
+    (set @viewWithSubviews ((ColoredView alloc) initWithFrame:`(10, 300, 150, 150)))
     (@viewWithSubviews setBackgroundColor:(UIColor blueColor))
     (@viewWithSubviews setAccessibilityLabel:"blue view")
     (view addSubview:@viewWithSubviews)
 
-    (set aSubview ((UIView alloc) initWithFrame:`(25, 25, 100, 100)))
+    (set aSubview ((ColoredView alloc) initWithFrame:`(25, 25, 100, 100)))
     (aSubview setAccessibilityLabel:"green view")
     (aSubview setBackgroundColor:(UIColor greenColor))
     (@viewWithSubviews addSubview:aSubview)
@@ -156,6 +158,16 @@
 
       (~ ((@controller view) viewsByPath:"'blue view'/*") should be:(NSArray arrayWithObject:($ "green view")))
       (~ ((@controller view) viewsByPath:"'blue view'//*") should be:(($ "blue view") viewsByClass:UIView))
+
+      (set views (NSMutableArray array))
+      (views addObject:($ "Button 3"))
+      (views addObject:($ "green view"))
+      (views addObject:($ "Button 6"))
+      (~ (@view viewsByPath:"//ColoredView/*") should be:views)
+      (~ (@view viewsByPath:"//*") should be:(@view viewsByClass:UIView))
+
+      (~ (@view viewsByPath:"//ColoredView/*[1]") should be:($ "green view"))
+      (~ (@view viewsByPath:"//ColoredView/*/UIButton[0]") should be:($ "Button 6"))
 
       (~ ((@controller view) viewsByPath:"'blue view'/UIButton") should be:nil)
       (~ ((@controller view) viewsByPath:"'blue view'/UIButton[0]") should be:nil)
