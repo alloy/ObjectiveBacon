@@ -18,24 +18,24 @@
 #line 19 "Source/UIBaconPath.m"
 static const char _query_path_actions[] = {
 	0, 1, 2, 1, 5, 1, 6, 1, 
-	7, 1, 8, 1, 9, 1, 10, 2, 
-	0, 1, 2, 3, 4
+	7, 1, 8, 1, 9, 1, 10, 1, 
+	11, 2, 0, 1, 2, 3, 4
 };
 
 static const char _query_path_key_offsets[] = {
-	0, 0, 2, 5, 7, 10, 17, 20, 
-	21
+	0, 0, 2, 5, 7, 10, 18, 21, 
+	22
 };
 
 static const char _query_path_trans_keys[] = {
 	32, 126, 39, 32, 126, 48, 57, 93, 
-	48, 57, 39, 47, 91, 65, 90, 97, 
-	122, 39, 32, 126, 47, 65, 90, 97, 
-	122, 0
+	48, 57, 39, 42, 47, 91, 65, 90, 
+	97, 122, 39, 32, 126, 47, 65, 90, 
+	97, 122, 0
 };
 
 static const char _query_path_single_lengths[] = {
-	0, 0, 1, 0, 1, 3, 1, 1, 
+	0, 0, 1, 0, 1, 4, 1, 1, 
 	0
 };
 
@@ -45,26 +45,26 @@ static const char _query_path_range_lengths[] = {
 };
 
 static const char _query_path_index_offsets[] = {
-	0, 0, 2, 5, 7, 10, 16, 19, 
-	21
+	0, 0, 2, 5, 7, 10, 17, 20, 
+	22
 };
 
 static const char _query_path_trans_targs_wi[] = {
 	2, 0, 6, 2, 5, 4, 0, 5, 
-	4, 0, 1, 7, 3, 8, 8, 0, 
-	6, 2, 5, 5, 5, 8, 8, 5, 
-	0
+	4, 0, 1, 5, 7, 3, 8, 8, 
+	0, 6, 2, 5, 5, 5, 8, 8, 
+	5, 0
 };
 
 static const char _query_path_trans_actions_wi[] = {
-	0, 0, 18, 0, 13, 0, 0, 3, 
-	0, 0, 0, 0, 0, 0, 0, 0, 
-	18, 0, 7, 5, 11, 0, 0, 9, 
-	0
+	0, 0, 20, 0, 15, 0, 0, 3, 
+	0, 0, 0, 5, 0, 0, 0, 0, 
+	0, 20, 0, 9, 7, 13, 0, 0, 
+	11, 0
 };
 
 static const char _query_path_to_state_actions[] = {
-	0, 0, 0, 0, 0, 15, 0, 0, 
+	0, 0, 0, 0, 0, 17, 0, 0, 
 	0
 };
 
@@ -74,8 +74,8 @@ static const char _query_path_from_state_actions[] = {
 };
 
 static const char _query_path_eof_trans[] = {
-	0, 0, 3, 0, 0, 0, 11, 12, 
-	14
+	0, 0, 3, 0, 0, 0, 12, 13, 
+	15
 };
 
 static const int query_path_start = 5;
@@ -202,11 +202,11 @@ _eof_trans:
 	{te = p+1;}
 	break;
 	case 4:
-#line 44 "Source/UIBaconPath.m.rl"
+#line 45 "Source/UIBaconPath.m.rl"
 	{act = 1;}
 	break;
 	case 5:
-#line 68 "Source/UIBaconPath.m.rl"
+#line 69 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         FILTER_TRIMMED();
         NSInteger index = [current integerValue];
@@ -217,13 +217,25 @@ _eof_trans:
       }}
 	break;
 	case 6:
-#line 81 "Source/UIBaconPath.m.rl"
+#line 78 "Source/UIBaconPath.m.rl"
+	{te = p+1;{
+        NSArray *r;
+        if (traverse) {
+          r = [self _collectSubviews:[NSArray arrayWithObject:result]];
+        } else {
+          r = [(UIView *)result subviews];
+        }
+        result = [[[UIBaconViewSet alloc] initWithArray:r] autorelease];
+      }}
+	break;
+	case 7:
+#line 92 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         traverse = YES;
       }}
 	break;
-	case 7:
-#line 44 "Source/UIBaconPath.m.rl"
+	case 8:
+#line 45 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         FILTER_TRIMMED();
         current = [current stringByReplacingOccurrencesOfString:@"\\'" withString:@"'"];
@@ -231,8 +243,8 @@ _eof_trans:
         // TODO raise if it's not at the start of the path!
       }}
 	break;
-	case 8:
-#line 51 "Source/UIBaconPath.m.rl"
+	case 9:
+#line 52 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         AUTO_FILTER();
         if ([result isKindOfClass:[UIView class]]) {
@@ -250,13 +262,13 @@ _eof_trans:
         result = [[[UIBaconViewSet alloc] initWithArray:result] autorelease];
       }}
 	break;
-	case 9:
-#line 77 "Source/UIBaconPath.m.rl"
+	case 10:
+#line 88 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         traverse = NO;
       }}
 	break;
-	case 10:
+	case 11:
 #line 1 "Source/UIBaconPath.m.rl"
 	{	switch( act ) {
 	case 0:
@@ -274,7 +286,7 @@ _eof_trans:
 	}
 	}
 	break;
-#line 278 "Source/UIBaconPath.m"
+#line 290 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -291,7 +303,7 @@ _again:
 #line 1 "Source/UIBaconPath.m.rl"
 	{act = 0;}
 	break;
-#line 295 "Source/UIBaconPath.m"
+#line 307 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -310,9 +322,19 @@ _again:
 
 	_out: {}
 	}
-#line 88 "Source/UIBaconPath.m.rl"
+#line 99 "Source/UIBaconPath.m.rl"
 
 
+  return result;
+}
+
++ (NSArray *)_collectSubviews:(NSArray *)views {
+  NSMutableArray *result = [NSMutableArray array];
+  for (UIView *v in views) {
+    NSArray *subviews = [v subviews];
+    [result addObjectsFromArray:subviews];
+    [result addObjectsFromArray:[self _collectSubviews:subviews]];
+  }
   return result;
 }
 

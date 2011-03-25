@@ -129,6 +129,12 @@
     (it "retrieves one element of a set with a numerical accessor" (do ()
       (~ ((@view viewsByPath:"/UIButton[2]") currentTitle) should be:"Button 4")
       (~ ((@view viewsByPath:"//UIButton[2]") currentTitle) should be:"Button 3")
+      (~ (@view viewsByPath:"//UIButton[42]") should be:nil)
+    ))
+
+    (it "returns all subviews with an asterisk (wildcard)" (do ()
+      (~ (@view viewsByPath:"/*") should be:((UIBaconViewSet alloc) initWithArray:(@view subviews)))
+      (~ (@view viewsByPath:"//*") should be:(@view viewsByClass:UIView))
     ))
 
     (it "combines the various path components to select views down in the tree" (do ()
@@ -148,9 +154,11 @@
       (~ ((@controller view) viewsByPath:"//UIButton") should be:($$ UIButton))
       (~ ((@controller view) viewsByPath:"//UIButton[1]") should be:($ "Button 2"))
 
+      (~ ((@controller view) viewsByPath:"'blue view'/*") should be:(NSArray arrayWithObject:($ "green view")))
+      (~ ((@controller view) viewsByPath:"'blue view'//*") should be:(($ "blue view") viewsByClass:UIView))
+
       (~ ((@controller view) viewsByPath:"'blue view'/UIButton") should be:nil)
       (~ ((@controller view) viewsByPath:"'blue view'/UIButton[0]") should be:nil)
-      (~ ((@controller view) viewsByPath:"//UIButton[42]") should be:nil)
     ))
   ))
 

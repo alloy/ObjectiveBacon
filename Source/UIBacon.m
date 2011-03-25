@@ -94,10 +94,9 @@
   for (UIView *view in self.subviews) {
     if ([view isKindOfClass:viewClass]) {
       [result addObject:view];
-    } else {
-      if (recursive) {
-        [result addObjectsFromArray:[view _viewsByClass:viewClass recursive:YES]];
-      }
+    }
+    if (recursive) {
+      [result addObjectsFromArray:[view _viewsByClass:viewClass recursive:YES]];
     }
   }
   return result;

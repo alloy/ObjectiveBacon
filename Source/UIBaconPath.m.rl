@@ -39,6 +39,7 @@
     name      = quote print+ quote;
     class     = alpha+;
     accessor  = "[" digit+ "]";
+    wildcard  = "*";
 
     main := |*
       name => {
@@ -74,6 +75,16 @@
         result = [result index:index];
       };
 
+      wildcard => {
+        NSArray *r;
+        if (traverse) {
+          r = [self _collectSubviews:[NSArray arrayWithObject:result]];
+        } else {
+          r = [(UIView *)result subviews];
+        }
+        result = [[[UIBaconViewSet alloc] initWithArray:r] autorelease];
+      };
+
       one_down {
         traverse = NO;
       };
@@ -87,6 +98,16 @@
     write exec;
   }%%
 
+  return result;
+}
+
++ (NSArray *)_collectSubviews:(NSArray *)views {
+  NSMutableArray *result = [NSMutableArray array];
+  for (UIView *v in views) {
+    NSArray *subviews = [v subviews];
+    [result addObjectsFromArray:subviews];
+    [result addObjectsFromArray:[self _collectSubviews:subviews]];
+  }
   return result;
 }
 
