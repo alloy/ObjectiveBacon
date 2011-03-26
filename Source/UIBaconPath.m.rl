@@ -95,15 +95,24 @@
         FILTER(pvs, pve-pvs);
         NSString *value = current;
 
-        NSMutableArray *r = [NSMutableArray array];
-        NSArray *views = [(UIBaconViewSet *)result array];
-        for (v in views) {
-          NSString *actualValue = [v valueForKey:name];
-          if ([value isEqualToString:actualValue]) {
-            [r addObject:v];
+        if ([result isKindOfClass:[UIView class]]) {
+          // only match the current view if it matches this property
+          NSString *actualValue = [result valueForKey:name];
+          if (![value isEqualToString:actualValue]) {
+            return nil;
           }
+        } else {
+          // return all views in the current view set that match this property
+          NSMutableArray *r = [NSMutableArray array];
+          NSArray *views = [(UIBaconViewSet *)result array];
+          for (v in views) {
+            NSString *actualValue = [v valueForKey:name];
+            if ([value isEqualToString:actualValue]) {
+              [r addObject:v];
+            }
+          }
+          result = [[[UIBaconViewSet alloc] initWithArray:r] autorelease];
         }
-        result = [[[UIBaconViewSet alloc] initWithArray:r] autorelease];
       };
 
       wildcard => {

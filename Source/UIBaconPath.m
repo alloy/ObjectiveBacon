@@ -253,7 +253,7 @@ _eof_trans:
       }}
 	break;
 	case 11:
-#line 109 "Source/UIBaconPath.m.rl"
+#line 118 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         NSArray *r;
         if ([result isKindOfClass:[UIView class]]) {
@@ -265,7 +265,7 @@ _eof_trans:
       }}
 	break;
 	case 12:
-#line 123 "Source/UIBaconPath.m.rl"
+#line 132 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         traverse = YES;
       }}
@@ -306,19 +306,28 @@ _eof_trans:
         FILTER(pvs, pve-pvs);
         NSString *value = current;
 
-        NSMutableArray *r = [NSMutableArray array];
-        NSArray *views = [(UIBaconViewSet *)result array];
-        for (v in views) {
-          NSString *actualValue = [v valueForKey:name];
-          if ([value isEqualToString:actualValue]) {
-            [r addObject:v];
+        if ([result isKindOfClass:[UIView class]]) {
+          // only match the current view if it matches this property
+          NSString *actualValue = [result valueForKey:name];
+          if (![value isEqualToString:actualValue]) {
+            return nil;
           }
+        } else {
+          // return all views in the current view set that match this property
+          NSMutableArray *r = [NSMutableArray array];
+          NSArray *views = [(UIBaconViewSet *)result array];
+          for (v in views) {
+            NSString *actualValue = [v valueForKey:name];
+            if ([value isEqualToString:actualValue]) {
+              [r addObject:v];
+            }
+          }
+          result = [[[UIBaconViewSet alloc] initWithArray:r] autorelease];
         }
-        result = [[[UIBaconViewSet alloc] initWithArray:r] autorelease];
       }}
 	break;
 	case 16:
-#line 119 "Source/UIBaconPath.m.rl"
+#line 128 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         traverse = NO;
       }}
@@ -344,22 +353,31 @@ _eof_trans:
         FILTER(pvs, pve-pvs);
         NSString *value = current;
 
-        NSMutableArray *r = [NSMutableArray array];
-        NSArray *views = [(UIBaconViewSet *)result array];
-        for (v in views) {
-          NSString *actualValue = [v valueForKey:name];
-          if ([value isEqualToString:actualValue]) {
-            [r addObject:v];
+        if ([result isKindOfClass:[UIView class]]) {
+          // only match the current view if it matches this property
+          NSString *actualValue = [result valueForKey:name];
+          if (![value isEqualToString:actualValue]) {
+            return nil;
           }
+        } else {
+          // return all views in the current view set that match this property
+          NSMutableArray *r = [NSMutableArray array];
+          NSArray *views = [(UIBaconViewSet *)result array];
+          for (v in views) {
+            NSString *actualValue = [v valueForKey:name];
+            if ([value isEqualToString:actualValue]) {
+              [r addObject:v];
+            }
+          }
+          result = [[[UIBaconViewSet alloc] initWithArray:r] autorelease];
         }
-        result = [[[UIBaconViewSet alloc] initWithArray:r] autorelease];
       }
 	break;
 	default: break;
 	}
 	}
 	break;
-#line 363 "Source/UIBaconPath.m"
+#line 381 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -376,7 +394,7 @@ _again:
 #line 1 "Source/UIBaconPath.m.rl"
 	{act = 0;}
 	break;
-#line 380 "Source/UIBaconPath.m"
+#line 398 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -395,7 +413,7 @@ _again:
 
 	_out: {}
 	}
-#line 130 "Source/UIBaconPath.m.rl"
+#line 139 "Source/UIBaconPath.m.rl"
 
 
   return result;
