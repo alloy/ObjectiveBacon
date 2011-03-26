@@ -34,6 +34,7 @@
   char *pve = 0;
 
   BOOL traverse = NO;
+  BOOL bool_value = NO;
   NSString *current;
 
   UIView *v;
@@ -42,8 +43,13 @@
     action pns { pns = p; }
     action pne { pne = p; }
 
-    action pvs { pvs = p; }
+    # property value start/end
+    action pvs { bool_value = NO; pvs = p + 1; } # +1 because we omit the first apostrophe
     action pve { pve = p; }
+
+    # property value bool start/end
+    action pvbs { bool_value = YES; pvs = p; }
+    action pvbe { pve = p; }
 
     delimiter = "/";
     one_down  = delimiter;
@@ -52,8 +58,12 @@
     name      = quote print+ quote;
     class     = alpha+;
     index     = "[" digit+ "]";
-    property  = "[@" (alpha+ >pns) ("='" >pne) (print+ >pvs) ("']" >pve);
     wildcard  = "*";
+
+    property_name         = "[@" (alpha+ >pns) ("=" >pne);
+    property_string_value = property_name (print+ >pvs) ("']" >pve);
+    property_bool_value   = property_name (("true" | "false") >pvbs) ("]" >pvbe);
+    property              = property_string_value | property_bool_value;
 
     main := |*
       name => {
@@ -92,12 +102,16 @@
         FILTER(pns, pne-pns);
         NSString *name = current;
         FILTER(pvs, pve-pvs);
-        NSString *value = current;
+        id value = current;
+
+        if (bool_value) {
+          value = [NSNumber numberWithBool:[value isEqualToString:@"true"]];
+        }
 
         if ([result isKindOfClass:[UIView class]]) {
           // only match the current view if it matches this property
           NSString *actualValue = [result valueForKey:name];
-          if (![value isEqualToString:actualValue]) {
+          if (![value isEqual:actualValue]) {
             return nil;
           }
         } else {
@@ -106,7 +120,7 @@
           NSArray *views = [(UIBaconViewSet *)result array];
           for (v in views) {
             NSString *actualValue = [v valueForKey:name];
-            if ([value isEqualToString:actualValue]) {
+            if ([value isEqual:actualValue]) {
               [r addObject:v];
             }
           }

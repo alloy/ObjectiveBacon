@@ -32,6 +32,10 @@
   return [viewSet count];
 }
 
+- (BOOL)isEmpty {
+  return [viewSet count] == 0;
+}
+
 - (id)index:(NSUInteger)index {
   return [viewSet objectAtIndex:index];
 }

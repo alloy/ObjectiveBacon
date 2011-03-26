@@ -139,12 +139,20 @@
       (~ (@view viewsByPath:"//*") should be:(@view viewsByClass:UIView))
     ))
 
+    (after (do ()
+      (($ "Button 2") setHidden:nil)
+    ))
+
     (it "selects elements matching the value for the given property key" (do ()
       (~ ((@view viewsByPath:"/UIButton[@currentTitle='Button 4'][0]") currentTitle) should be:"Button 4")
-      ;(~ (@view viewsByPath:"/UIButton[0][@currentTitle='Button \' 4']") should be:nil)
       (~ (@view viewsByPath:"/UIButton[0][@currentTitle='Button 4']") should be:nil)
       (~ ((@view viewsByPath:"/UIButton[2][@currentTitle='Button 4']") currentTitle) should be:"Button 4")
       (~ (@view viewsByPath:"/ColoredView[0][@accessibilityLabel='red\'s view']") should be:($ "red's view"))
+
+      (~ (@view viewsByPath:"//UIButton[@hidden=true]") should be empty)
+      (($ "Button 2") setHidden:t)
+      (~ ((@view viewsByPath:"//UIButton[@hidden=true]") currentTitle) should be:`("Button 2"))
+      (~ ((@view viewsByPath:"//UIButton[@hidden=false]") currentTitle) should be:`("Button 1" "Button 3" "Button 4" "Button 5" "Button 6"))
     ))
 
     (it "combines the various path components to select views down in the tree" (do ()
