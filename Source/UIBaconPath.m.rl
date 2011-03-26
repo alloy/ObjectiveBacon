@@ -11,6 +11,11 @@
 #define FILTER_TRIMMED() FILTER(ts+1, te-ts-2)
 #define AUTO_FILTER() FILTER(ts, te-ts)
 
+enum {
+  STRING,
+  VARIABLE,
+  BOOLEAN
+};
 
 %% machine query_path;
 %% write data;
@@ -28,14 +33,14 @@
   char *p = (char *)[path UTF8String];
   char *eof = p + (char)[path length];
 
+  // property name & value start/end
   char *pns = 0;
   char *pne = 0;
   char *pvs = 0;
   char *pve = 0;
+  int type = STRING;
 
   BOOL traverse = NO;
-  BOOL bool_value = NO;
-  BOOL alpha_value = NO;
   NSString *current;
 
   UIView *v;
@@ -45,13 +50,13 @@
     action pne { pne = p; }
 
     # property value start
-    action pvs { bool_value = NO; alpha_value = NO; pvs = p; }
+    action pvs { type = STRING; pvs = p; }
 
     # property value bool start
-    action pvbs { bool_value = YES; alpha_value = NO; pvs = p; }
+    action pvbs { type = BOOLEAN; pvs = p; }
 
     # property value alpha start
-    action pvas { bool_value = NO; alpha_value = YES; pvs = p; }
+    action pvas { type = VARIABLE; pvs = p; }
 
     # property value end
     action pve { pve = p; }
@@ -65,10 +70,10 @@
     index     = "[" "-"* digit+ "]";
     wildcard  = "*";
 
-    property_name         = "[@" (alpha+ >pns) ("=" >pne);
-    property_alpha_value  = (alpha+ >pvas) ("]" >pve); # this matches constants etc
-    property_string_value = "'" (print+ >pvs) ("']" >pve); # this matches the value as a string
-    property_bool_value   = (("true" | "false") >pvbs) ("]" >pve);
+    property_name         = "[@" (alpha+ >pns %pne) "=";
+    property_alpha_value  = (alpha+ >pvas %pve) "]"; # this matches constants etc
+    property_string_value = "'" (print+ >pvs %pve) "']"; # this matches the value as a string
+    property_bool_value   = (("true" | "false") >pvbs %pve) "]";
     property              = property_name (property_alpha_value | property_string_value | property_bool_value);
 
     main := |*
@@ -107,9 +112,9 @@
         FILTER(pvs, pve-pvs);
         id value = current;
 
-        if (bool_value) {
+        if (type == BOOLEAN) {
           value = [NSNumber numberWithBool:[value isEqualToString:@"true"]];
-        } else if (alpha_value) {
+        } else if (type == VARIABLE) {
           value = [self evalVariable:value];
         }
 

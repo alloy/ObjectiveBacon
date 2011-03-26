@@ -12,10 +12,15 @@
 #define FILTER_TRIMMED() FILTER(ts+1, te-ts-2)
 #define AUTO_FILTER() FILTER(ts, te-ts)
 
+enum {
+  STRING,
+  VARIABLE,
+  BOOLEAN
+};
 
-#line 16 "Source/UIBaconPath.m.rl"
+#line 21 "Source/UIBaconPath.m.rl"
 
-#line 19 "Source/UIBaconPath.m"
+#line 24 "Source/UIBaconPath.m"
 static const char _query_path_actions[] = {
 	0, 1, 0, 1, 1, 1, 2, 1, 
 	4, 1, 5, 1, 8, 1, 12, 1, 
@@ -107,7 +112,7 @@ static const int query_path_error = 0;
 
 static const int query_path_en_main = 13;
 
-#line 17 "Source/UIBaconPath.m.rl"
+#line 22 "Source/UIBaconPath.m.rl"
 
 
 @implementation UIBaconPath
@@ -122,20 +127,20 @@ static const int query_path_en_main = 13;
   char *p = (char *)[path UTF8String];
   char *eof = p + (char)[path length];
 
+  // property name & value start/end
   char *pns = 0;
   char *pne = 0;
   char *pvs = 0;
   char *pve = 0;
+  int type = STRING;
 
   BOOL traverse = NO;
-  BOOL bool_value = NO;
-  BOOL alpha_value = NO;
   NSString *current;
 
   UIView *v;
 
   
-#line 139 "Source/UIBaconPath.m"
+#line 144 "Source/UIBaconPath.m"
 	{
 	cs = query_path_start;
 	ts = 0;
@@ -143,7 +148,7 @@ static const int query_path_en_main = 13;
 	act = 0;
 	}
 
-#line 147 "Source/UIBaconPath.m"
+#line 152 "Source/UIBaconPath.m"
 	{
 	int _klen;
 	unsigned int _trans;
@@ -164,7 +169,7 @@ _resume:
 #line 1 "Source/UIBaconPath.m.rl"
 	{ts = p;}
 	break;
-#line 168 "Source/UIBaconPath.m"
+#line 173 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -230,27 +235,27 @@ _eof_trans:
 		switch ( *_acts++ )
 		{
 	case 0:
-#line 44 "Source/UIBaconPath.m.rl"
+#line 49 "Source/UIBaconPath.m.rl"
 	{ pns = p; }
 	break;
 	case 1:
-#line 45 "Source/UIBaconPath.m.rl"
+#line 50 "Source/UIBaconPath.m.rl"
 	{ pne = p; }
 	break;
 	case 2:
-#line 48 "Source/UIBaconPath.m.rl"
-	{ bool_value = NO; alpha_value = NO; pvs = p; }
+#line 53 "Source/UIBaconPath.m.rl"
+	{ type = STRING; pvs = p; }
 	break;
 	case 3:
-#line 51 "Source/UIBaconPath.m.rl"
-	{ bool_value = YES; alpha_value = NO; pvs = p; }
+#line 56 "Source/UIBaconPath.m.rl"
+	{ type = BOOLEAN; pvs = p; }
 	break;
 	case 4:
-#line 54 "Source/UIBaconPath.m.rl"
-	{ bool_value = NO; alpha_value = YES; pvs = p; }
+#line 59 "Source/UIBaconPath.m.rl"
+	{ type = VARIABLE; pvs = p; }
 	break;
 	case 5:
-#line 57 "Source/UIBaconPath.m.rl"
+#line 62 "Source/UIBaconPath.m.rl"
 	{ pve = p; }
 	break;
 	case 9:
@@ -258,31 +263,31 @@ _eof_trans:
 	{te = p+1;}
 	break;
 	case 10:
-#line 75 "Source/UIBaconPath.m.rl"
+#line 80 "Source/UIBaconPath.m.rl"
 	{act = 1;}
 	break;
 	case 11:
-#line 104 "Source/UIBaconPath.m.rl"
+#line 109 "Source/UIBaconPath.m.rl"
 	{act = 4;}
 	break;
 	case 12:
-#line 99 "Source/UIBaconPath.m.rl"
+#line 104 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         FILTER_TRIMMED();
         result = [result index:[current integerValue]];
       }}
 	break;
 	case 13:
-#line 104 "Source/UIBaconPath.m.rl"
+#line 109 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         FILTER(pns, pne-pns);
         NSString *name = current;
         FILTER(pvs, pve-pvs);
         id value = current;
 
-        if (bool_value) {
+        if (type == BOOLEAN) {
           value = [NSNumber numberWithBool:[value isEqualToString:@"true"]];
-        } else if (alpha_value) {
+        } else if (type == VARIABLE) {
           value = [self evalVariable:value];
         }
 
@@ -307,7 +312,7 @@ _eof_trans:
       }}
 	break;
 	case 14:
-#line 136 "Source/UIBaconPath.m.rl"
+#line 141 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         NSArray *r;
         if ([result isKindOfClass:[UIView class]]) {
@@ -319,13 +324,13 @@ _eof_trans:
       }}
 	break;
 	case 15:
-#line 150 "Source/UIBaconPath.m.rl"
+#line 155 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         traverse = YES;
       }}
 	break;
 	case 16:
-#line 75 "Source/UIBaconPath.m.rl"
+#line 80 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         FILTER_TRIMMED();
         result = [view viewByName:current];
@@ -334,7 +339,7 @@ _eof_trans:
       }}
 	break;
 	case 17:
-#line 82 "Source/UIBaconPath.m.rl"
+#line 87 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         AUTO_FILTER();
         if ([result isKindOfClass:[UIView class]]) {
@@ -353,16 +358,16 @@ _eof_trans:
       }}
 	break;
 	case 18:
-#line 104 "Source/UIBaconPath.m.rl"
+#line 109 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         FILTER(pns, pne-pns);
         NSString *name = current;
         FILTER(pvs, pve-pvs);
         id value = current;
 
-        if (bool_value) {
+        if (type == BOOLEAN) {
           value = [NSNumber numberWithBool:[value isEqualToString:@"true"]];
-        } else if (alpha_value) {
+        } else if (type == VARIABLE) {
           value = [self evalVariable:value];
         }
 
@@ -387,7 +392,7 @@ _eof_trans:
       }}
 	break;
 	case 19:
-#line 146 "Source/UIBaconPath.m.rl"
+#line 151 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         traverse = NO;
       }}
@@ -413,9 +418,9 @@ _eof_trans:
         FILTER(pvs, pve-pvs);
         id value = current;
 
-        if (bool_value) {
+        if (type == BOOLEAN) {
           value = [NSNumber numberWithBool:[value isEqualToString:@"true"]];
-        } else if (alpha_value) {
+        } else if (type == VARIABLE) {
           value = [self evalVariable:value];
         }
 
@@ -443,7 +448,7 @@ _eof_trans:
 	}
 	}
 	break;
-#line 447 "Source/UIBaconPath.m"
+#line 452 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -460,7 +465,7 @@ _again:
 #line 1 "Source/UIBaconPath.m.rl"
 	{act = 0;}
 	break;
-#line 464 "Source/UIBaconPath.m"
+#line 469 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -479,7 +484,7 @@ _again:
 
 	_out: {}
 	}
-#line 157 "Source/UIBaconPath.m.rl"
+#line 162 "Source/UIBaconPath.m.rl"
 
 
   return result;
