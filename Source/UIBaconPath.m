@@ -262,7 +262,7 @@ _eof_trans:
 	{act = 1;}
 	break;
 	case 11:
-#line 108 "Source/UIBaconPath.m.rl"
+#line 102 "Source/UIBaconPath.m.rl"
 	{act = 4;}
 	break;
 	case 12:
@@ -270,17 +270,11 @@ _eof_trans:
 	{te = p+1;{
         FILTER_TRIMMED();
         NSInteger index = [current integerValue];
-        if (index < 0) {
-          index = [result count] + index;
-        }
-        if (index < 0 || index + 1 > [result count]) {
-          return nil;
-        }
         result = [result index:index];
       }}
 	break;
 	case 13:
-#line 108 "Source/UIBaconPath.m.rl"
+#line 102 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         FILTER(pns, pne-pns);
         NSString *name = current;
@@ -314,7 +308,7 @@ _eof_trans:
       }}
 	break;
 	case 14:
-#line 140 "Source/UIBaconPath.m.rl"
+#line 134 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         NSArray *r;
         if ([result isKindOfClass:[UIView class]]) {
@@ -326,7 +320,7 @@ _eof_trans:
       }}
 	break;
 	case 15:
-#line 154 "Source/UIBaconPath.m.rl"
+#line 148 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         traverse = YES;
       }}
@@ -359,7 +353,7 @@ _eof_trans:
       }}
 	break;
 	case 18:
-#line 108 "Source/UIBaconPath.m.rl"
+#line 102 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         FILTER(pns, pne-pns);
         NSString *name = current;
@@ -393,7 +387,7 @@ _eof_trans:
       }}
 	break;
 	case 19:
-#line 150 "Source/UIBaconPath.m.rl"
+#line 144 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         traverse = NO;
       }}
@@ -448,7 +442,7 @@ _eof_trans:
 	}
 	}
 	break;
-#line 452 "Source/UIBaconPath.m"
+#line 446 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -465,7 +459,7 @@ _again:
 #line 1 "Source/UIBaconPath.m.rl"
 	{act = 0;}
 	break;
-#line 469 "Source/UIBaconPath.m"
+#line 463 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -484,7 +478,7 @@ _again:
 
 	_out: {}
 	}
-#line 161 "Source/UIBaconPath.m.rl"
+#line 155 "Source/UIBaconPath.m.rl"
 
 
   return result;

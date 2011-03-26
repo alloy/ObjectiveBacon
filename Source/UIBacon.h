@@ -9,7 +9,7 @@
 - (NSArray *)array;
 - (NSUInteger)count;
 - (BOOL)isEmpty;
-- (id)index:(NSUInteger)index;
+- (id)index:(NSInteger)index;
 
 - (id)_filteredList:(NSArray *)array;
 

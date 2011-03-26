@@ -36,8 +36,15 @@
   return [viewSet count] == 0;
 }
 
-- (id)index:(NSUInteger)index {
-  return [viewSet objectAtIndex:index];
+- (id)index:(NSInteger)index {
+  NSInteger i = index;
+  if (i < 0) {
+    i = [viewSet count] + i;
+  }
+  if (i < 0 || i + 1 > [viewSet count]) {
+    return nil;
+  }
+  return [viewSet objectAtIndex:i];
 }
 
 - (NSString *)description {

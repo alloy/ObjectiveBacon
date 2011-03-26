@@ -96,12 +96,6 @@
       index => {
         FILTER_TRIMMED();
         NSInteger index = [current integerValue];
-        if (index < 0) {
-          index = [result count] + index;
-        }
-        if (index < 0 || index + 1 > [result count]) {
-          return nil;
-        }
         result = [result index:index];
       };
 
