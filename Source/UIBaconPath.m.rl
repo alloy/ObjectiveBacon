@@ -60,7 +60,7 @@
     quote     = "'";
     name      = quote print+ quote;
     class     = alpha+;
-    index     = "[" digit+ "]";
+    index     = "[" "-"* digit+ "]";
     wildcard  = "*";
 
     property_name         = "[@" (alpha+ >pns) ("=" >pne);
@@ -96,7 +96,10 @@
       index => {
         FILTER_TRIMMED();
         NSInteger index = [current integerValue];
-        if (index + 1 > [result count]) {
+        if (index < 0) {
+          index = [result count] + index;
+        }
+        if (index < 0 || index + 1 > [result count]) {
           return nil;
         }
         result = [result index:index];

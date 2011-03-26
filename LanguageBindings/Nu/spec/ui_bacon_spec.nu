@@ -132,8 +132,12 @@
 
     (it "retrieves one element of a set with a numerical accessor" (do ()
       (~ ((@view viewsByPath:"/UIButton[2]") currentTitle) should be:"Button 4")
+      (~ ((@view viewsByPath:"/UIButton[-1]") currentTitle) should be:"Button 5")
+      (~ ((@view viewsByPath:"/UIButton[-2]") currentTitle) should be:"Button 4")
       (~ ((@view viewsByPath:"//UIButton[2]") currentTitle) should be:"Button 3")
+      (~ ((@view viewsByPath:"//UIButton[-1]") currentTitle) should be:"Button 6")
       (~ (@view viewsByPath:"//UIButton[42]") should be:nil)
+      (~ (@view viewsByPath:"//UIButton[-42]") should be:nil)
     ))
 
     (it "returns all subviews with an asterisk (wildcard)" (do ()

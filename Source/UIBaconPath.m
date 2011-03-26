@@ -26,83 +26,86 @@ static const char _query_path_actions[] = {
 };
 
 static const char _query_path_key_offsets[] = {
-	0, 0, 2, 5, 8, 11, 15, 20, 
-	27, 29, 32, 36, 41, 49, 52, 53, 
-	57
+	0, 0, 2, 5, 9, 12, 15, 19, 
+	24, 31, 33, 36, 40, 45, 53, 56, 
+	57, 61
 };
 
 static const char _query_path_trans_keys[] = {
-	32, 126, 39, 32, 126, 64, 48, 57, 
-	93, 48, 57, 65, 90, 97, 122, 61, 
-	65, 90, 97, 122, 39, 102, 116, 65, 
-	90, 97, 122, 32, 126, 39, 32, 126, 
-	39, 93, 32, 126, 93, 65, 90, 97, 
-	122, 39, 42, 47, 91, 65, 90, 97, 
-	122, 39, 32, 126, 47, 65, 90, 97, 
-	122, 39, 32, 126, 0
+	32, 126, 39, 32, 126, 45, 64, 48, 
+	57, 45, 48, 57, 93, 48, 57, 65, 
+	90, 97, 122, 61, 65, 90, 97, 122, 
+	39, 102, 116, 65, 90, 97, 122, 32, 
+	126, 39, 32, 126, 39, 93, 32, 126, 
+	93, 65, 90, 97, 122, 39, 42, 47, 
+	91, 65, 90, 97, 122, 39, 32, 126, 
+	47, 65, 90, 97, 122, 39, 32, 126, 
+	0
 };
 
 static const char _query_path_single_lengths[] = {
-	0, 0, 1, 1, 1, 0, 1, 3, 
-	0, 1, 2, 1, 4, 1, 1, 0, 
-	1
+	0, 0, 1, 2, 1, 1, 0, 1, 
+	3, 0, 1, 2, 1, 4, 1, 1, 
+	0, 1
 };
 
 static const char _query_path_range_lengths[] = {
-	0, 1, 1, 1, 1, 2, 2, 2, 
-	1, 1, 1, 2, 2, 1, 0, 2, 
-	1
+	0, 1, 1, 1, 1, 1, 2, 2, 
+	2, 1, 1, 1, 2, 2, 1, 0, 
+	2, 1
 };
 
 static const char _query_path_index_offsets[] = {
-	0, 0, 2, 5, 8, 11, 14, 18, 
-	24, 26, 29, 33, 37, 44, 47, 49, 
-	52
+	0, 0, 2, 5, 9, 12, 15, 18, 
+	22, 28, 30, 33, 37, 41, 48, 51, 
+	53, 56
 };
 
 static const char _query_path_trans_targs_wi[] = {
-	2, 0, 13, 2, 12, 5, 4, 0, 
-	12, 4, 0, 6, 6, 0, 7, 6, 
-	6, 0, 8, 11, 11, 11, 11, 0, 
-	9, 0, 10, 9, 12, 10, 16, 9, 
-	12, 12, 11, 11, 0, 1, 12, 14, 
-	3, 15, 15, 0, 13, 2, 12, 12, 
-	12, 15, 15, 12, 10, 9, 12, 0
+	2, 0, 14, 2, 13, 4, 6, 5, 
+	0, 4, 5, 0, 13, 5, 0, 7, 
+	7, 0, 8, 7, 7, 0, 9, 12, 
+	12, 12, 12, 0, 10, 0, 11, 10, 
+	13, 11, 17, 10, 13, 13, 12, 12, 
+	0, 1, 13, 15, 3, 16, 16, 0, 
+	14, 2, 13, 13, 13, 16, 16, 13, 
+	11, 10, 13, 0
 };
 
 static const char _query_path_trans_actions_wi[] = {
 	0, 0, 38, 0, 27, 0, 0, 0, 
-	13, 0, 0, 1, 1, 0, 3, 0, 
-	0, 0, 0, 32, 32, 9, 9, 0, 
-	5, 0, 7, 0, 27, 7, 41, 0, 
-	27, 29, 0, 0, 0, 0, 15, 0, 
-	0, 0, 0, 0, 38, 0, 19, 17, 
-	25, 0, 0, 21, 7, 0, 23, 0
+	0, 0, 0, 0, 13, 0, 0, 1, 
+	1, 0, 3, 0, 0, 0, 0, 32, 
+	32, 9, 9, 0, 5, 0, 7, 0, 
+	27, 7, 41, 0, 27, 29, 0, 0, 
+	0, 0, 15, 0, 0, 0, 0, 0, 
+	38, 0, 19, 17, 25, 0, 0, 21, 
+	7, 0, 23, 0
 };
 
 static const char _query_path_to_state_actions[] = {
 	0, 0, 0, 0, 0, 0, 0, 0, 
-	0, 0, 0, 0, 35, 0, 0, 0, 
-	0
+	0, 0, 0, 0, 0, 35, 0, 0, 
+	0, 0
 };
 
 static const char _query_path_from_state_actions[] = {
 	0, 0, 0, 0, 0, 0, 0, 0, 
-	0, 0, 0, 0, 11, 0, 0, 0, 
-	0
+	0, 0, 0, 0, 0, 11, 0, 0, 
+	0, 0
 };
 
 static const char _query_path_eof_trans[] = {
 	0, 0, 3, 0, 0, 0, 0, 0, 
-	0, 3, 3, 0, 0, 25, 26, 28, 
-	29
+	0, 0, 3, 3, 0, 0, 26, 27, 
+	29, 30
 };
 
-static const int query_path_start = 12;
-static const int query_path_first_final = 12;
+static const int query_path_start = 13;
+static const int query_path_first_final = 13;
 static const int query_path_error = 0;
 
-static const int query_path_en_main = 12;
+static const int query_path_en_main = 13;
 
 #line 17 "Source/UIBaconPath.m.rl"
 
@@ -132,7 +135,7 @@ static const int query_path_en_main = 12;
   UIView *v;
 
   
-#line 136 "Source/UIBaconPath.m"
+#line 139 "Source/UIBaconPath.m"
 	{
 	cs = query_path_start;
 	ts = 0;
@@ -140,7 +143,7 @@ static const int query_path_en_main = 12;
 	act = 0;
 	}
 
-#line 144 "Source/UIBaconPath.m"
+#line 147 "Source/UIBaconPath.m"
 	{
 	int _klen;
 	unsigned int _trans;
@@ -161,7 +164,7 @@ _resume:
 #line 1 "Source/UIBaconPath.m.rl"
 	{ts = p;}
 	break;
-#line 165 "Source/UIBaconPath.m"
+#line 168 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -259,7 +262,7 @@ _eof_trans:
 	{act = 1;}
 	break;
 	case 11:
-#line 105 "Source/UIBaconPath.m.rl"
+#line 108 "Source/UIBaconPath.m.rl"
 	{act = 4;}
 	break;
 	case 12:
@@ -267,14 +270,17 @@ _eof_trans:
 	{te = p+1;{
         FILTER_TRIMMED();
         NSInteger index = [current integerValue];
-        if (index + 1 > [result count]) {
+        if (index < 0) {
+          index = [result count] + index;
+        }
+        if (index < 0 || index + 1 > [result count]) {
           return nil;
         }
         result = [result index:index];
       }}
 	break;
 	case 13:
-#line 105 "Source/UIBaconPath.m.rl"
+#line 108 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         FILTER(pns, pne-pns);
         NSString *name = current;
@@ -308,7 +314,7 @@ _eof_trans:
       }}
 	break;
 	case 14:
-#line 137 "Source/UIBaconPath.m.rl"
+#line 140 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         NSArray *r;
         if ([result isKindOfClass:[UIView class]]) {
@@ -320,7 +326,7 @@ _eof_trans:
       }}
 	break;
 	case 15:
-#line 151 "Source/UIBaconPath.m.rl"
+#line 154 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         traverse = YES;
       }}
@@ -353,7 +359,7 @@ _eof_trans:
       }}
 	break;
 	case 18:
-#line 105 "Source/UIBaconPath.m.rl"
+#line 108 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         FILTER(pns, pne-pns);
         NSString *name = current;
@@ -387,7 +393,7 @@ _eof_trans:
       }}
 	break;
 	case 19:
-#line 147 "Source/UIBaconPath.m.rl"
+#line 150 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         traverse = NO;
       }}
@@ -442,7 +448,7 @@ _eof_trans:
 	}
 	}
 	break;
-#line 446 "Source/UIBaconPath.m"
+#line 452 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -459,7 +465,7 @@ _again:
 #line 1 "Source/UIBaconPath.m.rl"
 	{act = 0;}
 	break;
-#line 463 "Source/UIBaconPath.m"
+#line 469 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -478,7 +484,7 @@ _again:
 
 	_out: {}
 	}
-#line 158 "Source/UIBaconPath.m.rl"
+#line 161 "Source/UIBaconPath.m.rl"
 
 
   return result;

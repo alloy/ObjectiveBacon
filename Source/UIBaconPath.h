@@ -5,4 +5,6 @@
 + (id)viewsByPath:(NSString *)path ofView:(UIView *)view;
 + (NSArray *)_collectSubviews:(NSArray *)views recursive:(BOOL)recursive;
 
++ (id)evalVariable:(NSString *)variable;
+
 @end
