@@ -238,11 +238,11 @@ _eof_trans:
 	{act = 1;}
 	break;
 	case 9:
-#line 92 "Source/UIBaconPath.m.rl"
+#line 91 "Source/UIBaconPath.m.rl"
 	{act = 4;}
 	break;
 	case 10:
-#line 83 "Source/UIBaconPath.m.rl"
+#line 82 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         FILTER_TRIMMED();
         NSInteger index = [current integerValue];
@@ -253,7 +253,7 @@ _eof_trans:
       }}
 	break;
 	case 11:
-#line 118 "Source/UIBaconPath.m.rl"
+#line 117 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         NSArray *r;
         if ([result isKindOfClass:[UIView class]]) {
@@ -265,7 +265,7 @@ _eof_trans:
       }}
 	break;
 	case 12:
-#line 132 "Source/UIBaconPath.m.rl"
+#line 131 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         traverse = YES;
       }}
@@ -274,13 +274,12 @@ _eof_trans:
 #line 59 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         FILTER_TRIMMED();
-        current = [current stringByReplacingOccurrencesOfString:@"\\'" withString:@"'"];
         result = [view viewByName:current];
         // TODO raise if it's not at the start of the path!
       }}
 	break;
 	case 14:
-#line 66 "Source/UIBaconPath.m.rl"
+#line 65 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         AUTO_FILTER();
         if ([result isKindOfClass:[UIView class]]) {
@@ -299,7 +298,7 @@ _eof_trans:
       }}
 	break;
 	case 15:
-#line 92 "Source/UIBaconPath.m.rl"
+#line 91 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         FILTER(pns, pne-pns);
         NSString *name = current;
@@ -327,7 +326,7 @@ _eof_trans:
       }}
 	break;
 	case 16:
-#line 128 "Source/UIBaconPath.m.rl"
+#line 127 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         traverse = NO;
       }}
@@ -341,7 +340,6 @@ _eof_trans:
 	case 1:
 	{{p = ((te))-1;}
         FILTER_TRIMMED();
-        current = [current stringByReplacingOccurrencesOfString:@"\\'" withString:@"'"];
         result = [view viewByName:current];
         // TODO raise if it's not at the start of the path!
       }
@@ -377,7 +375,7 @@ _eof_trans:
 	}
 	}
 	break;
-#line 381 "Source/UIBaconPath.m"
+#line 379 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -394,7 +392,7 @@ _again:
 #line 1 "Source/UIBaconPath.m.rl"
 	{act = 0;}
 	break;
-#line 398 "Source/UIBaconPath.m"
+#line 396 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -413,7 +411,7 @@ _again:
 
 	_out: {}
 	}
-#line 139 "Source/UIBaconPath.m.rl"
+#line 138 "Source/UIBaconPath.m.rl"
 
 
   return result;

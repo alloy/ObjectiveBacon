@@ -58,7 +58,6 @@
     main := |*
       name => {
         FILTER_TRIMMED();
-        current = [current stringByReplacingOccurrencesOfString:@"\\'" withString:@"'"];
         result = [view viewByName:current];
         // TODO raise if it's not at the start of the path!
       };

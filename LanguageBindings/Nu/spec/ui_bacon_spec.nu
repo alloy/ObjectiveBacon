@@ -109,7 +109,7 @@
     ))
 
     (it "allows escaped single quotes in the accessibility label" (do ()
-      (~ (@view viewsByPath:"'red\\'s view'") should be:($ "red's view"))
+      (~ (@view viewsByPath:"'red\'s view'") should be:($ "red's view"))
     ))
 
     (it "raises an exception when a label is empty or unclosed" (do ()
@@ -144,6 +144,7 @@
       ;(~ (@view viewsByPath:"/UIButton[0][@currentTitle='Button \' 4']") should be:nil)
       (~ (@view viewsByPath:"/UIButton[0][@currentTitle='Button 4']") should be:nil)
       (~ ((@view viewsByPath:"/UIButton[2][@currentTitle='Button 4']") currentTitle) should be:"Button 4")
+      (~ (@view viewsByPath:"/ColoredView[0][@accessibilityLabel='red\'s view']") should be:($ "red's view"))
     ))
 
     (it "combines the various path components to select views down in the tree" (do ()
@@ -151,8 +152,8 @@
       (~ ((@controller view) viewsByPath:"'green view'/UIButton[0]") should be:($ "Button 6"))
       (~ ($$ (@controller view) "'green view'/UIButton[0]") should be:($ "Button 6"))
 
-      (~ ((@controller view) viewsByPath:"'red\\'s view'/UIButton") should be:(NSArray arrayWithObject:($ "Button 3")))
-      (~ ((@controller view) viewsByPath:"'red\\'s view'/UIButton[0]") should be:($ "Button 3"))
+      (~ ((@controller view) viewsByPath:"'red\'s view'/UIButton") should be:(NSArray arrayWithObject:($ "Button 3")))
+      (~ ((@controller view) viewsByPath:"'red\'s view'/UIButton[0]") should be:($ "Button 3"))
 
       (~ ((@controller view) viewsByPath:"'blue view'/UIView/UIButton") should be:(NSArray arrayWithObject:($ "Button 6")))
       (~ ((@controller view) viewsByPath:"'blue view'/UIView[0]/UIButton[0]") should be:($ "Button 6"))
