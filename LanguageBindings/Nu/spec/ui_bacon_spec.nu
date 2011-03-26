@@ -156,6 +156,10 @@
       (~ ((@view viewsByPath:"/UIButton[2][@currentTitle='Button 4']") currentTitle) should be:"Button 4")
       (~ (@view viewsByPath:"/ColoredView[0][@accessibilityLabel='red\'s view']") should be:($ "red's view"))
 
+      ;(~ ((@view viewsByPath:"/UIButton[@currentTitle=/Button 4/][0]") currentTitle) should be:"Button 4")
+      ;(~ (@view viewsByPath:"//UIButton[@currentTitle=/But+on \d+/]") should be:($$ UIButton))
+      ;(~ (@view viewsByPath:"//UIButton[@currentTitle=/But+on [1-4]+/]") should be:(($$ UIButton) first:4))
+
       (~ (@view viewsByPath:"//UIButton[@hidden=true]") should be empty)
       (($ "Button 2") setHidden:t)
       (~ ((@view viewsByPath:"//UIButton[@hidden=true]") currentTitle) should be:`("Button 2"))
@@ -165,6 +169,9 @@
       (~ (@view viewsByPath:"//UIButton[@contentVerticalAlignment=UIControlContentVerticalAlignmentTop]") should be empty)
       (($ "Button 2") setContentVerticalAlignment:UIControlContentVerticalAlignmentTop)
       (~ ((@view viewsByPath:"//UIButton[@contentVerticalAlignment=UIControlContentVerticalAlignmentTop]") currentTitle) should be:`("Button 2"))
+
+      (~ (@view viewsByPath:"//UIView[@class=UIButton]") should be:($$ UIButton))
+      (~ ((@view viewsByPath:"//UIView[@class=UIButton][@contentVerticalAlignment=UIControlContentVerticalAlignmentTop]") currentTitle) should be:`("Button 2"))
     ))
 
     (it "combines the various path components to select views down in the tree" (do ()

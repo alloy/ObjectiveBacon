@@ -44,15 +44,17 @@
     action pns { pns = p; }
     action pne { pne = p; }
 
-    # property value start/end
+    # property value start
     action pvs { bool_value = NO; alpha_value = NO; pvs = p; }
-    action pve { pve = p; }
 
-    # property value bool start/end
+    # property value bool start
     action pvbs { bool_value = YES; alpha_value = NO; pvs = p; }
 
-    # property value alpha start/end
+    # property value alpha start
     action pvas { bool_value = NO; alpha_value = YES; pvs = p; }
+
+    # property value end
+    action pve { pve = p; }
 
     delimiter = "/";
     one_down  = delimiter;
@@ -73,7 +75,8 @@
       name => {
         FILTER_TRIMMED();
         result = [view viewByName:current];
-        // TODO raise if it's not at the start of the path!
+        // TODO
+        //NSLog(@"raise if an element name is not at the start of the path!");
       };
 
       class => {
