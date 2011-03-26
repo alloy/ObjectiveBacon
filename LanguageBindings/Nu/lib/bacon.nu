@@ -120,6 +120,12 @@
       (array list)
     )
   )
+
+  (class UIBaconPath
+    (+ (id)evalVariable:(id)variable is
+      (((NuSymbolTable sharedSymbolTable) symbolWithString:variable) value)
+    )
+  )
 )
 
 (function $$ (*class-or-path)

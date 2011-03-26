@@ -35,6 +35,7 @@
 
   BOOL traverse = NO;
   BOOL bool_value = NO;
+  BOOL alpha_value = NO;
   NSString *current;
 
   UIView *v;
@@ -44,12 +45,14 @@
     action pne { pne = p; }
 
     # property value start/end
-    action pvs { bool_value = NO; pvs = p + 1; } # +1 because we omit the first apostrophe
+    action pvs { bool_value = NO; alpha_value = NO; pvs = p; }
     action pve { pve = p; }
 
     # property value bool start/end
-    action pvbs { bool_value = YES; pvs = p; }
-    action pvbe { pve = p; }
+    action pvbs { bool_value = YES; alpha_value = NO; pvs = p; }
+
+    # property value alpha start/end
+    action pvas { bool_value = NO; alpha_value = YES; pvs = p; }
 
     delimiter = "/";
     one_down  = delimiter;
@@ -61,9 +64,10 @@
     wildcard  = "*";
 
     property_name         = "[@" (alpha+ >pns) ("=" >pne);
-    property_string_value = property_name (print+ >pvs) ("']" >pve);
-    property_bool_value   = property_name (("true" | "false") >pvbs) ("]" >pvbe);
-    property              = property_string_value | property_bool_value;
+    property_alpha_value  = (alpha+ >pvas) ("]" >pve); # this matches constants etc
+    property_string_value = "'" (print+ >pvs) ("']" >pve); # this matches the value as a string
+    property_bool_value   = (("true" | "false") >pvbs) ("]" >pve);
+    property              = property_name (property_alpha_value | property_string_value | property_bool_value);
 
     main := |*
       name => {
@@ -106,6 +110,8 @@
 
         if (bool_value) {
           value = [NSNumber numberWithBool:[value isEqualToString:@"true"]];
+        } else if (alpha_value) {
+          value = [self evalVariable:value];
         }
 
         if ([result isKindOfClass:[UIView class]]) {
@@ -152,6 +158,12 @@
   }%%
 
   return result;
+}
+
++ (id)evalVariable:(NSString *)variable {
+  // TODO
+  NSLog(@"raise exception that +[UIBaconPath evalVariable:] should be implemented by the client!");
+  return nil;
 }
 
 + (NSArray *)_collectSubviews:(NSArray *)views recursive:(BOOL)recursive {

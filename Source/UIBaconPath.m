@@ -18,100 +18,91 @@
 #line 19 "Source/UIBaconPath.m"
 static const char _query_path_actions[] = {
 	0, 1, 0, 1, 1, 1, 2, 1, 
-	3, 1, 8, 1, 12, 1, 13, 1, 
+	3, 1, 5, 1, 8, 1, 12, 1, 
 	14, 1, 15, 1, 16, 1, 17, 1, 
-	18, 1, 19, 2, 2, 4, 2, 6, 
-	7, 2, 9, 10, 2, 9, 11, 3, 
-	9, 5, 11
+	18, 1, 19, 1, 20, 2, 3, 13, 
+	2, 5, 4, 2, 6, 7, 2, 9, 
+	10, 2, 9, 11
 };
 
 static const char _query_path_key_offsets[] = {
 	0, 0, 2, 5, 8, 11, 15, 20, 
-	24, 27, 31, 35, 39, 43, 47, 51, 
-	55, 59, 67, 70, 71, 75
+	27, 29, 32, 36, 41, 49, 52, 53, 
+	57
 };
 
 static const char _query_path_trans_keys[] = {
 	32, 126, 39, 32, 126, 64, 48, 57, 
 	93, 48, 57, 65, 90, 97, 122, 61, 
-	65, 90, 97, 122, 102, 116, 32, 126, 
-	39, 32, 126, 39, 93, 32, 126, 39, 
-	97, 32, 126, 39, 108, 32, 126, 39, 
-	115, 32, 126, 39, 101, 32, 126, 39, 
-	93, 32, 126, 39, 114, 32, 126, 39, 
-	117, 32, 126, 39, 42, 47, 91, 65, 
-	90, 97, 122, 39, 32, 126, 47, 65, 
-	90, 97, 122, 39, 32, 126, 0
+	65, 90, 97, 122, 39, 102, 116, 65, 
+	90, 97, 122, 32, 126, 39, 32, 126, 
+	39, 93, 32, 126, 93, 65, 90, 97, 
+	122, 39, 42, 47, 91, 65, 90, 97, 
+	122, 39, 32, 126, 47, 65, 90, 97, 
+	122, 39, 32, 126, 0
 };
 
 static const char _query_path_single_lengths[] = {
-	0, 0, 1, 1, 1, 0, 1, 2, 
-	1, 2, 2, 2, 2, 2, 2, 2, 
-	2, 4, 1, 1, 0, 1
+	0, 0, 1, 1, 1, 0, 1, 3, 
+	0, 1, 2, 1, 4, 1, 1, 0, 
+	1
 };
 
 static const char _query_path_range_lengths[] = {
-	0, 1, 1, 1, 1, 2, 2, 1, 
-	1, 1, 1, 1, 1, 1, 1, 1, 
-	1, 2, 1, 0, 2, 1
+	0, 1, 1, 1, 1, 2, 2, 2, 
+	1, 1, 1, 2, 2, 1, 0, 2, 
+	1
 };
 
 static const char _query_path_index_offsets[] = {
 	0, 0, 2, 5, 8, 11, 14, 18, 
-	22, 25, 29, 33, 37, 41, 45, 49, 
-	53, 57, 64, 67, 69, 72
-};
-
-static const char _query_path_indicies[] = {
-	0, 1, 3, 0, 2, 5, 4, 1, 
-	6, 4, 1, 7, 7, 1, 8, 9, 
-	9, 1, 11, 12, 10, 1, 14, 13, 
-	2, 14, 15, 13, 2, 14, 16, 13, 
-	1, 14, 17, 13, 1, 14, 18, 13, 
-	1, 14, 19, 13, 1, 14, 20, 13, 
-	1, 14, 21, 13, 1, 14, 18, 13, 
-	1, 22, 23, 24, 26, 25, 25, 1, 
-	3, 0, 27, 29, 28, 25, 25, 30, 
-	14, 13, 31, 0
+	24, 26, 29, 33, 37, 44, 47, 49, 
+	52
 };
 
 static const char _query_path_trans_targs_wi[] = {
-	2, 0, 17, 18, 4, 5, 17, 6, 
-	7, 6, 8, 10, 15, 8, 9, 21, 
-	11, 12, 13, 14, 21, 16, 1, 17, 
-	19, 20, 3, 17, 17, 17, 17, 17
+	2, 0, 13, 2, 12, 5, 4, 0, 
+	12, 4, 0, 6, 6, 0, 7, 6, 
+	6, 0, 8, 11, 11, 11, 11, 0, 
+	9, 0, 10, 9, 12, 10, 16, 9, 
+	12, 12, 11, 11, 0, 1, 12, 14, 
+	3, 15, 15, 0, 13, 2, 12, 12, 
+	12, 15, 15, 12, 10, 9, 12, 0
 };
 
 static const char _query_path_trans_actions_wi[] = {
-	0, 0, 25, 33, 0, 0, 11, 1, 
-	3, 0, 5, 27, 27, 0, 7, 36, 
-	0, 0, 0, 0, 39, 0, 0, 13, 
-	0, 0, 0, 17, 23, 15, 19, 21
+	0, 0, 38, 0, 27, 0, 0, 0, 
+	13, 0, 0, 1, 1, 0, 3, 0, 
+	0, 0, 0, 32, 32, 9, 9, 0, 
+	5, 0, 7, 0, 27, 7, 41, 0, 
+	27, 29, 0, 0, 0, 0, 15, 0, 
+	0, 0, 0, 0, 38, 0, 19, 17, 
+	25, 0, 0, 21, 7, 0, 23, 0
 };
 
 static const char _query_path_to_state_actions[] = {
 	0, 0, 0, 0, 0, 0, 0, 0, 
-	0, 0, 0, 0, 0, 0, 0, 0, 
-	0, 30, 0, 0, 0, 0
+	0, 0, 0, 0, 35, 0, 0, 0, 
+	0
 };
 
 static const char _query_path_from_state_actions[] = {
 	0, 0, 0, 0, 0, 0, 0, 0, 
-	0, 0, 0, 0, 0, 0, 0, 0, 
-	0, 9, 0, 0, 0, 0
+	0, 0, 0, 0, 11, 0, 0, 0, 
+	0
 };
 
 static const char _query_path_eof_trans[] = {
 	0, 0, 3, 0, 0, 0, 0, 0, 
-	3, 3, 0, 0, 0, 0, 0, 0, 
-	0, 0, 28, 29, 31, 32
+	0, 3, 3, 0, 0, 25, 26, 28, 
+	29
 };
 
-static const int query_path_start = 17;
-static const int query_path_first_final = 17;
+static const int query_path_start = 12;
+static const int query_path_first_final = 12;
 static const int query_path_error = 0;
 
-static const int query_path_en_main = 17;
+static const int query_path_en_main = 12;
 
 #line 17 "Source/UIBaconPath.m.rl"
 
@@ -135,12 +126,13 @@ static const int query_path_en_main = 17;
 
   BOOL traverse = NO;
   BOOL bool_value = NO;
+  BOOL alpha_value = NO;
   NSString *current;
 
   UIView *v;
 
   
-#line 144 "Source/UIBaconPath.m"
+#line 136 "Source/UIBaconPath.m"
 	{
 	cs = query_path_start;
 	ts = 0;
@@ -148,7 +140,7 @@ static const int query_path_en_main = 17;
 	act = 0;
 	}
 
-#line 152 "Source/UIBaconPath.m"
+#line 144 "Source/UIBaconPath.m"
 	{
 	int _klen;
 	unsigned int _trans;
@@ -169,7 +161,7 @@ _resume:
 #line 1 "Source/UIBaconPath.m.rl"
 	{ts = p;}
 	break;
-#line 173 "Source/UIBaconPath.m"
+#line 165 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -222,7 +214,6 @@ _resume:
 	}
 
 _match:
-	_trans = _query_path_indicies[_trans];
 _eof_trans:
 	cs = _query_path_trans_targs_wi[_trans];
 
@@ -236,43 +227,43 @@ _eof_trans:
 		switch ( *_acts++ )
 		{
 	case 0:
-#line 43 "Source/UIBaconPath.m.rl"
+#line 44 "Source/UIBaconPath.m.rl"
 	{ pns = p; }
 	break;
 	case 1:
-#line 44 "Source/UIBaconPath.m.rl"
+#line 45 "Source/UIBaconPath.m.rl"
 	{ pne = p; }
 	break;
 	case 2:
-#line 47 "Source/UIBaconPath.m.rl"
-	{ bool_value = NO; pvs = p + 1; }
+#line 48 "Source/UIBaconPath.m.rl"
+	{ bool_value = NO; alpha_value = NO; pvs = p; }
 	break;
 	case 3:
-#line 48 "Source/UIBaconPath.m.rl"
+#line 49 "Source/UIBaconPath.m.rl"
 	{ pve = p; }
 	break;
 	case 4:
-#line 51 "Source/UIBaconPath.m.rl"
-	{ bool_value = YES; pvs = p; }
+#line 52 "Source/UIBaconPath.m.rl"
+	{ bool_value = YES; alpha_value = NO; pvs = p; }
 	break;
 	case 5:
-#line 52 "Source/UIBaconPath.m.rl"
-	{ pve = p; }
+#line 55 "Source/UIBaconPath.m.rl"
+	{ bool_value = NO; alpha_value = YES; pvs = p; }
 	break;
 	case 9:
 #line 1 "Source/UIBaconPath.m.rl"
 	{te = p+1;}
 	break;
 	case 10:
-#line 69 "Source/UIBaconPath.m.rl"
+#line 73 "Source/UIBaconPath.m.rl"
 	{act = 1;}
 	break;
 	case 11:
-#line 101 "Source/UIBaconPath.m.rl"
+#line 105 "Source/UIBaconPath.m.rl"
 	{act = 4;}
 	break;
 	case 12:
-#line 92 "Source/UIBaconPath.m.rl"
+#line 96 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         FILTER_TRIMMED();
         NSInteger index = [current integerValue];
@@ -283,53 +274,8 @@ _eof_trans:
       }}
 	break;
 	case 13:
-#line 131 "Source/UIBaconPath.m.rl"
+#line 105 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
-        NSArray *r;
-        if ([result isKindOfClass:[UIView class]]) {
-          r = [self _collectSubviews:[NSArray arrayWithObject:result] recursive:traverse];
-        } else {
-          r = [self _collectSubviews:[(UIBaconViewSet *)result array] recursive:traverse];
-        }
-        result = [[[UIBaconViewSet alloc] initWithArray:r] autorelease];
-      }}
-	break;
-	case 14:
-#line 145 "Source/UIBaconPath.m.rl"
-	{te = p+1;{
-        traverse = YES;
-      }}
-	break;
-	case 15:
-#line 69 "Source/UIBaconPath.m.rl"
-	{te = p;p--;{
-        FILTER_TRIMMED();
-        result = [view viewByName:current];
-        // TODO raise if it's not at the start of the path!
-      }}
-	break;
-	case 16:
-#line 75 "Source/UIBaconPath.m.rl"
-	{te = p;p--;{
-        AUTO_FILTER();
-        if ([result isKindOfClass:[UIView class]]) {
-          result = [result _viewsByClass:NSClassFromString(current) recursive:traverse];
-        } else {
-          NSMutableArray *r = [NSMutableArray array];
-          for (v in [(UIBaconViewSet *)result array]) {
-            [r addObjectsFromArray:[v _viewsByClass:NSClassFromString(current) recursive:traverse]];
-          }
-          result = r;
-        }
-        if ([result count] == 0) {
-          return nil;
-        }
-        result = [[[UIBaconViewSet alloc] initWithArray:result] autorelease];
-      }}
-	break;
-	case 17:
-#line 101 "Source/UIBaconPath.m.rl"
-	{te = p;p--;{
         FILTER(pns, pne-pns);
         NSString *name = current;
         FILTER(pvs, pve-pvs);
@@ -337,6 +283,8 @@ _eof_trans:
 
         if (bool_value) {
           value = [NSNumber numberWithBool:[value isEqualToString:@"true"]];
+        } else if (alpha_value) {
+          value = [self evalVariable:value];
         }
 
         if ([result isKindOfClass:[UIView class]]) {
@@ -359,13 +307,92 @@ _eof_trans:
         }
       }}
 	break;
+	case 14:
+#line 137 "Source/UIBaconPath.m.rl"
+	{te = p+1;{
+        NSArray *r;
+        if ([result isKindOfClass:[UIView class]]) {
+          r = [self _collectSubviews:[NSArray arrayWithObject:result] recursive:traverse];
+        } else {
+          r = [self _collectSubviews:[(UIBaconViewSet *)result array] recursive:traverse];
+        }
+        result = [[[UIBaconViewSet alloc] initWithArray:r] autorelease];
+      }}
+	break;
+	case 15:
+#line 151 "Source/UIBaconPath.m.rl"
+	{te = p+1;{
+        traverse = YES;
+      }}
+	break;
+	case 16:
+#line 73 "Source/UIBaconPath.m.rl"
+	{te = p;p--;{
+        FILTER_TRIMMED();
+        result = [view viewByName:current];
+        // TODO raise if it's not at the start of the path!
+      }}
+	break;
+	case 17:
+#line 79 "Source/UIBaconPath.m.rl"
+	{te = p;p--;{
+        AUTO_FILTER();
+        if ([result isKindOfClass:[UIView class]]) {
+          result = [result _viewsByClass:NSClassFromString(current) recursive:traverse];
+        } else {
+          NSMutableArray *r = [NSMutableArray array];
+          for (v in [(UIBaconViewSet *)result array]) {
+            [r addObjectsFromArray:[v _viewsByClass:NSClassFromString(current) recursive:traverse]];
+          }
+          result = r;
+        }
+        if ([result count] == 0) {
+          return nil;
+        }
+        result = [[[UIBaconViewSet alloc] initWithArray:result] autorelease];
+      }}
+	break;
 	case 18:
-#line 141 "Source/UIBaconPath.m.rl"
+#line 105 "Source/UIBaconPath.m.rl"
+	{te = p;p--;{
+        FILTER(pns, pne-pns);
+        NSString *name = current;
+        FILTER(pvs, pve-pvs);
+        id value = current;
+
+        if (bool_value) {
+          value = [NSNumber numberWithBool:[value isEqualToString:@"true"]];
+        } else if (alpha_value) {
+          value = [self evalVariable:value];
+        }
+
+        if ([result isKindOfClass:[UIView class]]) {
+          // only match the current view if it matches this property
+          NSString *actualValue = [result valueForKey:name];
+          if (![value isEqual:actualValue]) {
+            return nil;
+          }
+        } else {
+          // return all views in the current view set that match this property
+          NSMutableArray *r = [NSMutableArray array];
+          NSArray *views = [(UIBaconViewSet *)result array];
+          for (v in views) {
+            NSString *actualValue = [v valueForKey:name];
+            if ([value isEqual:actualValue]) {
+              [r addObject:v];
+            }
+          }
+          result = [[[UIBaconViewSet alloc] initWithArray:r] autorelease];
+        }
+      }}
+	break;
+	case 19:
+#line 147 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         traverse = NO;
       }}
 	break;
-	case 19:
+	case 20:
 #line 1 "Source/UIBaconPath.m.rl"
 	{	switch( act ) {
 	case 0:
@@ -387,6 +414,8 @@ _eof_trans:
 
         if (bool_value) {
           value = [NSNumber numberWithBool:[value isEqualToString:@"true"]];
+        } else if (alpha_value) {
+          value = [self evalVariable:value];
         }
 
         if ([result isKindOfClass:[UIView class]]) {
@@ -413,7 +442,7 @@ _eof_trans:
 	}
 	}
 	break;
-#line 417 "Source/UIBaconPath.m"
+#line 446 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -430,7 +459,7 @@ _again:
 #line 1 "Source/UIBaconPath.m.rl"
 	{act = 0;}
 	break;
-#line 434 "Source/UIBaconPath.m"
+#line 463 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -449,10 +478,16 @@ _again:
 
 	_out: {}
 	}
-#line 152 "Source/UIBaconPath.m.rl"
+#line 158 "Source/UIBaconPath.m.rl"
 
 
   return result;
+}
+
++ (id)evalVariable:(NSString *)variable {
+  // TODO
+  NSLog(@"raise exception that +[UIBaconPath evalVariable:] should be implemented by the client!");
+  return nil;
 }
 
 + (NSArray *)_collectSubviews:(NSArray *)views recursive:(BOOL)recursive {

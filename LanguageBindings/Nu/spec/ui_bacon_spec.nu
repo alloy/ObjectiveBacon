@@ -1,5 +1,7 @@
 (global UIButtonTypeRoundedRect 1)
 (global UIControlStateNormal 0)
+(global UIControlContentVerticalAlignmentCenter 0)
+(global UIControlContentVerticalAlignmentTop 1)
 
 (class ColoredView is UIView)
 
@@ -141,6 +143,7 @@
 
     (after (do ()
       (($ "Button 2") setHidden:nil)
+      (($ "Button 2") setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter)
     ))
 
     (it "selects elements matching the value for the given property key" (do ()
@@ -153,6 +156,11 @@
       (($ "Button 2") setHidden:t)
       (~ ((@view viewsByPath:"//UIButton[@hidden=true]") currentTitle) should be:`("Button 2"))
       (~ ((@view viewsByPath:"//UIButton[@hidden=false]") currentTitle) should be:`("Button 1" "Button 3" "Button 4" "Button 5" "Button 6"))
+
+      (~ (@view viewsByPath:"//UIButton[@contentVerticalAlignment=UIControlContentVerticalAlignmentCenter]") should be:($$ UIButton))
+      (~ (@view viewsByPath:"//UIButton[@contentVerticalAlignment=UIControlContentVerticalAlignmentTop]") should be empty)
+      (($ "Button 2") setContentVerticalAlignment:UIControlContentVerticalAlignmentTop)
+      (~ ((@view viewsByPath:"//UIButton[@contentVerticalAlignment=UIControlContentVerticalAlignmentTop]") currentTitle) should be:`("Button 2"))
     ))
 
     (it "combines the various path components to select views down in the tree" (do ()
