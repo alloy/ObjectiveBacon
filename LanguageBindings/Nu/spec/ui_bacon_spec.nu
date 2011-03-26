@@ -139,6 +139,13 @@
       (~ (@view viewsByPath:"//*") should be:(@view viewsByClass:UIView))
     ))
 
+    (it "selects elements matching the value for the given property key" (do ()
+      (~ ((@view viewsByPath:"/UIButton[@currentTitle='Button 4'][0]") currentTitle) should be:"Button 4")
+      ;(~ (@view viewsByPath:"/UIButton[0][@currentTitle='Button \' 4']") should be:nil)
+      ;(~ (@view viewsByPath:"/UIButton[0][@currentTitle='Button 4']") should be:nil)
+      ;(~ ((@view viewsByPath:"/UIButton[3][@currentTitle='Button 4']") currentTitle) should be:"Button 4")
+    ))
+
     (it "combines the various path components to select views down in the tree" (do ()
       (~ ((@controller view) viewsByPath:"'green view'/UIButton") should be:(NSArray arrayWithObject:($ "Button 6")))
       (~ ((@controller view) viewsByPath:"'green view'/UIButton[0]") should be:($ "Button 6"))

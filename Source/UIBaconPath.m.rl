@@ -28,17 +28,31 @@
   char *p = (char *)[path UTF8String];
   char *eof = p + (char)[path length];
 
+  char *pns = 0;
+  char *pne = 0;
+  char *pvs = 0;
+  char *pve = 0;
+
   BOOL traverse = NO;
   NSString *current;
 
+  UIView *v;
+
   %%{
+    action pns { pns = p; }
+    action pne { pne = p; }
+
+    action pvs { pvs = p; }
+    action pve { pve = p; }
+
     delimiter = "/";
     one_down  = delimiter;
     any_depth = delimiter delimiter;
     quote     = "'";
     name      = quote print+ quote;
     class     = alpha+;
-    accessor  = "[" digit+ "]";
+    index     = "[" digit+ "]";
+    property  = "[@" (alpha+ >pns) ("='" >pne) (print+ >pvs) ("']" >pve);
     wildcard  = "*";
 
     main := |*
@@ -55,7 +69,7 @@
           result = [result _viewsByClass:NSClassFromString(current) recursive:traverse];
         } else {
           NSMutableArray *r = [NSMutableArray array];
-          for (UIView *v in [(UIBaconViewSet *)result array]) {
+          for (v in [(UIBaconViewSet *)result array]) {
             [r addObjectsFromArray:[v _viewsByClass:NSClassFromString(current) recursive:traverse]];
           }
           result = r;
@@ -66,13 +80,30 @@
         result = [[[UIBaconViewSet alloc] initWithArray:result] autorelease];
       };
 
-      accessor => {
+      index => {
         FILTER_TRIMMED();
         NSInteger index = [current integerValue];
-        if (index > ([result count] - 1)) {
+        if (index + 1 > [result count]) {
           return nil;
         }
         result = [result index:index];
+      };
+
+      property => {
+        FILTER(pns, pne-pns);
+        NSString *name = current;
+        FILTER(pvs, pve-pvs);
+        NSString *value = current;
+
+        NSMutableArray *r = [NSMutableArray array];
+        NSArray *views = [(UIBaconViewSet *)result array];
+        for (v in views) {
+          NSString *actualValue = [v valueForKey:name];
+          if ([value isEqualToString:actualValue]) {
+            [r addObject:v];
+          }
+        }
+        result = [[[UIBaconViewSet alloc] initWithArray:r] autorelease];
       };
 
       wildcard => {

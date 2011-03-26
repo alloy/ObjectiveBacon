@@ -17,72 +17,81 @@
 
 #line 19 "Source/UIBaconPath.m"
 static const char _query_path_actions[] = {
-	0, 1, 2, 1, 5, 1, 6, 1, 
-	7, 1, 8, 1, 9, 1, 10, 1, 
-	11, 2, 0, 1, 2, 3, 4
+	0, 1, 0, 1, 1, 1, 2, 1, 
+	3, 1, 6, 1, 10, 1, 11, 1, 
+	12, 1, 13, 1, 14, 1, 15, 1, 
+	16, 1, 17, 2, 4, 5, 2, 7, 
+	8, 2, 7, 9
 };
 
 static const char _query_path_key_offsets[] = {
-	0, 0, 2, 5, 7, 10, 18, 21, 
-	22
+	0, 0, 2, 5, 8, 11, 15, 20, 
+	21, 23, 26, 30, 38, 41, 42, 46
 };
 
 static const char _query_path_trans_keys[] = {
-	32, 126, 39, 32, 126, 48, 57, 93, 
-	48, 57, 39, 42, 47, 91, 65, 90, 
-	97, 122, 39, 32, 126, 47, 65, 90, 
-	97, 122, 0
+	32, 126, 39, 32, 126, 64, 48, 57, 
+	93, 48, 57, 65, 90, 97, 122, 61, 
+	65, 90, 97, 122, 39, 32, 126, 39, 
+	32, 126, 39, 93, 32, 126, 39, 42, 
+	47, 91, 65, 90, 97, 122, 39, 32, 
+	126, 47, 65, 90, 97, 122, 39, 32, 
+	126, 0
 };
 
 static const char _query_path_single_lengths[] = {
-	0, 0, 1, 0, 1, 4, 1, 1, 
-	0
+	0, 0, 1, 1, 1, 0, 1, 1, 
+	0, 1, 2, 4, 1, 1, 0, 1
 };
 
 static const char _query_path_range_lengths[] = {
-	0, 1, 1, 1, 1, 2, 1, 0, 
-	2
+	0, 1, 1, 1, 1, 2, 2, 0, 
+	1, 1, 1, 2, 1, 0, 2, 1
 };
 
 static const char _query_path_index_offsets[] = {
-	0, 0, 2, 5, 7, 10, 17, 20, 
-	22
+	0, 0, 2, 5, 8, 11, 14, 18, 
+	20, 22, 25, 29, 36, 39, 41, 44
 };
 
 static const char _query_path_trans_targs_wi[] = {
-	2, 0, 6, 2, 5, 4, 0, 5, 
-	4, 0, 1, 5, 7, 3, 8, 8, 
-	0, 6, 2, 5, 5, 5, 8, 8, 
-	5, 0
+	2, 0, 12, 2, 11, 5, 4, 0, 
+	11, 4, 0, 6, 6, 0, 7, 6, 
+	6, 0, 8, 0, 9, 0, 10, 9, 
+	11, 10, 15, 9, 11, 1, 11, 13, 
+	3, 14, 14, 0, 12, 2, 11, 11, 
+	11, 14, 14, 11, 10, 9, 11, 0
 };
 
 static const char _query_path_trans_actions_wi[] = {
-	0, 0, 20, 0, 15, 0, 0, 3, 
-	0, 0, 0, 5, 0, 0, 0, 0, 
-	0, 20, 0, 9, 7, 13, 0, 0, 
-	11, 0
+	0, 0, 30, 0, 25, 0, 0, 0, 
+	11, 0, 0, 1, 1, 0, 3, 0, 
+	0, 0, 0, 0, 5, 0, 7, 0, 
+	25, 7, 33, 0, 25, 0, 13, 0, 
+	0, 0, 0, 0, 30, 0, 17, 15, 
+	23, 0, 0, 19, 7, 0, 21, 0
 };
 
 static const char _query_path_to_state_actions[] = {
-	0, 0, 0, 0, 0, 17, 0, 0, 
-	0
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 27, 0, 0, 0, 0
 };
 
 static const char _query_path_from_state_actions[] = {
-	0, 0, 0, 0, 0, 1, 0, 0, 
-	0
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 9, 0, 0, 0, 0
 };
 
 static const char _query_path_eof_trans[] = {
-	0, 0, 3, 0, 0, 0, 12, 13, 
-	15
+	0, 0, 3, 0, 0, 0, 0, 0, 
+	0, 3, 3, 0, 21, 22, 24, 25
 };
 
-static const int query_path_start = 5;
-static const int query_path_first_final = 5;
+static const int query_path_start = 11;
+static const int query_path_first_final = 11;
 static const int query_path_error = 0;
 
-static const int query_path_en_main = 5;
+static const int query_path_en_main = 11;
 
 #line 17 "Source/UIBaconPath.m.rl"
 
@@ -99,11 +108,18 @@ static const int query_path_en_main = 5;
   char *p = (char *)[path UTF8String];
   char *eof = p + (char)[path length];
 
+  char *pns = 0;
+  char *pne = 0;
+  char *pvs = 0;
+  char *pve = 0;
+
   BOOL traverse = NO;
   NSString *current;
 
+  UIView *v;
+
   
-#line 107 "Source/UIBaconPath.m"
+#line 123 "Source/UIBaconPath.m"
 	{
 	cs = query_path_start;
 	ts = 0;
@@ -111,7 +127,7 @@ static const int query_path_en_main = 5;
 	act = 0;
 	}
 
-#line 115 "Source/UIBaconPath.m"
+#line 131 "Source/UIBaconPath.m"
 	{
 	int _klen;
 	unsigned int _trans;
@@ -128,11 +144,11 @@ _resume:
 	_nacts = (unsigned int) *_acts++;
 	while ( _nacts-- > 0 ) {
 		switch ( *_acts++ ) {
-	case 2:
+	case 6:
 #line 1 "Source/UIBaconPath.m.rl"
 	{ts = p;}
 	break;
-#line 136 "Source/UIBaconPath.m"
+#line 152 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -197,27 +213,47 @@ _eof_trans:
 	{
 		switch ( *_acts++ )
 		{
+	case 0:
+#line 42 "Source/UIBaconPath.m.rl"
+	{ pns = p; }
+	break;
+	case 1:
+#line 43 "Source/UIBaconPath.m.rl"
+	{ pne = p; }
+	break;
+	case 2:
+#line 45 "Source/UIBaconPath.m.rl"
+	{ pvs = p; }
+	break;
 	case 3:
+#line 46 "Source/UIBaconPath.m.rl"
+	{ pve = p; }
+	break;
+	case 7:
 #line 1 "Source/UIBaconPath.m.rl"
 	{te = p+1;}
 	break;
-	case 4:
-#line 45 "Source/UIBaconPath.m.rl"
+	case 8:
+#line 59 "Source/UIBaconPath.m.rl"
 	{act = 1;}
 	break;
-	case 5:
-#line 69 "Source/UIBaconPath.m.rl"
+	case 9:
+#line 92 "Source/UIBaconPath.m.rl"
+	{act = 4;}
+	break;
+	case 10:
+#line 83 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         FILTER_TRIMMED();
         NSInteger index = [current integerValue];
-        if (index > ([result count] - 1)) {
+        if (index + 1 > [result count]) {
           return nil;
         }
         result = [result index:index];
       }}
 	break;
-	case 6:
-#line 78 "Source/UIBaconPath.m.rl"
+	case 11:
+#line 109 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         NSArray *r;
         if ([result isKindOfClass:[UIView class]]) {
@@ -228,14 +264,14 @@ _eof_trans:
         result = [[[UIBaconViewSet alloc] initWithArray:r] autorelease];
       }}
 	break;
-	case 7:
-#line 92 "Source/UIBaconPath.m.rl"
+	case 12:
+#line 123 "Source/UIBaconPath.m.rl"
 	{te = p+1;{
         traverse = YES;
       }}
 	break;
-	case 8:
-#line 45 "Source/UIBaconPath.m.rl"
+	case 13:
+#line 59 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         FILTER_TRIMMED();
         current = [current stringByReplacingOccurrencesOfString:@"\\'" withString:@"'"];
@@ -243,15 +279,15 @@ _eof_trans:
         // TODO raise if it's not at the start of the path!
       }}
 	break;
-	case 9:
-#line 52 "Source/UIBaconPath.m.rl"
+	case 14:
+#line 66 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         AUTO_FILTER();
         if ([result isKindOfClass:[UIView class]]) {
           result = [result _viewsByClass:NSClassFromString(current) recursive:traverse];
         } else {
           NSMutableArray *r = [NSMutableArray array];
-          for (UIView *v in [(UIBaconViewSet *)result array]) {
+          for (v in [(UIBaconViewSet *)result array]) {
             [r addObjectsFromArray:[v _viewsByClass:NSClassFromString(current) recursive:traverse]];
           }
           result = r;
@@ -262,13 +298,32 @@ _eof_trans:
         result = [[[UIBaconViewSet alloc] initWithArray:result] autorelease];
       }}
 	break;
-	case 10:
-#line 88 "Source/UIBaconPath.m.rl"
+	case 15:
+#line 92 "Source/UIBaconPath.m.rl"
+	{te = p;p--;{
+        FILTER(pns, pne-pns);
+        NSString *name = current;
+        FILTER(pvs, pve-pvs);
+        NSString *value = current;
+
+        NSMutableArray *r = [NSMutableArray array];
+        NSArray *views = [(UIBaconViewSet *)result array];
+        for (v in views) {
+          NSString *actualValue = [v valueForKey:name];
+          if ([value isEqualToString:actualValue]) {
+            [r addObject:v];
+          }
+        }
+        result = [[[UIBaconViewSet alloc] initWithArray:r] autorelease];
+      }}
+	break;
+	case 16:
+#line 119 "Source/UIBaconPath.m.rl"
 	{te = p;p--;{
         traverse = NO;
       }}
 	break;
-	case 11:
+	case 17:
 #line 1 "Source/UIBaconPath.m.rl"
 	{	switch( act ) {
 	case 0:
@@ -282,11 +337,29 @@ _eof_trans:
         // TODO raise if it's not at the start of the path!
       }
 	break;
+	case 4:
+	{{p = ((te))-1;}
+        FILTER(pns, pne-pns);
+        NSString *name = current;
+        FILTER(pvs, pve-pvs);
+        NSString *value = current;
+
+        NSMutableArray *r = [NSMutableArray array];
+        NSArray *views = [(UIBaconViewSet *)result array];
+        for (v in views) {
+          NSString *actualValue = [v valueForKey:name];
+          if ([value isEqualToString:actualValue]) {
+            [r addObject:v];
+          }
+        }
+        result = [[[UIBaconViewSet alloc] initWithArray:r] autorelease];
+      }
+	break;
 	default: break;
 	}
 	}
 	break;
-#line 290 "Source/UIBaconPath.m"
+#line 363 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -295,15 +368,15 @@ _again:
 	_nacts = (unsigned int) *_acts++;
 	while ( _nacts-- > 0 ) {
 		switch ( *_acts++ ) {
-	case 0:
+	case 4:
 #line 1 "Source/UIBaconPath.m.rl"
 	{ts = 0;}
 	break;
-	case 1:
+	case 5:
 #line 1 "Source/UIBaconPath.m.rl"
 	{act = 0;}
 	break;
-#line 307 "Source/UIBaconPath.m"
+#line 380 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -322,7 +395,7 @@ _again:
 
 	_out: {}
 	}
-#line 99 "Source/UIBaconPath.m.rl"
+#line 130 "Source/UIBaconPath.m.rl"
 
 
   return result;
