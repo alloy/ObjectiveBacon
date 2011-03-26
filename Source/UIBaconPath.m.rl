@@ -95,8 +95,7 @@
 
       index => {
         FILTER_TRIMMED();
-        NSInteger index = [current integerValue];
-        result = [result index:index];
+        result = [result index:[current integerValue]];
       };
 
       property => {
