@@ -115,14 +115,14 @@
     ))
 
     (it "raises an exception when a label is empty or unclosed" (do ()
-      ;(puts ((@controller view) viewsByPath:"''/UIButton"))
+      (puts ((@controller view) viewsByPath:"''/UIButton"))
       ;(puts ((@controller view) viewsByPath:"'//UIButton"))
       ;(puts ((@controller view) viewsByPath:"'green view/UIButton"))
     ))
 
     (it "finds a view by class" (do ()
-      (~ ((@view viewsByPath:"UIButton") currentTitle) should be:`("Button 1" "Button 2" "Button 4" "Button 5"))
-      (~ (($ "red's view") viewsByPath:"UIButton") should be:(NSArray arrayWithObject:($ "Button 3")))
+      (~ ((@view viewsByPath:"/UIButton") currentTitle) should be:`("Button 1" "Button 2" "Button 4" "Button 5"))
+      (~ (($ "red's view") viewsByPath:"/UIButton") should be:(NSArray arrayWithObject:($ "Button 3")))
     ))
 
     (it "finds classes only one down or any depth with double slash" (do ()
