@@ -26,12 +26,14 @@ enum {
 + (id)viewsByPath:(NSString *)path ofView:(UIView *)view {
   id result = view;
 
+  NSString *_path = [path stringByAppendingString:@"%_PATH_END_%"];
+
   int cs, act = 0;
   char *ts = 0;
   char *te = 0;
   char *pe = 0;
-  char *p = (char *)[path UTF8String];
-  char *eof = p + (char)[path length];
+  char *p = (char *)[_path UTF8String];
+  char *eof = p + (char)[_path length];
 
   char *tokenstart = 0;
 
@@ -57,25 +59,19 @@ enum {
     # property value bool start
     action pvbs { type = BOOLEAN; pvs = p; }
 
-    # property value alpha start
-    action pvas { type = VARIABLE; pvs = p; }
+    # property variable start
+    action pvvs { type = VARIABLE; pvs = p; }
 
     # property value end
     action pve { pve = p; }
 
+    # token start
     action ts {
       ts = p;
     }
 
-    action tsc {
-      NSLog(@"HIERO!");
-      tokenstart = p;
-    }
-
     action name {
-      //FILTER_TRIMMED();
       AUTO_FILTER();
-      NSLog(@"NAME: %@", current);
       result = [view viewByName:current];
       // TODO
       //NSLog(@"raise if an element name is not at the start of the path!");
@@ -85,16 +81,8 @@ enum {
       NSLog(@"NAME ERROR!");
     }
 
-    action acc {
-      NSLog(@"Accumulate: %c", *p);
-      te = p;
-    }
-
     action class {
-      NSLog(@"CLASS!");
-      //AUTO_FILTER();
-      FILTER(tokenstart, p-tokenstart);
-      NSLog(@"Class %@", current);
+      AUTO_FILTER();
       if ([result isKindOfClass:[UIView class]]) {
         result = [result _viewsByClass:NSClassFromString(current) recursive:traverse];
       } else {
@@ -111,7 +99,7 @@ enum {
     }
 
     action index {
-      FILTER_TRIMMED();
+      AUTO_FILTER();
       result = [result index:[current integerValue]];
     }
 
@@ -158,42 +146,42 @@ enum {
     }
 
     action one_down {
-      NSLog(@"One down!");
       traverse = NO;
     }
 
     action any_depth {
-      NSLog(@"Any depth!");
       traverse = YES;
     }
 
-    one_down  = "/" %one_down;
-    any_depth = "//" %any_depth;
-    delimeter = any_depth | one_down;
-    quote     = "'";
-    name      = quote print+ >ts %name quote;
-    class     = alpha+ >tsc %class;
-    index     = ("[" "-"* digit+ "]" %index);
-    wildcard  = ("*" %wildcard);
+    # this is added to the end of each path string, so that there will always be one more final phase to transition to.
+    EOP             = "%_PATH_END_%";
 
-    property_name         = "[@" (alpha+ >pns %pne) "=";
-    property_alpha_value  = (alpha+ >pvas %pve) "]"; # this matches constants etc
-    property_string_value = "'" (print+ >pvs %pve) "']"; # this matches the value as a string
-    property_bool_value   = (("true" | "false") >pvbs %pve) "]";
-    property              = (property_name (property_alpha_value | property_string_value | property_bool_value) %property);
+    one_down        = "/" %one_down;
+    any_depth       = "//" %any_depth;
+    delimeter       = any_depth | one_down;
 
-    anything = any+ @{ NSLog(@"Something else!"); };
+    name            = "'" print+ >ts %name "'";            # matches a string inside two single quotes
+    class           = ([A-Z] alpha+) >ts %class;           # matches a word starting with an upcase letter as a class
+    wildcard        = "*" %wildcard;                       # matches any class
+    index           = "[" ("-"? digit+) >ts %index "]";    # matches an index from a view set
 
-#main := name? (delimeter class (index | property)*)+;
-    main := delimeter class any*;
+    prop_name       = "[@" (alpha+ >pns %pne) "=";         # matches the name of a property
+    prop_var_value  = (alpha+ >pvvs %pve) "]";             # matches the value as a variable name (eg constant)
+    prop_str_value  = "'" (print+ >pvs %pve) "']";         # matches the value as a string
+    prop_bool_value = (("true" | "false") >pvbs %pve) "]"; # matches the value as a boolean
+    property        = (prop_name (prop_var_value | prop_str_value | prop_bool_value) %property);
+
+    component       = (class | wildcard) (index | property)*;
+
+    main :=         name? (delimeter component)* EOP;
 
     write init;
     write exec;
   }%%
 
-  //if (cs == query_path_error) {
-    //NSLog(@"There was an error!");
-  //}
+  /*if (cs == query_path_error) {*/
+    /*NSLog(@"There was an error!");*/
+  /*}*/
 
   return result;
 }
