@@ -28,14 +28,13 @@ enum {
 
   NSString *_path = [path stringByAppendingString:@"%_PATH_END_%"];
 
-  int cs, act = 0;
+  int cs = 0;
   char *ts = 0;
-  char *te = 0;
   char *pe = 0;
   char *p = (char *)[_path UTF8String];
   char *eof = p + (char)[_path length];
 
-  char *tokenstart = 0;
+  char *start = p;
 
   // property name & value start/end
   char *pns = 0;
@@ -70,15 +69,16 @@ enum {
       ts = p;
     }
 
+    action error {
+      NSLog(@"Parse error occurred in: %@", path);
+      return nil;
+    }
+
     action name {
       AUTO_FILTER();
       result = [view viewByName:current];
       // TODO
       //NSLog(@"raise if an element name is not at the start of the path!");
-    }
-
-    action name_error {
-      NSLog(@"NAME ERROR!");
     }
 
     action class {
@@ -101,6 +101,17 @@ enum {
     action index {
       AUTO_FILTER();
       result = [result index:[current integerValue]];
+    }
+
+    action index_error {
+      int location = p-start;
+      printf("Index error: %d\n", location);
+      printf("%s\n", start);
+      for (int i = 0; i < location; i++) {
+        printf(" ");
+      }
+      printf("^\n");
+      return nil;
     }
 
     action property {
@@ -171,9 +182,10 @@ enum {
     prop_bool_value = (("true" | "false") >pvbs %pve) "]"; # matches the value as a boolean
     property        = (prop_name (prop_var_value | prop_str_value | prop_bool_value) %property);
 
-    component       = (class | wildcard) (index | property)*;
+    #component       = (class | wildcard) ((index? property*) | (property* index?)) @!index_error;
+    component       = (class | wildcard) ((index? property*) | (property* index?));
 
-    main :=         name? (delimeter component)* EOP;
+    main :=         (name? (delimeter component)* EOP) @!error;
 
     write init;
     write exec;
