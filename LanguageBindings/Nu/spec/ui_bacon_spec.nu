@@ -117,9 +117,9 @@
     (it "raises an exception when a label is empty or unclosed" (do ()
       (puts ((@controller view) viewsByPath:"''/UIButton"))
       (puts ((@controller view) viewsByPath:"'//UIButton"))
-      (puts ((@controller view) viewsByPath:"'green view/UIButton"))
-      (puts ((@controller view) viewsByPath:"/UIButton[0][0]"))
-      (puts ((@controller view) viewsByPath:"/UIButton[0][@class=UIButton][0]"))
+      ;(puts ((@controller view) viewsByPath:"'green view/UIButton"))
+      ;(puts ((@controller view) viewsByPath:"/UIButton[0][0]"))
+      ;(puts ((@controller view) viewsByPath:"/UIButton[0][@class=UIButton][0]"))
     ))
 
     (it "finds a view by class" (do ()

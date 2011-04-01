@@ -70,12 +70,16 @@ enum {
     }
 
     action error {
-      NSLog(@"Parse error occurred in: %@", path);
+      NSLog(@"A parse error occurred in: %@", path);
       return nil;
     }
 
     action name {
       AUTO_FILTER();
+      if ([current length] == 0) {
+        NSLog(@"An empty name value was encountered while parsing: %@", path);
+        return nil;
+      }
       result = [view viewByName:current];
       // TODO
       //NSLog(@"raise if an element name is not at the start of the path!");
@@ -171,7 +175,7 @@ enum {
     any_depth       = "//" %any_depth;
     delimeter       = any_depth | one_down;
 
-    name            = "'" print+ >ts %name "'";            # matches a string inside two single quotes
+    name            = "'" print* >ts %name "'";            # matches a string inside two single quotes
     class           = ([A-Z] alpha+) >ts %class;           # matches a word starting with an upcase letter as a class
     wildcard        = "*" %wildcard;                       # matches any class
     index           = "[" ("-"? digit+) >ts %index "]";    # matches an index from a view set
