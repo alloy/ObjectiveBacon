@@ -31,10 +31,20 @@ require 'fileutils'
 require 'optparse'
 require 'tmpdir'
 
+SYSROOT = '/Developer/Platforms/iPhoneSimulator.platform/Developer'
+SDKROOT = File.join(SYSROOT, 'SDKs/iPhoneSimulator4.2.sdk')
+
+#SYSROOT = '/Developer/Platforms/iPhoneOS.platform/Developer'
+#SDKROOT = File.join(SYSROOT, 'SDKs/iPhoneOS4.2.sdk')
+
 class OCHeaderAnalyzer
-  CPP = ['/usr/bin/cpp-4.0', '/usr/bin/cpp-3.3', '/usr/bin/cpp3'].find { |x| File.exist?(x) }
+  #CPP = ['/usr/bin/cpp-4.2', '/usr/bin/cpp-4.0', '/usr/bin/cpp'].map { |x| r = File.join(SYSROOT, x); p r; r }.find { |x| File.exist?(x) }
+  CPP = '/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/cpp-4.2'
+  p CPP
   raise "cpp not found" if CPP.nil?
-  CPPFLAGS = "-D__APPLE_CPP__ -include /usr/include/AvailabilityMacros.h"
+  #CPPFLAGS = "-D__APPLE_CPP__=0 -DTARGET_OS_IPHONE=1 -arch armv7 -miphoneos-version-min=4.2 -isysroot #{SDKROOT} -I#{SDKROOT}/usr/include -include #{SDKROOT}/usr/include/Availability.h -include #{SDKROOT}/usr/include/AvailabilityMacros.h"
+  CPPFLAGS = "-D__APPLE_CPP__=0 -DTARGET_OS_IPHONE=1 -arch i386 -miphoneos-version-min=4.2 -isysroot #{SDKROOT} -I#{SDKROOT}/usr/include -include #{SDKROOT}/usr/include/Availability.h -include #{SDKROOT}/usr/include/AvailabilityMacros.h"
+  #CPPFLAGS = "-D__APPLE_CPP__ -DTARGET_OS_IPHONE"
   CPPFLAGS << "-D__GNUC__" unless /\Acpp-4/.match(File.basename(CPP))
 
   def self.data(data)
@@ -333,7 +343,9 @@ class OCHeaderAnalyzer
     f_on = false
     err_file = '/tmp/.cpp.err'
     cpp_line = "#{CPP} #{CPPFLAGS} #{flags} #{do_64 ? '-D__LP64__' : ''} \"#{path}\" 2>#{err_file}"
+    p cpp_line
     complete_result = `#{cpp_line}` 
+    puts complete_result
     if $?.to_i != 0 and fails_on_error 
       $stderr.puts File.read(err_file)
       File.unlink(err_file)
@@ -671,7 +683,7 @@ class BridgeSupportGenerator
     # Link against Foundation by default.
     if @compiler_flags and @import_directive 
       @import_directive.insert(0, "#import <Foundation/Foundation.h>\n")
-      @compiler_flags << ' -framework Foundation '
+      @compiler_flags << " -framework Foundation -miphoneos-version-min=4.2 "
     end
 
     # Open exceptions, ignore mentionned headers.
@@ -1791,7 +1803,8 @@ EOC
         '' # nothing, by default the compiler choose the 32-bit arch
       end
 
-    line = "gcc #{arch_flag} #{tmp_src.path} -o #{tmp_bin_path} #{@compiler_flags} 2>#{tmp_log_path}"
+    #line = "#{SYSROOT}/usr/bin/gcc -I#{SDKROOT}/usr/include -arch armv7 #{arch_flag} #{tmp_src.path} -o #{tmp_bin_path} #{@compiler_flags} 2>#{tmp_log_path}"
+    line = "#{SYSROOT}/usr/bin/gcc -L#{SDKROOT}/usr/lib -lAccessibility -I#{SDKROOT}/usr/include -arch i386 #{arch_flag} #{tmp_src.path} -o #{tmp_bin_path} #{@compiler_flags} 2>#{tmp_log_path}"
     unless system(line)
       msg = "Can't compile C code... aborting\ncommand was: #{line}\n\n#{File.read(tmp_log_path)}"
       $stderr.puts "Code was:\n<<<<<<<\n#{code}>>>>>>>\n" if $DEBUG
@@ -1802,7 +1815,8 @@ EOC
     
     env = ''
     if @framework_paths
-      env << "DYLD_FRAMEWORK_PATH=\"#{@framework_paths.join(':')}\""
+      @framework_paths << "#{SDKROOT}/System/Library/PrivateFrameworks"
+      env << "DYLD_LIBRARY_PATH=#{SDKROOT}/usr/lib:#{SDKROOT}/System/Library/Frameworks/OpenGLES.framework DYLD_FRAMEWORK_PATH=\"#{@framework_paths.join(':')}\""
     end
 
     line = "#{env} #{tmp_bin_path}"
@@ -1838,11 +1852,11 @@ EOC
     tmp_log_path = unique_tmp_path('log')
     tmp_pch_path = "#{tmp_header.path}.gch"
 
-    line = "gcc -c -x objective-c-header #{tmp_header.path} -o #{tmp_pch_path} #{@compiler_flags} 2>#{tmp_log_path}"
+    line = "#{SYSROOT}/usr/bin/gcc -c -x objective-c-header -I#{SDKROOT}/usr/include #{tmp_header.path} -o #{tmp_pch_path} #{@compiler_flags} 2>#{tmp_log_path}"
     unless system(line)
       msg = "Can't precompile header... aborting\ncommand was: #{line}\n\n#{File.read(tmp_log_path)}"
-      File.unlink(tmp_log_path)
-      File.unlink(tmp_header.path)
+      #File.unlink(tmp_log_path)
+      #File.unlink(tmp_header.path)
       raise msg
     end
     @pch_files = [ tmp_pch_path, tmp_header.path ]

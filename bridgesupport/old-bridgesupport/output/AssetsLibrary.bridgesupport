@@ -1,0 +1,49 @@
+<?xml version='1.0'?>
+<!DOCTYPE signatures SYSTEM "file://localhost/System/Library/DTDs/BridgeSupport.dtd">
+<signatures version='0.9'>
+<constant name='ALAssetPropertyDate' type='@'/>
+<constant name='ALAssetPropertyDuration' type='@'/>
+<constant name='ALAssetPropertyLocation' type='@'/>
+<constant name='ALAssetPropertyOrientation' type='@'/>
+<constant name='ALAssetPropertyRepresentations' type='@'/>
+<constant name='ALAssetPropertyType' type='@'/>
+<constant name='ALAssetPropertyURLs' type='@'/>
+<constant name='ALAssetTypePhoto' type='@'/>
+<constant name='ALAssetTypeUnknown' type='@'/>
+<constant name='ALAssetTypeVideo' type='@'/>
+<constant name='ALAssetsGroupPropertyName' type='@'/>
+<constant name='ALAssetsGroupPropertyPersistentID' type='@'/>
+<constant name='ALAssetsGroupPropertyType' type='@'/>
+<constant name='ALAssetsLibraryChangedNotification' type='@'/>
+<constant name='ALAssetsLibraryErrorDomain' type='@'/>
+<constant name='ALErrorInvalidProperty' type='@'/>
+<enum name='ALAssetOrientationDown' value='1'/>
+<enum name='ALAssetOrientationDownMirrored' value='5'/>
+<enum name='ALAssetOrientationLeft' value='2'/>
+<enum name='ALAssetOrientationLeftMirrored' value='6'/>
+<enum name='ALAssetOrientationRight' value='3'/>
+<enum name='ALAssetOrientationRightMirrored' value='7'/>
+<enum name='ALAssetOrientationUp' value='0'/>
+<enum name='ALAssetOrientationUpMirrored' value='4'/>
+<enum name='ALAssetsGroupAlbum' value='2'/>
+<enum name='ALAssetsGroupAll' value='-1'/>
+<enum name='ALAssetsGroupEvent' value='4'/>
+<enum name='ALAssetsGroupFaces' value='8'/>
+<enum name='ALAssetsGroupLibrary' value='1'/>
+<enum name='ALAssetsGroupSavedPhotos' value='16'/>
+<enum name='ALAssetsLibraryAccessGloballyDeniedError' value='-3312'/>
+<enum name='ALAssetsLibraryAccessUserDeniedError' value='-3311'/>
+<enum name='ALAssetsLibraryDataUnavailableError' value='-3310'/>
+<enum name='ALAssetsLibraryUnknownError' value='-1'/>
+<enum name='ALAssetsLibraryWriteBusyError' value='-3301'/>
+<enum name='ALAssetsLibraryWriteDataEncodingError' value='-3304'/>
+<enum name='ALAssetsLibraryWriteDiskSpaceError' value='-3305'/>
+<enum name='ALAssetsLibraryWriteFailedError' value='-3300'/>
+<enum name='ALAssetsLibraryWriteIncompatibleDataError' value='-3303'/>
+<enum name='ALAssetsLibraryWriteInvalidDataError' value='-3302'/>
+<class name='ALAssetsLibrary'>
+<method selector='videoAtPathIsCompatibleWithSavedPhotosAlbum:'>
+<retval type='B'/>
+</method>
+</class>
+</signatures>
