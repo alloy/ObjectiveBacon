@@ -1,0 +1,18 @@
+*** /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CFBase.h	Fri Oct 22 06:05:04 2010
+--- /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CFBase.h	Sat Apr  2 15:19:54 2011
+***************
+*** 40,49 ****
+--- 40,52 ----
+  
+  #if __BLOCKS__
+  #include <Block.h>
+  #endif
+  
++ #define TARGET_OS_MAC 0
++ #define TARGET_OS_IPHONE 1
++ 
+  // The arguments to these availability macros is a version number, e.g. 10_7, 3_0
+  #if TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
+  
+  // Available on MacOS and iPhoneOS
+  #define CF_AVAILABLE(_mac, _iphone) AVAILABLE_MAC_OS_X_VERSION_##_mac##_AND_LATER
