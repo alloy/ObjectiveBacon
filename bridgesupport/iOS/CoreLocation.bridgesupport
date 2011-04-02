@@ -1,0 +1,68 @@
+<?xml version='1.0'?>
+<!DOCTYPE signatures SYSTEM "file://localhost/System/Library/DTDs/BridgeSupport.dtd">
+<signatures version='0.9'>
+<constant name='kCLDistanceFilterNone' type='d'/>
+<constant name='kCLErrorDomain' type='@'/>
+<constant name='kCLHeadingFilterNone' type='d'/>
+<constant name='kCLLocationAccuracyBest' type='d'/>
+<constant name='kCLLocationAccuracyBestForNavigation' type='d'/>
+<constant name='kCLLocationAccuracyHundredMeters' type='d'/>
+<constant name='kCLLocationAccuracyKilometer' type='d'/>
+<constant name='kCLLocationAccuracyNearestTenMeters' type='d'/>
+<constant name='kCLLocationAccuracyThreeKilometers' type='d'/>
+<constant name='kCLLocationCoordinate2DInvalid' type='{?=dd}'/>
+<enum name='CLDeviceOrientationFaceDown' value='6'/>
+<enum name='CLDeviceOrientationFaceUp' value='5'/>
+<enum name='CLDeviceOrientationLandscapeLeft' value='3'/>
+<enum name='CLDeviceOrientationLandscapeRight' value='4'/>
+<enum name='CLDeviceOrientationPortrait' value='1'/>
+<enum name='CLDeviceOrientationPortraitUpsideDown' value='2'/>
+<enum name='CLDeviceOrientationUnknown' value='0'/>
+<enum name='kCLAuthorizationStatusAuthorized' value='3'/>
+<enum name='kCLAuthorizationStatusDenied' value='2'/>
+<enum name='kCLAuthorizationStatusNotDetermined' value='0'/>
+<enum name='kCLAuthorizationStatusRestricted' value='1'/>
+<enum name='kCLErrorDenied' value='1'/>
+<enum name='kCLErrorHeadingFailure' value='3'/>
+<enum name='kCLErrorLocationUnknown' value='0'/>
+<enum name='kCLErrorNetwork' value='2'/>
+<enum name='kCLErrorRegionMonitoringDenied' value='4'/>
+<enum name='kCLErrorRegionMonitoringFailure' value='5'/>
+<enum name='kCLErrorRegionMonitoringSetupDelayed' value='6'/>
+<function name='CLLocationCoordinate2DIsValid'>
+<arg type='{?=dd}'/>
+<retval type='B'/>
+</function>
+<function name='CLLocationCoordinate2DMake'>
+<arg type='d'/>
+<arg type='d'/>
+<retval type='{?=dd}'/>
+</function>
+<class name='CLLocationManager'>
+<method selector='headingAvailable' class_method='true'>
+<retval type='B'/>
+</method>
+<method selector='locationServicesEnabled' class_method='true'>
+<retval type='B'/>
+</method>
+<method selector='regionMonitoringAvailable' class_method='true'>
+<retval type='B'/>
+</method>
+<method selector='regionMonitoringEnabled' class_method='true'>
+<retval type='B'/>
+</method>
+<method selector='significantLocationChangeMonitoringAvailable' class_method='true'>
+<retval type='B'/>
+</method>
+</class>
+<class name='CLRegion'>
+<method selector='containsCoordinate:'>
+<retval type='B'/>
+</method>
+</class>
+<class name='NSObject'>
+<method selector='locationManagerShouldDisplayHeadingCalibration:'>
+<retval type='B'/>
+</method>
+</class>
+</signatures>

@@ -1,0 +1,133 @@
+<?xml version='1.0'?>
+<!DOCTYPE signatures SYSTEM "file://localhost/System/Library/DTDs/BridgeSupport.dtd">
+<signatures version='0.9'>
+<enum name='GKErrorAuthenticationInProgress' value='7'/>
+<enum name='GKErrorCancelled' value='2'/>
+<enum name='GKErrorCommunicationsFailure' value='3'/>
+<enum name='GKErrorGameUnrecognized' value='15'/>
+<enum name='GKErrorInvalidCredentials' value='5'/>
+<enum name='GKErrorInvalidParameter' value='17'/>
+<enum name='GKErrorInvalidPlayer' value='8'/>
+<enum name='GKErrorMatchRequestInvalid' value='13'/>
+<enum name='GKErrorNotAuthenticated' value='6'/>
+<enum name='GKErrorNotSupported' value='16'/>
+<enum name='GKErrorParentalControlsBlocked' value='10'/>
+<enum name='GKErrorPlayerStatusExceedsMaximumLength' value='11'/>
+<enum name='GKErrorPlayerStatusInvalid' value='12'/>
+<enum name='GKErrorScoreNotSet' value='9'/>
+<enum name='GKErrorUnderage' value='14'/>
+<enum name='GKErrorUnknown' value='1'/>
+<enum name='GKErrorUserDenied' value='4'/>
+<enum name='GKLeaderboardPlayerScopeFriendsOnly' value='1'/>
+<enum name='GKLeaderboardPlayerScopeGlobal' value='0'/>
+<enum name='GKLeaderboardTimeScopeAllTime' value='2'/>
+<enum name='GKLeaderboardTimeScopeToday' value='0'/>
+<enum name='GKLeaderboardTimeScopeWeek' value='1'/>
+<enum name='GKMatchSendDataReliable' value='0'/>
+<enum name='GKMatchSendDataUnreliable' value='1'/>
+<enum name='GKPeerPickerConnectionTypeNearby' value='2'/>
+<enum name='GKPeerPickerConnectionTypeOnline' value='1'/>
+<enum name='GKPeerStateAvailable' value='0'/>
+<enum name='GKPeerStateConnected' value='2'/>
+<enum name='GKPeerStateConnecting' value='4'/>
+<enum name='GKPeerStateDisconnected' value='3'/>
+<enum name='GKPeerStateUnavailable' value='1'/>
+<enum name='GKPlayerStateConnected' value='1'/>
+<enum name='GKPlayerStateDisconnected' value='2'/>
+<enum name='GKPlayerStateUnknown' value='0'/>
+<enum name='GKSendDataReliable' value='0'/>
+<enum name='GKSendDataUnreliable' value='1'/>
+<enum name='GKSessionCancelledError' value='30504'/>
+<enum name='GKSessionCannotEnableError' value='30509'/>
+<enum name='GKSessionConnectionClosedError' value='30506'/>
+<enum name='GKSessionConnectionFailedError' value='30505'/>
+<enum name='GKSessionConnectivityError' value='30201'/>
+<enum name='GKSessionDataTooBigError' value='30507'/>
+<enum name='GKSessionDeclinedError' value='30502'/>
+<enum name='GKSessionInProgressError' value='30510'/>
+<enum name='GKSessionInternalError' value='30203'/>
+<enum name='GKSessionInvalidParameterError' value='30500'/>
+<enum name='GKSessionModeClient' value='1'/>
+<enum name='GKSessionModePeer' value='2'/>
+<enum name='GKSessionModeServer' value='0'/>
+<enum name='GKSessionNotConnectedError' value='30508'/>
+<enum name='GKSessionPeerNotFoundError' value='30501'/>
+<enum name='GKSessionSystemError' value='30205'/>
+<enum name='GKSessionTimedOutError' value='30503'/>
+<enum name='GKSessionTransportError' value='30202'/>
+<enum name='GKSessionUnknownError' value='30204'/>
+<enum name='GKVoiceChatPlayerConnected' value='0'/>
+<enum name='GKVoiceChatPlayerDisconnected' value='1'/>
+<enum name='GKVoiceChatPlayerSilent' value='3'/>
+<enum name='GKVoiceChatPlayerSpeaking' value='2'/>
+<enum name='GKVoiceChatServiceAudioUnavailableError' value='32005'/>
+<enum name='GKVoiceChatServiceClientMissingRequiredMethodsError' value='32007'/>
+<enum name='GKVoiceChatServiceInternalError' value='32000'/>
+<enum name='GKVoiceChatServiceInvalidCallIDError' value='32004'/>
+<enum name='GKVoiceChatServiceInvalidParameterError' value='32016'/>
+<enum name='GKVoiceChatServiceMethodCurrentlyInvalidError' value='32012'/>
+<enum name='GKVoiceChatServiceNetworkConfigurationError' value='32013'/>
+<enum name='GKVoiceChatServiceNoRemotePacketsError' value='32001'/>
+<enum name='GKVoiceChatServiceOutOfMemoryError' value='32015'/>
+<enum name='GKVoiceChatServiceRemoteParticipantBusyError' value='32008'/>
+<enum name='GKVoiceChatServiceRemoteParticipantCancelledError' value='32009'/>
+<enum name='GKVoiceChatServiceRemoteParticipantDeclinedInviteError' value='32011'/>
+<enum name='GKVoiceChatServiceRemoteParticipantHangupError' value='32003'/>
+<enum name='GKVoiceChatServiceRemoteParticipantResponseInvalidError' value='32010'/>
+<enum name='GKVoiceChatServiceUnableToConnectError' value='32002'/>
+<enum name='GKVoiceChatServiceUninitializedClientError' value='32006'/>
+<enum name='GKVoiceChatServiceUnsupportedRemoteVersionError' value='32014'/>
+<class name='GKAchievement'>
+<method selector='isCompleted'>
+<retval type='B'/>
+</method>
+<method selector='isHidden'>
+<retval type='B'/>
+</method>
+</class>
+<class name='GKAchievementDescription'>
+<method selector='isHidden'>
+<retval type='B'/>
+</method>
+</class>
+<class name='GKInvite'>
+<method selector='isHosted'>
+<retval type='B'/>
+</method>
+</class>
+<class name='GKLeaderboard'>
+<method selector='isLoading'>
+<retval type='B'/>
+</method>
+</class>
+<class name='GKMatch'>
+<method selector='sendData:toPlayers:withDataMode:error:'>
+<retval type='B'/>
+</method>
+<method selector='sendDataToAllPlayers:withDataMode:error:'>
+<retval type='B'/>
+</method>
+</class>
+<class name='GKMatchmakerViewController'>
+<method selector='isHosted'>
+<retval type='B'/>
+</method>
+<method selector='setHosted:'>
+<arg type='B' index='0'/>
+</method>
+</class>
+<class name='GKVoiceChat'>
+<method selector='isActive'>
+<retval type='B'/>
+</method>
+<method selector='isVoIPAllowed' class_method='true'>
+<retval type='B'/>
+</method>
+<method selector='setActive:'>
+<arg type='B' index='0'/>
+</method>
+<method selector='setMute:forPlayer:'>
+<arg type='B' index='0'/>
+</method>
+</class>
+</signatures>
