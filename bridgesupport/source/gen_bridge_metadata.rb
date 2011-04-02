@@ -32,7 +32,7 @@ require 'optparse'
 require 'tmpdir'
 
 SYSROOT = '/Developer-Xcode4/Platforms/iPhoneSimulator.platform/Developer'
-SDKROOT = File.join(SYSROOT, 'SDKs/iPhoneSimulator4.3.sdk')
+SDKROOT = File.join(SYSROOT, 'SDKs/iPhoneSimulator4.2.sdk')
 
 #SYSROOT = '/Developer/Platforms/iPhoneOS.platform/Developer'
 #SDKROOT = File.join(SYSROOT, 'SDKs/iPhoneOS4.2.sdk')
@@ -44,7 +44,7 @@ class OCHeaderAnalyzer
   p CPP
   raise "cpp not found" if CPP.nil?
   #CPPFLAGS = "-D__APPLE_CPP__=0 -DTARGET_OS_IPHONE=1 -arch armv7 -miphoneos-version-min=4.2 -isysroot #{SDKROOT} -I#{SDKROOT}/usr/include -include #{SDKROOT}/usr/include/Availability.h -include #{SDKROOT}/usr/include/AvailabilityMacros.h"
-  CPPFLAGS = "-D__APPLE_CPP__=0 -DTARGET_OS_IPHONE=1 -arch i386 -miphoneos-version-min=4.3 -isysroot #{SDKROOT} -I#{SDKROOT}/usr/include -include #{SDKROOT}/usr/include/Availability.h -include #{SDKROOT}/usr/include/AvailabilityMacros.h"
+  CPPFLAGS = "-D__APPLE_CPP__=0 -DTARGET_OS_IPHONE=1 -arch i386 -miphoneos-version-min=4.2 -isysroot #{SDKROOT} -I#{SDKROOT}/usr/include -include #{SDKROOT}/usr/include/Availability.h -include #{SDKROOT}/usr/include/AvailabilityMacros.h"
   #CPPFLAGS = "-D__APPLE_CPP__ -DTARGET_OS_IPHONE"
   CPPFLAGS << "-D__GNUC__" unless /\Acpp-4/.match(File.basename(CPP))
 
@@ -684,7 +684,7 @@ class BridgeSupportGenerator
     # Link against Foundation by default.
     if @compiler_flags and @import_directive 
       @import_directive.insert(0, "#import <Foundation/Foundation.h>\n")
-      @compiler_flags << " -framework CoreFoundation -framework Foundation -miphoneos-version-min=4.3 "
+      @compiler_flags << " -framework Foundation -miphoneos-version-min=4.3 "
     end
 
     # Open exceptions, ignore mentionned headers.
@@ -1806,7 +1806,8 @@ EOC
 
     #line = "#{SYSROOT}/usr/bin/gcc -I#{SDKROOT}/usr/include -arch armv7 #{arch_flag} #{tmp_src.path} -o #{tmp_bin_path} #{@compiler_flags} 2>#{tmp_log_path}"
     #line = "#{SYSROOT}/usr/bin/gcc -L#{SDKROOT}/usr/lib -lAccessibility -I#{SDKROOT}/usr/include -arch i386 #{arch_flag} #{tmp_src.path} -o #{tmp_bin_path} #{@compiler_flags} 2>#{tmp_log_path}"
-    line = "#{SYSROOT}/usr/bin/gcc -arch i386 -L#{SDKROOT}/usr/lib -L#{SDKROOT}/usr/lib/system -lobjc -I#{SDKROOT}/usr/include #{arch_flag} #{tmp_src.path} -o #{tmp_bin_path} #{@compiler_flags} 2>#{tmp_log_path}"
+    #line = "#{SYSROOT}/usr/bin/gcc -arch i386 -L#{SDKROOT}/usr/lib -L#{SDKROOT}/usr/lib/system -lobjc -I#{SDKROOT}/usr/include #{arch_flag} #{tmp_src.path} -o #{tmp_bin_path} #{@compiler_flags} 2>#{tmp_log_path}"
+    line = "#{SYSROOT}/usr/bin/gcc -arch i386 --sysroot=#{SDKROOT} -L#{SDKROOT}/usr/lib -L#{SDKROOT}/usr/lib/system -I#{SDKROOT}/usr/include #{arch_flag} #{tmp_src.path} -o #{tmp_bin_path} #{@compiler_flags} 2>#{tmp_log_path}"
     unless system(line)
       msg = "Can't compile C code... aborting\ncommand was: #{line}\n\n#{File.read(tmp_log_path)}"
       $stderr.puts "Code was:\n<<<<<<<\n#{code}>>>>>>>\n" if $DEBUG
@@ -1818,7 +1819,8 @@ EOC
     env = ''
     if @framework_paths
       @framework_paths << "#{SDKROOT}/System/Library/PrivateFrameworks"
-      env << "DYLD_LIBRARY_PATH=#{SDKROOT}/usr/lib:#{SDKROOT}/usr/lib/system DYLD_FRAMEWORK_PATH=\"#{@framework_paths.join(':')}\""
+      env << "DYLD_LIBRARY_PATH=#{SDKROOT}/usr/lib:#{SDKROOT}/usr/lib/system:#{SDKROOT}/System/Library/Frameworks/OpenGLES.framework DYLD_FRAMEWORK_PATH=\"#{@framework_paths.join(':')}\""
+      #env << "DYLD_LIBRARY_PATH=#{SDKROOT}/usr/lib:#{SDKROOT}/usr/lib/system DYLD_FRAMEWORK_PATH=\"#{@framework_paths.join(':')}\""
     end
 
     line = "#{env} #{tmp_bin_path}"
@@ -1854,7 +1856,7 @@ EOC
     tmp_log_path = unique_tmp_path('log')
     tmp_pch_path = "#{tmp_header.path}.gch"
 
-    line = "#{SYSROOT}/usr/bin/gcc -c -x objective-c-header -I#{SDKROOT}/usr/include #{tmp_header.path} -o #{tmp_pch_path} #{@compiler_flags} 2>#{tmp_log_path}"
+    line = "#{SYSROOT}/usr/bin/gcc -c -x objective-c-header -arch i386 --sysroot=#{SDKROOT} -L#{SDKROOT}/usr/lib -L#{SDKROOT}/usr/lib/system -I#{SDKROOT}/usr/include #{tmp_header.path} -o #{tmp_pch_path} #{@compiler_flags} 2>#{tmp_log_path}"
     unless system(line)
       msg = "Can't precompile header... aborting\ncommand was: #{line}\n\n#{File.read(tmp_log_path)}"
       #File.unlink(tmp_log_path)
