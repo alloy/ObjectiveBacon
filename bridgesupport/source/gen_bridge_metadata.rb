@@ -31,19 +31,20 @@ require 'fileutils'
 require 'optparse'
 require 'tmpdir'
 
-SYSROOT = '/Developer/Platforms/iPhoneSimulator.platform/Developer'
-SDKROOT = File.join(SYSROOT, 'SDKs/iPhoneSimulator4.2.sdk')
+SYSROOT = '/Developer-Xcode4/Platforms/iPhoneSimulator.platform/Developer'
+SDKROOT = File.join(SYSROOT, 'SDKs/iPhoneSimulator4.3.sdk')
 
 #SYSROOT = '/Developer/Platforms/iPhoneOS.platform/Developer'
 #SDKROOT = File.join(SYSROOT, 'SDKs/iPhoneOS4.2.sdk')
 
 class OCHeaderAnalyzer
   #CPP = ['/usr/bin/cpp-4.2', '/usr/bin/cpp-4.0', '/usr/bin/cpp'].map { |x| r = File.join(SYSROOT, x); p r; r }.find { |x| File.exist?(x) }
-  CPP = '/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/cpp-4.2'
+  #CPP = '/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/cpp-4.2'
+  CPP = '/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/cpp-4.2'
   p CPP
   raise "cpp not found" if CPP.nil?
   #CPPFLAGS = "-D__APPLE_CPP__=0 -DTARGET_OS_IPHONE=1 -arch armv7 -miphoneos-version-min=4.2 -isysroot #{SDKROOT} -I#{SDKROOT}/usr/include -include #{SDKROOT}/usr/include/Availability.h -include #{SDKROOT}/usr/include/AvailabilityMacros.h"
-  CPPFLAGS = "-D__APPLE_CPP__=0 -DTARGET_OS_IPHONE=1 -arch i386 -miphoneos-version-min=4.2 -isysroot #{SDKROOT} -I#{SDKROOT}/usr/include -include #{SDKROOT}/usr/include/Availability.h -include #{SDKROOT}/usr/include/AvailabilityMacros.h"
+  CPPFLAGS = "-D__APPLE_CPP__=0 -DTARGET_OS_IPHONE=1 -arch i386 -miphoneos-version-min=4.3 -isysroot #{SDKROOT} -I#{SDKROOT}/usr/include -include #{SDKROOT}/usr/include/Availability.h -include #{SDKROOT}/usr/include/AvailabilityMacros.h"
   #CPPFLAGS = "-D__APPLE_CPP__ -DTARGET_OS_IPHONE"
   CPPFLAGS << "-D__GNUC__" unless /\Acpp-4/.match(File.basename(CPP))
 
@@ -683,7 +684,7 @@ class BridgeSupportGenerator
     # Link against Foundation by default.
     if @compiler_flags and @import_directive 
       @import_directive.insert(0, "#import <Foundation/Foundation.h>\n")
-      @compiler_flags << " -framework Foundation -miphoneos-version-min=4.2 "
+      @compiler_flags << " -framework CoreFoundation -framework Foundation -miphoneos-version-min=4.3 "
     end
 
     # Open exceptions, ignore mentionned headers.
@@ -1794,17 +1795,18 @@ EOC
     tmp_bin_path = unique_tmp_path('bin')
     tmp_log_path = unique_tmp_path('log')
 
-    arch_flag =     
-      if @enable_64
-        " -arch #{IS_PPC ? 'ppc64' : 'x86_64'}"
-      elsif emulate_ppc
-        ' -arch ppc -arch i386'
-      else
-        '' # nothing, by default the compiler choose the 32-bit arch
-      end
+    arch_flag = ''    
+      #if @enable_64
+        #" -arch #{IS_PPC ? 'ppc64' : 'x86_64'}"
+      #elsif emulate_ppc
+        #' -arch ppc -arch i386'
+      #else
+        #'' # nothing, by default the compiler choose the 32-bit arch
+      #end
 
     #line = "#{SYSROOT}/usr/bin/gcc -I#{SDKROOT}/usr/include -arch armv7 #{arch_flag} #{tmp_src.path} -o #{tmp_bin_path} #{@compiler_flags} 2>#{tmp_log_path}"
-    line = "#{SYSROOT}/usr/bin/gcc -L#{SDKROOT}/usr/lib -lAccessibility -I#{SDKROOT}/usr/include -arch i386 #{arch_flag} #{tmp_src.path} -o #{tmp_bin_path} #{@compiler_flags} 2>#{tmp_log_path}"
+    #line = "#{SYSROOT}/usr/bin/gcc -L#{SDKROOT}/usr/lib -lAccessibility -I#{SDKROOT}/usr/include -arch i386 #{arch_flag} #{tmp_src.path} -o #{tmp_bin_path} #{@compiler_flags} 2>#{tmp_log_path}"
+    line = "#{SYSROOT}/usr/bin/gcc -arch i386 -L#{SDKROOT}/usr/lib -L#{SDKROOT}/usr/lib/system -lobjc -I#{SDKROOT}/usr/include #{arch_flag} #{tmp_src.path} -o #{tmp_bin_path} #{@compiler_flags} 2>#{tmp_log_path}"
     unless system(line)
       msg = "Can't compile C code... aborting\ncommand was: #{line}\n\n#{File.read(tmp_log_path)}"
       $stderr.puts "Code was:\n<<<<<<<\n#{code}>>>>>>>\n" if $DEBUG
@@ -1816,7 +1818,7 @@ EOC
     env = ''
     if @framework_paths
       @framework_paths << "#{SDKROOT}/System/Library/PrivateFrameworks"
-      env << "DYLD_LIBRARY_PATH=#{SDKROOT}/usr/lib:#{SDKROOT}/System/Library/Frameworks/OpenGLES.framework DYLD_FRAMEWORK_PATH=\"#{@framework_paths.join(':')}\""
+      env << "DYLD_LIBRARY_PATH=#{SDKROOT}/usr/lib:#{SDKROOT}/usr/lib/system DYLD_FRAMEWORK_PATH=\"#{@framework_paths.join(':')}\""
     end
 
     line = "#{env} #{tmp_bin_path}"
@@ -1825,14 +1827,14 @@ EOC
       raise "Can't execute compiled C code... aborting\nline was: #{line}\nbinary is #{tmp_bin_path}"
     end
 
-    if emulate_ppc
-      line = "#{env} /usr/libexec/oah/translate #{tmp_bin_path}"
-      out = [out]
-      out <<  `#{line}`
-      unless $?.success?
-        raise "Can't execute compiled C code under PPC mode... aborting\nline was: #{line}\nbinary is #{tmp_bin_path}"
-      end
-    end
+    #if emulate_ppc
+      #line = "#{env} /usr/libexec/oah/translate #{tmp_bin_path}"
+      #out = [out]
+      #out <<  `#{line}`
+      #unless $?.success?
+        #raise "Can't execute compiled C code under PPC mode... aborting\nline was: #{line}\nbinary is #{tmp_bin_path}"
+      #end
+    #end
 
     File.unlink(tmp_log_path)
     File.unlink(tmp_src.path)
