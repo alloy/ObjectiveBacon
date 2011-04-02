@@ -55,7 +55,7 @@ require 'bridgesupportparser'
 
 class OCHeaderAnalyzer
     CPP = ['/usr/bin/cpp-4.2', '/usr/bin/cpp-4.0', '/usr/bin/cpp'].find { |x| File.exist?(x) }
-    CPPFLAGS = "-D__APPLE_CPP__ -include /usr/include/AvailabilityMacros.h"
+    CPPFLAGS = "-D__APPLE_CPP__ -include /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/usr/include/Availability.h"
     CPPFLAGS << " -D__GNUC__" unless /^cpp-4/.match(File.basename(CPP))
 
     def self.data(data)
@@ -359,7 +359,9 @@ class OCHeaderAnalyzer
 	f_on = false
 	err_file = '/tmp/.cpp.err'
 	cpp_line = "#{CPP} #{CPPFLAGS} #{flags} #{do_64 ? '-D__LP64__' : ''} \"#{path}\" 2>#{err_file}"
+  puts cpp_line
 	complete_result = `#{cpp_line}`
+  puts complete_result
 	if $?.to_i != 0 and fails_on_error
 	    $stderr.puts File.read(err_file)
 	    File.unlink(err_file)
@@ -717,9 +719,10 @@ class BridgeSupportGenerator
 
 	prepare(sysroot == '/' ? '' : sysroot)
 	@incdirs << encode_includes("#{$slb}/include", 'A', false, false)
-	@incdirs << encode_includes('/System/Library/Frameworks/CoreServices.framework/Frameworks', 'S', false, true)
-	@imports.unshift('AvailabilityMacros.h')
+	@incdirs << encode_includes('/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/CoreServices.framework/Frameworks', 'S', false, true)
+	@imports.unshift('Availability.h')
 	@imports.unshift('_BS_bool.h')
+        p @incdirs, @imports
 
 	args = OpenStruct.new
 	args.darwinvers = darwinvers.nil? ? _darwinvers : darwinvers
