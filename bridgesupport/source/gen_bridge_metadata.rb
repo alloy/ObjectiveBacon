@@ -31,7 +31,7 @@ require 'fileutils'
 require 'optparse'
 require 'tmpdir'
 
-SYSROOT = '/Developer-Xcode4/Platforms/iPhoneSimulator.platform/Developer'
+SYSROOT = '/Developer/Platforms/iPhoneSimulator.platform/Developer'
 SDKROOT = File.join(SYSROOT, 'SDKs/iPhoneSimulator4.2.sdk')
 
 #SYSROOT = '/Developer/Platforms/iPhoneOS.platform/Developer'
@@ -1811,8 +1811,8 @@ EOC
     unless system(line)
       msg = "Can't compile C code... aborting\ncommand was: #{line}\n\n#{File.read(tmp_log_path)}"
       $stderr.puts "Code was:\n<<<<<<<\n#{code}>>>>>>>\n" if $DEBUG
-      File.unlink(tmp_log_path)
-      File.unlink(tmp_src.path) if cleanup_when_fail
+      #File.unlink(tmp_log_path)
+      #File.unlink(tmp_src.path) if cleanup_when_fail
       raise msg
     end
     
