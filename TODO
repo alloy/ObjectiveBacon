@@ -1,6 +1,4 @@
 * Check how to use BridgeSupport with Nu for constants on iOS/OSX
-* Add -[UIView touch]
-* Add property to UIBacon which stores a sharedWindow, which is where the $ and $$ helpers get the window from, default to key window.
 * Add before/after all.
 * Add generators for test cases and iOS testrunner app target for Xcode 4
 * add specs from NuBacon which test that BaconShould#raise returns the raised exception

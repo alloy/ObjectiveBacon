@@ -71,14 +71,14 @@
 (describe "Bacon UIView additions" `(
   (before (do ()
     (set @controller (ControlsViewController new))
-    ($window setRootViewController:@controller)
+    (window setRootViewController:@controller)
     (wait 1 (do ()
       (set @view (@controller view))
     ))
   ))
 
   (after (do ()
-    ($window setRootViewController:nil)
+    (window setRootViewController:nil)
   ))
 
   (describe "viewsByClass:" `(
@@ -235,6 +235,13 @@
     (it "sends a touch event to the view" (do ()
       (($ "Button 1") touch)
       (~ (@controller touchedButton) should be:($ "Button 1"))
+    ))
+  ))
+
+  (describe "UIBacon" `(
+    (it "returns the shared window" (do ()
+      (~ (UIBacon sharedWindow) should be:((UIApplication sharedApplication) keyWindow))
+      (~ window should be:((UIApplication sharedApplication) keyWindow))
     ))
   ))
 

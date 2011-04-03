@@ -156,8 +156,12 @@
   )
 )
 
+(macro window (*window-args)
+  `((UIBacon sharedWindow) ,@*window-args)
+)
+
 (function $ (accessibilityLabel)
-  (((UIApplication sharedApplication) keyWindow) viewByName:accessibilityLabel)
+  ((UIBacon sharedWindow) viewByName:accessibilityLabel)
 )
 
 ; main context macros

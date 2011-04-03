@@ -9,10 +9,9 @@
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
   id parser = [Nu parser];
 
-  // Create a window and make it available in the Nu runtime as a global
+  // Create a window and make it key which means it will be picked up by +[UIBacon sharedWindow] automatically
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   [self.window makeKeyAndVisible];
-  [parser parseEval:@"(set $window ((UIApplication sharedApplication) keyWindow))"];
 
   // Load the NuBacon source before anything else
   NSString *baconPath = [[NSBundle mainBundle] pathForResource:@"bacon" ofType:@"nu"];

@@ -1,6 +1,25 @@
 #import "UIBacon.h"
 #import "UIBaconPath.h"
 
+
+@implementation UIBacon
+
+static UIWindow *sharedWindow = nil;
+
++ (UIWindow *)sharedWindow {
+  if (sharedWindow == nil) {
+    sharedWindow = [[UIApplication sharedApplication] keyWindow];
+  }
+  return sharedWindow;
+}
+
++ (void)setSharedWindow:(UIWindow *)window {
+  sharedWindow = window;
+}
+
+@end
+
+
 @implementation UIBaconViewSet
 
 

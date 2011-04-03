@@ -1,6 +1,13 @@
 #import <UIKit/UIKit.h>
 
 
+@interface UIBacon : NSObject
+
++ (UIWindow *)sharedWindow;
++ (void)setSharedWindow:(UIWindow *)window;
+
+@end
+
 @interface UIBaconViewSet : NSObject {
   NSArray *viewSet;
 }
@@ -14,6 +21,7 @@
 - (id)_filteredList:(NSArray *)array;
 
 @end
+
 
 @interface UIView (UIBacon)
 
