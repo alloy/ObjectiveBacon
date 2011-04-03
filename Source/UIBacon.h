@@ -22,5 +22,7 @@
 - (UIView *)viewByName:(NSString *)accessibilityLabel;
 - (id)viewsByPath:(NSString *)path;
 
+- (void)touch;
+
 @end
 

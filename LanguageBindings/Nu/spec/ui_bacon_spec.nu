@@ -2,19 +2,26 @@
 (global UIControlStateNormal 0)
 (global UIControlContentVerticalAlignmentCenter 0)
 (global UIControlContentVerticalAlignmentTop 1)
+(global UIControlEventTouchUpInside 64)
 
 (class ColoredView is UIView)
 
 (class ControlsViewController is UIViewController
-  (ivar (id) viewWithSubviews)
+  (ivar (id) viewWithSubviews
+        (id) touchedButton)
 
   (ivar-accessors)
+
+  (- (id)buttonTouched:(id)sender is
+    (set @touchedButton sender)
+  )
 
   (- (id)loadView is
     (set view (UIView new))
     (self setView:view)
 
     (set button (UIButton buttonWithType:UIButtonTypeRoundedRect))
+    (button addTarget:self action:"buttonTouched:" forControlEvents:UIControlEventTouchUpInside)
     (button setTitle:"Button 1" forState:UIControlStateNormal)
     (button setFrame:`(0 0 80 30))
     (view addSubview:button)
@@ -223,4 +230,12 @@
       (~ ((($ "green view") subviews) objectAtIndex:0) should be:($ "Button 6"))
     ))
   ))
+
+  (describe "-[UIView touch]" `(
+    (it "sends a touch event to the view" (do ()
+      (($ "Button 1") touch)
+      (~ (@controller touchedButton) should be:($ "Button 1"))
+    ))
+  ))
+
 ))
