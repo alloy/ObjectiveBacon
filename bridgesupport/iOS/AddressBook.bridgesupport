@@ -1,0 +1,410 @@
+<?xml version='1.0'?>
+<!DOCTYPE signatures SYSTEM "file://localhost/System/Library/DTDs/BridgeSupport.dtd">
+<signatures version='0.9'>
+<constant name='ABAddressBookErrorDomain' type='^{__CFString=}'/>
+<constant name='kABGroupNameProperty' type='i'/>
+<constant name='kABHomeLabel' type='^{__CFString=}'/>
+<constant name='kABOtherLabel' type='^{__CFString=}'/>
+<constant name='kABPersonAddressCityKey' type='^{__CFString=}'/>
+<constant name='kABPersonAddressCountryCodeKey' type='^{__CFString=}'/>
+<constant name='kABPersonAddressCountryKey' type='^{__CFString=}'/>
+<constant name='kABPersonAddressProperty' type='i'/>
+<constant name='kABPersonAddressStateKey' type='^{__CFString=}'/>
+<constant name='kABPersonAddressStreetKey' type='^{__CFString=}'/>
+<constant name='kABPersonAddressZIPKey' type='^{__CFString=}'/>
+<constant name='kABPersonAnniversaryLabel' type='^{__CFString=}'/>
+<constant name='kABPersonAssistantLabel' type='^{__CFString=}'/>
+<constant name='kABPersonBirthdayProperty' type='i'/>
+<constant name='kABPersonBrotherLabel' type='^{__CFString=}'/>
+<constant name='kABPersonChildLabel' type='^{__CFString=}'/>
+<constant name='kABPersonCreationDateProperty' type='i'/>
+<constant name='kABPersonDateProperty' type='i'/>
+<constant name='kABPersonDepartmentProperty' type='i'/>
+<constant name='kABPersonEmailProperty' type='i'/>
+<constant name='kABPersonFatherLabel' type='^{__CFString=}'/>
+<constant name='kABPersonFirstNamePhoneticProperty' type='i'/>
+<constant name='kABPersonFirstNameProperty' type='i'/>
+<constant name='kABPersonFriendLabel' type='^{__CFString=}'/>
+<constant name='kABPersonHomePageLabel' type='^{__CFString=}'/>
+<constant name='kABPersonInstantMessageProperty' type='i'/>
+<constant name='kABPersonInstantMessageServiceAIM' type='^{__CFString=}'/>
+<constant name='kABPersonInstantMessageServiceICQ' type='^{__CFString=}'/>
+<constant name='kABPersonInstantMessageServiceJabber' type='^{__CFString=}'/>
+<constant name='kABPersonInstantMessageServiceKey' type='^{__CFString=}'/>
+<constant name='kABPersonInstantMessageServiceMSN' type='^{__CFString=}'/>
+<constant name='kABPersonInstantMessageServiceYahoo' type='^{__CFString=}'/>
+<constant name='kABPersonInstantMessageUsernameKey' type='^{__CFString=}'/>
+<constant name='kABPersonJobTitleProperty' type='i'/>
+<constant name='kABPersonKindOrganization' type='^{__CFNumber=}'/>
+<constant name='kABPersonKindPerson' type='^{__CFNumber=}'/>
+<constant name='kABPersonKindProperty' type='i'/>
+<constant name='kABPersonLastNamePhoneticProperty' type='i'/>
+<constant name='kABPersonLastNameProperty' type='i'/>
+<constant name='kABPersonManagerLabel' type='^{__CFString=}'/>
+<constant name='kABPersonMiddleNamePhoneticProperty' type='i'/>
+<constant name='kABPersonMiddleNameProperty' type='i'/>
+<constant name='kABPersonModificationDateProperty' type='i'/>
+<constant name='kABPersonMotherLabel' type='^{__CFString=}'/>
+<constant name='kABPersonNicknameProperty' type='i'/>
+<constant name='kABPersonNoteProperty' type='i'/>
+<constant name='kABPersonOrganizationProperty' type='i'/>
+<constant name='kABPersonParentLabel' type='^{__CFString=}'/>
+<constant name='kABPersonPartnerLabel' type='^{__CFString=}'/>
+<constant name='kABPersonPhoneHomeFAXLabel' type='^{__CFString=}'/>
+<constant name='kABPersonPhoneIPhoneLabel' type='^{__CFString=}'/>
+<constant name='kABPersonPhoneMainLabel' type='^{__CFString=}'/>
+<constant name='kABPersonPhoneMobileLabel' type='^{__CFString=}'/>
+<constant name='kABPersonPhonePagerLabel' type='^{__CFString=}'/>
+<constant name='kABPersonPhoneProperty' type='i'/>
+<constant name='kABPersonPhoneWorkFAXLabel' type='^{__CFString=}'/>
+<constant name='kABPersonPrefixProperty' type='i'/>
+<constant name='kABPersonRelatedNamesProperty' type='i'/>
+<constant name='kABPersonSisterLabel' type='^{__CFString=}'/>
+<constant name='kABPersonSpouseLabel' type='^{__CFString=}'/>
+<constant name='kABPersonSuffixProperty' type='i'/>
+<constant name='kABPersonURLProperty' type='i'/>
+<constant name='kABSourceNameProperty' type='i'/>
+<constant name='kABSourceTypeProperty' type='i'/>
+<constant name='kABWorkLabel' type='^{__CFString=}'/>
+<enum name='kABDateTimePropertyType' value='4'/>
+<enum name='kABDictionaryPropertyType' value='5'/>
+<enum name='kABGroupType' value='1'/>
+<enum name='kABIntegerPropertyType' value='2'/>
+<enum name='kABInvalidPropertyType' value='0'/>
+<enum name='kABMultiDateTimePropertyType' value='260'/>
+<enum name='kABMultiDictionaryPropertyType' value='261'/>
+<enum name='kABMultiIntegerPropertyType' value='258'/>
+<enum name='kABMultiRealPropertyType' value='259'/>
+<enum name='kABMultiStringPropertyType' value='257'/>
+<enum name='kABMultiValueInvalidIdentifier' value='-1'/>
+<enum name='kABMultiValueMask' value='256'/>
+<enum name='kABOperationNotPermittedByStoreError' value='0'/>
+<enum name='kABPersonCompositeNameFormatFirstNameFirst' value='0'/>
+<enum name='kABPersonCompositeNameFormatLastNameFirst' value='1'/>
+<enum name='kABPersonImageFormatOriginalSize' value='2'/>
+<enum name='kABPersonImageFormatThumbnail' value='0'/>
+<enum name='kABPersonSortByFirstName' value='0'/>
+<enum name='kABPersonSortByLastName' value='1'/>
+<enum name='kABPersonType' value='0'/>
+<enum name='kABPropertyInvalidID' value='-1'/>
+<enum name='kABRealPropertyType' value='3'/>
+<enum name='kABRecordInvalidID' value='-1'/>
+<enum name='kABSourceTypeCardDAV' value='4'/>
+<enum name='kABSourceTypeCardDAVSearch' value='16777220'/>
+<enum name='kABSourceTypeExchange' value='1'/>
+<enum name='kABSourceTypeExchangeGAL' value='16777217'/>
+<enum name='kABSourceTypeLDAP' value='16777219'/>
+<enum name='kABSourceTypeLocal' value='0'/>
+<enum name='kABSourceTypeMobileMe' value='2'/>
+<enum name='kABSourceTypeSearchableMask' value='16777216'/>
+<enum name='kABStringPropertyType' value='1'/>
+<function name='ABAddressBookAddRecord'>
+<arg type='@'/>
+<arg type='@'/>
+<arg type='^^{__CFError}'/>
+<retval type='B'/>
+</function>
+<function name='ABAddressBookCopyArrayOfAllGroups'>
+<arg type='@'/>
+<retval type='^{__CFArray=}'/>
+</function>
+<function name='ABAddressBookCopyArrayOfAllGroupsInSource'>
+<arg type='@'/>
+<arg type='@'/>
+<retval type='^{__CFArray=}'/>
+</function>
+<function name='ABAddressBookCopyArrayOfAllPeople'>
+<arg type='@'/>
+<retval type='^{__CFArray=}'/>
+</function>
+<function name='ABAddressBookCopyArrayOfAllPeopleInSource'>
+<arg type='@'/>
+<arg type='@'/>
+<retval type='^{__CFArray=}'/>
+</function>
+<function name='ABAddressBookCopyArrayOfAllPeopleInSourceWithSortOrdering'>
+<arg type='@'/>
+<arg type='@'/>
+<arg type='I'/>
+<retval type='^{__CFArray=}'/>
+</function>
+<function name='ABAddressBookCopyArrayOfAllSources'>
+<arg type='@'/>
+<retval type='^{__CFArray=}'/>
+</function>
+<function name='ABAddressBookCopyDefaultSource'>
+<arg type='@'/>
+<retval already_retained='true' type='@'/>
+</function>
+<function name='ABAddressBookCopyLocalizedLabel'>
+<arg type='^{__CFString=}'/>
+<retval type='^{__CFString=}'/>
+</function>
+<function name='ABAddressBookCopyPeopleWithName'>
+<arg type='@'/>
+<arg type='^{__CFString=}'/>
+<retval type='^{__CFArray=}'/>
+</function>
+<function name='ABAddressBookCreate'>
+<retval already_retained='true' type='@'/>
+</function>
+<function name='ABAddressBookGetGroupCount'>
+<arg type='@'/>
+<retval type='l'/>
+</function>
+<function name='ABAddressBookGetGroupWithRecordID'>
+<arg type='@'/>
+<arg type='i'/>
+<retval type='@'/>
+</function>
+<function name='ABAddressBookGetPersonCount'>
+<arg type='@'/>
+<retval type='l'/>
+</function>
+<function name='ABAddressBookGetPersonWithRecordID'>
+<arg type='@'/>
+<arg type='i'/>
+<retval type='@'/>
+</function>
+<function name='ABAddressBookGetSourceWithRecordID'>
+<arg type='@'/>
+<arg type='i'/>
+<retval type='@'/>
+</function>
+<function name='ABAddressBookHasUnsavedChanges'>
+<arg type='@'/>
+<retval type='B'/>
+</function>
+<function name='ABAddressBookRegisterExternalChangeCallback'>
+<arg type='@'/>
+<arg function_pointer='true' type='^?'>
+<arg type='@'/>
+<arg type='^{__CFDictionary=}'/>
+<arg type='^v'/>
+<retval type='v'/>
+</arg>
+<arg type='^v'/>
+</function>
+<function name='ABAddressBookRemoveRecord'>
+<arg type='@'/>
+<arg type='@'/>
+<arg type='^^{__CFError}'/>
+<retval type='B'/>
+</function>
+<function name='ABAddressBookRevert'>
+<arg type='@'/>
+</function>
+<function name='ABAddressBookSave'>
+<arg type='@'/>
+<arg type='^^{__CFError}'/>
+<retval type='B'/>
+</function>
+<function name='ABAddressBookUnregisterExternalChangeCallback'>
+<arg type='@'/>
+<arg function_pointer='true' type='^?'>
+<arg type='@'/>
+<arg type='^{__CFDictionary=}'/>
+<arg type='^v'/>
+<retval type='v'/>
+</arg>
+<arg type='^v'/>
+</function>
+<function name='ABGroupAddMember'>
+<arg type='@'/>
+<arg type='@'/>
+<arg type='^^{__CFError}'/>
+<retval type='B'/>
+</function>
+<function name='ABGroupCopyArrayOfAllMembers'>
+<arg type='@'/>
+<retval type='^{__CFArray=}'/>
+</function>
+<function name='ABGroupCopyArrayOfAllMembersWithSortOrdering'>
+<arg type='@'/>
+<arg type='I'/>
+<retval type='^{__CFArray=}'/>
+</function>
+<function name='ABGroupCopySource'>
+<arg type='@'/>
+<retval already_retained='true' type='@'/>
+</function>
+<function name='ABGroupCreate'>
+<retval already_retained='true' type='@'/>
+</function>
+<function name='ABGroupCreateInSource'>
+<arg type='@'/>
+<retval already_retained='true' type='@'/>
+</function>
+<function name='ABGroupRemoveMember'>
+<arg type='@'/>
+<arg type='@'/>
+<arg type='^^{__CFError}'/>
+<retval type='B'/>
+</function>
+<function name='ABMultiValueAddValueAndLabel'>
+<arg type='@'/>
+<arg type='@'/>
+<arg type='^{__CFString=}'/>
+<arg type='^i'/>
+<retval type='B'/>
+</function>
+<function name='ABMultiValueCopyArrayOfAllValues'>
+<arg type='@'/>
+<retval type='^{__CFArray=}'/>
+</function>
+<function name='ABMultiValueCopyLabelAtIndex'>
+<arg type='@'/>
+<arg type='l'/>
+<retval type='^{__CFString=}'/>
+</function>
+<function name='ABMultiValueCopyValueAtIndex'>
+<arg type='@'/>
+<arg type='l'/>
+<retval already_retained='true' type='@'/>
+</function>
+<function name='ABMultiValueCreateMutable'>
+<arg type='I'/>
+<retval already_retained='true' type='@'/>
+</function>
+<function name='ABMultiValueCreateMutableCopy'>
+<arg type='@'/>
+<retval already_retained='true' type='@'/>
+</function>
+<function name='ABMultiValueGetCount'>
+<arg type='@'/>
+<retval type='l'/>
+</function>
+<function name='ABMultiValueGetFirstIndexOfValue'>
+<arg type='@'/>
+<arg type='@'/>
+<retval type='l'/>
+</function>
+<function name='ABMultiValueGetIdentifierAtIndex'>
+<arg type='@'/>
+<arg type='l'/>
+<retval type='i'/>
+</function>
+<function name='ABMultiValueGetIndexForIdentifier'>
+<arg type='@'/>
+<arg type='i'/>
+<retval type='l'/>
+</function>
+<function name='ABMultiValueGetPropertyType'>
+<arg type='@'/>
+<retval type='I'/>
+</function>
+<function name='ABMultiValueInsertValueAndLabelAtIndex'>
+<arg type='@'/>
+<arg type='@'/>
+<arg type='^{__CFString=}'/>
+<arg type='l'/>
+<arg type='^i'/>
+<retval type='B'/>
+</function>
+<function name='ABMultiValueRemoveValueAndLabelAtIndex'>
+<arg type='@'/>
+<arg type='l'/>
+<retval type='B'/>
+</function>
+<function name='ABMultiValueReplaceLabelAtIndex'>
+<arg type='@'/>
+<arg type='^{__CFString=}'/>
+<arg type='l'/>
+<retval type='B'/>
+</function>
+<function name='ABMultiValueReplaceValueAtIndex'>
+<arg type='@'/>
+<arg type='@'/>
+<arg type='l'/>
+<retval type='B'/>
+</function>
+<function name='ABPersonComparePeopleByName'>
+<arg type='@'/>
+<arg type='@'/>
+<arg type='I'/>
+<retval type='l'/>
+</function>
+<function name='ABPersonCopyArrayOfAllLinkedPeople'>
+<arg type='@'/>
+<retval type='^{__CFArray=}'/>
+</function>
+<function name='ABPersonCopyImageData'>
+<arg type='@'/>
+<retval type='^{__CFData=}'/>
+</function>
+<function name='ABPersonCopyImageDataWithFormat'>
+<arg type='@'/>
+<arg type='i'/>
+<retval type='^{__CFData=}'/>
+</function>
+<function name='ABPersonCopyLocalizedPropertyName'>
+<arg type='i'/>
+<retval type='^{__CFString=}'/>
+</function>
+<function name='ABPersonCopySource'>
+<arg type='@'/>
+<retval already_retained='true' type='@'/>
+</function>
+<function name='ABPersonCreate'>
+<retval already_retained='true' type='@'/>
+</function>
+<function name='ABPersonCreateInSource'>
+<arg type='@'/>
+<retval already_retained='true' type='@'/>
+</function>
+<function name='ABPersonGetCompositeNameFormat'>
+<retval type='I'/>
+</function>
+<function name='ABPersonGetSortOrdering'>
+<retval type='I'/>
+</function>
+<function name='ABPersonGetTypeOfProperty'>
+<arg type='i'/>
+<retval type='I'/>
+</function>
+<function name='ABPersonHasImageData'>
+<arg type='@'/>
+<retval type='B'/>
+</function>
+<function name='ABPersonRemoveImageData'>
+<arg type='@'/>
+<arg type='^^{__CFError}'/>
+<retval type='B'/>
+</function>
+<function name='ABPersonSetImageData'>
+<arg type='@'/>
+<arg type='^{__CFData=}'/>
+<arg type='^^{__CFError}'/>
+<retval type='B'/>
+</function>
+<function name='ABRecordCopyCompositeName'>
+<arg type='@'/>
+<retval type='^{__CFString=}'/>
+</function>
+<function name='ABRecordCopyValue'>
+<arg type='@'/>
+<arg type='i'/>
+<retval already_retained='true' type='@'/>
+</function>
+<function name='ABRecordGetRecordID'>
+<arg type='@'/>
+<retval type='i'/>
+</function>
+<function name='ABRecordGetRecordType'>
+<arg type='@'/>
+<retval type='I'/>
+</function>
+<function name='ABRecordRemoveValue'>
+<arg type='@'/>
+<arg type='i'/>
+<arg type='^^{__CFError}'/>
+<retval type='B'/>
+</function>
+<function name='ABRecordSetValue'>
+<arg type='@'/>
+<arg type='i'/>
+<arg type='@'/>
+<arg type='^^{__CFError}'/>
+<retval type='B'/>
+</function>
+</signatures>
