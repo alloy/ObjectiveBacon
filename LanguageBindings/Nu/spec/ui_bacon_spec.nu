@@ -68,6 +68,16 @@
   )
 )
 
+(describe "BridgeSupport" `(
+  (it "loads" (do ()
+    (set url ((NSBundle mainBundle) URLForResource:"CoreLocation" withExtension:"bridgesupport"))
+    (puts url)
+    (set metadata (NSMutableDictionary dictionary))
+    (NuBridgeSupport importMetadata:url intoDictionary:metadata)
+    (puts metadata)
+  ))
+))
+
 (describe "Bacon UIView additions" `(
   (before (do ()
     (set @controller (ControlsViewController new))

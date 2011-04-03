@@ -16,13 +16,128 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #ifdef DARWIN
-#ifndef IPHONE
+// #ifndef IPHONE
 
 #import <Foundation/Foundation.h>
 #import <dlfcn.h>
 #import "bridgesupport.h"
 #import "extensions.h"
 #import "symbol.h"
+
+static NSString *getTypeStringFromAttrs(NSDictionary *attrs)
+{
+	static BOOL use64BitTypes = (sizeof(void *) == 8);
+    if (use64BitTypes ) {
+        id type64Attribute = [attrs valueForKey:@"type64"];
+        if (type64Attribute)
+            return [type64Attribute stringValue];
+    }
+    return [[attrs valueForKey:@"type"] stringValue];
+}
+
+@interface NuBridgeSupportParser : NSObject {
+  NSXMLParser *xmlParser;
+  NSMutableDictionary *constants;
+  NSMutableDictionary *enums;
+  NSMutableDictionary *functions;
+
+  NSString *functionName;
+  NSString *returnType;
+  NSMutableString *argumentTypes;
+}
+
+- (id)initWithMetadata:(NSURL *) metadataURL outputDictionary:(NSMutableDictionary *) dictionary;
+
+@end
+
+@implementation NuBridgeSupportParser
+
+- (id)initWithMetadata:(NSURL *) metadataURL outputDictionary:(NSMutableDictionary *) dictionary
+{
+  if (self = [super init]) {
+    xmlParser = [[NSXMLParser alloc] initWithContentsOfURL:metadataURL];
+    xmlParser.delegate = self;
+
+    constants = [dictionary objectForKey:@"constants"];
+    if (constants == nil) {
+      constants = [NSMutableDictionary dictionary];
+      [dictionary setObject:constants forKey:@"constants"];
+    }
+
+    enums = [dictionary objectForKey:@"enums"];
+    if (enums == nil) {
+      enums = [NSMutableDictionary dictionary];
+      [dictionary setObject:enums forKey:@"enums"];
+    }
+
+    functionName = nil;
+    argumentTypes = nil;
+    returnType = nil;
+
+    functions = [dictionary objectForKey:@"functions"];
+    if (functions == nil) {
+      functions = [NSMutableDictionary dictionary];
+      [dictionary setObject:functions forKey:@"functions"];
+    }
+  }
+  return self;
+}
+
+- (void)dealloc
+{
+  [xmlParser release];
+  [functionName release];
+  [returnType release];
+  [argumentTypes release];
+  [super dealloc];
+}
+
+- (void)start
+{
+  [xmlParser parse];
+}
+
+- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)name namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attrs
+{
+  NSLog(@"Elm: %@, namespace: %@, qualifiedName: %@ attrs: %@", name, namespaceURI, qualifiedName, attrs);
+
+  if ([name isEqualToString:@"constant"]) {
+    [constants setObject:getTypeStringFromAttrs(attrs) forKey:[[attrs valueForKey:@"name"] stringValue]];
+  }
+  else if ([name isEqualToString:@"enum"]) {
+    [enums setObject:[NSNumber numberWithInt:[[[attrs valueForKey:@"value"] stringValue] intValue]] forKey:[[attrs valueForKey:@"name"] stringValue]];
+  }
+  else if ([name isEqualToString:@"function"]) {
+    functionName = [[[attrs valueForKey:@"name"] stringValue] retain];
+    argumentTypes = [NSMutableString new];
+    returnType = @"v";
+  }
+  else if (functionName && [name isEqualToString:@"arg"]) {
+    [argumentTypes appendString:getTypeStringFromAttrs(attrs)];
+  }
+  else if (functionName && [name isEqualToString:@"retval"]) {
+    returnType = [getTypeStringFromAttrs(attrs) retain];
+  }
+}
+
+- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)name namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
+{
+  NSLog(@"END: %@", name);
+  if ([name isEqual:@"function"]) {
+    NSString *signature = [NSString stringWithFormat:@"%@%@", returnType, argumentTypes];
+    [functions setObject:signature forKey:functionName];
+    NSLog(@"Functions: %@", functions);
+    [functionName release];
+    [returnType release];
+    [argumentTypes release];
+    functionName = nil;
+    argumentTypes = nil;
+    returnType = nil;
+  }
+}
+
+@end
+
 
 static NSString *getTypeStringFromNode(id node)
 {
@@ -35,12 +150,20 @@ static NSString *getTypeStringFromNode(id node)
     return [[node attributeForName:@"type"] stringValue];
 }
 
+
 @implementation NuBridgeSupport
 
 + (void)importLibrary:(NSString *) libraryPath
 {
     //NSLog(@"importing library %@", libraryPath);
     dlopen([libraryPath cStringUsingEncoding:NSUTF8StringEncoding], RTLD_LAZY | RTLD_GLOBAL);
+}
+
++ (void)importMetadata:(NSURL *) metadataURL intoDictionary:(NSMutableDictionary *) BridgeSupport
+{
+  NuBridgeSupportParser *parser = [[NuBridgeSupportParser alloc] initWithMetadata:metadataURL outputDictionary:BridgeSupport];
+  [parser start];
+  [parser release];
 }
 
 + (void)importFramework:(NSString *) framework fromPath:(NSString *) path intoDictionary:(NSMutableDictionary *) BridgeSupport
@@ -70,55 +193,55 @@ static NSString *getTypeStringFromNode(id node)
     NSMutableDictionary *enums =     [BridgeSupport valueForKey:@"enums"];
     NSMutableDictionary *functions = [BridgeSupport valueForKey:@"functions"];
 
-    NSXMLDocument *xmlDocument = [[[NSXMLDocument alloc] initWithContentsOfURL:[NSURL fileURLWithPath:xmlPath] options:0 error:nil] autorelease];
-    if (xmlDocument) {
-        id node;
-        NSEnumerator *childEnumerator = [[[xmlDocument rootElement] children] objectEnumerator];
-        while ((node = [childEnumerator nextObject])) {
-            if ([[node name] isEqual:@"depends_on"]) {
-                id fileName = [[node attributeForName:@"path"] stringValue];
-                id frameworkName = [[[fileName lastPathComponent] componentsSeparatedByString:@"."] objectAtIndex:0];
-                [NuBridgeSupport importFramework:frameworkName fromPath:fileName intoDictionary:BridgeSupport];
-            }
-            else if ([[node name] isEqual:@"constant"]) {
-                [constants setValue:getTypeStringFromNode(node)
-                    forKey:[[node attributeForName:@"name"] stringValue]];
-            }
-            else if ([[node name] isEqual:@"enum"]) {
-                [enums setValue:[NSNumber numberWithInt:[[[node attributeForName:@"value"] stringValue] intValue]]
-                    forKey:[[node attributeForName:@"name"] stringValue]];
-            }
-            else if ([[node name] isEqual:@"function"]) {
-                id name = [[node attributeForName:@"name"] stringValue];
-                id argumentTypes = [NSMutableString string];
-                id returnType = @"v";
-                id child;
-                NSEnumerator *nodeChildEnumerator = [[node children] objectEnumerator];
-                while ((child = [nodeChildEnumerator nextObject])) {
-                    if ([[child name] isEqual:@"arg"]) {
-                        id typeModifier = [child attributeForName:@"type_modifier"];
-                        if (typeModifier) {
-                            [argumentTypes appendString:[typeModifier stringValue]];
-                        }
-						[argumentTypes appendString:getTypeStringFromNode(child)];
-                    }
-                    else if ([[child name] isEqual:@"retval"]) {
-						returnType = getTypeStringFromNode(child);
-                    }
-                    else {
-                        NSLog(@"unrecognized type #{[child XMLString]}");
-                    }
-                }
-                id signature = [NSString stringWithFormat:@"%@%@", returnType, argumentTypes];
-                [functions setValue:signature forKey:name];
-            }
-        }
-    }
-    else {
-        // don't complain about missing bridge support files...
-        //NSString *reason = [NSString stringWithFormat:@"unable to find BridgeSupport file for %@", framework];
-        //[[NSException exceptionWithName:@"NuBridgeSupportMissing" reason:reason userInfo:nil] raise];
-    }
+    //NSXMLDocument *xmlDocument = [[[NSXMLDocument alloc] initWithContentsOfURL:[NSURL fileURLWithPath:xmlPath] options:0 error:nil] autorelease];
+    //if (xmlDocument) {
+        //id node;
+        //NSEnumerator *childEnumerator = [[[xmlDocument rootElement] children] objectEnumerator];
+        //while ((node = [childEnumerator nextObject])) {
+            //if ([[node name] isEqual:@"depends_on"]) {
+                //id fileName = [[node attributeForName:@"path"] stringValue];
+                //id frameworkName = [[[fileName lastPathComponent] componentsSeparatedByString:@"."] objectAtIndex:0];
+                //[NuBridgeSupport importFramework:frameworkName fromPath:fileName intoDictionary:BridgeSupport];
+            //}
+            //else if ([[node name] isEqual:@"constant"]) {
+                //[constants setValue:getTypeStringFromNode(node)
+                    //forKey:[[node attributeForName:@"name"] stringValue]];
+            //}
+            //else if ([[node name] isEqual:@"enum"]) {
+                //[enums setValue:[NSNumber numberWithInt:[[[node attributeForName:@"value"] stringValue] intValue]]
+                    //forKey:[[node attributeForName:@"name"] stringValue]];
+            //}
+            //else if ([[node name] isEqual:@"function"]) {
+                //id name = [[node attributeForName:@"name"] stringValue];
+                //id argumentTypes = [NSMutableString string];
+                //id returnType = @"v";
+                //id child;
+                //NSEnumerator *nodeChildEnumerator = [[node children] objectEnumerator];
+                //while ((child = [nodeChildEnumerator nextObject])) {
+                    //if ([[child name] isEqual:@"arg"]) {
+                        //id typeModifier = [child attributeForName:@"type_modifier"];
+                        //if (typeModifier) {
+                            //[argumentTypes appendString:[typeModifier stringValue]];
+                        //}
+						//[argumentTypes appendString:getTypeStringFromNode(child)];
+                    //}
+                    //else if ([[child name] isEqual:@"retval"]) {
+						//returnType = getTypeStringFromNode(child);
+                    //}
+                    //else {
+                        //NSLog(@"unrecognized type #{[child XMLString]}");
+                    //}
+                //}
+                //id signature = [NSString stringWithFormat:@"%@%@", returnType, argumentTypes];
+                //[functions setValue:signature forKey:name];
+            //}
+        //}
+    //}
+    //else {
+        //// don't complain about missing bridge support files...
+        ////NSString *reason = [NSString stringWithFormat:@"unable to find BridgeSupport file for %@", framework];
+        ////[[NSException exceptionWithName:@"NuBridgeSupportMissing" reason:reason userInfo:nil] raise];
+    //}
 }
 
 + (void) prune
@@ -186,5 +309,5 @@ static NSString *getTypeStringFromNode(id node)
 }
 
 @end
-#endif
+// #endif
 #endif
