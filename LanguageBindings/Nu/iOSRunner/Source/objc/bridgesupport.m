@@ -99,8 +99,7 @@ static NSString *getTypeStringFromAttrs(NSDictionary *attrs)
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)name namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attrs
 {
-  NSLog(@"Elm: %@, namespace: %@, qualifiedName: %@ attrs: %@", name, namespaceURI, qualifiedName, attrs);
-
+  //NSLog(@"Elm: %@, namespace: %@, qualifiedName: %@ attrs: %@", name, namespaceURI, qualifiedName, attrs);
   if ([name isEqualToString:@"constant"]) {
     [constants setObject:getTypeStringFromAttrs(attrs) forKey:[[attrs valueForKey:@"name"] stringValue]];
   }
@@ -122,11 +121,11 @@ static NSString *getTypeStringFromAttrs(NSDictionary *attrs)
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)name namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
 {
-  NSLog(@"END: %@", name);
+  //NSLog(@"END: %@", name);
   if ([name isEqual:@"function"]) {
     NSString *signature = [NSString stringWithFormat:@"%@%@", returnType, argumentTypes];
     [functions setObject:signature forKey:functionName];
-    NSLog(@"Functions: %@", functions);
+    //NSLog(@"Functions: %@", functions);
     [functionName release];
     [returnType release];
     [argumentTypes release];

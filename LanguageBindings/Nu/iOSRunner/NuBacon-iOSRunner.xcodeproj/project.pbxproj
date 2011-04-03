@@ -25,7 +25,7 @@
 		51BFF95B1334226A006EBF54 /* UIBacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 51BFF9591334226A006EBF54 /* UIBacon.m */; };
 		51BFFD00133665E5006EBF54 /* UIBaconPath.h in Headers */ = {isa = PBXBuildFile; fileRef = 51BFFCFE133665E5006EBF54 /* UIBaconPath.h */; };
 		51BFFD01133665E5006EBF54 /* UIBaconPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 51BFFCFF133665E5006EBF54 /* UIBaconPath.m */; };
-		51D91AFF1348A0A50061B8AA /* CoreLocation.bridgesupport in Resources */ = {isa = PBXBuildFile; fileRef = 51D91AFE1348A0A50061B8AA /* CoreLocation.bridgesupport */; };
+		51D91B011348EB570061B8AA /* UIKit.bridgesupport in Resources */ = {isa = PBXBuildFile; fileRef = 51D91B001348EB570061B8AA /* UIKit.bridgesupport */; };
 		51ED141912AE422D003E9DC2 /* block.m in Sources */ = {isa = PBXBuildFile; fileRef = 2283087411DE5F0100A5C690 /* block.m */; };
 		51ED141A12AE422D003E9DC2 /* bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 2283087611DE5F0100A5C690 /* bridge.m */; };
 		51ED141B12AE422D003E9DC2 /* bridgesupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2283087811DE5F0100A5C690 /* bridgesupport.m */; };
@@ -240,7 +240,7 @@
 		51BFF9591334226A006EBF54 /* UIBacon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIBacon.m; path = ../../../Source/UIBacon.m; sourceTree = SOURCE_ROOT; };
 		51BFFCFE133665E5006EBF54 /* UIBaconPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIBaconPath.h; path = ../../../Source/UIBaconPath.h; sourceTree = SOURCE_ROOT; };
 		51BFFCFF133665E5006EBF54 /* UIBaconPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIBaconPath.m; path = ../../../Source/UIBaconPath.m; sourceTree = SOURCE_ROOT; };
-		51D91AFE1348A0A50061B8AA /* CoreLocation.bridgesupport */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = CoreLocation.bridgesupport; path = ../../../bridgesupport/iOS/CoreLocation.bridgesupport; sourceTree = "<group>"; };
+		51D91B001348EB570061B8AA /* UIKit.bridgesupport */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = UIKit.bridgesupport; path = ../../../bridgesupport/iOS/UIKit.bridgesupport; sourceTree = "<group>"; };
 		51ED140B12AE416B003E9DC2 /* libNuBaconLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNuBaconLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		51ED157012AE4735003E9DC2 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		51ED157112AE4735003E9DC2 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -441,7 +441,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				51D91AFE1348A0A50061B8AA /* CoreLocation.bridgesupport */,
 				5169DBDC12917DE4002517BD /* Spec */,
 				5169DBCF12917D58002517BD /* NuBacon */,
 				22E7304411AB5E210014052A /* Source */,
@@ -495,6 +494,7 @@
 		5169DBDC12917DE4002517BD /* Spec */ = {
 			isa = PBXGroup;
 			children = (
+				51D91B001348EB570061B8AA /* UIKit.bridgesupport */,
 				518D6CD3133418610086143B /* ui_bacon_spec.nu */,
 				518A910413290CBC000DA4DE /* bacon_spec.nu */,
 			);
@@ -595,11 +595,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				51D91AFF1348A0A50061B8AA /* CoreLocation.bridgesupport in Resources */,
 				515C419B133256CD004545DA /* bacon.nu in Resources */,
 				515C419C133256CD004545DA /* bacon_spec.nu in Resources */,
 				515C419D133256CD004545DA /* SpecHelper.nu in Resources */,
 				518D6CD4133418610086143B /* ui_bacon_spec.nu in Resources */,
+				51D91B011348EB570061B8AA /* UIKit.bridgesupport in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

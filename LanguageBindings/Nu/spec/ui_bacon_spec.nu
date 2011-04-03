@@ -1,8 +1,10 @@
-(global UIButtonTypeRoundedRect 1)
-(global UIControlStateNormal 0)
-(global UIControlContentVerticalAlignmentCenter 0)
-(global UIControlContentVerticalAlignmentTop 1)
-(global UIControlEventTouchUpInside 64)
+(import "UIKit")
+
+;(global UIButtonTypeRoundedRect 1)
+;(global UIControlStateNormal 0)
+;(global UIControlContentVerticalAlignmentCenter 0)
+;(global UIControlContentVerticalAlignmentTop 1)
+;(global UIControlEventTouchUpInside 64)
 
 (class ColoredView is UIView)
 
@@ -69,12 +71,8 @@
 )
 
 (describe "BridgeSupport" `(
-  (it "loads" (do ()
-    (set url ((NSBundle mainBundle) URLForResource:"CoreLocation" withExtension:"bridgesupport"))
-    (puts url)
-    (set metadata (NSMutableDictionary dictionary))
-    (NuBridgeSupport importMetadata:url intoDictionary:metadata)
-    (puts metadata)
+  (it "loads constants" (do ()
+    (~ UIImagePickerControllerEditedImage should be:"UIImagePickerControllerEditedImage")
   ))
 ))
 
