@@ -3,6 +3,7 @@ OBJECTIVE_BACON_SOURCE = 'Source'
 MACRUBY_ROOT      = 'LanguageBindings/MacRuby'
 MACRUBY_RUN_SPECS = "macruby -r #{MACRUBY_ROOT}/spec/bacon_spec.rb -r #{MACRUBY_ROOT}/spec/mac_bacon_spec.rb -e 'Bacon.sharedInstance.run'"
 MACRUBY_EXT       = "#{MACRUBY_ROOT}/ext"
+MACRUBY_PKG       = "#{MACRUBY_ROOT}/pkg"
 
 namespace :macruby do
   desc 'Copy source files into MacRuby ext dir'
@@ -21,13 +22,12 @@ namespace :macruby do
 
   desc 'Clean extension'
   task :clean do
-    Dir.chdir(MACRUBY_EXT) do
-      sh 'rm -f Makefile'
-      sh 'rm -f *.h'
-      sh 'rm -f *.m'
-      sh 'rm -f *.o'
-      sh 'rm -f objective_bacon.bundle'
-    end
+    rm_rf MACRUBY_PKG
+    rm_f  "#{MACRUBY_EXT}/Makefile"
+    rm_f  "#{MACRUBY_EXT}/*.h"
+    rm_f  "#{MACRUBY_EXT}/*.m"
+    rm_f  "#{MACRUBY_EXT}/*.o"
+    rm_f  "#{MACRUBY_EXT}/objective_bacon.bundle"
   end
 
   desc 'Run specs'
@@ -35,14 +35,21 @@ namespace :macruby do
     sh MACRUBY_RUN_SPECS
   end
 
+  def gem_name
+    require File.join(MACRUBY_ROOT, 'lib/mac_bacon/version.rb')
+    "mac_bacon-#{Bacon::VERSION}.gem"
+  end
+
   desc 'Build gem'
   task :gem => :copy_source do
-    require File.join(MACRUBY_ROOT, 'lib/mac_bacon/version')
-    Dir.chdir(MACRUBY_ROOT) do
-      sh 'gem build mac_bacon.gemspec'
-      sh 'mkdir -p pkg'
-      sh "mv mac_bacon-#{Bacon::VERSION}.gem pkg"
-    end
+    sh "cd #{MACRUBY_ROOT} && gem build mac_bacon.gemspec"
+    mkdir_p MACRUBY_PKG
+    mv "#{MACRUBY_ROOT}/#{gem_name}", MACRUBY_PKG
+  end
+
+  desc 'Install gem'
+  task :install => :gem do
+    sh "sudo macgem install #{MACRUBY_PKG}/#{gem_name}"
   end
 end
 
