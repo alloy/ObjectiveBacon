@@ -1,0 +1,19 @@
+#!/usr/bin/env macruby
+
+
+if ARGV.empty?
+  puts "Usage: macbacon spec/*_spec.rb"
+  exit 1
+end
+
+if $0 == __FILE__
+  puts "HIER!"
+  $:.unshift File.expand_path('../../ext', __FILE__)
+  $:.unshift File.expand_path('../../lib', __FILE__)
+end
+
+require 'mac_bacon'
+
+ARGV.each { |spec| require spec }
+
+Bacon.sharedInstance.run

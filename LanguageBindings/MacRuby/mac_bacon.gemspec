@@ -17,7 +17,7 @@ EOF
   
   s.files         = Dir['**/*'].reject { |f| %w{ .o .bundle }.include?(File.extname(f)) }
   s.test_files    = Dir['spec/**/*']
-  #s.executables   = Dir['bin/*'].map { |f| File.basename(f) }
+  s.executables   = %w{ macbacon }
   s.require_paths = %w{ ext lib }
   s.extensions    = %w{ ext/extconf.rb }
   
