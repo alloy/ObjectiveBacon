@@ -1,5 +1,6 @@
 unless defined?(RUBY_ENGINE) && RUBY_ENGINE == "macruby"
-  raise "The MacBacon gem is a MacRuby only gem."
+  $stderr.puts "\n[!] The MacBacon gem is a MacRuby only gem."
+  exit 1
 end
 
 require 'mkmf'
