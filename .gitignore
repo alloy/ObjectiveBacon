@@ -3,10 +3,11 @@
 *.swo
 *.mode1v3
 *.pbxuser
-LanguageBindings/MacRuby/ext/objective_bacon/Makefile
-LanguageBindings/MacRuby/ext/objective_bacon/*.h
-LanguageBindings/MacRuby/ext/objective_bacon/*.m
-LanguageBindings/MacRuby/ext/objective_bacon/*.o
-LanguageBindings/MacRuby/ext/objective_bacon/*.bundle
+LanguageBindings/MacRuby/ext/Makefile
+LanguageBindings/MacRuby/ext/*.h
+LanguageBindings/MacRuby/ext/*.m
+LanguageBindings/MacRuby/ext/*.o
+LanguageBindings/MacRuby/ext/*.bundle
+LanguageBindings/MacRuby/pkg
 Framework/build
 LanguageBindings/Nu/iOSRunner/build

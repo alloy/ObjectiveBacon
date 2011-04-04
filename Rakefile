@@ -2,7 +2,7 @@ OBJECTIVE_BACON_SOURCE = 'Source'
 
 MACRUBY_ROOT      = 'LanguageBindings/MacRuby'
 MACRUBY_RUN_SPECS = "macruby -r #{MACRUBY_ROOT}/spec/bacon_spec.rb -r #{MACRUBY_ROOT}/spec/mac_bacon_spec.rb -e 'Bacon.sharedInstance.run'"
-MACRUBY_EXT       = "#{MACRUBY_ROOT}/ext/objective_bacon"
+MACRUBY_EXT       = "#{MACRUBY_ROOT}/ext"
 
 namespace :macruby do
   desc 'Copy source files into MacRuby ext dir'
@@ -33,6 +33,16 @@ namespace :macruby do
   desc 'Run specs'
   task :spec => :compile do
     sh MACRUBY_RUN_SPECS
+  end
+
+  desc 'Build gem'
+  task :gem => :copy_source do
+    require File.join(MACRUBY_ROOT, 'lib/mac_bacon/version')
+    Dir.chdir(MACRUBY_ROOT) do
+      sh 'gem build mac_bacon.gemspec'
+      sh 'mkdir -p pkg'
+      sh "mv mac_bacon-#{Bacon::VERSION}.gem pkg"
+    end
   end
 end
 
