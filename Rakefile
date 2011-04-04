@@ -8,6 +8,7 @@ namespace :macruby do
   desc 'Copy source files into MacRuby ext dir'
   task :copy_source do
     sh "cp #{OBJECTIVE_BACON_SOURCE}/*.* #{MACRUBY_EXT}/"
+    sh "rm #{MACRUBY_EXT}/UIBacon*.*"
   end
 
   desc 'Compile extension'
