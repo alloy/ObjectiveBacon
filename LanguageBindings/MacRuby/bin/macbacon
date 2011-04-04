@@ -7,7 +7,6 @@ if ARGV.empty?
 end
 
 if $0 == __FILE__
-  puts "HIER!"
   $:.unshift File.expand_path('../../ext', __FILE__)
   $:.unshift File.expand_path('../../lib', __FILE__)
 end
