@@ -1,18 +1,32 @@
 #!/usr/bin/env macruby
 
+require 'optparse'
 
-if ARGV.empty?
-  puts "Usage: macbacon spec/*_spec.rb"
-  exit 1
+specs = nil
+
+options = OptionParser.new do |opt|
+  bin = File.basename($0)
+  opt.banner = "Usage:  #{bin} [options] spec/*_spec.rb"
+  opt.on("-I path", "Add path to $LOAD_PATH") { |p| $LOAD_PATH.unshift(p) }
+  opt.on("-a", "--automatic", "Run spec/*_spec.rb files") { specs = Dir.glob("spec/*_spec.rb") }
+  opt.on("-v", "--version", "Print the version of #{bin}") do
+    require 'mac_bacon/version'
+    $stdout.puts Bacon::VERSION
+    exit
+  end
 end
 
-if $0 == __FILE__
-  $:.unshift File.expand_path('../../ext', __FILE__)
-  $:.unshift File.expand_path('../../lib', __FILE__)
+options.parse!(ARGV)
+
+specs ||= ARGV
+
+if specs.empty?
+  puts options
+  exit 1
 end
 
 require 'mac_bacon'
 
-ARGV.each { |spec| require spec }
+specs.each { |spec| load spec }
 
 Bacon.sharedInstance.run
