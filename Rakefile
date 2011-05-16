@@ -1,9 +1,9 @@
 OBJECTIVE_BACON_SOURCE = 'Source'
 
 MACRUBY_ROOT      = 'LanguageBindings/MacRuby'
-MACRUBY_RUN_SPECS = "macruby -r #{MACRUBY_ROOT}/spec/bacon_spec.rb -r #{MACRUBY_ROOT}/spec/mac_bacon_spec.rb -e 'Bacon.sharedInstance.run'"
 MACRUBY_EXT       = "#{MACRUBY_ROOT}/ext"
 MACRUBY_PKG       = "#{MACRUBY_ROOT}/pkg"
+MACRUBY_RUN_SPECS = "macruby -I#{MACRUBY_EXT} -r #{MACRUBY_ROOT}/spec/bacon_spec.rb -r #{MACRUBY_ROOT}/spec/mac_bacon_spec.rb -e 'Bacon.sharedInstance.run'"
 
 namespace :macruby do
   desc 'Copy source files into MacRuby ext dir'
