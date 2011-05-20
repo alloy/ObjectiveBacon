@@ -8,7 +8,7 @@ options = OptionParser.new do |opt|
   bin = File.basename($0)
   opt.banner = "Usage:  #{bin} [options] spec/*_spec.rb"
   opt.on("-I path", "Add path to $LOAD_PATH") { |p| $LOAD_PATH.unshift(p) }
-  opt.on("-a", "--automatic", "Run spec/*_spec.rb files") { specs = Dir.glob("spec/*_spec.rb") }
+  opt.on("-a", "--automatic", "Run spec/*_spec.rb files") { specs = Dir.glob("spec/**/*_spec.rb", File::FNM_CASEFOLD) }
   opt.on("-v", "--version", "Print the version of #{bin}") do
     require 'mac_bacon/version'
     $stdout.puts Bacon::VERSION
