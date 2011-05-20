@@ -171,6 +171,16 @@ class BaconShould
   end
 end
 
+class BaconSummary
+  def formatExceptionBacktrace(exception)
+    # TODO iirc, this can be nil/empty in the case of a pure objc exception
+    if (bt = exception.backtrace) && !bt.empty?
+      bt = bt.reject { |l| l =~ /(mac_bacon|macbacon)/ } unless $DEBUG
+      "\t#{bt.join("\n\t")}"
+    end
+  end
+end
+
 class Proc
   def throw?(sym)
     catch(sym) {

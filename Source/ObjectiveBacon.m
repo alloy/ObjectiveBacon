@@ -161,8 +161,12 @@ static Bacon *sharedBaconInstance = nil;
     [errorLog appendString:[exception description]];
   }
   [errorLog appendString:type];
+  NSString *backtrace = [self formatExceptionBacktrace:exception];
+  if (backtrace) {
+    [errorLog appendString:@"\n"];
+    [errorLog appendString:backtrace];
+  }
   [errorLog appendString:@"\n\n"];
-  // TODO callStackSymbols for NuBacon/objc?
 }
 
 - (void)print {
@@ -174,6 +178,11 @@ static Bacon *sharedBaconInstance = nil;
     printf("%d specifications (%d requirements) of which %d were (partially) skipped, %d failures, %d errors\n",
       (int)specifications, (int)requirements, (int)skipped, (int)failures, (int)errors);
   }
+}
+
+// TO be overriden by the client
+- (NSString *)formatExceptionBacktrace:(id)exception {
+  return nil;
 }
 
 @end

@@ -54,6 +54,9 @@
 
 - (void)print;
 
+// To be overriden by the client
+- (NSString *)formatExceptionBacktrace:(id)exception;
+
 @end
 
 
