@@ -35,7 +35,7 @@ static NSString *getTypeStringFromAttrs(NSDictionary *attrs)
     return [[attrs valueForKey:@"type"] stringValue];
 }
 
-@interface NuBridgeSupportParser : NSObject {
+@interface NuBridgeSupportParser : NSObject <NSXMLParserDelegate> {
   NSXMLParser *xmlParser;
   NSMutableDictionary *constants;
   NSMutableDictionary *enums;
@@ -138,16 +138,16 @@ static NSString *getTypeStringFromAttrs(NSDictionary *attrs)
 @end
 
 
-static NSString *getTypeStringFromNode(id node)
-{
-	static BOOL use64BitTypes = (sizeof(void *) == 8);
-    if (use64BitTypes ) {
-        id type64Attribute = [node attributeForName:@"type64"];
-        if (type64Attribute)
-            return [type64Attribute stringValue];
-    }
-    return [[node attributeForName:@"type"] stringValue];
-}
+//static NSString *getTypeStringFromNode(id node)
+//{
+	//static BOOL use64BitTypes = (sizeof(void *) == 8);
+    //if (use64BitTypes ) {
+        //id type64Attribute = [node attributeForName:@"type64"];
+        //if (type64Attribute)
+            //return [type64Attribute stringValue];
+    //}
+    //return [[node attributeForName:@"type"] stringValue];
+//}
 
 
 @implementation NuBridgeSupport
@@ -188,9 +188,9 @@ static NSString *getTypeStringFromNode(id node)
     if ([NSFileManager fileExistsNamed:dylibPath])
         [self importLibrary:dylibPath];
 
-    NSMutableDictionary *constants = [BridgeSupport valueForKey:@"constants"];
-    NSMutableDictionary *enums =     [BridgeSupport valueForKey:@"enums"];
-    NSMutableDictionary *functions = [BridgeSupport valueForKey:@"functions"];
+    //NSMutableDictionary *constants = [BridgeSupport valueForKey:@"constants"];
+    //NSMutableDictionary *enums =     [BridgeSupport valueForKey:@"enums"];
+    //NSMutableDictionary *functions = [BridgeSupport valueForKey:@"functions"];
 
     //NSXMLDocument *xmlDocument = [[[NSXMLDocument alloc] initWithContentsOfURL:[NSURL fileURLWithPath:xmlPath] options:0 error:nil] autorelease];
     //if (xmlDocument) {

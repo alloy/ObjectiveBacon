@@ -1,3 +1,4 @@
+
 #line 1 "Source/UIBaconPath.m.rl"
 #import "UIBaconPath.h"
 #import "UIBacon.h"
@@ -18,9 +19,10 @@ enum {
   BOOLEAN
 };
 
+
 #line 21 "Source/UIBaconPath.m.rl"
 
-#line 24 "Source/UIBaconPath.m"
+#line 26 "Source/UIBaconPath.m"
 static const char _query_path_actions[] = {
 	0, 1, 0, 1, 1, 1, 2, 1, 
 	4, 1, 5, 1, 6, 1, 7, 1, 
@@ -358,7 +360,7 @@ static const short _query_path_index_offsets[] = {
 	1233, 1236, 1242, 1243, 1246, 1249, 1252, 1255
 };
 
-static const unsigned char _query_path_trans_targs_wi[] = {
+static const unsigned char _query_path_trans_targs[] = {
 	2, 13, 130, 0, 3, 0, 4, 0, 
 	5, 0, 6, 0, 7, 0, 8, 0, 
 	9, 0, 10, 0, 11, 0, 12, 0, 
@@ -519,7 +521,7 @@ static const unsigned char _query_path_trans_targs_wi[] = {
 	171, 0, 0
 };
 
-static const char _query_path_trans_actions_wi[] = {
+static const char _query_path_trans_actions[] = {
 	0, 0, 0, 13, 0, 13, 0, 13, 
 	0, 13, 0, 13, 0, 13, 0, 13, 
 	0, 13, 0, 13, 0, 13, 0, 13, 
@@ -719,6 +721,7 @@ static const int query_path_error = 0;
 
 static const int query_path_en_main = 1;
 
+
 #line 22 "Source/UIBaconPath.m.rl"
 
 
@@ -735,7 +738,7 @@ static const int query_path_en_main = 1;
   char *p = (char *)[_path UTF8String];
   char *eof = p + (char)[_path length];
 
-  char *start = p;
+  //char *start = p;
 
   // property name & value start/end
   char *pns = 0;
@@ -750,12 +753,12 @@ static const int query_path_en_main = 1;
   UIView *v;
 
   
-#line 754 "Source/UIBaconPath.m"
+#line 757 "Source/UIBaconPath.m"
 	{
 	cs = query_path_start;
 	}
 
-#line 759 "Source/UIBaconPath.m"
+#line 762 "Source/UIBaconPath.m"
 	{
 	int _klen;
 	unsigned int _trans;
@@ -817,12 +820,12 @@ _resume:
 	}
 
 _match:
-	cs = _query_path_trans_targs_wi[_trans];
+	cs = _query_path_trans_targs[_trans];
 
-	if ( _query_path_trans_actions_wi[_trans] == 0 )
+	if ( _query_path_trans_actions[_trans] == 0 )
 		goto _again;
 
-	_acts = _query_path_actions + _query_path_trans_actions_wi[_trans];
+	_acts = _query_path_actions + _query_path_trans_actions[_trans];
 	_nacts = (unsigned int) *_acts++;
 	while ( _nacts-- > 0 )
 	{
@@ -962,7 +965,7 @@ _match:
       traverse = YES;
     }
 	break;
-#line 966 "Source/UIBaconPath.m"
+#line 969 "Source/UIBaconPath.m"
 		}
 	}
 
@@ -985,13 +988,14 @@ _again:
       return nil;
     }
 	break;
-#line 989 "Source/UIBaconPath.m"
+#line 992 "Source/UIBaconPath.m"
 		}
 	}
 	}
 
 	_out: {}
 	}
+
 #line 196 "Source/UIBaconPath.m.rl"
 
 

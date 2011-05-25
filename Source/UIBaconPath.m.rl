@@ -34,7 +34,7 @@ enum {
   char *p = (char *)[_path UTF8String];
   char *eof = p + (char)[_path length];
 
-  char *start = p;
+  //char *start = p;
 
   // property name & value start/end
   char *pns = 0;
@@ -107,16 +107,16 @@ enum {
       result = [result index:[current integerValue]];
     }
 
-    action index_error {
-      int location = p-start;
-      printf("Index error: %d\n", location);
-      printf("%s\n", start);
-      for (int i = 0; i < location; i++) {
-        printf(" ");
-      }
-      printf("^\n");
-      return nil;
-    }
+    #action index_error {
+      #int location = p-start;
+      #printf("Index error: %d\n", location);
+      #printf("%s\n", start);
+      #for (int i = 0; i < location; i++) {
+        #printf(" ");
+      #}
+      #printf("^\n");
+      #return nil;
+    #}
 
     action property {
       FILTER(pns, pne-pns);

@@ -1,5 +1,7 @@
 * Print requirement description *before* running the requirement!
 * Make it possible to run only specs that match the given string
+* Finish ragel error handling code in UIBaconPath
+* Cleanup bridgesupport.h/.m
 * Check how to use BridgeSupport with Nu for constants on iOS/OSX
 * Add before/after all.
 * Add generators for test cases and iOS testrunner app target for Xcode 4
