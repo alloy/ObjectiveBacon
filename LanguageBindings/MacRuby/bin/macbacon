@@ -3,12 +3,14 @@
 require 'optparse'
 
 specs = nil
+use_gdb = false
 
 options = OptionParser.new do |opt|
   bin = File.basename($0)
   opt.banner = "Usage:  #{bin} [options] spec/*_spec.rb"
   opt.on("-I path", "Add path to $LOAD_PATH") { |p| $LOAD_PATH.unshift(p) }
   opt.on("-a", "--automatic", "Run spec/*_spec.rb files") { specs = Dir.glob("spec/**/*_spec.rb", File::FNM_CASEFOLD) }
+  opt.on("-g", "--gdb", "Run with GDB") { use_gdb = true }
   opt.on("-v", "--version", "Print the version of #{bin}") do
     require 'mac_bacon/version'
     $stdout.puts Bacon::VERSION
@@ -25,8 +27,10 @@ if specs.empty?
   exit 1
 end
 
-require 'mac_bacon'
-
-specs.each { |spec| load spec }
-
-Bacon.sharedInstance.run
+unless use_gdb
+  require 'mac_bacon'
+  specs.each { |spec| load spec }
+  Bacon.sharedInstance.run
+else
+  exec "gdb --args macruby -r rubygems -r mac_bacon -r #{specs.join(' -r ')} -e 'Bacon.sharedInstance.run'"
+end
