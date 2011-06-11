@@ -1,3 +1,5 @@
+* Fix segfault that occurs with the commented out spec in the normal bacon spec with my MacRuby NSException patch.
+* Don't print backtrace of EMPTY spec errors
 * Print requirement description *before* running the requirement!
 * Make it possible to run only specs that match the given string
 * Finish ragel error handling code in UIBaconPath

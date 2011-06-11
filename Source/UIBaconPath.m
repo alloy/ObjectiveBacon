@@ -727,7 +727,7 @@ static const int query_path_en_main = 1;
 
 @implementation UIBaconPath
 
-+ (id)viewsByPath:(NSString *)path ofView:(UIView *)view {
++ (id)viewsByPath:(NSString *)path ofView:(BACON_VIEW *)view {
   id result = view;
 
   NSString *_path = [path stringByAppendingString:@"%_PATH_END_%"];
@@ -750,7 +750,7 @@ static const int query_path_en_main = 1;
   BOOL traverse = NO;
   NSString *current;
 
-  UIView *v;
+  BACON_VIEW *v;
 
   
 #line 757 "Source/UIBaconPath.m"
@@ -885,7 +885,7 @@ _match:
 #line 88 "Source/UIBaconPath.m.rl"
 	{
       AUTO_FILTER();
-      if ([result isKindOfClass:[UIView class]]) {
+      if ([result isKindOfClass:[BACON_VIEW class]]) {
         result = [result _viewsByClass:NSClassFromString(current) recursive:traverse];
       } else {
         NSMutableArray *r = [NSMutableArray array];
@@ -921,7 +921,7 @@ _match:
         value = [self evalVariable:value];
       }
 
-      if ([result isKindOfClass:[UIView class]]) {
+      if ([result isKindOfClass:[BACON_VIEW class]]) {
         // only match the current view if it matches this property
         NSString *actualValue = [result valueForKey:name];
         if (![value isEqual:actualValue]) {
@@ -945,7 +945,7 @@ _match:
 #line 153 "Source/UIBaconPath.m.rl"
 	{
       NSArray *r;
-      if ([result isKindOfClass:[UIView class]]) {
+      if ([result isKindOfClass:[BACON_VIEW class]]) {
         r = [self _collectSubviews:[NSArray arrayWithObject:result] recursive:traverse];
       } else {
         r = [self _collectSubviews:[(UIBaconViewSet *)result array] recursive:traverse];
@@ -1014,7 +1014,7 @@ _again:
 
 + (NSArray *)_collectSubviews:(NSArray *)views recursive:(BOOL)recursive {
   NSMutableArray *result = [NSMutableArray array];
-  for (UIView *v in views) {
+  for (BACON_VIEW *v in views) {
     NSArray *subviews = [v subviews];
     [result addObjectsFromArray:subviews];
     if (recursive) {

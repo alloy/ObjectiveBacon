@@ -161,6 +161,7 @@ static Bacon *sharedBaconInstance = nil;
     [errorLog appendString:[exception description]];
   }
   [errorLog appendString:type];
+
   NSString *backtrace = [self formatExceptionBacktrace:exception];
   if (backtrace) {
     [errorLog appendString:@"\n"];

@@ -23,7 +23,7 @@ enum {
 
 @implementation UIBaconPath
 
-+ (id)viewsByPath:(NSString *)path ofView:(UIView *)view {
++ (id)viewsByPath:(NSString *)path ofView:(BACON_VIEW *)view {
   id result = view;
 
   NSString *_path = [path stringByAppendingString:@"%_PATH_END_%"];
@@ -46,7 +46,7 @@ enum {
   BOOL traverse = NO;
   NSString *current;
 
-  UIView *v;
+  BACON_VIEW *v;
 
   %%{
     action pns { pns = p; }
@@ -87,7 +87,7 @@ enum {
 
     action class {
       AUTO_FILTER();
-      if ([result isKindOfClass:[UIView class]]) {
+      if ([result isKindOfClass:[BACON_VIEW class]]) {
         result = [result _viewsByClass:NSClassFromString(current) recursive:traverse];
       } else {
         NSMutableArray *r = [NSMutableArray array];
@@ -130,7 +130,7 @@ enum {
         value = [self evalVariable:value];
       }
 
-      if ([result isKindOfClass:[UIView class]]) {
+      if ([result isKindOfClass:[BACON_VIEW class]]) {
         // only match the current view if it matches this property
         NSString *actualValue = [result valueForKey:name];
         if (![value isEqual:actualValue]) {
@@ -152,7 +152,7 @@ enum {
 
     action wildcard {
       NSArray *r;
-      if ([result isKindOfClass:[UIView class]]) {
+      if ([result isKindOfClass:[BACON_VIEW class]]) {
         r = [self _collectSubviews:[NSArray arrayWithObject:result] recursive:traverse];
       } else {
         r = [self _collectSubviews:[(UIBaconViewSet *)result array] recursive:traverse];
@@ -210,7 +210,7 @@ enum {
 
 + (NSArray *)_collectSubviews:(NSArray *)views recursive:(BOOL)recursive {
   NSMutableArray *result = [NSMutableArray array];
-  for (UIView *v in views) {
+  for (BACON_VIEW *v in views) {
     NSArray *subviews = [v subviews];
     [result addObjectsFromArray:subviews];
     if (recursive) {

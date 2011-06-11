@@ -1,10 +1,23 @@
-#import <UIKit/UIKit.h>
+#import "TargetConditionals.h"
 
+#if TARGET_OS_IPHONE
+
+#import <UIKit/UIKit.h>
+#define BACON_WINDOW UIWindow
+#define BACON_VIEW UIView
+
+#else
+
+#import <AppKit/AppKit.h>
+#define BACON_WINDOW NSWindow
+#define BACON_VIEW NSView
+
+#endif
 
 @interface UIBacon : NSObject
 
-+ (UIWindow *)sharedWindow;
-+ (void)setSharedWindow:(UIWindow *)window;
++ (BACON_WINDOW *)sharedWindow;
++ (void)setSharedWindow:(BACON_WINDOW *)window;
 
 @end
 
@@ -22,15 +35,15 @@
 
 @end
 
-
-@interface UIView (UIBacon)
+@interface BACON_VIEW (UIBacon)
 
 - (UIBaconViewSet *)viewsByClass:(Class)viewClass;
 - (NSArray *)_viewsByClass:(Class)viewClass recursive:(BOOL)recursive;
-- (UIView *)viewByName:(NSString *)accessibilityLabel;
+- (BACON_VIEW *)viewByName:(NSString *)accessibilityLabel;
 - (id)viewsByPath:(NSString *)path;
-
+#if TARGET_OS_IPHONE
 - (void)touch;
+#endif
 
 @end
 

@@ -11,3 +11,5 @@ LanguageBindings/MacRuby/ext/*.bundle
 LanguageBindings/MacRuby/pkg
 Framework/build
 LanguageBindings/Nu/iOSRunner/build
+LanguageBindings/Nu/iOSRunner/NuBacon-iOSRunner.xcodeproj/project.xcworkspace
+LanguageBindings/Nu/iOSRunner/NuBacon-iOSRunner.xcodeproj/xcuserdata
