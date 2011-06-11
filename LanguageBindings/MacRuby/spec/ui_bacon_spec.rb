@@ -114,11 +114,16 @@ describe "Bacon NSView additions" do
   end
 
   describe "viewsByPath:" do
-    #it "finds a view by accessibility label if the start of the path is enclosed by single quotes" do
-    #end
+    it "finds a view by accessibility label if the start of the path is enclosed by single quotes" do
+      @view.viewsByPath("'green view'").should == V("green view")
+      @view.viewsByPath("'purple view'").should == nil
+      V("blue view").viewsByPath("'green view'").should == V("green view")
+      V("green view").viewsByPath("'blue view'").should == nil
+    end
 
-    #it "allows escaped single quotes in the accessibility label" do
-    #end
+    it "allows escaped single quotes in the accessibility label" do
+      @view.viewsByPath("'red\'s view'").should == V("red's view")
+    end
 
     #it "raises an exception when a label is empty or unclosed" do
       
@@ -126,7 +131,7 @@ describe "Bacon NSView additions" do
 
     it "finds a view by class" do
       @view.viewsByPath("/NSButton").title.should == ["Button 1", "Button 2", "Button 4", "Button 5"]
-      # V("red's view").viewsByPath("/NSButton").title.should == ["Button 3"]
+      V("red's view").viewsByPath("/NSButton").title.should == ["Button 3"]
     end
 
     it "finds classes only one down or any depth with double slash" do
@@ -149,26 +154,22 @@ describe "Bacon NSView additions" do
       @view.viewsByPath("//*").should == @view.viewsByClass(NSView)
     end
 
-    #after do
-      #@view.viewsByClass(NSButton)[1].hidden = false
-      ##V("Button 2").hidden = false
-      ##V("Button 2").setContentVerticalAlignment(UIControlContentVerticalAlignmentCenter)
-    #end
-
     it "selects elements matching the value for the given property key" do
+      button = V("Button 2")
+
       @view.viewsByPath("/NSButton[@title='Button 4'][0]").title.should == "Button 4"
       @view.viewsByPath("/NSButton[0][@title='Button 4']").should == nil
       @view.viewsByPath("/NSButton[2][@title='Button 4']").title.should == "Button 4"
-      #@view.viewsByPath("/ColoredView[0][@accessibilityLabel='red\'s view']").should == V("red's view")
+      @view.viewsByPath("/ColoredView[0][@accessibilityLabel='red\'s view']").should == V("red's view")
 
       @view.viewsByPath("//NSButton[@hidden=true]").should.be.empty
-      @view.viewsByClass(NSButton)[1].hidden = true
+      button.hidden = true
       @view.viewsByPath("//NSButton[@hidden=true]").title.should == ["Button 2"]
       @view.viewsByPath("//NSButton[@hidden=false]").title.should == ["Button 1", "Button 3", "Button 4", "Button 5", "Button 6"]
 
       @view.viewsByPath("//NSButton[@alignment=NSCenterTextAlignment]").should == VV(NSButton)
       @view.viewsByPath("//NSButton[@alignment=NSRightTextAlignment]").should.be.empty
-      @view.viewsByClass(NSButton)[1].alignment = NSRightTextAlignment
+      button.alignment = NSRightTextAlignment
       @view.viewsByPath("//NSButton[@alignment=NSRightTextAlignment]").title.should == ["Button 2"]
 
       @view.viewsByPath("//NSView[@class=NSButton]").should == VV(NSButton)

@@ -267,6 +267,10 @@ module AccessibilityTitle
     accessibilitySetValue(title, forAttribute:NSAccessibilityTitleAttribute)
   end
 
+  def accessibilityLabel
+    accessibilityAttributeValue(NSAccessibilityTitleAttribute)
+  end
+
   def accessibilitySetValue(value, forAttribute:name)
     if name == NSAccessibilityTitleAttribute
       @_accessibilityTitle = value
