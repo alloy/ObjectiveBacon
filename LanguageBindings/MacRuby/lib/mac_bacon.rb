@@ -79,6 +79,12 @@ class BaconContext
 
   # UIBacon shortcuts
 
+  def V(accessibilityLabel)
+    app = NSApplication.sharedApplication
+    window = app.keyWindow || app.windows.first
+    window.contentView.viewByName(accessibilityLabel)
+  end
+
   def VV(class_or_path)
     app = NSApplication.sharedApplication
     window = app.keyWindow || app.windows.first
@@ -225,6 +231,56 @@ end
 class UIBaconPath
   def self.evalVariable(variable)
     eval variable
+  end
+end
+
+# A mixin that can be used to add +AXtitle+ support to a NSView
+#
+# E.g.
+#
+#   class BananaView < NSView
+#     include AccessibilityTitle
+#   end
+#
+#   view = BananaView.new
+#   view.accessibilityLabel = "banana"
+#   view.accessibilityAttributeValue(NSAccessibilityTitleAttribute) # => "banana"
+module AccessibilityTitle
+  def accessibilityIsIgnored
+    false
+  end
+
+  def accessibilityAttributeNames
+    [NSAccessibilityTitleAttribute] + super
+  end
+
+  def accessibilityIsAttributeSettable(name)
+    if name == NSAccessibilityTitleAttribute
+      true
+    else
+      super
+    end
+  end
+
+  # This is named this way because that's what the property is called on iOS.
+  def accessibilityLabel=(title)
+    accessibilitySetValue(title, forAttribute:NSAccessibilityTitleAttribute)
+  end
+
+  def accessibilitySetValue(value, forAttribute:name)
+    if name == NSAccessibilityTitleAttribute
+      @_accessibilityTitle = value
+    else
+      super
+    end
+  end
+
+  def accessibilityAttributeValue(name)
+    if name == NSAccessibilityTitleAttribute
+      @_accessibilityTitle
+    else
+      super
+    end
   end
 end
 

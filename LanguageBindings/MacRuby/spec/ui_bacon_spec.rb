@@ -7,6 +7,8 @@ class ColoredView < NSView
     NSRectFill(rect)
     super
   end
+
+  include AccessibilityTitle
 end
 
 class ControlsViewController < NSViewController
@@ -35,7 +37,7 @@ class ControlsViewController < NSViewController
 
     subview = ColoredView.alloc.initWithFrame(NSMakeRect(90, 15, 100, 100))
     subview.backgroundColor = NSColor.redColor
-    #subview.accessibilityLabel = "red's view"
+    subview.accessibilityLabel = "red's view"
     view.addSubview(subview)
 
     button = buttonWithTitle('Button 3', frame:NSMakeRect(10, 35, 80, 30))
@@ -49,12 +51,12 @@ class ControlsViewController < NSViewController
 
     @viewWithSubviews = ColoredView.alloc.initWithFrame(NSMakeRect(10, 300, 150, 150))
     @viewWithSubviews.backgroundColor = NSColor.blueColor
-    #@viewWithSubviews.accessibilityLabel = "blue view"
+    @viewWithSubviews.accessibilityLabel = "blue view"
     view.addSubview(@viewWithSubviews)
 
     subview = ColoredView.alloc.initWithFrame(NSMakeRect(25, 25, 100, 100))
     subview.backgroundColor = NSColor.greenColor
-    #subview.accessibilityLabel = "green view"
+    subview.accessibilityLabel = "green view"
     @viewWithSubviews.addSubview(subview)
 
     button = buttonWithTitle('Button 6', frame:NSMakeRect(10, 35, 80, 30))
@@ -77,6 +79,8 @@ describe "Bacon NSView additions" do
     @window.contentView.addSubview(@view)
     @window.orderFrontRegardless
     @window.makeKeyWindow
+    #wait 1 do
+    #end
   end
 
   after do
@@ -104,7 +108,7 @@ describe "Bacon NSView additions" do
       @allButtons.title.should == Array.new(6) { |i| "Button #{i+1}" }
     end
 
-    it "has `VV' as a shortcut for getting views from the key window or the first of the a[p's windows" do
+    it "has `VV' as a shortcut for getting views from the key window or the first of the app's windows" do
       VV(NSButton).should == @allButtons
     end
   end
@@ -174,5 +178,18 @@ describe "Bacon NSView additions" do
     #it "combines the various path components to select views down in the tree" do
       
     #end
+  end
+
+  describe "viewByName:" do
+    it "returns a NSView at any level by `AXTitle'" do
+      @view.viewByName("Button 3").title.should == "Button 3"
+      @view.viewByName("Button 6").title.should == "Button 6"
+    end
+
+    it "has `V' as a shortcut for getting views from the key window or the first of the app's windows" do
+      V("Button 3").title.should == "Button 3"
+      V("Button 6").title.should == "Button 6"
+      V("green view").subviews[0].should == V("Button 6")
+    end
   end
 end
