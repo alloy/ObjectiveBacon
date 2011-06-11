@@ -76,6 +76,18 @@ class BaconContext
   def evaluateBlock(block)
     instance_eval(&block)
   end
+
+  # UIBacon shortcuts
+
+  def VV(class_or_path)
+    app = NSApplication.sharedApplication
+    window = app.keyWindow || app.windows.first
+    if class_or_path.is_a?(Class)
+      window.contentView.viewsByClass(class_or_path)
+    else
+      puts "TODO!"
+    end
+  end
 end
 
 class BaconShould
@@ -178,6 +190,41 @@ class BaconSummary
       bt = bt.reject { |l| l =~ /(mac_bacon|macbacon)/ } unless $DEBUG
       "\t#{bt.join("\n\t")}"
     end
+  end
+end
+
+class UIBaconViewSet
+  alias_method :[], :index
+
+  include Enumerable
+  def each(&block)
+    array.each(&block)
+  end
+
+  def inspect
+    array.inspect
+  end
+
+  # TODO a MacRuby workwround, because it does not send a forwardInvocation message
+  # even if methodSignatureForSelector implemented in objective-c returns a sig.
+  # So force it to work as normal, overriding the imp from UIBaconViewSet.
+  def methodSignatureForSelector(selector)
+    super(selector)
+  end
+
+  def method_missing(method, *args, &block)
+    viewSet = self.array
+    if viewSet.first.respond_to?(method)
+      _filteredList(viewSet.valueForKey(method))
+    else
+      super
+    end
+  end
+end
+
+class UIBaconPath
+  def self.evalVariable(variable)
+    eval variable
   end
 end
 

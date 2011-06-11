@@ -50,6 +50,11 @@ static BACON_WINDOW *sharedWindow = nil;
   return self;
 }
 
+- (void)dealloc {
+  [viewSet release];
+  [super dealloc];
+}
+
 - (NSArray *)array {
   return [viewSet autorelease];
 }
@@ -102,7 +107,6 @@ static BACON_WINDOW *sharedWindow = nil;
 
 - (void)forwardInvocation:(NSInvocation *)invocation {
   SEL sel = [invocation selector];
-
   if ([[viewSet objectAtIndex:0] respondsToSelector:sel]) {
     id result = [self _filteredList:[viewSet valueForKey:NSStringFromSelector(sel)]];
     [invocation setReturnValue:&result];

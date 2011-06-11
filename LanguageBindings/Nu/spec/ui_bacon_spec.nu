@@ -99,7 +99,6 @@
       (~ (@allButtons count) should be:6)
       (~ ((@allButtons index:1) currentTitle) should equal:"Button 2")
       ; method forwarding
-      (~ (@allButtons currentTitle) should equal:`("Button 1" "Button 2" "Button 3" "Button 4" "Button 5" "Button 6"))
       (~ (@allButtons currentImage) should equal:`(() () () () () ())) ; nil
       (~ (@allButtons buttonType) should equal:`(1 1 1 1 1 1))
     ))
