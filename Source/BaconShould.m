@@ -214,9 +214,9 @@
         return NO;
       }
       @catch(NSException *e) {
-        //NSLog(@"Got exception: %@, expected: %@", [e name], exceptionName);
+        // NSLog(@"Got exception: %@, expected: %@", (NSString *)[e name], exceptionName);
         result = [self convertException:e];
-        if ([[e name] isEqualToString:exceptionName]) {
+        if ([[e name] isEqual:exceptionName]) {
           return YES;
         } else {
           @throw e;
