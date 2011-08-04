@@ -1,0 +1,8 @@
+= Usage on the iPhone/iPad simulator
+
+* Create a new application target that will be the spec runner
+* Remove the NSMainNibFile key-value from the runner app’s Info.plist
+* Add to the runner app’s ‘Other Linker Flags’ (so it can find the AppDelegate class): -ObjC -all_load
+* Make the runner app link against liNuBacon.a
+* Add the NuBacon sources (*.nu) to the runner app’s resources
+* Finally, add all the app's sources to the runner app (.h/.m). (There needs to be at least one source file or the app won't start!)
