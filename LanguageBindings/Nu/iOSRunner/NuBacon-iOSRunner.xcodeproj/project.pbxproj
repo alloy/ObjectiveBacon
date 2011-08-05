@@ -3,10 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		51506ED113EC4DCE0085D45A /* UIEventExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 51506ECF13EC4DCE0085D45A /* UIEventExtensions.h */; };
+		51506ED213EC4DCE0085D45A /* UIEventExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 51506ED013EC4DCE0085D45A /* UIEventExtensions.m */; };
+		51506ED313EC4DCE0085D45A /* UIEventExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 51506ED013EC4DCE0085D45A /* UIEventExtensions.m */; };
 		515C419A133256C2004545DA /* libNuBaconLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51ED140B12AE416B003E9DC2 /* libNuBaconLib.a */; };
 		515C419B133256CD004545DA /* bacon.nu in Resources */ = {isa = PBXBuildFile; fileRef = 5169DBD812917DD2002517BD /* bacon.nu */; };
 		515C419C133256CD004545DA /* bacon_spec.nu in Resources */ = {isa = PBXBuildFile; fileRef = 518A910413290CBC000DA4DE /* bacon_spec.nu */; };
@@ -217,6 +220,8 @@
 		22A2932D11DE8450008B1084 /* handlers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = handlers.m; path = util/handlers.m; sourceTree = "<group>"; };
 		22B4F2E311DEBD53009C693F /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 		22E7304811AB5E210014052A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		51506ECF13EC4DCE0085D45A /* UIEventExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIEventExtensions.h; path = ../../../Source/UIEventExtensions.h; sourceTree = "<group>"; };
+		51506ED013EC4DCE0085D45A /* UIEventExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIEventExtensions.m; path = ../../../Source/UIEventExtensions.m; sourceTree = "<group>"; };
 		515C4192133256B9004545DA /* NuBaconSpecs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NuBaconSpecs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		515C4194133256B9004545DA /* NuBaconSpecs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NuBaconSpecs-Info.plist"; sourceTree = "<group>"; };
 		515C422113326B81004545DA /* BaconContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaconContext.h; path = ../../../Source/BaconContext.h; sourceTree = SOURCE_ROOT; };
@@ -474,6 +479,8 @@
 		5169DBCF12917D58002517BD /* NuBacon */ = {
 			isa = PBXGroup;
 			children = (
+				51506ECF13EC4DCE0085D45A /* UIEventExtensions.h */,
+				51506ED013EC4DCE0085D45A /* UIEventExtensions.m */,
 				51BFFCFE133665E5006EBF54 /* UIBaconPath.h */,
 				51BFFCFF133665E5006EBF54 /* UIBaconPath.m */,
 				515C422113326B81004545DA /* BaconContext.h */,
@@ -524,6 +531,7 @@
 				515C422F13326B81004545DA /* ObjectiveBacon.h in Headers */,
 				51BFF95A1334226A006EBF54 /* UIBacon.h in Headers */,
 				51BFFD00133665E5006EBF54 /* UIBaconPath.h in Headers */,
+				51506ED113EC4DCE0085D45A /* UIEventExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,8 +578,11 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0410;
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "NuBacon-iOSRunner" */;
-			compatibilityVersion = "Xcode 3.1";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -611,6 +622,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				515C419E133256D3004545DA /* SpecHelper.m in Sources */,
+				51506ED313EC4DCE0085D45A /* UIEventExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -687,6 +699,7 @@
 				515C423013326B81004545DA /* ObjectiveBacon.m in Sources */,
 				51BFF95B1334226A006EBF54 /* UIBacon.m in Sources */,
 				51BFFD01133665E5006EBF54 /* UIBaconPath.m in Sources */,
+				51506ED213EC4DCE0085D45A /* UIEventExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -711,6 +724,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "NuBaconSpecs-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
@@ -721,7 +735,6 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = NuBaconSpecs;
 				SDKROOT = iphoneos;
 			};
@@ -734,9 +747,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "NuBaconSpecs-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
@@ -747,7 +760,6 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = NuBaconSpecs;
 				SDKROOT = iphoneos;
 				ZERO_LINK = NO;
@@ -762,8 +774,8 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				OTHER_LDFLAGS = "";
-				PREBINDING = NO;
 				PRODUCT_NAME = NuBaconLib;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -777,9 +789,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Don't Code Sign";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				OTHER_LDFLAGS = "";
-				PREBINDING = NO;
 				PRODUCT_NAME = NuBaconLib;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -803,7 +814,6 @@
 				HEADER_SEARCH_PATHS = ../../include;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				OTHER_LDFLAGS = "";
-				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -827,7 +837,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "";
-				PREBINDING = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -122,9 +122,12 @@ static BACON_WINDOW *sharedWindow = nil;
 
 @end
 
+#if TARGET_OS_IPHONE
+#else
 @interface BACON_VIEW (UIBaconPrivate)
 - (CGPoint)carbonScreenPointFromCocoaScreenPoint:(NSPoint)cocoaPoint;
 @end
+#endif
 
 @implementation BACON_VIEW (UIBacon)
 
@@ -197,6 +200,8 @@ static BACON_WINDOW *sharedWindow = nil;
   return nil;
 }
 
+#if TARGET_OS_IPHONE
+#else
 // Taken from the Apple UIElementInspector sample code
 - (CGPoint)carbonScreenPointFromCocoaScreenPoint:(NSPoint)cocoaPoint {
   NSScreen *foundScreen = nil;
@@ -217,6 +222,7 @@ static BACON_WINDOW *sharedWindow = nil;
 
   return thePoint;
 }
+#endif
 
 - (id)viewsByPath:(NSString *)path {
   return [UIBaconPath viewsByPath:path ofView:self];
