@@ -1,0 +1,243 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		51B457A313F1DEB6008268EF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51B457A213F1DEB6008268EF /* Foundation.framework */; };
+		51B457A613F1DEB6008268EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B457A513F1DEB6008268EF /* main.m */; };
+		51B457AA13F1DEB7008268EF /* jsbacon.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 51B457A913F1DEB6008268EF /* jsbacon.1 */; };
+		51B457B113F1DF1F008268EF /* JSCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51B457B013F1DF1F008268EF /* JSCocoa.framework */; };
+		51B457B313F1DF41008268EF /* ObjectiveBacon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51B457B213F1DF41008268EF /* ObjectiveBacon.framework */; };
+		51B457B813F1EF81008268EF /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51B457B713F1EF81008268EF /* JavaScriptCore.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		51B4579C13F1DEB6008268EF /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				51B457AA13F1DEB7008268EF /* jsbacon.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		51B4579E13F1DEB6008268EF /* jsbacon */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = jsbacon; sourceTree = BUILT_PRODUCTS_DIR; };
+		51B457A213F1DEB6008268EF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		51B457A513F1DEB6008268EF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		51B457A813F1DEB6008268EF /* jsbacon-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "jsbacon-Prefix.pch"; sourceTree = "<group>"; };
+		51B457A913F1DEB6008268EF /* jsbacon.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = jsbacon.1; sourceTree = "<group>"; };
+		51B457B013F1DF1F008268EF /* JSCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSCocoa.framework; path = Library/Frameworks/JSCocoa.framework; sourceTree = SDKROOT; };
+		51B457B213F1DF41008268EF /* ObjectiveBacon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectiveBacon.framework; path = /Library/Frameworks/ObjectiveBacon.framework; sourceTree = "<absolute>"; };
+		51B457B713F1EF81008268EF /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		51B4579B13F1DEB6008268EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				51B457B813F1EF81008268EF /* JavaScriptCore.framework in Frameworks */,
+				51B457B313F1DF41008268EF /* ObjectiveBacon.framework in Frameworks */,
+				51B457B113F1DF1F008268EF /* JSCocoa.framework in Frameworks */,
+				51B457A313F1DEB6008268EF /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		51B4579313F1DEB6008268EF = {
+			isa = PBXGroup;
+			children = (
+				51B457B713F1EF81008268EF /* JavaScriptCore.framework */,
+				51B457A413F1DEB6008268EF /* jsbacon */,
+				51B457A113F1DEB6008268EF /* Frameworks */,
+				51B4579F13F1DEB6008268EF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		51B4579F13F1DEB6008268EF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				51B4579E13F1DEB6008268EF /* jsbacon */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		51B457A113F1DEB6008268EF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				51B457B213F1DF41008268EF /* ObjectiveBacon.framework */,
+				51B457B013F1DF1F008268EF /* JSCocoa.framework */,
+				51B457A213F1DEB6008268EF /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		51B457A413F1DEB6008268EF /* jsbacon */ = {
+			isa = PBXGroup;
+			children = (
+				51B457A513F1DEB6008268EF /* main.m */,
+				51B457A913F1DEB6008268EF /* jsbacon.1 */,
+				51B457A713F1DEB6008268EF /* Supporting Files */,
+			);
+			path = jsbacon;
+			sourceTree = "<group>";
+		};
+		51B457A713F1DEB6008268EF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				51B457A813F1DEB6008268EF /* jsbacon-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		51B4579D13F1DEB6008268EF /* jsbacon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 51B457AD13F1DEB7008268EF /* Build configuration list for PBXNativeTarget "jsbacon" */;
+			buildPhases = (
+				51B4579A13F1DEB6008268EF /* Sources */,
+				51B4579B13F1DEB6008268EF /* Frameworks */,
+				51B4579C13F1DEB6008268EF /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = jsbacon;
+			productName = jsbacon;
+			productReference = 51B4579E13F1DEB6008268EF /* jsbacon */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		51B4579513F1DEB6008268EF /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 51B4579813F1DEB6008268EF /* Build configuration list for PBXProject "jsbacon" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 51B4579313F1DEB6008268EF;
+			productRefGroup = 51B4579F13F1DEB6008268EF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				51B4579D13F1DEB6008268EF /* jsbacon */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		51B4579A13F1DEB6008268EF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				51B457A613F1DEB6008268EF /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		51B457AB13F1DEB7008268EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		51B457AC13F1DEB7008268EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		51B457AE13F1DEB7008268EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "jsbacon/jsbacon-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		51B457AF13F1DEB7008268EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "jsbacon/jsbacon-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		51B4579813F1DEB6008268EF /* Build configuration list for PBXProject "jsbacon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				51B457AB13F1DEB7008268EF /* Debug */,
+				51B457AC13F1DEB7008268EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		51B457AD13F1DEB7008268EF /* Build configuration list for PBXNativeTarget "jsbacon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				51B457AE13F1DEB7008268EF /* Debug */,
+				51B457AF13F1DEB7008268EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 51B4579513F1DEB6008268EF /* Project object */;
+}
