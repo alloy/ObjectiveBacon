@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		515C420C13326AD1004545DA /* BaconContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 515C420413326AD1004545DA /* BaconContext.h */; };
+		515C420C13326AD1004545DA /* BaconContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 515C420413326AD1004545DA /* BaconContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		515C420D13326AD1004545DA /* BaconContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 515C420513326AD1004545DA /* BaconContext.m */; };
-		515C420E13326AD1004545DA /* BaconShould.h in Headers */ = {isa = PBXBuildFile; fileRef = 515C420613326AD1004545DA /* BaconShould.h */; };
+		515C420E13326AD1004545DA /* BaconShould.h in Headers */ = {isa = PBXBuildFile; fileRef = 515C420613326AD1004545DA /* BaconShould.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		515C420F13326AD1004545DA /* BaconShould.m in Sources */ = {isa = PBXBuildFile; fileRef = 515C420713326AD1004545DA /* BaconShould.m */; };
-		515C421013326AD1004545DA /* BaconSpecification.h in Headers */ = {isa = PBXBuildFile; fileRef = 515C420813326AD1004545DA /* BaconSpecification.h */; };
+		515C421013326AD1004545DA /* BaconSpecification.h in Headers */ = {isa = PBXBuildFile; fileRef = 515C420813326AD1004545DA /* BaconSpecification.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		515C421113326AD1004545DA /* BaconSpecification.m in Sources */ = {isa = PBXBuildFile; fileRef = 515C420913326AD1004545DA /* BaconSpecification.m */; };
-		515C421213326AD1004545DA /* ObjectiveBacon.h in Headers */ = {isa = PBXBuildFile; fileRef = 515C420A13326AD1004545DA /* ObjectiveBacon.h */; };
+		515C421213326AD1004545DA /* ObjectiveBacon.h in Headers */ = {isa = PBXBuildFile; fileRef = 515C420A13326AD1004545DA /* ObjectiveBacon.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		515C421313326AD1004545DA /* ObjectiveBacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 515C420B13326AD1004545DA /* ObjectiveBacon.m */; };
 		518D6CB31333F7690086143B /* bacon.nu in Resources */ = {isa = PBXBuildFile; fileRef = 518D6CB21333F7690086143B /* bacon.nu */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
