@@ -35,21 +35,29 @@
     [parser parseEval:@"(global UIUserInterfaceIdiomPhone t)"];
   }
 
+  NSArray *onlyRunFiles = [[NSProcessInfo processInfo] arguments];
+  onlyRunFiles = [onlyRunFiles subarrayWithRange:NSMakeRange(1, [onlyRunFiles count] - 1)];
+  //NSLog(@"Only run: %@", onlyRunFiles);
+  
   // Now load the specs, which are files like: FooSpec.nu or foo_spec.nu
   NSArray *files = [[NSBundle mainBundle] pathsForResourcesOfType:@"nu" inDirectory:nil];
   //NSLog([files description]);
   [files enumerateObjectsUsingBlock:^(id path, NSUInteger idx, BOOL *stop) {
     BOOL loadSpec = NO;
-    if ([path hasSuffix:@"IPadSpec.nu"] || [path hasSuffix:@"_ipad_spec.nu"]) {
-      if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+    // If the user specified specific spec files to run, then check if this `path' is one of them.
+    // If the user did not specify specific spec files to run, then run them all.
+    if ([onlyRunFiles count] == 0 || [onlyRunFiles indexOfObject:[path lastPathComponent]] != NSNotFound) {
+      if ([path hasSuffix:@"IPadSpec.nu"] || [path hasSuffix:@"_ipad_spec.nu"]) {
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+          loadSpec = YES;
+        }
+      } else if ([path hasSuffix:@"IPhoneSpec.nu"] || [path hasSuffix:@"_iphone_spec.nu"]) {
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+          loadSpec = YES;
+        }
+      } else if ([path hasSuffix:@"Spec.nu"] || [path hasSuffix:@"_spec.nu"]) {
         loadSpec = YES;
       }
-    } else if ([path hasSuffix:@"IPhoneSpec.nu"] || [path hasSuffix:@"_iphone_spec.nu"]) {
-      if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        loadSpec = YES;
-      }
-    } else if ([path hasSuffix:@"Spec.nu"] || [path hasSuffix:@"_spec.nu"]) {
-      loadSpec = YES;
     }
     if (loadSpec) {
       NSString *source = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
