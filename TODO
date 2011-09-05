@@ -15,3 +15,10 @@
 * We can't really implement handling missing objc methods from objc, because the language that the call originates from, eg MacRuby, might have boxed an immediate type such as an int as a NSNumber. So the client has to deal with this. Is this correct?
 * MacRuby and Nu both come with regexp engines, so for now -[BaconShould match:] is implemented by the client.
 * Improve exception printing in BaconSummary from client.
+
+# WebRat like integration spec API
+
+These should all call delegate callback methods as would normally happen.
+
+* `-[UITextField fillIn:@"text"]` which checks if the text field is visible/enabled and then assigns the text.
+* `-[UIScrollView scrollTo:]` which sets the content offset and then calls the delegate methods.
